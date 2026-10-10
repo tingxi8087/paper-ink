@@ -1,0 +1,27 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { AlertDemos } from '../../../components/StatusDemos';
+import { AlertApiTable } from '../../../components/StatusDemos';
+
+# Alert 警告提示
+
+支持语义提示、描述、图标、关闭、横幅、操作区域与 Alert.ErrorBoundary。
+
+## 代码演示
+
+<AlertDemos />
+
+## API
+
+<AlertApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+优先使用 title 和 closable 配置，保留 message/onClose/afterClose 兼容写法。关闭立即移除，afterClose 调用一次。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="alert" component="Alert" />

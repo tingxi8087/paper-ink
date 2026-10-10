@@ -1,0 +1,17 @@
+.pi-checkbox { position: relative; display: inline-flex; align-items: center; gap: 8px; color: var(--pi-color-text-primary); font: var(--pi-font-size)/1.5 var(--pi-font-family); cursor: pointer; vertical-align: middle; }
+.pi-checkbox input { position: absolute; z-index: 1; inset-inline-start: 0; width: 16px; height: 16px; margin: 0; opacity: 0; cursor: inherit; }
+.pi-checkbox__mark { display: inline-flex; flex: none; width: 16px; height: 16px; box-sizing: border-box; border: 1px solid var(--pi-color-border-default); border-radius: 3px; background: var(--pi-color-surface-container); align-items: center; justify-content: center; }
+.pi-checkbox input:checked + .pi-checkbox__mark, .pi-checkbox input:indeterminate + .pi-checkbox__mark { background: var(--pi-color-primary-solid); border-color: var(--pi-color-primary-solid); }
+.pi-checkbox input:checked + .pi-checkbox__mark::after { content: ''; width: 4px; height: 8px; border: solid var(--pi-color-primary-on-solid); border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+.pi-checkbox input:indeterminate + .pi-checkbox__mark::after { content: ''; width: 8px; height: 2px; background: var(--pi-color-primary-on-solid); border: 0; transform: none; }
+.pi-checkbox input:focus-visible + .pi-checkbox__mark { outline: 2px solid var(--pi-color-primary-solid); outline-offset: 3px; }
+.pi-checkbox--disabled { color: var(--pi-color-text-disabled); cursor: not-allowed; }
+.pi-checkbox--disabled .pi-checkbox__mark { opacity: .5; }
+.pi-checkbox-group { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; }
+
+.pi-checkbox__mark { transition:background-color 120ms ease,border-color 120ms ease; }
+@media(prefers-reduced-motion:reduce) { .pi-checkbox__mark { transition:none; } }
+
+.pi-checkbox input:checked + .pi-checkbox__mark::after { animation:pi-checkbox-check 120ms ease-out; }
+@keyframes pi-checkbox-check { from { opacity:0; } to { opacity:1; } }
+@media(prefers-reduced-motion:reduce) { .pi-checkbox input:checked + .pi-checkbox__mark::after { animation:none; } }

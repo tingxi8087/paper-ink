@@ -1,0 +1,27 @@
+import { ResultDemos } from '../../../components/RateTimelineResultDemos';
+import { ResultApiTable } from '../../../components/RateTimelineResultApiTables';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# Result 结果页
+
+展示操作结果、异常页面和后续操作。
+
+## 代码演示
+
+<ResultDemos />
+
+## API
+
+<ResultApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+异常状态使用轻量 SVG，不引入大型插画。允许 icon 覆盖所有状态。classNames / styles 仅支持对象；ref 使用原生 DOM 引用。不提供 PRESENTED_IMAGE 静态属性。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="result" component="Result" />

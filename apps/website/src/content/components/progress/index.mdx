@@ -1,0 +1,26 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { ProgressDemos } from '../../../components/InteractiveDemos';
+
+# Progress 进度条
+
+线性、环形、仪表盘与分段进度。
+
+## 代码演示
+
+<ProgressDemos />
+
+## API
+
+percent、type、status、showInfo、format(percent, successPercent)、strokeColor、trailColor、strokeWidth、strokeLinecap、size、steps、success、gapDegree、gapPosition。
+
+## 支持边界
+
+<DocBoundary>
+
+strokeColor 仅支持颜色字符串；steps 仅支持线形数值步数，未提供渐变、环形分段和语义样式对象。百分比限制在 0–100。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="progress" component="Progress" />

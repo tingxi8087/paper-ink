@@ -1,0 +1,9 @@
+import { forwardRef, type HTMLAttributes, type ReactNode, type MouseEventHandler } from 'react';
+import { useTheme } from '../config-provider/index.js';
+import { themeVariables } from '../theme/variables.js';
+export interface BreadcrumbItem { key?: string | number; title?: ReactNode; href?: string; onClick?: MouseEventHandler<HTMLElement>; className?: string; separator?: ReactNode; type?: 'separator' }
+export interface BreadcrumbProps extends HTMLAttributes<HTMLElement> { items?: BreadcrumbItem[]; separator?: ReactNode; itemRender?: (item: BreadcrumbItem, params: unknown, items: BreadcrumbItem[], paths: string[]) => ReactNode; params?: unknown }
+export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Breadcrumb({ items = [], separator = '/', itemRender, params, className, style, ...rest }, ref) {
+ const theme = useTheme();
+ return <nav {...rest} ref={ref} aria-label={rest['aria-label'] ?? '面包屑'} className={['pi-breadcrumb',className].filter(Boolean).join(' ')} style={{...themeVariables(theme),...style}}><ol>{items.map((item,index) => item.type === 'separator' ? <li key={item.key ?? index} className="pi-breadcrumb__separator" aria-hidden="true">{item.separator ?? separator}</li> : <li key={item.key ?? index} className={item.className}>{index > 0 && items[index-1]?.type !== 'separator' && <span className="pi-breadcrumb__separator" aria-hidden="true">{items[index-1]?.separator ?? separator}</span>}<span aria-current={index === items.length-1 ? 'page' : undefined}>{itemRender ? itemRender(item,params,items,items.slice(0,index+1).map(i=>i.href??'').filter(Boolean)) : item.href ? <a href={item.href} onClick={item.onClick}>{item.title}</a> : item.onClick ? <button type="button" onClick={item.onClick}>{item.title}</button> : item.title}</span></li>)}</ol></nav>;
+});

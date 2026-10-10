@@ -1,0 +1,33 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { CheckboxDemos } from '../../../components/ChoiceDemos';
+import { CheckboxApiTable } from '../../../components/ChoiceApiTables';
+
+import { CheckboxGroupApiTable } from '../../../components/ChoiceApiTables';
+
+# Checkbox 多选框
+
+支持单独控件、半选状态与 Group。onChange(event) 读取 event.target.checked；Group 使用 onChange(values)。
+
+## 代码演示
+
+<CheckboxDemos />
+
+## API
+
+<CheckboxApiTable />
+
+<CheckboxGroupApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+不包含 Form 自动联动或语义样式函数。原生表单与键盘行为由 input 支撑。
+
+选中背景、边框及标记使用 120ms 轻量过渡。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="checkbox" component="Checkbox" />

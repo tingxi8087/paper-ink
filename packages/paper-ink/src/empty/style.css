@@ -1,0 +1,5 @@
+.pi-empty { padding: 16px; text-align: center; color: var(--pi-color-text-secondary); font-family: var(--pi-font-family); font-size: var(--pi-font-size); line-height: 1.5; }
+.pi-empty__image { display: flex; justify-content: center; align-items: center; height: 64px; margin-bottom: var(--pi-spacing-medium); }
+.pi-empty__image img, .pi-empty__image svg { max-width: 100%; max-height: 100%; }
+.pi-empty__description { overflow-wrap: anywhere; }
+.pi-empty__footer { margin-top: var(--pi-spacing-large); }

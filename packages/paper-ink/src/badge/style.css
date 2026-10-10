@@ -1,0 +1,9 @@
+.pi-badge { position: relative; display: inline-flex; align-items: center; vertical-align: middle; color: var(--pi-color-text-primary); font: inherit; font-family: var(--pi-font-family); }
+.pi-badge__indicator { position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-width: 20px; height: 20px; padding-inline: 6px; border-radius: 10px; color: var(--pi-color-error-on-solid); font-size: 12px; line-height: 1; font-weight: 400; }
+.pi-badge--attached > .pi-badge__indicator { position: absolute; inset-block-start: 0; inset-inline-end: 0; transform: translate(50%, -50%); box-shadow: 0 0 0 1px var(--pi-color-surface-container); z-index: 1; }
+.pi-badge__indicator--small { min-width: 14px; height: 14px; padding-inline: 4px; font-size: 10px; }
+.pi-badge__indicator--dot { min-width: 6px; width: 6px; height: 6px; padding: 0; }
+.pi-badge__text { margin-inline-start: var(--pi-spacing-medium); }
+.pi-badge__indicator--processing::after { content: ''; position: absolute; inset: -3px; border: 1px solid currentColor; border-radius: 50%; color: var(--pi-color-info-solid); animation: pi-badge-pulse 1.4s ease-out infinite; }
+@keyframes pi-badge-pulse { to { transform: scale(1.4); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .pi-badge__indicator--processing::after { animation: none; } }

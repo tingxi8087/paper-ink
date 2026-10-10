@@ -20,7 +20,7 @@ import 'paper-ink/button/style.css';
 
 Button supports common types, sizes, shapes, color/variant, className/style, semantic classNames/styles, delayed/custom loading icons, links and native element refs.
 
-Input and Input.TextArea (also exported as TextArea) support native attributes, controlled/uncontrolled values, clear, status, count and refs. TextArea supports autoSize. Modal provides controlled dialogs, focus management, portal theme inheritance and custom footers. Ordinary Modal callbacks do not automatically close or start loading; a business ref.open(config) example is available on the website.
+Input, Input.Search, Input.Password and Input.TextArea (also exported as Search, Password and TextArea) support native attributes, controlled/uncontrolled values, clear, status, count and refs. TextArea supports autoSize. Search supports enterButton, loading and onSearch with input/clear source. Password supports iconRender and controlled visibilityToggle. Input CSS includes its Button dependency. Modal provides controlled dialogs, focus management, portal theme inheritance and custom footers. Ordinary Modal callbacks do not automatically close or start loading; a business ref.open(config) example is available on the website.
 
 Input and Modal also have subpath exports and CSS. Modal CSS includes its Button dependency.
 
@@ -31,3 +31,15 @@ See the repository website and `doc` directory for the supported API and design 
 Stack, Inline and SimpleGrid provide vertical, horizontal and grid layouts with independent APIs. Spacing presets are small=4px, medium=8px, large=16px under theme.token.spacing; default gap is medium. All support native div attributes, className/style and refs. SimpleGrid accepts columns (number/CSS template) or minChildWidth, plus rowGap/columnGap; SimpleGrid.Item supports span (positive integer/full). Automatic columns allow span=1/full only. Numeric fixed columns clamp span to their column count. CSS overrides take precedence, and custom templates require the caller to manage spanning.
 
 Import each from paper-ink/stack, paper-ink/inline or paper-ink/simple-grid with its corresponding style.css, or use the root exports and full stylesheet.
+
+## Common components
+
+Checkbox/Group, Radio/Group/Button, Switch, Select (single/multiple/tags/search), Tabs (items/keyboard/panel lifecycle), Tag/CheckableTag, Empty, Alert/ErrorBoundary, Spin, Tooltip and message/useMessage are available from the root or their lowercase subpaths. Each has a standalone style.css. These are documented subsets of familiar Ant Design APIs, not full API implementations.
+
+Prefer `message.useMessage()` with its contextHolder inside your ConfigProvider for theme inheritance. Static message calls use the default theme. Select supports ordinary option sets without virtualization. Editable/vertical Tabs, Select labelInValue/grouped options, Form integration and semantic style functions remain outside this release.
+
+Additional common API subsets: Typography, Divider, Breadcrumb, Dropdown, Pagination, InputNumber, Avatar, Badge, Card, Collapse, Descriptions, Popover, Segmented, Drawer, Popconfirm, Progress, Skeleton and App. Each has a lowercase kebab-case subpath and stylesheet. Space, DatePicker, Form and Table are deferred.
+
+InputNumber uses MIT-licensed @rc-component/mini-decimal for string-based decimal calculations; enable stringMode and pass strings for high precision. App.useApp() provides theme-aware message and modal APIs, including async confirmation handles. Notification is not included. Read each component README for supported API boundaries.
+
+新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。

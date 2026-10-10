@@ -1,0 +1,33 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { RadioDemos } from '../../../components/ChoiceDemos';
+import { RadioApiTable } from '../../../components/ChoiceApiTables';
+
+import { RadioGroupApiTable } from '../../../components/ChoiceApiTables';
+
+# Radio 单选框
+
+支持 Radio、Radio.Group、Radio.Button，使用 onChange(event) 读取 event.target.value。
+
+## 代码演示
+
+<RadioDemos />
+
+## API
+
+<RadioApiTable />
+
+<RadioGroupApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+同组键盘切换、表单行为与 disabled 状态见演示；不包含 Form 自动联动。
+
+选中边框、标记及按钮式选项颜色使用 120ms 轻量过渡。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="radio" component="Radio" />

@@ -1,0 +1,13 @@
+.pi-spin { --pi-spin-size: 20px; position: relative; display: inline-flex; color: var(--pi-color-primary-solid); font-family: var(--pi-font-family); font-size: var(--pi-font-size); }
+.pi-spin--small { --pi-spin-size: 14px; }
+.pi-spin--large { --pi-spin-size: 32px; }
+.pi-spin__indicator { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: var(--pi-spacing-medium); }
+.pi-spin__ring { display: inline-block; width: var(--pi-spin-size); height: var(--pi-spin-size); border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: pi-spin-rotate .8s linear infinite; }
+.pi-spin--nested { display: block; }
+.pi-spin__content { transition: opacity var(--pi-motion-duration); }
+.pi-spin--nested.pi-spin--spinning > .pi-spin__content { opacity: .4; pointer-events: none; user-select: none; }
+.pi-spin--nested > .pi-spin__indicator { position: absolute; inset: 0; background: #ffffff66; z-index: 1; }
+.pi-spin--fullscreen { display: flex; position: fixed; inset: 0; z-index: 1100; background: #ffffffcc; justify-content: center; align-items: center; }
+.pi-spin__description, .pi-spin__percent { font-size: 13px; }
+@keyframes pi-spin-rotate { to { transform: rotate(360deg); } }
+@media(prefers-reduced-motion: reduce) { .pi-spin__ring { animation: none; border-right-color: currentColor; opacity: .6; } .pi-spin__content { transition: none; } }

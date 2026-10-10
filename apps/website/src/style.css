@@ -118,3 +118,21 @@ code { font-family: 'SFMono-Regular', Consolas, monospace; }
 .business-modal-example { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 16px; background: white; border: 1px solid #deddd7; border-radius: 5px; font-size: 13px; }
 details { margin: 12px 0; font-size: 13px; }
 summary { cursor: pointer; }
+
+.sidebar { overflow-y: auto; }
+
+.main-content p { overflow-wrap: anywhere; }
+
+.doc-boundary { border:1px solid #deddd6; border-left:3px solid #aaa99f; border-radius:4px; padding:12px 16px; background:#f0efe9; color:#55544e; font-size:13px; line-height:1.75; }
+.doc-boundary p { margin:0; color:inherit; font-size:inherit; }
+.doc-boundary p + p { margin-top:8px; }
+.doc-boundary ul { margin:0; padding-left:18px; }
+.doc-imports { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:12px; }
+.doc-import-card { min-width:0; border:1px solid #deddd6; border-radius:4px; background:#fff; overflow:hidden; }
+.doc-import-header { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-bottom:1px solid #eeede7; font-size:12px; }
+.doc-import-header strong { font-weight:500; }
+.doc-import-header button { padding:2px 6px; border:0; border-radius:3px; background:transparent; color:#77766e; font:inherit; cursor:pointer; }
+.doc-import-header button:hover { background:#eeede7; color:#20201e; }
+.doc-import-header button:focus-visible { outline:1px solid #20201e; outline-offset:2px; }
+.doc-import-card pre { margin:0; padding:12px; background:transparent; border-radius:0; font-size:12px; line-height:1.7; }
+@media(max-width:700px) { .doc-imports { grid-template-columns:minmax(0,1fr); gap:8px; } .doc-boundary { padding:10px 12px; } }

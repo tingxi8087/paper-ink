@@ -1,0 +1,8 @@
+.pi-divider { box-sizing: border-box; color: var(--pi-color-text-primary); font: inherit; font-family: var(--pi-font-family); }
+.pi-divider--horizontal { display: flex; align-items: center; width: 100%; margin: var(--pi-divider-space) 0; border-block-start: 1px var(--pi-divider-line) var(--pi-color-border-subtle); }
+.pi-divider--with-text { border: 0; gap: var(--pi-spacing-medium); font-weight: 600; }
+.pi-divider--with-text::before,.pi-divider--with-text::after { content: ''; flex: 1; border-block-start: 1px var(--pi-divider-line) var(--pi-color-border-subtle); }
+.pi-divider--start::before,.pi-divider--end::after { flex: 0 0 var(--pi-divider-title-margin, 5%); }
+.pi-divider__text { min-width: 0; overflow-wrap: anywhere; }
+.pi-divider--plain { font-weight: 400; }
+.pi-divider--vertical { display: inline-block; height: .9em; margin-inline: var(--pi-spacing-medium); vertical-align: middle; border-inline-start: 1px var(--pi-divider-line) var(--pi-color-border-subtle); }

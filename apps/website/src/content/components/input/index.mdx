@@ -9,7 +9,7 @@ import { InputDemos } from '../../../components/InputDemos';
 
 ## API
 
-`Input.TextArea` 提供多行文本输入，也可以单独导入 `TextArea`。两者支持 `className`、`style` 和适用的原生属性，如 `name`、`required`、`aria-*`。
+`Input.TextArea` 提供多行文本输入，`Input.Search` 提供搜索，`Input.Password` 提供密码可见性切换。也可以从 `paper-ink/input` 单独导入 `TextArea`、`Search`、`Password`。这些组件支持 `className`、`style` 和适用的原生属性，如 `name`、`required`、`aria-*`。
 
 <InputApiTable />
 
@@ -21,4 +21,8 @@ import { InputDemos } from '../../../components/InputDemos';
 
 ## 兼容范围
 
-本期提供基本 Input 与 TextArea；暂不包含 Search、Password、OTP、addonBefore / addonAfter、Form 联动、完整 count 配置和语义样式 API。ref 的实际支持范围见导出的 InputRef / TextAreaRef 类型。
+本期提供 Input、TextArea、Search 和 Password；暂不包含 OTP、addonBefore / addonAfter、variant、Form 联动、完整 count 配置和语义样式 API。ref 的实际支持范围见导出的 InputRef / TextAreaRef 类型。
+
+Search 普通输入只触发 onChange；回车和搜索按钮触发 source=input，清空按钮触发 source=clear。清空回调的 event 为携带空值的 ChangeEvent，原生来源仍是鼠标 click；回车为 KeyboardEvent、搜索按钮为 MouseEvent。loading 阻止回车和搜索按钮提交，仍允许清空及 source=clear 通知，与 antd 的常规行为一致。onPressEnter 或自定义按钮 onClick 调用 preventDefault() 可取消对应搜索。自定义 enterButton 支持本库 Button 和原生 button，其他 ReactNode 作为按钮内容。
+
+Password 支持 controlled/uncontrolled 输入和独立的受控可见性。只读密码仍可显示，disabled 会禁用可见性切换。暂不提供 hover action。内置搜索与密码图标均为 SVG。

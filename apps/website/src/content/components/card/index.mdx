@@ -1,0 +1,26 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { CardDemos, CardApiTable } from '../../../components/ContentDemos';
+
+# Card 卡片
+
+提供标题、封面、操作区、加载占位和 Meta 摘要。
+
+## 代码演示
+
+<CardDemos />
+
+## API
+
+<CardApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+不支持 Grid、内置 tabList 与 tabs 配置。可组合 Tabs 实现切换。styles/classNames 仅接受对象，不接受函数。loading 使用静态占位并隐藏内容，保留封面、标题和操作区。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="card" component="Card" />

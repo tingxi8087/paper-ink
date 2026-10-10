@@ -23,24 +23,49 @@ try {
   run('pnpm', ['install', '--offline', '--ignore-scripts']);
   run('pnpm', ['exec', 'paper-ink', '--version']);
   run('pnpm', ['exec', 'paper-ink', 'init']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', '--dry-run']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', '--dry-run']);
   assert.equal((await readdir(join(consumer, 'src'))).length, 0);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result']);
   await writeFile(join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8" /></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>');
   await writeFile(join(consumer, 'src/main.tsx'), `import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import * as LocalComponents from './components/paper-ink/index';
+import * as NpmComponents from 'paper-ink';
+import * as Npm from 'paper-ink';
+import * as Local from './components/paper-ink';
 import { Button as NpmButton, Input as NpmInput, Modal as NpmModal, ConfigProvider as NpmProvider, Stack as NpmStack, Inline as NpmInline, SimpleGrid as NpmGrid } from 'paper-ink';
 import { Button as LocalButton, Input as LocalInput, Modal as LocalModal, ConfigProvider as LocalProvider, Stack as LocalStack, Inline as LocalInline, SimpleGrid as LocalGrid } from './components/paper-ink';
 import 'paper-ink/style.css';
 import './components/paper-ink/style.css';
+function ModernFeatures({ source }: { source: 'Local' | 'Npm' }) {
+ const C = source === 'Local' ? LocalComponents : NpmComponents;
+ const [drawer, setDrawer] = useState(false); const [searchResult, setSearchResult] = useState('');
+ function Actions() { const app = C.App.useApp(); return <C.Button onClick={() => app.modal.confirm({ title: source + ' modern confirm', content: 'Ready' })}>{source} context confirm</C.Button>; }
+ return <><C.Breadcrumb items={[{ title: 'Home' }, { title: 'Settings' }]} /><C.Typography.Title level={3}>Modern components</C.Typography.Title><C.Divider />
+ <C.Card title="Profile"><C.Badge count={3}><C.Avatar>PI</C.Avatar></C.Badge><C.Descriptions items={[{ key: 'name', label: 'Name', children: 'Paper Ink' }]} /></C.Card>
+ <C.Input.Search aria-label={source + ' search input'} enterButton="Search" allowClear onSearch={(value,event,info) => setSearchResult((info?.source ?? 'input') + ':' + value)} /><output aria-label={source + ' search result'}>{searchResult}</output><C.Input.Password aria-label={source + ' password input'} defaultValue="secret" /><C.InputNumber aria-label={source + ' precise number'} stringMode defaultValue="0.000000000000000001" step="0.000000000000000001" />
+ <C.Segmented options={['List', 'Grid']} /><C.Progress percent={50} /><C.Skeleton loading={false}>Loaded</C.Skeleton>
+ <C.Collapse items={[{key:'details',label:source+' Details',children:'Visible details'}]} />
+ <C.Pagination total={40} /><C.Dropdown trigger={['click']} menu={{items:[{key:'copy',label:source+' Copy'}]}}><C.Button>{source} menu</C.Button></C.Dropdown>
+ <C.Popover trigger="click" content={<C.Input placeholder="Popup input" />}><C.Button>{source} card popup</C.Button></C.Popover>
+ <C.Popconfirm title="Delete?" onConfirm={() => Promise.resolve()}><C.Button>{source} delete</C.Button></C.Popconfirm>
+ <C.Button onClick={() => setDrawer(true)}>{source} drawer</C.Button><C.Drawer title={source+' Drawer'} open={drawer} onClose={() => setDrawer(false)}>Drawer content</C.Drawer>
+ <C.Rate aria-label={source + ' rating'} defaultValue={2.5} allowHalf /><C.Timeline items={[{title:'09:00',content:source + ' timeline entry'}]} /><C.Result status="success" title={source + ' ready'} extra={<C.Button>{source} result action</C.Button>} />
+ <C.App><Actions /></C.App></>;
+}
+function FeatureSet({ source }: { source: 'Local' | 'Npm' }) {
+ const ui = source === 'Local' ? Local : Npm;
+ const [api, holder] = ui.message.useMessage();
+ return <>{holder}<form><ui.Checkbox name={source+'-check'} defaultChecked>{source} checkbox</ui.Checkbox><ui.Radio.Group name={source+'-radio'} defaultValue="a" options={[{value:'a',label:source+' radio A'},{value:'b',label:source+' radio B'}]} /><ui.Switch aria-label={source+' switch'} /><ui.Select aria-label={source+' select'} name={source+'-select'} options={[{value:'a',label:source+' option A'},{value:'b',label:source+' option B'}]} allowClear /><ui.Tabs items={[{key:'a',label:source+' tab A',children:source+' panel A'},{key:'b',label:source+' tab B',children:source+' panel B'}]} /><ui.Tag closable>{source} tag</ui.Tag><ui.Alert title={source+' alert'} closable /><ui.Spin spinning={false}><span>{source} content</span></ui.Spin><ui.Empty description={source+' empty'} /><ui.Tooltip title={source+' hint'}><ui.Button>{source} tooltip</ui.Button></ui.Tooltip><ui.Button onClick={()=>api.success(source+' message',0)}>{source} message</ui.Button><ui.Button onClick={()=>api.destroy()}>{source} close message</ui.Button></form></>;
+}
 function Demo() {
  const [local, setLocal] = useState(0); const [npm, setNpm] = useState(0);
  const [localOpen, setLocalOpen] = useState(false); const [npmOpen, setNpmOpen] = useState(false);
  const theme = { token: { color: { primary: { solid: '#1677ff' } }, radius: { control: 12 } } };
  return <><h1>Paper Ink dual distribution</h1>
- <section aria-label="CLI source"><LocalProvider theme={theme}><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
- <section aria-label="npm package"><NpmProvider theme={theme}><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
+ <section aria-label="CLI source"><LocalProvider theme={theme}><FeatureSet source="Local" /><ModernFeatures source="Local" /><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
+ <section aria-label="npm package"><NpmProvider theme={theme}><FeatureSet source="Npm" /><ModernFeatures source="Npm" /><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
 }
 createRoot(document.getElementById('root')!).render(<Demo />);`);
   run('pnpm', ['exec', 'tsc', '--noEmit']);
@@ -53,6 +78,30 @@ createRoot(document.getElementById('root')!).render(<Demo />);`);
   const page = await browser.newPage(); const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(`http://127.0.0.1:${address.port}`);
+
+  for (const [region, label] of [['CLI source', 'Local'], ['npm package', 'Npm']]) {
+    const group = page.getByRole('region', { name: region });
+    await group.getByRole('spinbutton', { name: label + ' precise number' }).waitFor();
+    const rating = group.getByRole('slider',{name:label+' rating'}); await rating.focus();await rating.press('ArrowRight');assert.equal(await rating.getAttribute('aria-valuenow'),'3');assert.equal(await group.getByText(label+' timeline entry',{exact:true}).count(),1);assert.equal(await group.getByText(label+' ready',{exact:true}).count(),1);
+    const search = group.getByRole('searchbox', {name:label+' search input'}); await search.fill('design'); await search.press('Enter');
+    assert.equal(await group.getByLabel(label+' search result').textContent(),'input:design');
+    await group.locator('.pi-input-search').getByRole('button',{name:'清空内容'}).click();
+    assert.equal(await group.getByLabel(label+' search result').textContent(),'clear:');
+    const password = group.locator('input[aria-label="'+label+' password input"]'); assert.equal(await password.getAttribute('type'),'password');
+    await group.getByRole('button',{name:'显示密码',exact:true}).click();assert.equal(await password.getAttribute('type'),'text');
+    await group.getByRole('button',{name:'隐藏密码',exact:true}).click();assert.equal(await password.getAttribute('type'),'password');
+
+    await group.getByRole('button', { name: '增加', exact: true }).click();
+    assert.equal(await group.getByRole('spinbutton', { name: label + ' precise number' }).inputValue(), '0.000000000000000002');
+    await group.getByRole('button', { name: label + ' menu', exact: true }).click();
+    await page.getByRole('menuitem', { name: label + ' Copy' }).click();
+    await group.getByRole('button', { name: label + ' drawer', exact: true }).click();
+    const drawer = page.getByRole('dialog', { name: label + ' Drawer' }); await drawer.waitFor();
+    await drawer.getByRole('button', { name: '关闭', exact: true }).click(); await drawer.waitFor({ state: 'hidden' });
+    await group.getByRole('button', { name: label + ' context confirm', exact: true }).click();
+    const confirm = page.getByRole('dialog', { name: label + ' modern confirm' }); await confirm.waitFor();
+    await confirm.getByRole('button', { name: '确定', exact: true }).click(); await confirm.waitFor({ state: 'hidden' });
+  }
   for (const [region, label] of [['CLI source', 'Local'], ['npm package', 'Npm']]) {
     const button = page.getByRole('region', { name: region }).getByRole('button', { name: `${label} 0`, exact: true });
     await button.waitFor({ state: 'visible' });
@@ -83,9 +132,24 @@ createRoot(document.getElementById('root')!).render(<Demo />);`);
     await page.keyboard.press('Escape');
     await dialog.waitFor({ state: 'hidden' });
   }
+  for (const [region, label] of [['CLI source', 'Local'], ['npm package', 'Npm']]) {
+    const group=page.getByRole('region',{name:region});
+    const check=group.getByRole('checkbox',{name:label+' checkbox',exact:true});await check.uncheck();assert.equal(await check.isChecked(),false);
+    await group.getByRole('radio',{name:label+' radio B',exact:true}).check();
+    await group.getByRole('switch',{name:label+' switch',exact:true}).click();assert.equal(await group.getByRole('switch',{name:label+' switch',exact:true}).getAttribute('aria-checked'),'true');
+    await group.getByRole('combobox',{name:label+' select',exact:true}).click();await page.getByRole('option',{name:label+' option B',exact:true}).click();
+    assert.equal(await group.locator('input[type="hidden"][name="'+label+'-select"]').inputValue(),'b');
+    await group.getByRole('tab',{name:label+' tab B',exact:true}).click();assert.equal(await group.getByRole('tabpanel').innerText(),label+' panel B');
+    await group.getByRole('button',{name:'关闭标签',exact:true}).click();assert.equal(await group.getByText(label+' tag',{exact:true}).count(),0);
+    await group.getByRole('button',{name:'关闭提示',exact:true}).click();assert.equal(await group.getByRole('alert').count(),0);
+    assert.equal(await group.getByText(label+' empty',{exact:true}).count(),1);
+    await group.getByRole('button',{name:label+' tooltip',exact:true}).hover();await page.getByRole('tooltip',{name:label+' hint',exact:true}).waitFor();await page.keyboard.press('Escape');
+    await group.getByRole('button',{name:label+' message',exact:true}).click();await page.getByRole('status').filter({hasText:label+' message'}).waitFor();
+    await group.getByRole('button',{name:label+' close message',exact:true}).click();
+  }
   assert.deepEqual(errors, []);
   await page.screenshot({ path: join(root, '.artifacts/dual-distribution.png') });
-  console.log('Packed CLI binary + local TSX + npm package: typecheck, Vite production build, browser Button/Input/TextArea/Modal behavior and portal theme all passed.');
+  console.log('Packed CLI binary + local TSX + npm package: typecheck, Vite production build, browser behavior for all components and portal themes passed.');
 } finally {
   await browser?.close();
   await new Promise(resolve => { if (server) server.httpServer.close(resolve); else resolve(); });

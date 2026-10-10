@@ -1,3 +1,5 @@
+import { usePresence } from '../internal/motion.js';
+import { CloseIcon } from '../internal/icons.js';
 import { useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from '../button/button.js';
@@ -20,7 +22,8 @@ function focusable(dialog: HTMLElement) {
     return true;
   });
 }
-function focusFirst(dialog: HTMLElement) { (focusable(dialog)[0] ?? dialog).focus(); }
+// Focusing an offscreen entering panel must not scroll its container and cancel the motion.
+function focusFirst(dialog: HTMLElement) { (focusable(dialog)[0] ?? dialog).focus({ preventScroll: true }); }
 
 export function Modal({
   open = false, title, children, onOk, onCancel, confirmLoading = false,
@@ -30,6 +33,8 @@ export function Modal({
   forceRender = false, getContainer, className = '', rootClassName = '', style,
   zIndex = 1000, focusTriggerAfterClose = true, ...rest
 }: ModalProps) {
+  const active = usePresence(open, rootClassName.includes('pi-drawer-root') ? 0 : 180);
+  const openRef = useRef(open); openRef.current = open;
   const theme = useTheme();
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -44,7 +49,7 @@ export function Modal({
     typeof getContainer === 'function' ? getContainer() : typeof getContainer === 'string' ? document.querySelector(getContainer) : getContainer ?? document.body;
 
   useEffect(() => {
-    if (!open || !dialogRef.current) return;
+    if (!active || !dialogRef.current) return;
     const dialog = dialogRef.current;
     const doc = dialog.ownerDocument;
     let stack = stacks.get(doc);
@@ -66,7 +71,7 @@ export function Modal({
       if (event.key === 'Escape' && callbacks.current.keyboard && !event.isComposing) {
         event.preventDefault();
         event.stopPropagation();
-        callbacks.current.onCancel?.(event);
+        if (openRef.current) callbacks.current.onCancel?.(event);
       }
       if (event.key === 'Tab') {
         const items = focusable(dialog);
@@ -104,33 +109,33 @@ export function Modal({
         else if (next) focusFirst(next.dialog);
       }
     };
-  }, [open, container, zIndex]);
+  }, [active, container, zIndex]);
 
   useEffect(() => {
-    if (wasOpen.current && !open) callbacks.current.afterClose?.();
-    wasOpen.current = open;
-  }, [open]);
+    if (wasOpen.current && !active) callbacks.current.afterClose?.();
+    wasOpen.current = active;
+  }, [active]);
 
-  if (typeof document === 'undefined' || (!open && !forceRender && (!openedRef.current || destroyOnHidden))) return null;
+  if (typeof document === 'undefined' || (!active && !forceRender && (!openedRef.current || destroyOnHidden))) return null;
   const cancelFromMask = (event: React.MouseEvent<HTMLDivElement>) => {
     const entry = entryRef.current;
-    if (mask && maskClosable && event.target === event.currentTarget && entry && stacks.get(entry.dialog.ownerDocument)?.entries.at(-1) === entry) onCancel?.(event);
+    if (open && mask && maskClosable && event.target === event.currentTarget && entry && stacks.get(entry.dialog.ownerDocument)?.entries.at(-1) === entry) onCancel?.(event);
   };
-  const content = <div className={['pi-modal-root', !mask && 'pi-modal-root--no-mask', rootClassName].filter(Boolean).join(' ')} hidden={!open} style={{ ...themeVariables(theme), zIndex }}>
+  const content = <div className={['pi-modal-root', !mask && 'pi-modal-root--no-mask', !rootClassName.includes('pi-drawer-root') && `pi-modal-root--${open ? 'enter' : 'leave'}`, rootClassName].filter(Boolean).join(' ')} hidden={!active} style={{ ...themeVariables(theme), zIndex }}>
     {mask && <div className="pi-modal-mask" />}
     <div className={['pi-modal-wrap', centered && 'pi-modal-wrap--centered'].filter(Boolean).join(' ')} onClick={cancelFromMask}>
       <div {...rest} ref={dialogRef} role="dialog" aria-modal={mask ? true : undefined}
         aria-labelledby={rest['aria-labelledby'] ?? (title != null && !rest['aria-label'] ? titleId : undefined)}
         aria-label={rest['aria-label'] ?? (title == null && !rest['aria-labelledby'] ? '对话框' : undefined)}
         tabIndex={-1} className={['pi-modal', className].filter(Boolean).join(' ')} style={{ width, ...style }}>
-        {closable && <button type="button" className="pi-modal-close" aria-label="关闭" onClick={onCancel}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" /></svg>
+        {closable && <button type="button" className="pi-modal-close" aria-label="关闭" onClick={open ? onCancel : undefined}>
+          <CloseIcon width={16} height={16} />
         </button>}
         {title != null && <div id={titleId} className="pi-modal-title">{title}</div>}
         <div className="pi-modal-body">{children}</div>
         {footer !== null && <div className="pi-modal-footer">{footer === undefined ? <>
-          <Button {...cancelButtonProps} onClick={event => { cancelButtonProps?.onClick?.(event); if (!event.defaultPrevented) onCancel?.(event); }}>{cancelText}</Button>
-          <Button type="primary" loading={confirmLoading} {...okButtonProps} onClick={event => { okButtonProps?.onClick?.(event); if (!event.defaultPrevented) onOk?.(event); }}>{okText}</Button>
+          <Button {...cancelButtonProps} onClick={event => { if (!open) return; cancelButtonProps?.onClick?.(event); if (!event.defaultPrevented) onCancel?.(event); }}>{cancelText}</Button>
+          <Button type="primary" loading={confirmLoading} {...okButtonProps} onClick={event => { if (!open) return; okButtonProps?.onClick?.(event); if (!event.defaultPrevented) onOk?.(event); }}>{okText}</Button>
         </> : footer}</div>}
       </div>
     </div>

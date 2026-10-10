@@ -1,0 +1,5 @@
+import {render,screen} from '@testing-library/react';
+import {expect,it} from 'vitest';
+import {Badge} from './index';
+it('hides zero unless requested and preserves actual count in tooltip when overflowed',()=>{const {rerender,container}=render(<Badge count={0}>Inbox</Badge>);expect(container.querySelector('sup')).toBeNull();rerender(<Badge count={0} showZero>Inbox</Badge>);expect(screen.getByText('0')).toBeVisible();rerender(<Badge count={120} overflowCount={99}>Inbox</Badge>);expect(screen.getByText('99+')).toHaveAttribute('title','120');rerender(<Badge count={120} title={false}>Inbox</Badge>);expect(screen.getByText('99+')).not.toHaveAttribute('title');});
+it('renders standalone status and custom count content without coercing it',()=>{const {container}=render(<><Badge status="processing" text="Building"/><Badge count={<strong>New</strong>} /></>);expect(screen.getByText('Building')).toBeVisible();expect(container.querySelector('.pi-badge__indicator--processing')).toBeTruthy();expect(screen.getByText('New').tagName).toBe('STRONG');});

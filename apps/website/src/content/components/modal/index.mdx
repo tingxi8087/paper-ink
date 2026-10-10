@@ -42,4 +42,6 @@ const editor = useRef<EditorHandle>(null);
 
 ## 兼容范围
 
-本期提供受控 Modal；不包含 `Modal.confirm()`、`Modal.useModal()`、静态提示方法、动画、拖拽、响应式 width 配置和完整语义样式 API。普通 Modal 不会因为 onOk 返回 Promise 而自动关闭或进入 loading，请显式控制 open 与 confirmLoading。
+本期提供受控 Modal；不包含 `Modal.confirm()`、`Modal.useModal()`、静态提示方法、拖拽、响应式 width 配置和完整语义样式 API。普通 Modal 不会因为 onOk 返回 Promise 而自动关闭或进入 loading，请显式控制 open 与 confirmLoading。
+
+默认 180ms 淡入淡出与轻微缩放，遮罩同步渐变。退出结束后再恢复焦点、滚动及调用 afterClose；Drawer 使用自己的动画时不会叠加。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。

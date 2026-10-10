@@ -2,7 +2,7 @@
 
 默认黑白主色、保留语义色的 React UI 组件库。常规组件 API 参考 Ant Design，支持范围逐步扩展，主题结构独立设计。
 
-当前为 **0.1.0 本地开发版本，尚未发布到 npm**。已实现 Button、Input / TextArea、受控 Modal、Stack / Inline / SimpleGrid 布局、基础 ConfigProvider、源码安装 CLI，以及 React + Vite + MDX 文档站和在线 JSX 编辑预览。
+当前为 **0.1.0 本地开发版本，尚未发布到 npm**。已实现 Button、Input / Search / Password / TextArea、受控 Modal、Checkbox / Radio / Switch / Select、Tabs、Tag / Empty / Alert / Spin / Tooltip / Message、Stack / Inline / SimpleGrid 布局、基础 ConfigProvider、源码安装 CLI，以及 React + Vite + MDX 文档站和在线 JSX 编辑预览。
 
 ## 开发
 
@@ -81,7 +81,7 @@ export default function App() {
 
 ## 范围与差异
 
-Button 支持常用属性、color/variant、className/style、语义 classNames/styles、自定义 loading 图标和原生 ref。Input/TextArea 支持清空、状态、计数、原生表单与高度自适应。Modal 支持受控显示、焦点管理、Portal 主题和内容生命周期；业务 ref.open(config) 示例见文档站。详见各组件页。
+Button 支持常用属性、color/variant、className/style、语义 classNames/styles、自定义 loading 图标和原生 ref。Input/TextArea 支持清空、状态、计数、原生表单与高度自适应；Input.Search 提供搜索按钮、清空来源与加载状态，Input.Password 支持自定义图标和受控显隐。Modal 支持受控显示、焦点管理、Portal 主题和内容生命周期；业务 ref.open(config) 示例见文档站。详见各组件页。
 
 在线编辑器支持 JSX／函数组件和 Hooks，提供站内组件 scope，不支持任意模块 import 或包安装。源码修改仅保留在当前页面。
 
@@ -92,3 +92,13 @@ Button 支持常用属性、color/variant、className/style、语义 classNames/
 MIT。贡献前请阅读 `doc` 中的设计约定；新增组件需要同步公开类型、行为、演示、API 支持范围及兼容差异。此项目独立实现，不依赖 antd。
 
 布局组件支持 4 / 8 / 16px 主题间距、自动列数、列比例和跨列。使用方式见 [布局组件](doc/layout-components.md)。源码安装：`pnpm cli add stack inline simple-grid --cwd /absolute/path/to/your-app`。
+
+推荐指数为 5 的组件现已全部提供常用 API 子集：Button、Input、Modal、ConfigProvider、Checkbox、Radio、Switch、Select、Tabs、Tag、Empty、Alert、Spin、Tooltip、Message。API 与暂未支持的能力见文档站各组件页；不表示实现了 antd 的完整 API。
+
+Message 推荐使用 `message.useMessage()` 与 contextHolder 继承主题。Select 支持单选、多选、tags 和键盘搜索；大型数据列表的虚拟化、Form 自动联动和 Tabs 可编辑模式暂未提供。
+
+本批新增 18 个 4 分组件：Typography、Divider、Breadcrumb、Dropdown、Pagination、InputNumber、Avatar、Badge、Card、Collapse、Descriptions、Popover、Segmented、Drawer、Popconfirm、Progress、Skeleton、App。Space、DatePicker、Form、Table 暂不实现；布局继续使用 Inline / Stack / SimpleGrid。
+
+InputNumber 使用 `@rc-component/mini-decimal` 的字符串十进制运算，支持 `stringMode`。App.useApp() 提供继承主题的 message 和 modal，确认弹窗支持异步回调、更新、销毁及等待结果。内置图标统一为 SVG。
+
+新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。

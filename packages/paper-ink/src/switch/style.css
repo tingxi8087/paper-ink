@@ -1,0 +1,14 @@
+.pi-switch { position: relative; display: inline-flex; align-items: center; justify-content: flex-end; min-width: 44px; height: 22px; box-sizing: border-box; border: 0; border-radius: 999px; padding: 0 6px 0 25px; color: var(--pi-color-primary-on-solid); background: var(--pi-color-text-disabled); font: 12px/1 var(--pi-font-family); cursor: pointer; vertical-align: middle; transition: background var(--pi-motion-duration); }
+.pi-switch--checked { background: var(--pi-color-primary-solid); justify-content: flex-start; padding: 0 25px 0 6px; }
+.pi-switch__handle { position: absolute; inset-inline-start: 2px; top: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--pi-color-surface-container); display: flex; align-items: center; justify-content: center; transition: inset-inline-start var(--pi-motion-duration); }
+.pi-switch--checked .pi-switch__handle { inset-inline-start: calc(100% - 20px); }
+.pi-switch:focus-visible { outline: 2px solid var(--pi-color-primary-solid); outline-offset: 3px; }
+.pi-switch:disabled { cursor: not-allowed; opacity: .5; }
+.pi-switch--loading { cursor: default; }
+.pi-switch--small { min-width: 28px; height: 16px; padding-inline-start: 18px; font-size: 10px; }
+.pi-switch--small .pi-switch__handle { width: 12px; height: 12px; }
+.pi-switch--small.pi-switch--checked { padding-inline: 6px 18px; }
+.pi-switch--small.pi-switch--checked .pi-switch__handle { inset-inline-start: calc(100% - 14px); }
+.pi-switch__spinner { width: 8px; height: 8px; border: 1.5px solid var(--pi-color-primary-solid); border-inline-end-color: transparent; border-radius: 50%; animation: pi-switch-spin .7s linear infinite; }
+@keyframes pi-switch-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .pi-switch, .pi-switch__handle { transition: none; } .pi-switch__spinner { animation-duration: 1.5s; } }

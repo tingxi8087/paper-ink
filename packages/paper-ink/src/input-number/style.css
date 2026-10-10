@@ -1,0 +1,19 @@
+.pi-input-number { display: inline-flex; align-items: center; box-sizing: border-box; width: 120px; height: var(--pi-control-height-middle); border: 1px solid var(--pi-color-border-default); border-radius: var(--pi-radius-control); background: var(--pi-color-surface-container); color: var(--pi-color-text-primary); font: var(--pi-font-size)/1.5 var(--pi-font-family); overflow: hidden; }
+.pi-input-number > input { box-sizing: border-box; min-width: 0; width: 100%; flex: 1; height: 100%; padding: 0 10px; border: 0; outline: none; background: transparent; color: inherit; font: inherit; }
+.pi-input-number > input:focus-visible { outline: none; }
+.pi-input-number:focus-within { border-color: var(--pi-color-primary-solid); }
+.pi-input-number--small { height: var(--pi-control-height-small); }
+.pi-input-number--large { height: var(--pi-control-height-large); }
+.pi-input-number--filled { background: var(--pi-color-surface-muted); border-color: transparent; }
+.pi-input-number--borderless { border-color: transparent; }
+.pi-input-number--underlined { border-width: 0 0 1px; border-radius: 0; }
+.pi-input-number--error { border-color: var(--pi-color-error-solid); }
+.pi-input-number--warning { border-color: var(--pi-color-warning-solid); }
+.pi-input-number--disabled { background: var(--pi-color-surface-muted); color: var(--pi-color-text-disabled); cursor: not-allowed; }
+.pi-input-number--disabled > input { cursor: not-allowed; }
+.pi-input-number__affix { flex: none; padding-inline: 8px; color: var(--pi-color-text-secondary); }
+.pi-input-number__controls { display: flex; flex: none; flex-direction: column; width: 20px; height: 100%; border-inline-start: 1px solid var(--pi-color-border-subtle); }
+.pi-input-number__controls button { display: flex; align-items: center; justify-content: center; flex: 1; padding: 0; border: 0; background: transparent; color: var(--pi-color-text-secondary); cursor: pointer; }
+.pi-input-number__controls button + button { border-top: 1px solid var(--pi-color-border-subtle); }
+.pi-input-number__controls button:hover:enabled { background: var(--pi-color-surface-muted); color: var(--pi-color-text-primary); }
+.pi-input-number__controls button:disabled { color: var(--pi-color-text-disabled); cursor: not-allowed; }

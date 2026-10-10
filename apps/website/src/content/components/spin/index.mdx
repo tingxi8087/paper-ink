@@ -1,0 +1,27 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { SpinDemos } from '../../../components/StatusDemos';
+import { SpinApiTable } from '../../../components/StatusDemos';
+
+# Spin 加载中
+
+支持独立、区域和全屏加载，延迟显示、自定义指示器与进度文本。
+
+## 代码演示
+
+<SpinDemos />
+
+## API
+
+<SpinApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+区域内容保持挂载，加载时设置 inert 阻止操作。全屏模式不锁滚动或限制焦点。默认动画尊重减少动态效果设置。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="spin" component="Spin" />

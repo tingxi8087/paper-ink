@@ -1,0 +1,26 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { CollapseDemos } from '../../../components/InteractiveDemos';
+
+# Collapse 折叠面板
+
+单项或多项展开、内容保留和手风琴。
+
+## 代码演示
+
+<CollapseDemos />
+
+## API
+
+items（key / label / children / extra / showArrow / collapsible / forceRender / className / style）、activeKey / defaultActiveKey、onChange(keys)、accordion、bordered、ghost、size、destroyOnHidden、expandIcon、expandIconPosition。
+
+## 支持边界
+
+<DocBoundary>
+
+使用 items，不提供旧 Collapse.Panel。没有展开动画；destroyOnHidden 优先于 forceRender。图标触发的按钮通过 label 提供无障碍名称。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="collapse" component="Collapse" />

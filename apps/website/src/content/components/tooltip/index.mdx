@@ -1,0 +1,29 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { TooltipDemos } from '../../../components/FeedbackDemos';
+import { TooltipApiTable } from '../../../components/FeedbackApiTables';
+
+# Tooltip 文字提示
+
+支持 12 种位置、hover/focus/click 触发、延迟与受控显示。浮层继承主题，滚动及尺寸变化时重新定位。
+
+## 代码演示
+
+<TooltipDemos />
+
+## API
+
+<TooltipApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+使用一个 span 承载触发行为，保留子元素事件与 ref。首期不支持 arrow 配置、语义样式函数和 contextMenu 触发。
+
+默认 120ms 淡入淡出。关闭后立即取消可访问关联，退出结束后隐藏或销毁。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="tooltip" component="Tooltip" />

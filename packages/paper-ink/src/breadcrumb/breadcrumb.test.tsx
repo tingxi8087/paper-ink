@@ -1,0 +1,5 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import { expect, it, vi } from 'vitest';
+import { Breadcrumb } from './index';
+it('renders links and current location with configurable separators',()=>{const click=vi.fn();render(<Breadcrumb separator="/" items={[{title:'Home',href:'#home'},{title:'Projects',onClick:click},{title:'Detail'}]}/>);expect(screen.getByRole('link',{name:'Home'})).toHaveAttribute('href','#home');expect(screen.getByText('Detail').closest('[aria-current]')).toHaveAttribute('aria-current','page');fireEvent.click(screen.getByRole('button',{name:'Projects'}));expect(click).toHaveBeenCalledOnce();});
+it('supports itemRender and standalone separator items',()=>{render(<Breadcrumb items={[{title:'Home',href:'/home'},{type:'separator',separator:'>'},{title:'Detail'}]} itemRender={(item,_params,_items,paths)=><span>{item.title} {paths.join(',')}</span>}/>);expect(screen.getByText('Detail /home')).toBeVisible();expect(screen.getAllByText('>')).toHaveLength(1);});

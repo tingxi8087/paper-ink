@@ -1,0 +1,5 @@
+import { render, screen } from '@testing-library/react';
+import { expect, it } from 'vitest';
+import { Progress } from './index';
+it('bounds percentages and supports custom status and format',()=>{const {rerender}=render(<Progress percent={130} format={value=>`${value} done`}/>);expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow','100');expect(screen.getByText('100 done')).toBeVisible();rerender(<Progress percent={-10} status="exception"/>);expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');expect(screen.getByRole('progressbar')).toHaveClass('pi-progress--exception');});
+it('renders dashboard geometry and discrete steps with success portions',()=>{const {container,rerender}=render(<Progress type="dashboard" percent={60} success={{percent:20}} gapDegree={90}/>);expect(container.querySelectorAll('circle')).toHaveLength(3);expect(container.querySelector('circle')).toHaveAttribute('stroke-dasharray');rerender(<Progress percent={60} steps={5}/>);expect(container.querySelectorAll('.pi-progress__steps>span')).toHaveLength(5);expect(screen.getByText('60%')).toBeVisible();});

@@ -1,0 +1,10 @@
+.pi-popover-trigger { display:inline-flex; vertical-align:middle; }
+.pi-popover { box-sizing:border-box; max-width:calc(100vw - 16px); padding:12px; border:1px solid var(--pi-color-border-subtle); border-radius:var(--pi-radius-control); background:var(--pi-color-surface-elevated); color:var(--pi-color-text-primary); font-family:var(--pi-font-family); font-size:var(--pi-font-size); line-height:1.6; overflow-wrap:anywhere; box-shadow:0 4px 18px rgb(0 0 0 / 12%); }
+.pi-popover[hidden] { display:none; }
+.pi-popover-title { margin-bottom:8px; font-weight:600; }
+
+.pi-popover[data-motion=enter] { animation:pi-popover-motion-enter 180ms ease-out both; }
+.pi-popover[data-motion=leave] { animation:pi-popover-motion-leave 180ms ease-in both; pointer-events:none; }
+@keyframes pi-popover-motion-enter { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pi-popover-motion-leave { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(4px); } }
+@media(prefers-reduced-motion:reduce) { .pi-popover[data-motion] { animation:none; } }

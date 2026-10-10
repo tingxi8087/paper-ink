@@ -1,0 +1,23 @@
+.pi-drawer-root .pi-modal-wrap { padding:0; overflow:hidden; }
+.pi-drawer.pi-modal { position:absolute; display:flex; flex-direction:column; max-height:100%; max-width:100%; margin:0; padding:0; border-radius:0; }
+.pi-drawer .pi-modal-title { flex-shrink:0; margin:0; padding:16px 52px 16px 20px; border-bottom:1px solid var(--pi-color-border-subtle); }
+.pi-drawer .pi-modal-body { display:flex; flex:1; flex-direction:column; min-height:0; }
+.pi-drawer-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.pi-drawer-extra { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:400; }
+.pi-drawer-content { flex:1; overflow:auto; overscroll-behavior:contain; padding:20px; }
+.pi-drawer:not(:has(.pi-modal-title)) .pi-drawer-content { padding-top:52px; }
+.pi-drawer-footer { flex-shrink:0; padding:12px 20px; border-top:1px solid var(--pi-color-border-subtle); }
+
+.pi-drawer-root--right { --pi-drawer-offset-x:100%; --pi-drawer-offset-y:0; }
+.pi-drawer-root--left { --pi-drawer-offset-x:-100%; --pi-drawer-offset-y:0; }
+.pi-drawer-root--top { --pi-drawer-offset-x:0; --pi-drawer-offset-y:-100%; }
+.pi-drawer-root--bottom { --pi-drawer-offset-x:0; --pi-drawer-offset-y:100%; }
+.pi-drawer-root--enter .pi-drawer { animation:pi-drawer-enter 260ms cubic-bezier(.22,1,.36,1) both; }
+.pi-drawer-root--leave .pi-drawer { animation:pi-drawer-leave 260ms cubic-bezier(.4,0,1,1) both; }
+.pi-drawer-root--enter .pi-modal-mask { animation:pi-drawer-mask-enter 260ms ease both; }
+.pi-drawer-root--leave .pi-modal-mask { animation:pi-drawer-mask-leave 260ms ease both; }
+@keyframes pi-drawer-enter { from { transform:translate(var(--pi-drawer-offset-x),var(--pi-drawer-offset-y)); } to { transform:translate(0,0); } }
+@keyframes pi-drawer-leave { from { transform:translate(0,0); } to { transform:translate(var(--pi-drawer-offset-x),var(--pi-drawer-offset-y)); } }
+@keyframes pi-drawer-mask-enter { from { opacity:0; } to { opacity:1; } }
+@keyframes pi-drawer-mask-leave { from { opacity:1; } to { opacity:0; } }
+@media (prefers-reduced-motion:reduce) { .pi-drawer-root .pi-drawer,.pi-drawer-root .pi-modal-mask { animation:none; } }

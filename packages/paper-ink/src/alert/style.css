@@ -1,0 +1,8 @@
+.pi-alert { display: flex; align-items: flex-start; gap: var(--pi-spacing-medium); min-width: 0; padding: 8px 12px; border: 1px solid; border-radius: var(--pi-radius-control); color: var(--pi-color-text-primary); font-family: var(--pi-font-family); font-size: var(--pi-font-size); line-height: 1.5; }
+.pi-alert--banner { border-radius: 0; }
+.pi-alert__icon { display: inline-flex; justify-content: center; align-items: center; flex: none; font-weight: 600; width: 20px; height: 20px; font-size: 12px; }
+.pi-alert__content { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.pi-alert__description { margin-top: 4px; color: var(--pi-color-text-secondary); font-size: 13px; }
+.pi-alert__action { flex: none; }
+.pi-alert__close { display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; width: 20px; min-height: 20px; background: transparent; color: var(--pi-color-text-secondary); font: inherit; cursor: pointer; }
+.pi-alert__close:disabled { cursor: not-allowed; opacity: .5; }

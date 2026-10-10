@@ -1,0 +1,29 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { SelectDemos } from '../../../components/SelectDemos';
+import { SelectApiTable } from '../../../components/SelectApiTable';
+
+# Select 选择器
+
+支持 options、单选、多选、标签、搜索与清空，onChange(value, option) 返回选中值及选项。
+
+## 代码演示
+
+<SelectDemos />
+
+## API
+
+<SelectApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+搜索 API 主要兼容 antd 5 常用写法。暂不支持 JSX Option/OptGroup、labelInValue、分组选项、虚拟滚动和完整自定义渲染；适合普通数量选项。
+
+下拉面板使用 180ms 淡入淡出，关闭立即更新 expanded 状态，退出结束后卸载面板。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="select" component="Select" />

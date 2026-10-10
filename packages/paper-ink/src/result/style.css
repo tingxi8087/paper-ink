@@ -1,0 +1,6 @@
+.pi-result { box-sizing:border-box; width:100%; min-width:0; padding:28px 20px; color:var(--pi-color-text-primary); font:var(--pi-font-size)/1.6 var(--pi-font-family); text-align:center; overflow-wrap:anywhere; }
+.pi-result__icon { display:flex; align-items:center; justify-content:center; margin-bottom:16px; }.pi-result__icon > svg { flex-shrink:0; }
+.pi-result__title { font-size:24px; line-height:1.4; font-weight:500; }.pi-result__subTitle { margin-top:8px; color:var(--pi-color-text-secondary); }
+.pi-result__extra { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; align-items:center; margin-top:20px; }
+.pi-result__body { margin-top:20px; padding:16px; border-radius:var(--pi-radius-control); background:var(--pi-color-surface-muted); text-align:start; }
+@media(max-width:480px) { .pi-result { padding:20px 12px; }.pi-result__title { font-size:22px; } }

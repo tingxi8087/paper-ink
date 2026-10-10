@@ -1,0 +1,5 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import { expect, it, vi } from 'vitest';
+import { Segmented } from './index';
+it('supports native radio selection and arrow navigation skipping disabled options',()=>{const change=vi.fn();render(<Segmented name="view" options={['Day',{value:'Week',disabled:true},'Month']} onChange={change}/>);fireEvent.keyDown(screen.getByRole('radiogroup'),{key:'ArrowRight'});expect(change).toHaveBeenCalledWith('Month');expect(screen.getByRole('radio',{name:'Month'})).toBeChecked();expect(screen.getByRole('radio',{name:'Month'})).toHaveFocus();fireEvent.keyDown(screen.getByRole('radiogroup'),{key:'Home'});expect(screen.getByRole('radio',{name:'Day'})).toBeChecked();fireEvent.click(screen.getByRole('radio',{name:'Month'}));expect(screen.getByRole('radio',{name:'Month'})).toBeChecked();});
+it('preserves numeric controlled values and disabled choices',()=>{const change=vi.fn();render(<Segmented options={[1,2]} value={1} onChange={change}/>);fireEvent.click(screen.getByRole('radio',{name:'2'}));expect(change).toHaveBeenCalledWith(2);expect(screen.getByRole('radio',{name:'1'})).toBeChecked();});

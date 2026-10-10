@@ -1,0 +1,27 @@
+import { TimelineDemos } from '../../../components/RateTimelineResultDemos';
+import { TimelineApiTable } from '../../../components/RateTimelineResultApiTables';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# Timeline 时间轴
+
+用简洁的节点与连线展示事件顺序。
+
+## 代码演示
+
+<TimelineDemos />
+
+## API
+
+<TimelineApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+提供垂直时间轴、交错排列、加载和反转；不提供横向时间轴、titleSpan、Timeline.Item 与语义样式函数。默认节点使用主色；支持状态颜色及自定义 SVG。加载动效遵循 prefers-reduced-motion。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="timeline" component="Timeline" />

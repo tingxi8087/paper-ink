@@ -1,0 +1,5 @@
+import {fireEvent,render,screen} from '@testing-library/react';
+import {expect,it,vi} from 'vitest';
+import {Card} from './index';
+it('keeps card actions interactive and applies section styles independently',()=>{const action=vi.fn();render(<Card title="Project" extra={<a href="/edit">Edit</a>} actions={[<button onClick={action}>Archive</button>]} styles={{body:{padding:0}}}><Card.Meta title="Paper" description="Library" avatar={<span>PI</span>} /></Card>);fireEvent.click(screen.getByRole('button',{name:'Archive'}));expect(action).toHaveBeenCalledOnce();expect(screen.getByText('Paper').closest('.pi-card__body')).toHaveStyle({padding:'0px'});expect(screen.getByRole('link',{name:'Edit'})).toHaveAttribute('href','/edit');});
+it('replaces pending content while loading and restores it afterward',()=>{const {rerender}=render(<Card loading><button>Content</button></Card>);expect(screen.queryByRole('button',{name:'Content'})).toBeNull();expect(screen.getByRole('status',{name:'加载中'})).toBeVisible();rerender(<Card><button>Content</button></Card>);expect(screen.getByRole('button',{name:'Content'})).toBeVisible();});

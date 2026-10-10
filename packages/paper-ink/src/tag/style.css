@@ -1,0 +1,9 @@
+.pi-tag { box-sizing: border-box; display: inline-flex; align-items: center; gap: var(--pi-spacing-small); max-width: 100%; min-height: 22px; padding: 0 7px; border: 1px solid; border-radius: 4px; font: inherit; font-family: var(--pi-font-family); font-size: 12px; line-height: 20px; overflow-wrap: anywhere; vertical-align: middle; }
+.pi-tag__icon { display: inline-flex; align-items: center; }
+.pi-tag__close { display: inline-flex; align-items: center; justify-content: center; padding: 0; width: 14px; height: 18px; border: 0; background: transparent; color: inherit; font: inherit; font-size: 16px; cursor: pointer; opacity: .65; }
+.pi-tag__close:hover { opacity: 1; }
+.pi-tag--checkable { border-color: transparent; background: transparent; color: var(--pi-color-text-primary); cursor: pointer; }
+.pi-tag--checkable:hover:not(:disabled) { background: var(--pi-color-surface-muted); }
+.pi-tag--checked, .pi-tag--checked:hover:not(:disabled) { background: var(--pi-color-primary-solid); color: var(--pi-color-primary-on-solid); }
+.pi-tag--disabled, .pi-tag--checkable:disabled { opacity: .5; cursor: not-allowed; }
+.pi-tag__close:disabled { cursor: not-allowed; }

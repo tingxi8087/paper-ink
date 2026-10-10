@@ -1,0 +1,26 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { DescriptionsDemos, DescriptionsApiTable } from '../../../components/ContentDemos';
+
+# Descriptions 描述列表
+
+提供横向、纵向详情，边框、跨列与条目样式。
+
+## 代码演示
+
+<DescriptionsDemos />
+
+## API
+
+<DescriptionsApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+column 仅支持数字，不支持响应式对象；span 支持数字或 filled，不支持响应式对象。styles 仅接受对象；不支持 classNames。推荐 items，旧版 Item 仅支持直接子元素。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="descriptions" component="Descriptions" />

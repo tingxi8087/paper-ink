@@ -1,3 +1,4 @@
+import { CloseIcon } from '../internal/icons.js';
 import { useEffect, useState, type ChangeEvent, type MouseEvent, type RefObject } from 'react';
 import type { InputFocusOptions, SharedInputProps } from './types.js';
 
@@ -45,5 +46,5 @@ export function Count({ value, maxLength, showCount }: { value: string; maxLengt
   return <span className="pi-input__count">{formatter ? formatter({ value, count, maxLength }) : `${count}${maxLength === undefined ? '' : ` / ${maxLength}`}`}</span>;
 }
 export function ClearButton({ allowClear, clear }: { allowClear: SharedInputProps['allowClear']; clear: (event: MouseEvent<HTMLButtonElement>) => void }) {
-  return <button type="button" className="pi-input__clear" aria-label="清空内容" onMouseDown={event => event.preventDefault()} onClick={clear}>{typeof allowClear === 'object' ? allowClear.clearIcon ?? '×' : '×'}</button>;
+  return <button type="button" className="pi-input__clear" aria-label="清空内容" onMouseDown={event => event.preventDefault()} onClick={clear}>{typeof allowClear === 'object' ? allowClear.clearIcon ?? <CloseIcon /> : <CloseIcon />}</button>;
 }

@@ -21,6 +21,24 @@
       ]
     },
     {
+      "name": "icons",
+      "internal": true,
+      "description": "Shared lightweight SVG icons",
+      "files": [
+        "internal/icons.tsx"
+      ],
+      "exports": []
+    },
+    {
+      "name": "motion",
+      "internal": true,
+      "description": "Shared lightweight presence lifecycle",
+      "files": [
+        "internal/motion.ts"
+      ],
+      "exports": []
+    },
+    {
       "name": "button",
       "description": "Button with familiar Ant Design-style APIs",
       "registryDependencies": [
@@ -39,21 +57,25 @@
     },
     {
       "name": "input",
-      "description": "Input and TextArea with clear, status, count and auto size",
+      "description": "Input, Search, Password and TextArea with clear, status, count and refs",
       "registryDependencies": [
-        "theme"
+        "theme",
+        "icons",
+        "button"
       ],
       "files": [
         "input/index.ts",
         "input/input.tsx",
-        "input/text-area.tsx",
+        "input/password.tsx",
+        "input/search.tsx",
         "input/shared.tsx",
-        "input/types.ts",
-        "input/style.css"
+        "input/style.css",
+        "input/text-area.tsx",
+        "input/types.ts"
       ],
       "exports": [
-        "export { Input, TextArea } from './input/index';",
-        "export type { InputProps, InputRef, TextAreaProps, TextAreaRef } from './input/types';"
+        "export { Input, TextArea, Search, Password } from './input/index';",
+        "export type { InputProps, InputRef, TextAreaProps, TextAreaRef, SearchProps, PasswordProps } from './input/types';"
       ]
     },
     {
@@ -61,7 +83,9 @@
       "description": "Controlled modal with focus management and inherited theme",
       "registryDependencies": [
         "theme",
-        "button"
+        "button",
+        "icons",
+        "motion"
       ],
       "peerDependencies": {
         "react-dom": ">=18.0.0"
@@ -134,6 +158,521 @@
       "exports": [
         "export { SimpleGrid } from './simple-grid/index';",
         "export type { SimpleGridProps, SimpleGridItemProps } from './simple-grid/index';"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "description": "Checkbox, CheckboxGroup common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "checkbox/index.tsx",
+        "checkbox/style.css"
+      ],
+      "exports": [
+        "export { Checkbox, CheckboxGroup } from './checkbox/index';",
+        "export type { CheckboxProps, CheckboxGroupProps, CheckboxOption, CheckboxValue, CheckboxChangeEvent, CheckboxRef } from './checkbox/index';"
+      ]
+    },
+    {
+      "name": "radio",
+      "description": "Radio, RadioGroup common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "radio/index.tsx",
+        "radio/style.css"
+      ],
+      "exports": [
+        "export { Radio, RadioGroup } from './radio/index';",
+        "export type { RadioProps, RadioGroupProps, RadioOption, RadioValue, RadioChangeEvent, RadioRef } from './radio/index';"
+      ]
+    },
+    {
+      "name": "switch",
+      "description": "Switch common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "switch/index.tsx",
+        "switch/style.css"
+      ],
+      "exports": [
+        "export { Switch } from './switch/index';",
+        "export type { SwitchProps } from './switch/index';"
+      ]
+    },
+    {
+      "name": "tabs",
+      "description": "Tabs common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "tabs/index.tsx",
+        "tabs/style.css"
+      ],
+      "exports": [
+        "export { Tabs } from './tabs/index';",
+        "export type { TabsProps, TabItem } from './tabs/index';"
+      ]
+    },
+    {
+      "name": "select",
+      "description": "Select common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "motion"
+      ],
+      "files": [
+        "select/index.ts",
+        "select/select.tsx",
+        "select/style.css",
+        "select/types.ts"
+      ],
+      "exports": [
+        "export { Select } from './select/index';",
+        "export type { SelectProps, SelectOption, SelectRawValue, SelectValue, SelectRef } from './select/index';"
+      ],
+      "peerDependencies": {
+        "react-dom": ">=18.0.0"
+      }
+    },
+    {
+      "name": "tooltip",
+      "description": "Tooltip common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "motion"
+      ],
+      "files": [
+        "tooltip/index.ts",
+        "tooltip/style.css",
+        "tooltip/tooltip.tsx",
+        "tooltip/types.ts"
+      ],
+      "exports": [
+        "export { Tooltip } from './tooltip/index';",
+        "export type { TooltipProps, TooltipPlacement } from './tooltip/index';"
+      ],
+      "peerDependencies": {
+        "react-dom": ">=18.0.0"
+      }
+    },
+    {
+      "name": "message",
+      "description": "message, useMessage common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "motion"
+      ],
+      "files": [
+        "message/index.ts",
+        "message/message.tsx",
+        "message/style.css",
+        "message/types.ts"
+      ],
+      "exports": [
+        "export { message, useMessage } from './message/index';",
+        "export type { MessageArgs, MessageConfig, MessageHandle, MessageInstance, MessageType } from './message/index';"
+      ],
+      "peerDependencies": {
+        "react-dom": ">=18.0.0"
+      }
+    },
+    {
+      "name": "tag",
+      "description": "Tag common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ],
+      "files": [
+        "tag/index.tsx",
+        "tag/style.css"
+      ],
+      "exports": [
+        "export { Tag } from './tag/index';",
+        "export type { TagProps, CheckableTagProps } from './tag/index';"
+      ]
+    },
+    {
+      "name": "alert",
+      "description": "Alert common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ],
+      "files": [
+        "alert/index.tsx",
+        "alert/style.css"
+      ],
+      "exports": [
+        "export { Alert } from './alert/index';",
+        "export type { AlertProps, AlertClosable, AlertErrorBoundaryProps } from './alert/index';"
+      ]
+    },
+    {
+      "name": "spin",
+      "description": "Spin common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "spin/index.tsx",
+        "spin/style.css"
+      ],
+      "exports": [
+        "export { Spin } from './spin/index';",
+        "export type { SpinProps } from './spin/index';"
+      ],
+      "peerDependencies": {
+        "react-dom": ">=18.0.0"
+      }
+    },
+    {
+      "name": "empty",
+      "description": "Empty common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "empty/index.tsx",
+        "empty/style.css"
+      ],
+      "exports": [
+        "export { Empty } from './empty/index';",
+        "export type { EmptyProps } from './empty/index';"
+      ]
+    },
+    {
+      "name": "typography",
+      "description": "typography common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ],
+      "files": [
+        "typography/index.tsx",
+        "typography/style.css"
+      ],
+      "exports": [
+        "export * from './typography/index';"
+      ]
+    },
+    {
+      "name": "divider",
+      "description": "divider common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "divider/index.tsx",
+        "divider/style.css"
+      ],
+      "exports": [
+        "export * from './divider/index';"
+      ]
+    },
+    {
+      "name": "avatar",
+      "description": "avatar common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "avatar/index.tsx",
+        "avatar/style.css"
+      ],
+      "exports": [
+        "export * from './avatar/index';"
+      ]
+    },
+    {
+      "name": "badge",
+      "description": "badge common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "badge/index.tsx",
+        "badge/style.css"
+      ],
+      "exports": [
+        "export * from './badge/index';"
+      ]
+    },
+    {
+      "name": "card",
+      "description": "card common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "card/index.tsx",
+        "card/style.css"
+      ],
+      "exports": [
+        "export * from './card/index';"
+      ]
+    },
+    {
+      "name": "descriptions",
+      "description": "descriptions common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "descriptions/index.tsx",
+        "descriptions/style.css"
+      ],
+      "exports": [
+        "export * from './descriptions/index';"
+      ]
+    },
+    {
+      "name": "dropdown",
+      "description": "dropdown common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "popover"
+      ],
+      "files": [
+        "dropdown/index.tsx",
+        "dropdown/style.css"
+      ],
+      "exports": [
+        "export * from './dropdown/index';"
+      ]
+    },
+    {
+      "name": "popover",
+      "description": "popover common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "motion"
+      ],
+      "files": [
+        "popover/index.ts",
+        "popover/popover.tsx",
+        "popover/style.css",
+        "popover/types.ts"
+      ],
+      "exports": [
+        "export * from './popover/index';"
+      ],
+      "peerDependencies": {
+        "react-dom": ">=18.0.0"
+      }
+    },
+    {
+      "name": "popconfirm",
+      "description": "popconfirm common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "button",
+        "popover"
+      ],
+      "files": [
+        "popconfirm/index.tsx",
+        "popconfirm/style.css"
+      ],
+      "exports": [
+        "export * from './popconfirm/index';"
+      ]
+    },
+    {
+      "name": "drawer",
+      "description": "drawer common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "modal"
+      ],
+      "files": [
+        "drawer/index.tsx",
+        "drawer/style.css"
+      ],
+      "exports": [
+        "export * from './drawer/index';"
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "description": "breadcrumb common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "breadcrumb/index.tsx",
+        "breadcrumb/style.css"
+      ],
+      "exports": [
+        "export * from './breadcrumb/index';"
+      ]
+    },
+    {
+      "name": "pagination",
+      "description": "pagination common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "select"
+      ],
+      "files": [
+        "pagination/index.tsx",
+        "pagination/style.css"
+      ],
+      "exports": [
+        "export * from './pagination/index';"
+      ]
+    },
+    {
+      "name": "collapse",
+      "description": "collapse common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ],
+      "files": [
+        "collapse/index.tsx",
+        "collapse/style.css"
+      ],
+      "exports": [
+        "export * from './collapse/index';"
+      ]
+    },
+    {
+      "name": "segmented",
+      "description": "segmented common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "segmented/index.tsx",
+        "segmented/style.css"
+      ],
+      "exports": [
+        "export * from './segmented/index';"
+      ]
+    },
+    {
+      "name": "progress",
+      "description": "progress common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ],
+      "files": [
+        "progress/index.tsx",
+        "progress/style.css"
+      ],
+      "exports": [
+        "export * from './progress/index';"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "description": "skeleton common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "skeleton/index.tsx",
+        "skeleton/style.css"
+      ],
+      "exports": [
+        "export * from './skeleton/index';"
+      ]
+    },
+    {
+      "name": "input-number",
+      "description": "input-number common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "input"
+      ],
+      "files": [
+        "input-number/index.tsx",
+        "input-number/style.css"
+      ],
+      "exports": [
+        "export * from './input-number/index';"
+      ],
+      "dependencies": {
+        "@rc-component/mini-decimal": "^1.1.4"
+      }
+    },
+    {
+      "name": "app",
+      "description": "app common Ant Design-style API subset",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "button",
+        "modal",
+        "message"
+      ],
+      "files": [
+        "app/index.tsx",
+        "app/style.css"
+      ],
+      "exports": [
+        "export * from './app/index';"
+      ]
+    },
+    {
+      "name": "rate",
+      "description": "Rate with common Ant Design-style APIs",
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ],
+      "files": [
+        "rate/index.tsx",
+        "rate/style.css"
+      ],
+      "exports": [
+        "export { Rate } from './rate/index';",
+        "export type { RateProps, RateRef } from './rate/index';"
+      ]
+    },
+    {
+      "name": "timeline",
+      "description": "Timeline with common Ant Design-style APIs",
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ],
+      "files": [
+        "timeline/index.tsx",
+        "timeline/style.css"
+      ],
+      "exports": [
+        "export { Timeline } from './timeline/index';",
+        "export type { TimelineProps, TimelineItemType } from './timeline/index';"
+      ]
+    },
+    {
+      "name": "result",
+      "description": "Result with common Ant Design-style APIs",
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ],
+      "files": [
+        "result/index.tsx",
+        "result/style.css"
+      ],
+      "exports": [
+        "export { Result } from './result/index';",
+        "export type { ResultProps, ResultStatus, ResultSemantic } from './result/index';"
       ]
     }
   ]

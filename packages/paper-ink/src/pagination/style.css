@@ -1,0 +1,13 @@
+.pi-pagination { display:flex; align-items:center; flex-wrap:wrap; gap:6px; color:var(--pi-color-text-primary); font:var(--pi-font-size)/1.5 var(--pi-font-family); }
+.pi-pagination--center { justify-content:center; }
+.pi-pagination--end { justify-content:flex-end; }
+.pi-pagination > button,.pi-pagination__jumper > button,.pi-pagination__simple > input,.pi-pagination__jumper > input { box-sizing:border-box; height:32px; border:1px solid var(--pi-color-border-default); border-radius:var(--pi-radius-control); background:var(--pi-color-surface-container); color:inherit; font:inherit; }
+.pi-pagination > button,.pi-pagination__jumper > button { min-width:32px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; padding:0 6px; }
+.pi-pagination > button:hover:not(:disabled),.pi-pagination__jumper > button:hover:not(:disabled) { border-color:var(--pi-color-primary-solid); }
+.pi-pagination > button[aria-current=page] { background:var(--pi-color-primary-solid); color:var(--pi-color-primary-on-solid); border-color:var(--pi-color-primary-solid); }
+.pi-pagination > button:disabled,.pi-pagination__jumper > button:disabled,.pi-pagination__simple > input:disabled,.pi-pagination__jumper > input:disabled { color:var(--pi-color-text-disabled); cursor:not-allowed; }
+.pi-pagination__simple > input,.pi-pagination__jumper > input { width:44px; text-align:center; padding:0 4px; }
+.pi-pagination__simple,.pi-pagination__jumper { display:inline-flex; gap:6px; align-items:center; }
+.pi-pagination--small > button,.pi-pagination--small .pi-pagination__jumper > button,.pi-pagination--small .pi-pagination__simple > input,.pi-pagination--small .pi-pagination__jumper > input { height:24px; min-width:24px; }
+.pi-pagination--large > button,.pi-pagination--large .pi-pagination__jumper > button,.pi-pagination--large .pi-pagination__simple > input,.pi-pagination--large .pi-pagination__jumper > input { height:40px; min-width:40px; }
+.pi-pagination__size { display:inline-flex; align-items:center; width:112px; flex:none; }

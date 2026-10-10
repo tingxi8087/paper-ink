@@ -48,7 +48,167 @@
       "types": "./dist/simple-grid/index.d.ts",
       "import": "./dist/simple-grid/index.js"
     },
-    "./simple-grid/style.css": "./dist/simple-grid/style.css"
+    "./simple-grid/style.css": "./dist/simple-grid/style.css",
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "import": "./dist/checkbox/index.js"
+    },
+    "./checkbox/style.css": "./dist/checkbox/style.css",
+    "./radio": {
+      "types": "./dist/radio/index.d.ts",
+      "import": "./dist/radio/index.js"
+    },
+    "./radio/style.css": "./dist/radio/style.css",
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "import": "./dist/switch/index.js"
+    },
+    "./switch/style.css": "./dist/switch/style.css",
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "import": "./dist/tabs/index.js"
+    },
+    "./tabs/style.css": "./dist/tabs/style.css",
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "import": "./dist/select/index.js"
+    },
+    "./select/style.css": "./dist/select/style.css",
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.js"
+    },
+    "./tooltip/style.css": "./dist/tooltip/style.css",
+    "./message": {
+      "types": "./dist/message/index.d.ts",
+      "import": "./dist/message/index.js"
+    },
+    "./message/style.css": "./dist/message/style.css",
+    "./tag": {
+      "types": "./dist/tag/index.d.ts",
+      "import": "./dist/tag/index.js"
+    },
+    "./tag/style.css": "./dist/tag/style.css",
+    "./alert": {
+      "types": "./dist/alert/index.d.ts",
+      "import": "./dist/alert/index.js"
+    },
+    "./alert/style.css": "./dist/alert/style.css",
+    "./spin": {
+      "types": "./dist/spin/index.d.ts",
+      "import": "./dist/spin/index.js"
+    },
+    "./spin/style.css": "./dist/spin/style.css",
+    "./empty": {
+      "types": "./dist/empty/index.d.ts",
+      "import": "./dist/empty/index.js"
+    },
+    "./empty/style.css": "./dist/empty/style.css",
+    "./typography": {
+      "types": "./dist/typography/index.d.ts",
+      "import": "./dist/typography/index.js"
+    },
+    "./typography/style.css": "./dist/typography/style.css",
+    "./divider": {
+      "types": "./dist/divider/index.d.ts",
+      "import": "./dist/divider/index.js"
+    },
+    "./divider/style.css": "./dist/divider/style.css",
+    "./avatar": {
+      "types": "./dist/avatar/index.d.ts",
+      "import": "./dist/avatar/index.js"
+    },
+    "./avatar/style.css": "./dist/avatar/style.css",
+    "./badge": {
+      "types": "./dist/badge/index.d.ts",
+      "import": "./dist/badge/index.js"
+    },
+    "./badge/style.css": "./dist/badge/style.css",
+    "./card": {
+      "types": "./dist/card/index.d.ts",
+      "import": "./dist/card/index.js"
+    },
+    "./card/style.css": "./dist/card/style.css",
+    "./descriptions": {
+      "types": "./dist/descriptions/index.d.ts",
+      "import": "./dist/descriptions/index.js"
+    },
+    "./descriptions/style.css": "./dist/descriptions/style.css",
+    "./dropdown": {
+      "types": "./dist/dropdown/index.d.ts",
+      "import": "./dist/dropdown/index.js"
+    },
+    "./dropdown/style.css": "./dist/dropdown/style.css",
+    "./popover": {
+      "types": "./dist/popover/index.d.ts",
+      "import": "./dist/popover/index.js"
+    },
+    "./popover/style.css": "./dist/popover/style.css",
+    "./popconfirm": {
+      "types": "./dist/popconfirm/index.d.ts",
+      "import": "./dist/popconfirm/index.js"
+    },
+    "./popconfirm/style.css": "./dist/popconfirm/style.css",
+    "./drawer": {
+      "types": "./dist/drawer/index.d.ts",
+      "import": "./dist/drawer/index.js"
+    },
+    "./drawer/style.css": "./dist/drawer/style.css",
+    "./breadcrumb": {
+      "types": "./dist/breadcrumb/index.d.ts",
+      "import": "./dist/breadcrumb/index.js"
+    },
+    "./breadcrumb/style.css": "./dist/breadcrumb/style.css",
+    "./pagination": {
+      "types": "./dist/pagination/index.d.ts",
+      "import": "./dist/pagination/index.js"
+    },
+    "./pagination/style.css": "./dist/pagination/style.css",
+    "./collapse": {
+      "types": "./dist/collapse/index.d.ts",
+      "import": "./dist/collapse/index.js"
+    },
+    "./collapse/style.css": "./dist/collapse/style.css",
+    "./segmented": {
+      "types": "./dist/segmented/index.d.ts",
+      "import": "./dist/segmented/index.js"
+    },
+    "./segmented/style.css": "./dist/segmented/style.css",
+    "./progress": {
+      "types": "./dist/progress/index.d.ts",
+      "import": "./dist/progress/index.js"
+    },
+    "./progress/style.css": "./dist/progress/style.css",
+    "./skeleton": {
+      "types": "./dist/skeleton/index.d.ts",
+      "import": "./dist/skeleton/index.js"
+    },
+    "./skeleton/style.css": "./dist/skeleton/style.css",
+    "./input-number": {
+      "types": "./dist/input-number/index.d.ts",
+      "import": "./dist/input-number/index.js"
+    },
+    "./input-number/style.css": "./dist/input-number/style.css",
+    "./app": {
+      "types": "./dist/app/index.d.ts",
+      "import": "./dist/app/index.js"
+    },
+    "./app/style.css": "./dist/app/style.css",
+    "./rate": {
+      "types": "./dist/rate/index.d.ts",
+      "import": "./dist/rate/index.js"
+    },
+    "./rate/style.css": "./dist/rate/style.css",
+    "./timeline": {
+      "types": "./dist/timeline/index.d.ts",
+      "import": "./dist/timeline/index.js"
+    },
+    "./timeline/style.css": "./dist/timeline/style.css",
+    "./result": {
+      "types": "./dist/result/index.d.ts",
+      "import": "./dist/result/index.js"
+    },
+    "./result/style.css": "./dist/result/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"
@@ -60,5 +220,8 @@
   "devDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@rc-component/mini-decimal": "^1.1.4"
   }
 }

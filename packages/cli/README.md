@@ -57,3 +57,9 @@ Existing tracked files are preserved even if modified. Untracked conflicting fil
 Use local source or the npm package consistently within a component tree: the two distributions have independent theme contexts, and editing local source does not alter the npm package.
 
 Layout source installation: `paper-ink add stack inline simple-grid`. These components share spacing helpers and theme modules, installed once.
+
+Available source items also include checkbox, radio, switch, tabs, select, tooltip, message, tag, alert, spin and empty. Install any combination with `paper-ink add checkbox radio switch tabs select tooltip message tag alert spin empty`. Select, Tooltip, Message and fullscreen Spin require the project's compatible ReactDOM dependency, which the CLI validates before writing files.
+
+Source items now also include typography, divider, breadcrumb, dropdown, pagination, input-number, avatar, badge, card, collapse, descriptions, popover, segmented, drawer, popconfirm, progress, skeleton and app. Shared dependencies are installed once. Adding input-number installs @rc-component/mini-decimal; other components do not require a decimal dependency.
+
+新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。

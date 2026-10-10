@@ -13,3 +13,13 @@
 .pi-modal-close:focus-visible { outline: 2px solid var(--pi-color-primary-solid); outline-offset: 2px; }
 .pi-modal-footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 24px; }
 @media (max-width: 600px) { .pi-modal-wrap { padding: 24px 12px; } }
+
+.pi-modal-root--enter > .pi-modal-wrap > .pi-modal { animation:pi-modal-enter 180ms ease-out both; }
+.pi-modal-root--leave > .pi-modal-wrap > .pi-modal { pointer-events:none; animation:pi-modal-leave 180ms ease-in both; }
+.pi-modal-root--enter > .pi-modal-mask { animation:pi-modal-mask-enter 180ms ease-out both; }
+.pi-modal-root--leave > .pi-modal-mask { animation:pi-modal-mask-leave 180ms ease-in both; }
+@keyframes pi-modal-enter { from { opacity:0; transform:scale(.98); } to { opacity:1; transform:scale(1); } }
+@keyframes pi-modal-leave { from { opacity:1; transform:scale(1); } to { opacity:0; transform:scale(.98); } }
+@keyframes pi-modal-mask-enter { from { opacity:0; } to { opacity:1; } }
+@keyframes pi-modal-mask-leave { from { opacity:1; } to { opacity:0; } }
+@media(prefers-reduced-motion:reduce) { .pi-modal-root--enter > .pi-modal-wrap > .pi-modal,.pi-modal-root--leave > .pi-modal-wrap > .pi-modal,.pi-modal-root--enter > .pi-modal-mask,.pi-modal-root--leave > .pi-modal-mask { animation:none; } }

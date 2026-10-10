@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 test('MDX demos compile, editing changes output, errors recover, reset works', async ({ page }) => {
  const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
- await page.goto('/#/button');
+ await page.goto('/#/button', { waitUntil: 'domcontentloaded' });
  await expect(page.getByRole('heading', { name: 'Button 按钮' })).toBeVisible();
  const demo = page.getByRole('region', { name: '按钮类型', exact: true });
  await expect(demo.getByRole('button', { name: 'Primary', exact: true })).toBeVisible();
@@ -28,7 +28,7 @@ test('MDX demos compile, editing changes output, errors recover, reset works', a
  expect(errors.filter(message => !message.includes('示例渲染错误'))).toEqual([]);
 });
 test('theme controls update real Button styles and export matching configuration', async ({ page }) => {
- await page.goto('/#/theme');
+ await page.goto('/#/theme', { waitUntil: 'domcontentloaded' });
  await page.getByRole('button', { name: '信息蓝', exact: true }).click();
  const button = page.getByRole('button', { name: '保存修改', exact: true });
  await expect(button).toHaveCSS('background-color', 'rgb(22, 119, 255)');
@@ -39,7 +39,7 @@ test('theme controls update real Button styles and export matching configuration
  await expect(button).toHaveCSS('background-color', 'rgb(23, 23, 23)');
 });
 test('composition submits and resets using native form behavior', async ({ page }) => {
- await page.goto('/#/examples');
+ await page.goto('/#/examples', { waitUntil: 'domcontentloaded' });
  await page.getByLabel('名称').fill('New workspace');
  await page.getByRole('button', { name: '保存修改' }).click();
  await expect(page.getByRole('status')).toHaveText('已保存到本次演示');
@@ -50,7 +50,7 @@ test('desktop and mobile pages have no horizontal overflow', async ({ page }) =>
  for (const width of [1440, 390]) {
   await page.setViewportSize({ width, height: 900 });
   for (const route of ['', 'button', 'guide', 'theme', 'examples', 'input', 'modal']) {
-   await page.goto(`/#/${route}`);
+   await page.goto(`/#/${route}`, { waitUntil: 'domcontentloaded' });
    await expect(page.locator('h1')).toBeVisible();
    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
    if (width === 390 && route === 'button') await page.screenshot({ path: '.artifacts/button-mobile.png', fullPage: false });
@@ -61,7 +61,7 @@ test('desktop and mobile pages have no horizontal overflow', async ({ page }) =>
 });
 
 test('Input clear, native attributes and TextArea auto size work in the browser', async ({ page }) => {
- await page.goto('/#/input');
+ await page.goto('/#/input', { waitUntil: 'domcontentloaded' });
  const demo = page.getByRole('region', { name: '输入与清空', exact: true });
  await expect(demo.getByRole('textbox')).toHaveValue('Paper Ink');
  await demo.getByRole('button', { name: '清空内容' }).click();
@@ -88,7 +88,7 @@ test('Input clear, native attributes and TextArea auto size work in the browser'
 });
 
 test('Modal traps focus, restores trigger, waits for controlled submit and inherits portal theme', async ({ page }) => {
- await page.goto('/#/modal');
+ await page.goto('/#/modal', { waitUntil: 'domcontentloaded' });
  const trigger = page.getByRole('button', { name: '打开基础弹窗' });
  await trigger.click();
  const dialog = page.getByRole('dialog', { name: '基础弹窗', exact: true });
@@ -115,7 +115,7 @@ test('Modal traps focus, restores trigger, waits for controlled submit and inher
 });
 
 test('business ref.open initializes each session and reports local save result', async ({ page }) => {
- await page.goto('/#/modal');
+ await page.goto('/#/modal', { waitUntil: 'domcontentloaded' });
  const demo = page.getByRole('region', { name: '命令式业务弹窗' });
  await demo.getByRole('button', { name: '编辑工作空间' }).click();
  const dialog = page.getByRole('dialog', { name: '编辑工作空间', exact: true });
@@ -133,7 +133,7 @@ test('business ref.open initializes each session and reports local save result',
 
 test('mobile Modal fits viewport with focused form and scrollable content', async ({ page }) => {
  await page.setViewportSize({ width: 390, height: 700 });
- await page.goto('/#/modal');
+ await page.goto('/#/modal', { waitUntil: 'domcontentloaded' });
  await page.getByRole('button', { name: '打开基础弹窗' }).click();
  const dialog = page.getByRole('dialog', { name: '基础弹窗', exact: true });
  const bounds = await dialog.boundingBox();

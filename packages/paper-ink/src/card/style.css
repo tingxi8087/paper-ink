@@ -1,0 +1,17 @@
+.pi-card { box-sizing: border-box; min-width: 0; border: 1px solid var(--pi-color-border-subtle); border-radius: var(--pi-radius-control); background: var(--pi-color-surface-container); color: var(--pi-color-text-primary); font: inherit; font-family: var(--pi-font-family); font-size: var(--pi-font-size); transition: box-shadow var(--pi-motion-duration); }
+.pi-card--borderless { border-color: transparent; }
+.pi-card--hoverable:hover { box-shadow: 0 3px 12px #00000010; }
+.pi-card__header { display: flex; align-items: center; gap: var(--pi-spacing-medium); padding: 12px 16px; border-block-end: 1px solid var(--pi-color-border-subtle); }
+.pi-card__title { flex: 1; min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+.pi-card__extra { flex-shrink: 0; }
+.pi-card__body { padding: 16px; overflow-wrap: anywhere; }
+.pi-card--small .pi-card__header,.pi-card--small .pi-card__body { padding: 8px 12px; }
+.pi-card--inner > .pi-card__header { background: var(--pi-color-surface-muted); }
+.pi-card__cover { overflow: hidden; border-radius: var(--pi-radius-control) var(--pi-radius-control) 0 0; }
+.pi-card__cover > img { display: block; width: 100%; }
+.pi-card__actions { display: flex; list-style: none; margin: 0; padding: 8px 0; border-block-start: 1px solid var(--pi-color-border-subtle); }
+.pi-card__actions > li { flex: 1; min-width: 0; text-align: center; padding-inline: 8px; }
+.pi-card__actions > li + li { border-inline-start: 1px solid var(--pi-color-border-subtle); }
+.pi-card-meta { display: flex; gap: 12px; min-width: 0; color: var(--pi-color-text-primary); font: inherit; font-family: var(--pi-font-family); }
+.pi-card-meta__detail { min-width: 0; flex: 1; overflow-wrap: anywhere; }.pi-card-meta__title { font-weight: 600; }.pi-card-meta__description { color: var(--pi-color-text-secondary); margin-block-start: 4px; }
+.pi-card__loading { display: flex; flex-direction: column; gap: 10px; }.pi-card__loading span { height: 14px; background: var(--pi-color-surface-muted); border-radius: 3px; }.pi-card__loading span:last-child { width: 60%; }

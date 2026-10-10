@@ -1,4 +1,4 @@
-import type { ChangeEventHandler, InputHTMLAttributes, KeyboardEventHandler, ReactNode, TextareaHTMLAttributes } from 'react';
+import type { ChangeEvent, ChangeEventHandler, InputHTMLAttributes, KeyboardEvent, KeyboardEventHandler, MouseEvent, ReactNode, TextareaHTMLAttributes } from 'react';
 
 export interface InputFocusOptions extends FocusOptions { cursor?: 'start' | 'end' | 'all' }
 export interface InputRef {
@@ -36,4 +36,15 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   autoSize?: boolean | { minRows?: number; maxRows?: number };
   onPressEnter?: KeyboardEventHandler<HTMLTextAreaElement>;
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+}
+
+export interface SearchProps extends InputProps {
+  enterButton?: ReactNode;
+  loading?: boolean;
+  searchIcon?: ReactNode;
+  onSearch?: (value: string, event?: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLElement> | KeyboardEvent<HTMLInputElement>, info?: { source?: 'input' | 'clear' }) => void;
+}
+export interface PasswordProps extends InputProps {
+  visibilityToggle?: boolean | { visible?: boolean; onVisibleChange?: (visible: boolean) => void; tabIndex?: number };
+  iconRender?: (visible: boolean) => ReactNode;
 }

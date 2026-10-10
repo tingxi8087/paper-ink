@@ -1,0 +1,5 @@
+import { render, screen } from '@testing-library/react';
+import { expect, it } from 'vitest';
+import { Skeleton } from './index';
+it('replaces children while loading and restores them when ready',()=>{const {container,rerender}=render(<Skeleton active avatar paragraph={{rows:2,width:['100%','50%']}}>Content</Skeleton>);expect(screen.queryByText('Content')).toBeNull();expect(screen.getByRole('status')).toHaveAttribute('aria-busy','true');expect(container.querySelectorAll('.pi-skeleton__paragraph>div')).toHaveLength(2);rerender(<Skeleton loading={false}>Content</Skeleton>);expect(screen.getByText('Content')).toBeVisible();expect(screen.queryByRole('status')).toBeNull();});
+it('renders independently sized skeleton primitives',()=>{const {container}=render(<><Skeleton.Avatar size={48}/><Skeleton.Button block active/><Skeleton.Input size="small"/><Skeleton.Image/><Skeleton.Node>Placeholder</Skeleton.Node></>);expect(container.querySelector('.pi-skeleton-element')).toHaveStyle({width:'48px',height:'48px'});expect(container.querySelector('.pi-skeleton-element--button')).toHaveStyle({width:'100%'});});

@@ -1,0 +1,16 @@
+.pi-tabs { color: var(--pi-color-text-primary); font: var(--pi-font-size)/1.6 var(--pi-font-family); min-width: 0; }
+.pi-tabs__bar { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--pi-color-border-default); }
+.pi-tabs__nav { display: flex; align-items: stretch; gap: 24px; overflow-x: auto; min-width: 0; flex: 1; }
+.pi-tabs--centered .pi-tabs__nav { justify-content: center; }
+.pi-tabs__tab { position: relative; flex: none; border: 0; padding: 10px 0; background: transparent; color: var(--pi-color-text-secondary); font: inherit; cursor: pointer; white-space: nowrap; }
+.pi-tabs__tab[aria-selected=true] { color: var(--pi-color-primary-solid); }
+.pi-tabs--line .pi-tabs__tab[aria-selected=true]::after { content: ''; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: var(--pi-color-primary-solid); }
+.pi-tabs__tab:focus-visible { outline: 2px solid var(--pi-color-primary-solid); outline-offset: -2px; }
+.pi-tabs__tab:disabled { color: var(--pi-color-text-disabled); cursor: not-allowed; }
+.pi-tabs__panel { padding-block: 14px; }
+.pi-tabs__panel[hidden] { display: none; }
+.pi-tabs--small .pi-tabs__tab { padding-block: 6px; font-size: 12px; }
+.pi-tabs--large .pi-tabs__tab { padding-block: 14px; font-size: 16px; }
+.pi-tabs--card .pi-tabs__nav { gap: 4px; }
+.pi-tabs--card .pi-tabs__tab { padding-inline: 14px; border: 1px solid var(--pi-color-border-default); border-bottom: 0; border-radius: var(--pi-radius-control) var(--pi-radius-control) 0 0; background: var(--pi-color-surface-muted); }
+.pi-tabs--card .pi-tabs__tab[aria-selected=true] { background: var(--pi-color-surface-container); }

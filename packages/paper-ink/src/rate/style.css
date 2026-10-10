@@ -1,0 +1,10 @@
+.pi-rate { display:inline-flex; align-items:center; gap:6px; font:20px/1 var(--pi-font-family); color:var(--pi-color-primary-solid); vertical-align:middle; border-radius:3px; }
+.pi-rate--small { font-size:16px; gap:4px; }.pi-rate--large { font-size:24px; gap:8px; }
+.pi-rate__star { position:relative; display:block; width:1em; height:1em; cursor:pointer; }
+.pi-rate__glyph { display:flex; align-items:center; justify-content:center; width:1em; height:1em; white-space:nowrap; }
+.pi-rate__glyph--empty { color:var(--pi-color-border-default); }
+.pi-rate__fill { position:absolute; inset-block:0; inset-inline-start:0; overflow:hidden; pointer-events:none; color:inherit; }
+.pi-rate:focus-visible { outline:1px solid var(--pi-color-primary-solid); outline-offset:4px; }
+.pi-rate--disabled .pi-rate__star { cursor:default; }
+.pi-rate__fill { transition:width 120ms ease; }
+@media(prefers-reduced-motion:reduce) { .pi-rate__fill { transition:none; } }

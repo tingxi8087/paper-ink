@@ -1,0 +1,27 @@
+import { RateDemos } from '../../../components/RateTimelineResultDemos';
+import { RateApiTable } from '../../../components/RateTimelineResultApiTables';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# Rate 评分
+
+整星、半星、键盘评分和自定义符号。
+
+## 代码演示
+
+<RateDemos />
+
+## API
+
+<RateApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+使用一个可聚焦的 slider 表达评分。默认星形使用主色，其他颜色可通过 style 覆盖。tooltips 当前支持字符串原生提示，不支持 TooltipProps 对象、语义样式函数与原生表单提交。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="rate" component="Rate" />

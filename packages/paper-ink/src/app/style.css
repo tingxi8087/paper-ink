@@ -1,0 +1,10 @@
+.pi-app { color: var(--pi-color-text-primary); font-family: var(--pi-font-family); font-size: var(--pi-font-size); }
+.pi-app-confirm-content { display: flex; gap: 12px; align-items: flex-start; }
+.pi-app-confirm-icon { display: inline-flex; flex: none; padding-top: 1px; }
+.pi-app-confirm-icon--success { color: var(--pi-color-success-solid); }
+.pi-app-confirm-icon--info { color: var(--pi-color-info-solid); }
+.pi-app-confirm-icon--warning { color: var(--pi-color-warning-solid); }
+.pi-app-confirm-icon--error, .pi-app-confirm-error { color: var(--pi-color-error-solid); }
+.pi-app-confirm-error { margin: 8px 0 0; font-size: 12px; }
+.pi-app-confirm-ok { padding: 4px 12px; min-height: var(--pi-control-height-middle); border: 0; border-radius: var(--pi-radius-control); background: var(--pi-color-primary-solid); color: var(--pi-color-primary-on-solid); cursor: pointer; font: inherit; }
+.pi-app-confirm-ok:disabled { opacity: .5; cursor: not-allowed; }

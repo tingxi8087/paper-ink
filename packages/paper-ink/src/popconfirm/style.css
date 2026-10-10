@@ -1,0 +1,6 @@
+.pi-popconfirm { max-width:320px; }
+.pi-popconfirm-main { display:flex; align-items:flex-start; gap:8px; }
+.pi-popconfirm-icon { color:var(--pi-color-warning-solid); display:inline-flex; padding-top:2px; flex-shrink:0; }
+.pi-popconfirm-title { font-weight:600; }
+.pi-popconfirm-description { margin-top:4px; color:var(--pi-color-text-secondary); }
+.pi-popconfirm-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:12px; }

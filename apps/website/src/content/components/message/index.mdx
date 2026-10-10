@@ -1,0 +1,29 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { MessageDemos } from '../../../components/FeedbackDemos';
+import { MessageApiTable } from '../../../components/FeedbackApiTables';
+
+# Message 全局提示
+
+通过 message.useMessage() 获得 [api, contextHolder]，将 contextHolder 放在对应 ConfigProvider 内以继承主题。
+
+## 代码演示
+
+<MessageDemos />
+
+## API
+
+<MessageApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+也提供静态 message.success/error/info/warning/loading/open/destroy/config；静态调用使用默认主题。duration 单位秒，0 表示手动关闭；返回可调用的关闭句柄，支持 then。
+
+消息使用 180ms 轻微滑入、淡出及高度收起，使其他消息平顺补位；onClose 和 thenable 在退出结束后完成。同 key 更新不会重新挂载，更新正在退出的消息会取消退出。maxCount 超限淘汰及 holder 卸载即时清理。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="message" component="message" />
