@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "name": "theme",
+      "internal": true,
+      "description": "Shared theme and ConfigProvider",
+      "files": [
+        "config-provider/index.tsx",
+        "theme/types.ts",
+        "theme/defaults.ts",
+        "theme/resolve.ts",
+        "theme/variables.ts",
+        "styles/theme.css"
+      ],
+      "exports": [
+        "export { ConfigProvider, useTheme } from './config-provider/index';",
+        "export type { ConfigProviderProps } from './config-provider/index';",
+        "export { defaultToken } from './theme/defaults';",
+        "export type { ThemeConfig, ThemeToken, ButtonToken, Tone } from './theme/types';"
+      ]
+    },
+    {
+      "name": "button",
+      "description": "Button with familiar Ant Design-style APIs",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "button/index.ts",
+        "button/button.tsx",
+        "button/types.ts",
+        "button/style.css"
+      ],
+      "exports": [
+        "export { Button } from './button/index';",
+        "export type { ButtonProps } from './button/types';"
+      ]
+    },
+    {
+      "name": "input",
+      "description": "Input and TextArea with clear, status, count and auto size",
+      "registryDependencies": [
+        "theme"
+      ],
+      "files": [
+        "input/index.ts",
+        "input/input.tsx",
+        "input/text-area.tsx",
+        "input/shared.tsx",
+        "input/types.ts",
+        "input/style.css"
+      ],
+      "exports": [
+        "export { Input, TextArea } from './input/index';",
+        "export type { InputProps, InputRef, TextAreaProps, TextAreaRef } from './input/types';"
+      ]
+    },
+    {
+      "name": "modal",
+      "description": "Controlled modal with focus management and inherited theme",
+      "registryDependencies": [
+        "theme",
+        "button"
+      ],
+      "peerDependencies": {
+        "react-dom": ">=18.0.0"
+      },
+      "files": [
+        "modal/index.ts",
+        "modal/modal.tsx",
+        "modal/types.ts",
+        "modal/style.css"
+      ],
+      "exports": [
+        "export { Modal } from './modal/index';",
+        "export type { ModalProps } from './modal/types';"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+import { ButtonDemos } from '../../../components/ButtonDemos';
+import { ApiTable } from '../../../components/ApiTable';
+
+# Button 按钮
+
+## 代码演示
+
+<ButtonDemos />
+
+## API
+
+支持的属性如下；此外可以传递适用的原生属性，包括 `aria-*`、`data-*` 和表单属性。
+
+<ApiTable />
+
+## 主题变量
+
+<div className="table-scroll"><table><thead><tr><th>变量</th><th>影响范围</th></tr></thead><tbody><tr><td><code>color.primary.solid / solidHover / solidActive / onSolid</code></td><td>主按钮背景、交互状态和前景；普通按钮的交互强调色</td></tr><tr><td><code>{'color.error.*'}</code></td><td>danger 按钮的语义色</td></tr><tr><td><code>{'color.text.* / color.surface.* / color.border.*'}</code></td><td>普通按钮和禁用状态</td></tr><tr><td><code>{'radius.control / control.height.* / font.* / motion.duration'}</code></td><td>全局控件外观与过渡</td></tr><tr><td><code>components.Button.radius / paddingInline</code></td><td>仅覆盖 Button 的圆角和横向内边距</td></tr></tbody></table></div>
+
+[打开主题实验室 →](#/theme)
+
+## 与 antd 的兼容范围
+
+常规属性名称和用途参考 Ant Design Button，保留 type、size、shape、htmlType、loading 等使用习惯。支持 color（default / primary / danger）、六种 variant、对象形式的 classNames / styles（root / icon / content）和 autoInsertSpace。color + variant 成对提供时覆盖 type / danger；仅提供一项时按兼容回退规则解析，建议成对使用。
+
+加载时使用原生 disabled 阻止重复提交；链接禁用或加载时移除 href 并设置 aria-disabled。图标由使用者提供，不捆绑图标库。iconPlacement 优先于旧的 iconPosition；loading 支持自定义 icon。两汉字间距仅处理纯字符串的普通按钮内容，不处理 React 元素内部文本，不改变可访问名称。默认字号与三档高度参考 antd，但不承诺像素级一致。暂不支持预设色名称和函数形式的语义样式配置。
+
+ConfigProvider 的主题变量结构独立设计，且当前会渲染一个 display: contents 的作用域元素。暂不支持 antd 的 algorithm、prefixCls、全局 componentSize 或完整 ButtonRef。颜色派生和暗色预设尚未实现，当前覆盖只修改明确提供的变量，关联状态色需要一并配置。

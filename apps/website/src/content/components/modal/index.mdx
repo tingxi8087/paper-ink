@@ -1,0 +1,45 @@
+import { ModalApiTable } from '../../../components/ComponentApiTables';
+import { ModalDemos } from '../../../components/ModalDemos';
+import { BusinessModalExample } from '../../../components/BusinessModalExample';
+import businessSource from '../../../components/BusinessModalExample.tsx?raw';
+
+# Modal 对话框
+
+## 代码演示
+
+<ModalDemos />
+
+## 业务弹窗：open(config)
+
+页面挂载业务弹窗一次，通过 ref 打开并传入数据。显示、表单和保存状态放在业务组件内，页面只提供成功回调。
+
+<BusinessModalExample />
+
+<details><summary>查看完整业务示例</summary><pre><code>{businessSource}</code></pre></details>
+
+```tsx
+const editor = useRef<EditorHandle>(null);
+
+<Button onClick={() => editor.current?.open({
+  name,
+  onSuccess: setName,
+})}>编辑</Button>
+
+<WorkspaceEditor ref={editor} />
+```
+
+`open(config)` 是业务组件的封装方式；基础 Modal 保持 `open`、`onOk`、`onCancel` 的受控用法。保存失败的提示、数据请求和表单校验由业务组件管理。
+
+## API
+
+<ModalApiTable />
+
+## 主题与交互
+
+通过 React Portal 保留调用位置的 Context，并在弹层上应用主题变量。支持 Tab 焦点循环、Esc、关闭后焦点恢复、多个弹窗的顶层交互与页面滚动锁定。
+
+`components.Modal.radius`、`components.Modal.padding` 控制圆角和内容间距，颜色消费 `color.surface.elevated`、`color.text` 和 `color.border`。
+
+## 兼容范围
+
+本期提供受控 Modal；不包含 `Modal.confirm()`、`Modal.useModal()`、静态提示方法、动画、拖拽、响应式 width 配置和完整语义样式 API。普通 Modal 不会因为 onOk 返回 Promise 而自动关闭或进入 loading，请显式控制 open 与 confirmLoading。

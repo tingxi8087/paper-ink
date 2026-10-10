@@ -1,0 +1,23 @@
+const rows = [
+  ['type', "'default' | 'primary' | 'dashed' | 'text' | 'link'", 'default', '按钮视觉类型'],
+  ['color', "'default' | 'primary' | 'danger'", '—', '与 variant 成对使用时覆盖 type/danger'],
+  ['variant', "'outlined' | 'dashed' | 'solid' | 'filled' | 'text' | 'link'", '—', '视觉变体'],
+  ['size', "'small' | 'middle' | 'large'", 'middle', '控件尺寸'],
+  ['shape', "'default' | 'circle' | 'round'", 'default', '按钮形状'],
+  ['htmlType', "'button' | 'submit' | 'reset'", 'button', '原生 button 类型'],
+  ['loading', 'boolean | { delay?: number; icon?: ReactNode }', 'false', '加载状态，delay 单位为 ms'],
+  ['disabled', 'boolean', 'false', '禁用交互'],
+  ['danger', 'boolean', 'false', '危险操作语义'],
+  ['ghost', 'boolean', 'false', '透明背景；用于有色容器'],
+  ['block', 'boolean', 'false', '占满父容器宽度'],
+  ['icon', 'ReactNode', '—', '按钮图标'],
+  ['iconPlacement / iconPosition', "'start' | 'end'", 'start', '图标位置'],
+  ['href / target / rel', 'string', '—', '设置 href 后渲染原生链接'],
+  ['onClick', '(event: MouseEvent<HTMLElement>) => void', '—', '点击回调'],
+  ['className / style', 'string / CSSProperties', '—', '局部样式扩展'],
+  ['rootClassName', 'string', '—', '根元素类名'],
+  ['classNames / styles', 'Partial<Record<root | icon | content, …>>', '—', '内部元素类名与样式'],
+  ['autoInsertSpace', 'boolean', 'true', '两个汉字的视觉字距'],
+  ['ref', 'HTMLButtonElement | HTMLAnchorElement', '—', '访问原生元素'],
+];
+export function ApiTable() { return <div className="table-scroll"><table><thead><tr><th>属性</th><th>类型</th><th>默认值</th><th>说明</th></tr></thead><tbody>{rows.map(row => <tr key={row[0]}>{row.map((cell, i) => <td key={i}>{i < 3 ? <code>{cell}</code> : cell}</td>)}</tr>)}</tbody></table></div>; }

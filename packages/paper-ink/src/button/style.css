@@ -1,0 +1,50 @@
+.pi-button {
+  --btn-color: var(--pi-color-primary-solid); --btn-hover: var(--pi-color-primary-solid-hover); --btn-active: var(--pi-color-primary-solid-active); --btn-on: var(--pi-color-primary-on-solid);
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; vertical-align: middle;
+  box-sizing: border-box; height: var(--pi-control-height-middle); padding-inline: var(--pi-button-padding-inline, 15px);
+  border: 1px solid var(--pi-color-border-default); border-radius: var(--pi-button-radius, var(--pi-radius-control));
+  font: inherit; font-family: var(--pi-font-family); font-size: var(--pi-font-size); line-height: 1; white-space: nowrap;
+  color: var(--pi-color-text-primary); background: var(--pi-color-surface-container); text-decoration: none; cursor: pointer;
+  transition: background var(--pi-motion-duration), color var(--pi-motion-duration), border-color var(--pi-motion-duration);
+}
+.pi-button:hover:not(:disabled):not([aria-disabled=true]) { color: var(--btn-hover); border-color: var(--btn-hover); }
+.pi-button:active:not(:disabled):not([aria-disabled=true]) { color: var(--btn-active); border-color: var(--btn-active); }
+.pi-button:focus { outline: none; }
+/* Color and appearance are independent; legacy type resolves to these classes. */
+.pi-button { --btn-subtle: var(--pi-color-primary-subtle); }
+.pi-button--color-danger { --btn-color: var(--pi-color-error-solid); --btn-hover: var(--pi-color-error-solid-hover); --btn-active: var(--pi-color-error-solid-active); --btn-on: var(--pi-color-error-on-solid); --btn-subtle: var(--pi-color-error-subtle); }
+.pi-button--color-primary, .pi-button--color-danger { color: var(--btn-color); border-color: var(--btn-color); }
+.pi-button--variant-solid { background: var(--btn-color); border-color: var(--btn-color); color: var(--btn-on); }
+.pi-button--variant-solid:hover:not(:disabled):not([aria-disabled=true]) { background: var(--btn-hover); border-color: var(--btn-hover); color: var(--btn-on); }
+.pi-button--variant-solid:active:not(:disabled):not([aria-disabled=true]) { background: var(--btn-active); border-color: var(--btn-active); color: var(--btn-on); }
+.pi-button--variant-dashed { border-style: dashed; }
+.pi-button--variant-text, .pi-button--variant-link, .pi-button--variant-filled { border-color: transparent; background: transparent; }
+.pi-button--variant-link { color: var(--btn-color); }
+.pi-button--variant-filled { background: var(--btn-subtle); color: var(--btn-color); }
+.pi-button--color-default.pi-button--variant-filled { background: var(--pi-color-surface-muted); color: var(--pi-color-text-primary); }
+.pi-button--variant-text:hover:not(:disabled):not([aria-disabled=true]), .pi-button--variant-text:active:not(:disabled):not([aria-disabled=true]), .pi-button--variant-filled:hover:not(:disabled):not([aria-disabled=true]), .pi-button--variant-filled:active:not(:disabled):not([aria-disabled=true]) { background: var(--btn-subtle); border-color: transparent; }
+.pi-button--color-default.pi-button--variant-text:hover:not(:disabled):not([aria-disabled=true]), .pi-button--color-default.pi-button--variant-text:active:not(:disabled):not([aria-disabled=true]) { background: var(--pi-color-surface-muted); }
+.pi-button--variant-link:hover:not(:disabled):not([aria-disabled=true]), .pi-button--variant-link:active:not(:disabled):not([aria-disabled=true]) { border-color: transparent; }
+.pi-button--ghost:not(.pi-button--variant-text):not(.pi-button--variant-link) { background: transparent; color: white; border-color: white; }
+.pi-button--ghost.pi-button--color-primary, .pi-button--ghost.pi-button--color-danger { color: var(--btn-color); border-color: var(--btn-color); }
+.pi-button--ghost:hover:not(:disabled):not([aria-disabled=true]) { background: transparent; color: var(--btn-hover); border-color: var(--btn-hover); }
+.pi-button--ghost:active:not(:disabled):not([aria-disabled=true]) { background: transparent; color: var(--btn-active); border-color: var(--btn-active); }
+.pi-button--small { height: var(--pi-control-height-small); padding-inline: var(--pi-button-padding-inline, 7px); font-size: 12px; }
+.pi-button--large { height: var(--pi-control-height-large); padding-inline: var(--pi-button-padding-inline, 19px); font-size: 16px; }
+.pi-button--round { border-radius: 999px; }
+.pi-button--circle { border-radius: 50%; width: var(--pi-control-height-middle); padding: 0; }
+.pi-button--circle.pi-button--small { width: var(--pi-control-height-small); }
+.pi-button--circle.pi-button--large { width: var(--pi-control-height-large); }
+.pi-button--icon-only { padding-inline: 0; aspect-ratio: 1; }
+.pi-button--block { display: flex; width: 100%; }
+.pi-button:disabled, .pi-button[aria-disabled=true] { cursor: not-allowed; color: var(--pi-color-text-disabled); background: var(--pi-color-surface-muted); border-color: var(--pi-color-border-default); }
+.pi-button--loading:not(.pi-button--disabled) { opacity: .65; cursor: default; }
+.pi-button--loading.pi-button--variant-solid:not(.pi-button--disabled) { color: var(--btn-on); background: var(--btn-color); border-color: var(--btn-color); }
+.pi-button--loading.pi-button--variant-outlined:not(.pi-button--disabled), .pi-button--loading.pi-button--variant-dashed:not(.pi-button--disabled) { color: var(--pi-color-text-primary); background: var(--pi-color-surface-container); border-color: var(--pi-color-border-default); }
+.pi-button--variant-text:disabled, .pi-button--variant-link:disabled, .pi-button--variant-text[aria-disabled=true], .pi-button--variant-link[aria-disabled=true] { background: transparent; border-color: transparent; }
+.pi-button__content--spaced { letter-spacing: .3em; margin-inline-end: -.3em; }
+.pi-button__icon { display: inline-flex; align-items: center; }
+.pi-button__spinner { display: block; width: 1em; height: 1em; border: 1.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: pi-spin .7s linear infinite; }
+@keyframes pi-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .pi-button { transition: none; } .pi-button__spinner { animation-duration: 1.5s; } }
+

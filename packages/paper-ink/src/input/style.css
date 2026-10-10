@@ -1,0 +1,34 @@
+.pi-input, .pi-textarea {
+  box-sizing: border-box; display: inline-flex; width: 100%; vertical-align: middle;
+  color: var(--pi-color-text-primary); font-family: var(--pi-font-family); font-size: var(--pi-font-size); line-height: 1.5;
+}
+.pi-input { align-items: center; gap: 8px; min-height: var(--pi-control-height-middle); padding: 3px var(--pi-input-padding-inline, 11px); border: 1px solid var(--pi-color-border-default); border-radius: var(--pi-input-radius, var(--pi-radius-control)); background: var(--pi-color-surface-container); transition: border-color var(--pi-motion-duration), box-shadow var(--pi-motion-duration); }
+.pi-input__control { box-sizing: border-box; flex: 1; width: 0; min-width: 0; padding: 0; border: 0; outline: none; font: inherit; color: inherit; background: transparent; }
+.pi-input__control::placeholder, .pi-textarea__control::placeholder { color: var(--pi-color-text-disabled); opacity: 1; }
+.pi-input__affix { display: inline-flex; align-items: center; flex-shrink: 0; color: var(--pi-color-text-secondary); }
+.pi-input__count { flex-shrink: 0; color: var(--pi-color-text-secondary); font-size: 12px; }
+.pi-input__clear { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 18px; height: 18px; padding: 0; border: none; border-radius: 50%; color: var(--pi-color-text-secondary); background: transparent; font: inherit; font-size: 18px; line-height: 1; cursor: pointer; }
+.pi-input__clear:hover { color: var(--pi-color-text-primary); background: var(--pi-color-surface-muted); }
+.pi-input__clear:focus-visible { outline: 2px solid var(--pi-color-primary-solid); outline-offset: 2px; }
+.pi-input--small { font-size: 12px; }
+.pi-input.pi-input--small { min-height: var(--pi-control-height-small); padding: 0 var(--pi-input-padding-inline, 7px); }
+.pi-input--large { font-size: 16px; }
+.pi-input.pi-input--large { min-height: var(--pi-control-height-large); padding: 6px var(--pi-input-padding-inline, 11px); }
+.pi-textarea { position: relative; flex-direction: column; gap: 4px; }
+.pi-textarea__control { box-sizing: border-box; display: block; width: 100%; min-width: 0; padding: 5px var(--pi-input-padding-inline, 11px); border: 1px solid var(--pi-color-border-default); border-radius: var(--pi-input-radius, var(--pi-radius-control)); outline: none; font: inherit; color: inherit; background: var(--pi-color-surface-container); resize: vertical; transition: border-color var(--pi-motion-duration), box-shadow var(--pi-motion-duration); }
+.pi-textarea.pi-input--small .pi-textarea__control { padding: 3px var(--pi-input-padding-inline, 7px); }
+.pi-textarea.pi-input--large .pi-textarea__control { padding: 7px var(--pi-input-padding-inline, 11px); }
+.pi-textarea:has(.pi-input__clear) .pi-textarea__control { padding-inline-end: 32px; }
+.pi-textarea > .pi-input__clear { position: absolute; inset-block-start: 7px; inset-inline-end: 9px; }
+.pi-textarea > .pi-input__count { align-self: flex-end; }
+.pi-input:hover:not(.pi-input--disabled), .pi-textarea:not(.pi-input--disabled) .pi-textarea__control:hover { border-color: var(--pi-color-primary-solid-hover); }
+.pi-input:focus-within, .pi-textarea__control:focus { border-color: var(--pi-color-primary-solid); box-shadow: 0 0 0 2px color-mix(in srgb, var(--pi-color-primary-solid) 12%, transparent); }
+.pi-input--error { --pi-input-status: var(--pi-color-error-solid); }
+.pi-input--warning { --pi-input-status: var(--pi-color-warning-solid); }
+.pi-input:is(.pi-input--error, .pi-input--warning), .pi-textarea:is(.pi-input--error, .pi-input--warning) .pi-textarea__control { border-color: var(--pi-input-status); }
+.pi-input:is(.pi-input--error, .pi-input--warning):focus-within, .pi-textarea:is(.pi-input--error, .pi-input--warning) .pi-textarea__control:focus { box-shadow: 0 0 0 2px color-mix(in srgb, var(--pi-input-status) 12%, transparent); }
+.pi-input.pi-input--disabled, .pi-textarea.pi-input--disabled .pi-textarea__control { color: var(--pi-color-text-disabled); background: var(--pi-color-surface-muted); cursor: not-allowed; }
+.pi-input__control:disabled { cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) { .pi-input, .pi-textarea__control { transition: none; } }
+
+.pi-input__control:focus-visible, .pi-textarea__control:focus-visible { outline: none; }

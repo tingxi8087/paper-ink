@@ -1,0 +1,49 @@
+{
+  "name": "paper-ink",
+  "version": "0.1.0",
+  "description": "A monochrome-first React UI library with familiar APIs.",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "import": "./dist/button/index.js"
+    },
+    "./style.css": "./dist/style.css",
+    "./button/style.css": "./dist/button/style.css",
+    "./theme.css": "./dist/styles/theme.css",
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "import": "./dist/input/index.js"
+    },
+    "./input/style.css": "./dist/input/style.css",
+    "./modal": {
+      "types": "./dist/modal/index.d.ts",
+      "import": "./dist/modal/index.js"
+    },
+    "./modal/style.css": "./dist/modal/style.css"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

@@ -1,0 +1,24 @@
+import { InputApiTable } from '../../../components/ComponentApiTables';
+import { InputDemos } from '../../../components/InputDemos';
+
+# Input 输入框
+
+## 代码演示
+
+<InputDemos />
+
+## API
+
+`Input.TextArea` 提供多行文本输入，也可以单独导入 `TextArea`。两者支持 `className`、`style` 和适用的原生属性，如 `name`、`required`、`aria-*`。
+
+<InputApiTable />
+
+## 主题变量
+
+共用 `color.text`、`color.surface`、`color.border`、`color.primary`、`control.height`、`radius.control` 和 `font`。`status` 使用 error / warning 语义色。
+
+`components.Input.radius`、`components.Input.paddingInline` 只调整输入控件；TextArea 使用同一组覆盖。
+
+## 兼容范围
+
+本期提供基本 Input 与 TextArea；暂不包含 Search、Password、OTP、addonBefore / addonAfter、Form 联动、完整 count 配置和语义样式 API。ref 的实际支持范围见导出的 InputRef / TextAreaRef 类型。
