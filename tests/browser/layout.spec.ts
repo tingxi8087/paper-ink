@@ -1,0 +1,38 @@
+import { test, expect } from '@playwright/test';
+
+test('layout presets inherit theme; Grid reflows without overflow and supports full rows', async ({ page }) => {
+  const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
+  await page.goto('/#/layout');
+  await expect(page.getByRole('heading', { name: '布局 Stack / Inline / SimpleGrid' })).toBeVisible();
+  const form = page.getByRole('region', { name: '竖向表单', exact: true });
+  await expect(form.locator('.pi-stack')).toHaveCSS('gap', '16px');
+  await expect(form.locator('.pi-inline')).toHaveCSS('gap', '8px');
+  await expect(form.locator('.pi-inline')).toHaveCSS('flex-wrap', 'wrap');
+  const theme = page.getByRole('region', { name: '主题间距', exact: true });
+  await expect(theme.locator('.pi-stack')).toHaveCSS('gap', '20px');
+  await expect(theme.locator('.pi-inline')).toHaveCSS('gap', '4px');
+  const toolbar = page.getByRole('region', { name: '工具栏', exact: true });
+  await expect(toolbar.locator('.pi-inline')).toHaveCSS('flex-wrap', 'nowrap');
+  const spanning = page.getByRole('region', { name: '跨列表单', exact: true });
+  await expect(spanning.locator('.pi-simple-grid')).toHaveCSS('row-gap', '8px');
+  await expect(spanning.locator('.pi-simple-grid')).toHaveCSS('column-gap', '16px');
+  const automatic = page.getByRole('region', { name: '自动列数', exact: true });
+  const grid = automatic.locator('.pi-simple-grid');
+  await expect(grid).toHaveCSS('gap', '8px');
+  await expect(page.getByRole('region', { name: '列比例', exact: true }).locator('.pi-simple-grid')).toHaveCSS('gap', '16px');
+  await grid.evaluate(el => { el.style.width = '500px'; });
+  const wide = await grid.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
+  expect(wide).toBe(3);
+  await grid.evaluate(el => { el.style.width = '120px'; });
+  expect(await grid.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length)).toBe(1);
+  expect(await grid.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
+  const full = grid.locator('.pi-simple-grid-item');
+  expect(await full.evaluate(el => el.getBoundingClientRect().width)).toBeCloseTo(120, 0);
+  await automatic.getByRole('button', { name: '重置自动列数' }).click();
+  await page.screenshot({ path: '.artifacts/layout-desktop.png' });
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect(spanning.locator('.pi-simple-grid-item').first()).toHaveCSS('grid-column', '1 / -1');
+  await page.screenshot({ path: '.artifacts/layout-mobile.png' });
+  expect(errors).toEqual([]);
+});

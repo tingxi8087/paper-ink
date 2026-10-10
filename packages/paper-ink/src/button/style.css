@@ -19,6 +19,7 @@
 .pi-button--variant-solid:active:not(:disabled):not([aria-disabled=true]) { background: var(--btn-active); border-color: var(--btn-active); color: var(--btn-on); }
 .pi-button--variant-dashed { border-style: dashed; }
 .pi-button--variant-text, .pi-button--variant-link, .pi-button--variant-filled { border-color: transparent; background: transparent; }
+.pi-button--color-default.pi-button--variant-link { --btn-color: var(--pi-color-link-default); --btn-hover: var(--pi-color-link-hover); --btn-active: var(--pi-color-link-active); }
 .pi-button--variant-link { color: var(--btn-color); }
 .pi-button--variant-filled { background: var(--btn-subtle); color: var(--btn-color); }
 .pi-button--color-default.pi-button--variant-filled { background: var(--pi-color-surface-muted); color: var(--pi-color-text-primary); }

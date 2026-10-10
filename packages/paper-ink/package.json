@@ -33,7 +33,22 @@
       "types": "./dist/modal/index.d.ts",
       "import": "./dist/modal/index.js"
     },
-    "./modal/style.css": "./dist/modal/style.css"
+    "./modal/style.css": "./dist/modal/style.css",
+    "./stack": {
+      "types": "./dist/stack/index.d.ts",
+      "import": "./dist/stack/index.js"
+    },
+    "./stack/style.css": "./dist/stack/style.css",
+    "./inline": {
+      "types": "./dist/inline/index.d.ts",
+      "import": "./dist/inline/index.js"
+    },
+    "./inline/style.css": "./dist/inline/style.css",
+    "./simple-grid": {
+      "types": "./dist/simple-grid/index.d.ts",
+      "import": "./dist/simple-grid/index.js"
+    },
+    "./simple-grid/style.css": "./dist/simple-grid/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"

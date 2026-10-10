@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-const nav = [{ group: '开始', items: [['guide', '快速开始'], ['theme', '主题实验室']] }, { group: '组件', items: [['button', 'Button 按钮'], ['input', 'Input 输入框'], ['modal', 'Modal 对话框']] }, { group: '组合', items: [['examples', '实际场景']] }];
+const nav = [{ group: '开始', items: [['guide', '快速开始'], ['theme', '主题实验室']] }, { group: '组件', items: [['button', 'Button 按钮'], ['input', 'Input 输入框'], ['modal', 'Modal 对话框'], ['layout', '布局']] }, { group: '组合', items: [['examples', '实际场景']] }];
 export function DocLayout({ route, children }: { route: string; children: ReactNode }) {
  const [menu, setMenu] = useState(false);
  useEffect(() => { setMenu(false); window.scrollTo(0, 0); }, [route]);

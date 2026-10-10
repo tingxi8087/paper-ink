@@ -126,6 +126,8 @@ color.primary.solidHover → --pi-color-primary-solid-hover
 - 紧凑模式可以是一组明确的预设。
 - 阴影、焦点环、动效及浮层层级按真实需求加入，避免过早暴露大量变量。
 
+布局间距已实现为 `theme.token.spacing`：`small=4`、`medium=8`、`large=16`（单位 px）。Stack、Inline、SimpleGrid 默认使用 medium；预设继承主题，显式数字及 CSS 字符串不受预设覆盖。
+
 ## 当前实现进度
 
 已实现分组的主题类型、默认语义色、显式深层覆盖、嵌套继承、`inherit: false`、CSS 变量映射，以及 Button 的圆角和横向内边距覆盖。文档站提供主题实验室。

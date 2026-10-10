@@ -76,6 +76,65 @@
         "export { Modal } from './modal/index';",
         "export type { ModalProps } from './modal/types';"
       ]
+    },
+    {
+      "name": "layout",
+      "internal": true,
+      "description": "Shared layout spacing types and helpers",
+      "files": [
+        "layout/shared.ts"
+      ],
+      "exports": [
+        "export type { LayoutGap } from './layout/shared';"
+      ]
+    },
+    {
+      "name": "stack",
+      "description": "Stack lightweight layout",
+      "registryDependencies": [
+        "theme",
+        "layout"
+      ],
+      "files": [
+        "stack/index.tsx",
+        "stack/style.css"
+      ],
+      "exports": [
+        "export { Stack } from './stack/index';",
+        "export type { StackProps } from './stack/index';"
+      ]
+    },
+    {
+      "name": "inline",
+      "description": "Inline lightweight layout",
+      "registryDependencies": [
+        "theme",
+        "layout"
+      ],
+      "files": [
+        "inline/index.tsx",
+        "inline/style.css"
+      ],
+      "exports": [
+        "export { Inline } from './inline/index';",
+        "export type { InlineProps } from './inline/index';"
+      ]
+    },
+    {
+      "name": "simple-grid",
+      "description": "SimpleGrid lightweight layout",
+      "registryDependencies": [
+        "theme",
+        "layout"
+      ],
+      "files": [
+        "simple-grid/index.tsx",
+        "simple-grid/style.css"
+      ],
+      "exports": [
+        "export { SimpleGrid } from './simple-grid/index';",
+        "export type { SimpleGridProps, SimpleGridItemProps } from './simple-grid/index';"
+      ]
     }
   ]
 }

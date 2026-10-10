@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import * as React from 'react';
 import { LiveProvider, LiveError, LivePreview } from 'react-live';
-import { Button, Input, Modal, ConfigProvider, useTheme } from 'paper-ink';
-const scope = { React, useState: React.useState, useEffect: React.useEffect, useRef: React.useRef, Button, Input, Modal, ConfigProvider, useTheme };
+import { Button, Input, Modal, Stack, Inline, SimpleGrid, ConfigProvider, useTheme } from 'paper-ink';
+const scope = { React, useState: React.useState, useEffect: React.useEffect, useRef: React.useRef, Button, Input, Modal, Stack, Inline, SimpleGrid, ConfigProvider, useTheme };
 export function LiveDemo({ title, code, dark = false }: { title: string; code: string; dark?: boolean }) {
   const [source, setSource] = useState(code);
   const [editing, setEditing] = useState(false);

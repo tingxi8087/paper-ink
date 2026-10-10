@@ -23,15 +23,15 @@ try {
   run('pnpm', ['install', '--offline', '--ignore-scripts']);
   run('pnpm', ['exec', 'paper-ink', '--version']);
   run('pnpm', ['exec', 'paper-ink', 'init']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', '--dry-run']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', '--dry-run']);
   assert.equal((await readdir(join(consumer, 'src'))).length, 0);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid']);
   await writeFile(join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8" /></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>');
   await writeFile(join(consumer, 'src/main.tsx'), `import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Button as NpmButton, Input as NpmInput, Modal as NpmModal, ConfigProvider as NpmProvider } from 'paper-ink';
-import { Button as LocalButton, Input as LocalInput, Modal as LocalModal, ConfigProvider as LocalProvider } from './components/paper-ink';
+import { Button as NpmButton, Input as NpmInput, Modal as NpmModal, ConfigProvider as NpmProvider, Stack as NpmStack, Inline as NpmInline, SimpleGrid as NpmGrid } from 'paper-ink';
+import { Button as LocalButton, Input as LocalInput, Modal as LocalModal, ConfigProvider as LocalProvider, Stack as LocalStack, Inline as LocalInline, SimpleGrid as LocalGrid } from './components/paper-ink';
 import 'paper-ink/style.css';
 import './components/paper-ink/style.css';
 function Demo() {
@@ -39,8 +39,8 @@ function Demo() {
  const [localOpen, setLocalOpen] = useState(false); const [npmOpen, setNpmOpen] = useState(false);
  const theme = { token: { color: { primary: { solid: '#1677ff' } }, radius: { control: 12 } } };
  return <><h1>Paper Ink dual distribution</h1>
- <section aria-label="CLI source"><LocalProvider theme={theme}><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
- <section aria-label="npm package"><NpmProvider theme={theme}><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
+ <section aria-label="CLI source"><LocalProvider theme={theme}><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
+ <section aria-label="npm package"><NpmProvider theme={theme}><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
 }
 createRoot(document.getElementById('root')!).render(<Demo />);`);
   run('pnpm', ['exec', 'tsc', '--noEmit']);
@@ -64,6 +64,9 @@ createRoot(document.getElementById('root')!).render(<Demo />);`);
   }
   for (const [region, label] of [['CLI source', 'Local'], ['npm package', 'Npm']]) {
     const group = page.getByRole('region', { name: region });
+    assert.equal(await group.locator('.pi-stack').evaluate(el => getComputedStyle(el).gap), '8px');
+    assert.equal(await group.locator('.pi-inline').evaluate(el => getComputedStyle(el).display), 'flex');
+    assert.equal(await group.locator('.pi-simple-grid-item').evaluate(el => getComputedStyle(el).gridColumn), '1 / -1');
     const input = group.getByRole('textbox', { name: `${label} input` });
     await group.getByRole('button', { name: '清空内容' }).click();
     assert.equal(await input.inputValue(), '');

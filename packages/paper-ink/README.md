@@ -27,3 +27,7 @@ Input and Modal also have subpath exports and CSS. Modal CSS includes its Button
 Theme configuration uses `ConfigProvider` with grouped semantic tokens under `theme.token` and component overrides under `theme.components.Button`, `Input` and `Modal`. It intentionally differs from antd. Current themes use explicit overrides, not automatic color derivation.
 
 See the repository website and `doc` directory for the supported API and design decisions.
+
+Stack, Inline and SimpleGrid provide vertical, horizontal and grid layouts with independent APIs. Spacing presets are small=4px, medium=8px, large=16px under theme.token.spacing; default gap is medium. All support native div attributes, className/style and refs. SimpleGrid accepts columns (number/CSS template) or minChildWidth, plus rowGap/columnGap; SimpleGrid.Item supports span (positive integer/full). Automatic columns allow span=1/full only. Numeric fixed columns clamp span to their column count. CSS overrides take precedence, and custom templates require the caller to manage spanning.
+
+Import each from paper-ink/stack, paper-ink/inline or paper-ink/simple-grid with its corresponding style.css, or use the root exports and full stylesheet.

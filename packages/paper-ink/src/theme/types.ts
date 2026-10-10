@@ -7,8 +7,10 @@ export interface ThemeToken {
     text: { primary: string; secondary: string; disabled: string };
     surface: { page: string; container: string; elevated: string; muted: string };
     border: { default: string; subtle: string };
+    link: { default: string; hover: string; active: string };
     primary: Tone; success: Tone; warning: Tone; error: Tone; info: Tone;
   };
+  spacing: { small: number; medium: number; large: number };
   radius: { control: number };
   control: { height: { small: number; middle: number; large: number } };
   font: { size: number; family: string };

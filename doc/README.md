@@ -10,3 +10,13 @@
 - [npm 包与 CLI 源码分发](./distribution.md)：安装命令、registry、文件保护及验证。
 
 - [Modal 与输入控件](./modal-and-input.md)：受控弹窗、业务 open(config)、输入 API 与实现边界。
+
+- [antd 组件清单与开发优先级](./component-priorities.md)：73 个核心条目、6 个扩展组件的推荐指数、成本、理由和分批计划。
+
+- [组件规划筛选网页](./component-priorities.html)：可直接打开，支持分类、指数、成本、状态、批次筛选和统计、CSV 导出。
+
+修改组件优先级 Markdown 后，运行 `node scripts/build-component-priorities.mjs` 同步网页数据。实现状态为记录时的快照。
+
+- [布局组件](./layout-components.md)
+
+每次新增组件或变更实现状态后，必须同步更新 `component-priorities.md` 并运行 `node scripts/build-component-priorities.mjs`。独立组件单独记录；不将对应的 antd API 误标为已完成。

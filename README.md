@@ -2,7 +2,7 @@
 
 默认黑白主色、保留语义色的 React UI 组件库。常规组件 API 参考 Ant Design，支持范围逐步扩展，主题结构独立设计。
 
-当前为 **0.1.0 本地开发版本，尚未发布到 npm**。已实现 Button、Input / TextArea、受控 Modal、基础 ConfigProvider、源码安装 CLI，以及 React + Vite + MDX 文档站和在线 JSX 编辑预览。
+当前为 **0.1.0 本地开发版本，尚未发布到 npm**。已实现 Button、Input / TextArea、受控 Modal、Stack / Inline / SimpleGrid 布局、基础 ConfigProvider、源码安装 CLI，以及 React + Vite + MDX 文档站和在线 JSX 编辑预览。
 
 ## 开发
 
@@ -90,3 +90,5 @@ Button 支持常用属性、color/variant、className/style、语义 classNames/
 ## 开源
 
 MIT。贡献前请阅读 `doc` 中的设计约定；新增组件需要同步公开类型、行为、演示、API 支持范围及兼容差异。此项目独立实现，不依赖 antd。
+
+布局组件支持 4 / 8 / 16px 主题间距、自动列数、列比例和跨列。使用方式见 [布局组件](doc/layout-components.md)。源码安装：`pnpm cli add stack inline simple-grid --cwd /absolute/path/to/your-app`。

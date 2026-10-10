@@ -55,3 +55,5 @@ An existing `@/` alias can also be used; the CLI does not change your tsconfig o
 Existing tracked files are preserved even if modified. Untracked conflicting files abort before component writes; use another directory or explicitly opt into `--overwrite`. User exports outside the managed block in index.ts are preserved. There is no automatic upstream merge/update command.
 
 Use local source or the npm package consistently within a component tree: the two distributions have independent theme contexts, and editing local source does not alter the npm package.
+
+Layout source installation: `paper-ink add stack inline simple-grid`. These components share spacing helpers and theme modules, installed once.
