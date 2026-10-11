@@ -36,9 +36,9 @@ Import each from paper-ink/stack, paper-ink/inline or paper-ink/simple-grid with
 
 Checkbox/Group, Radio/Group/Button, Switch, Select (single/multiple/tags/search), Tabs (items/keyboard/panel lifecycle), Tag/CheckableTag, Empty, Alert/ErrorBoundary, Spin, Tooltip and message/useMessage are available from the root or their lowercase subpaths. Each has a standalone style.css. These are documented subsets of familiar Ant Design APIs, not full API implementations.
 
-Prefer `message.useMessage()` with its contextHolder inside your ConfigProvider for theme inheritance. Static message calls use the default theme. Select supports ordinary option sets without virtualization. Editable/vertical Tabs, Select labelInValue/grouped options, Form integration and semantic style functions remain outside this release.
+Prefer `message.useMessage()` with its contextHolder inside your ConfigProvider for theme inheritance. Static message calls use the default theme. Select supports ordinary option sets without virtualization. Editable/vertical Tabs, Select labelInValue/grouped options, antd Form integration and semantic style functions remain outside this release. An independent Form engine is available.
 
-Additional common API subsets: Typography, Divider, Breadcrumb, Dropdown, Pagination, InputNumber, Avatar, Badge, Card, Collapse, Descriptions, Popover, Segmented, Drawer, Popconfirm, Progress, Skeleton and App. Each has a lowercase kebab-case subpath and stylesheet. Space, DatePicker, Form and Table are deferred.
+Additional common API subsets: Typography, Divider, Breadcrumb, Dropdown, Pagination, InputNumber, Avatar, Badge, Card, Collapse, Descriptions, Popover, Segmented, Drawer, Popconfirm, Progress, Skeleton and App. Each has a lowercase kebab-case subpath and stylesheet. Space, DatePicker, antd Form and Table are deferred. Our independent Form supports top-level fields, declarative bindings, async validation, subscriptions and atomic patches; import Form/useForm from paper-ink/form.
 
 InputNumber uses MIT-licensed @rc-component/mini-decimal for string-based decimal calculations; enable stringMode and pass strings for high precision. App.useApp() provides theme-aware message and modal APIs, including async confirmation handles. Notification is not included. Read each component README for supported API boundaries.
 

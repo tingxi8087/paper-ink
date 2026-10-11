@@ -1,3 +1,4 @@
+import { defineFieldBinding, textFieldBinding } from '../internal/field-binding.js';
 import { forwardRef, useState } from 'react';
 import { EyeIcon, EyeOffIcon } from '../internal/icons.js';
 import { InputControl } from './input.js';
@@ -13,3 +14,5 @@ export const Password = forwardRef<InputRef, PasswordProps>(function Password({ 
   {suffix}
  </>} />;
 });
+
+defineFieldBinding(Password, textFieldBinding);

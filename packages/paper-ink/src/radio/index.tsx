@@ -1,3 +1,4 @@
+import { defineFieldBinding, checkedFieldBinding } from '../internal/field-binding.js';
 import { createContext, forwardRef, useContext, useEffect, useId, useImperativeHandle, useRef, useState, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { useTheme } from '../config-provider/index.js';
 import { themeVariables } from '../theme/variables.js';
@@ -42,8 +43,10 @@ function createRadio(button: boolean) {
   });
 }
 const RadioControl = createRadio(false); export const RadioButton = createRadio(true);
-export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(function RadioGroup({ value, defaultValue, options, disabled = false, name, optionType = 'default', buttonStyle = 'outline', size = 'middle', onChange, children, className, style, onKeyDown, ...rest }, ref) {
-  const [local, setLocal] = useState(defaultValue); const root = useRef<HTMLDivElement>(null); const id = useId(); const current = value ?? local; const theme = useTheme();
+export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(function RadioGroup(props, ref) {
+  const { value, defaultValue, options, disabled = false, name, optionType = 'default', buttonStyle = 'outline', size = 'middle', onChange, children, className, style, onKeyDown, ...rest } = props;
+  const controlled = Object.prototype.hasOwnProperty.call(props, 'value');
+  const [local, setLocal] = useState(defaultValue); const root = useRef<HTMLDivElement>(null); const id = useId(); const current = controlled ? value : local; const theme = useTheme();
   useImperativeHandle(ref, () => root.current!);
   const resetState = useRef({ value, defaultValue });
   resetState.current = { value, defaultValue };
@@ -57,7 +60,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(function R
     form?.addEventListener('reset', reset);
     return () => { alive = false; form?.removeEventListener('reset', reset); };
   }, []);
-  return <GroupContext.Provider value={{ value: current, resetValue: value ?? defaultValue, disabled, name: name ?? `pi-radio-${id}`, select: (next, event) => { if (value === undefined) setLocal(next); if (current !== next) onChange?.(event); } }}>
+  return <GroupContext.Provider value={{ value: current, resetValue: value ?? defaultValue, disabled, name: name ?? `pi-radio-${id}`, select: (next, event) => { if (!controlled) setLocal(next); if (current !== next) onChange?.(event); } }}>
     <div {...rest} ref={root} role={rest.role ?? 'radiogroup'} className={['pi-radio-group', `pi-radio-group--${size}`, `pi-radio-group--${buttonStyle}`, className].filter(Boolean).join(' ')} style={{ ...themeVariables(theme), ...style }} onKeyDown={event => {
       onKeyDown?.(event); if (event.defaultPrevented || !['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(event.key)) return;
       const inputs = Array.from(root.current?.querySelectorAll<HTMLInputElement>('input[type="radio"]:not(:disabled)') ?? []); const index = inputs.indexOf(event.target as HTMLInputElement); if (index < 0 || !inputs.length) return;
@@ -66,3 +69,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(function R
   </GroupContext.Provider>;
 });
 export const Radio = Object.assign(RadioControl, { Group: RadioGroup, Button: RadioButton });
+
+defineFieldBinding(Radio, checkedFieldBinding);
+defineFieldBinding(RadioButton, checkedFieldBinding);
+defineFieldBinding(RadioGroup, { getValue: event => event.target.value, status: false });

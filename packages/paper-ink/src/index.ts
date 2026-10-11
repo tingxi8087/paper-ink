@@ -90,3 +90,5 @@ export * from './app/index.js';
 export * from './rate/index.js';
 export * from './timeline/index.js';
 export * from './result/index.js';
+
+export * from './form/index.js';

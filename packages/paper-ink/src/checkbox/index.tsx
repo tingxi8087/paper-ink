@@ -1,3 +1,4 @@
+import { defineFieldBinding, checkedFieldBinding } from '../internal/field-binding.js';
 import { createContext, useCallback, forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState, type ChangeEvent, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { useTheme } from '../config-provider/index.js';
 import { themeVariables } from '../theme/variables.js';
@@ -74,3 +75,6 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(func
   return <GroupContext.Provider value={{ value: current, resetValue: value ?? defaultValue, disabled, name, toggle, register }}><div {...rest} ref={root} className={['pi-checkbox-group', className].filter(Boolean).join(' ')} style={{ ...themeVariables(theme), ...style }}>{options ? options.map(option => { const item = typeof option === 'object' ? option : { label: String(option), value: option }; return <CheckboxControl key={`${typeof item.value}:${item.value}`} value={item.value} disabled={item.disabled} title={item.title} className={item.className} style={item.style}>{item.label}</CheckboxControl>; }) : children}</div></GroupContext.Provider>;
 });
 export const Checkbox = Object.assign(CheckboxControl, { Group: CheckboxGroup });
+
+defineFieldBinding(Checkbox, checkedFieldBinding);
+defineFieldBinding(CheckboxGroup, { toControlValue: value => value ?? [], status: false });

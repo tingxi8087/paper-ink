@@ -36,6 +36,7 @@ const InputNumberDoc = lazy(() => import('./content/components/input-number/inde
 const AppDoc = lazy(() => import('./content/components/app/index.mdx'));
 const RateDoc = lazy(() => import('./content/components/rate/index.mdx'));
 const TimelineDoc = lazy(() => import('./content/components/timeline/index.mdx'));
+const FormDoc = lazy(() => import('./content/components/form/index.mdx'));
 const ResultDoc = lazy(() => import('./content/components/result/index.mdx'));
 import Guide from './content/guides/getting-started.mdx';
 import { HomePage } from './pages/HomePage';
@@ -80,11 +81,12 @@ import '../../../packages/paper-ink/src/app/style.css';
 import '../../../packages/paper-ink/src/rate/style.css';
 import '../../../packages/paper-ink/src/timeline/style.css';
 import '../../../packages/paper-ink/src/result/style.css';
+import '../../../packages/paper-ink/src/form/style.css';
 import './style.css';
 function App() {
  const [route, setRoute] = useState(window.location.hash.replace(/^#\/?/, ''));
  useEffect(() => { const update = () => setRoute(window.location.hash.replace(/^#\/?/, '')); window.addEventListener('hashchange', update); return () => window.removeEventListener('hashchange', update); }, []);
- const pages: Record<string, React.ReactNode> = { 'result': <ResultDoc />, 'timeline': <TimelineDoc />, 'rate': <RateDoc />, 'typography': <TypographyDoc />, 'divider': <DividerDoc />, 'avatar': <AvatarDoc />, 'badge': <BadgeDoc />, 'card': <CardDoc />, 'descriptions': <DescriptionsDoc />, 'dropdown': <DropdownDoc />, 'popover': <PopoverDoc />, 'popconfirm': <PopconfirmDoc />, 'drawer': <DrawerDoc />, 'breadcrumb': <BreadcrumbDoc />, 'pagination': <PaginationDoc />, 'collapse': <CollapseDoc />, 'segmented': <SegmentedDoc />, 'progress': <ProgressDoc />, 'skeleton': <SkeletonDoc />, 'input-number': <InputNumberDoc />, 'app': <AppDoc />, '': <HomePage />, layout: <LayoutDoc />, checkbox: <CheckboxDoc />, radio: <RadioDoc />, switch: <SwitchDoc />, tabs: <TabsDoc />, select: <SelectDoc />, tooltip: <TooltipDoc />, message: <MessageDoc />, tag: <TagDoc />, alert: <AlertDoc />, spin: <SpinDoc />, empty: <EmptyDoc />, button: <ButtonDoc />, input: <InputDoc />, modal: <ModalDoc />, guide: <Guide />, theme: <ThemePage />, examples: <ExamplesPage /> };
+ const pages: Record<string, React.ReactNode> = { 'form': <FormDoc />, 'result': <ResultDoc />, 'timeline': <TimelineDoc />, 'rate': <RateDoc />, 'typography': <TypographyDoc />, 'divider': <DividerDoc />, 'avatar': <AvatarDoc />, 'badge': <BadgeDoc />, 'card': <CardDoc />, 'descriptions': <DescriptionsDoc />, 'dropdown': <DropdownDoc />, 'popover': <PopoverDoc />, 'popconfirm': <PopconfirmDoc />, 'drawer': <DrawerDoc />, 'breadcrumb': <BreadcrumbDoc />, 'pagination': <PaginationDoc />, 'collapse': <CollapseDoc />, 'segmented': <SegmentedDoc />, 'progress': <ProgressDoc />, 'skeleton': <SkeletonDoc />, 'input-number': <InputNumberDoc />, 'app': <AppDoc />, '': <HomePage />, layout: <LayoutDoc />, checkbox: <CheckboxDoc />, radio: <RadioDoc />, switch: <SwitchDoc />, tabs: <TabsDoc />, select: <SelectDoc />, tooltip: <TooltipDoc />, message: <MessageDoc />, tag: <TagDoc />, alert: <AlertDoc />, spin: <SpinDoc />, empty: <EmptyDoc />, button: <ButtonDoc />, input: <InputDoc />, modal: <ModalDoc />, guide: <Guide />, theme: <ThemePage />, examples: <ExamplesPage /> };
  return <DocLayout route={route}><Suspense fallback={<p role="status">正在载入文档…</p>}>{pages[route] ?? <><h1>页面未找到</h1><a href="#/">回到首页</a></>}</Suspense></DocLayout>;
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);

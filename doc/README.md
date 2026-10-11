@@ -18,10 +18,10 @@
 修改组件优先级 Markdown 后，运行 `node scripts/build-component-priorities.mjs` 同步网页数据。实现状态为记录时的快照。
 
 - [布局组件](./layout-components.md)
-- [新表单设计草案](./form-design.md)：计划 API、字段绑定、校验、状态订阅、自定义控件协议及功能范围；尚未实现。
+- [新表单设计草案](./form-design.md)：确定 API、字段绑定、校验、状态订阅、自定义控件协议及实现边界；独立 Form 已实现。
 
 每次新增组件或变更实现状态后，必须同步更新 `component-priorities.md` 并运行 `node scripts/build-component-priorities.mjs`。独立组件单独记录；不将对应的 antd API 误标为已完成。
 
 5 分组件的常用 API 子集已齐备，详细支持边界见文档站各组件页和 `packages/paper-ink/src/<component>/README.md`。
 
-4 分组件本批完成 18 项，规划页共 36 项已有基础实现。Space、DatePicker、Form、Table 暂缓。InputNumber 与 App 的使用边界见各组件文档。
+4 分组件本批完成 18 项，规划页共 40 项已有基础实现（包含 Rate、Timeline、Result 与独立 Form）。Space、DatePicker、Table 与 antd Form 暂缓。InputNumber 与 App 的使用边界见各组件文档。

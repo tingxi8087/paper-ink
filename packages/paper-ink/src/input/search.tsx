@@ -1,3 +1,4 @@
+import { defineFieldBinding, textFieldBinding } from '../internal/field-binding.js';
 import { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef, type MouseEvent, type ReactElement } from 'react';
 import { Button } from '../button/button.js';
 import type { ButtonProps } from '../button/types.js';
@@ -37,3 +38,5 @@ export const Search = forwardRef<InputRef, SearchProps>(function Search({
   {button}
  </span>;
 });
+
+defineFieldBinding(Search, textFieldBinding);

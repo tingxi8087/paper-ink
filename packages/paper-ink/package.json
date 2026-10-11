@@ -208,7 +208,12 @@
       "types": "./dist/result/index.d.ts",
       "import": "./dist/result/index.js"
     },
-    "./result/style.css": "./dist/result/style.css"
+    "./result/style.css": "./dist/result/style.css",
+    "./form": {
+      "types": "./dist/form/index.d.ts",
+      "import": "./dist/form/index.js"
+    },
+    "./form/style.css": "./dist/form/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"

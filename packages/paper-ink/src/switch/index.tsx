@@ -1,3 +1,4 @@
+import { defineFieldBinding } from '../internal/field-binding.js';
 import { forwardRef, useState, type ButtonHTMLAttributes, type MouseEvent, type KeyboardEvent, type ReactNode } from 'react';
 import { useTheme } from '../config-provider/index.js';
 import { themeVariables } from '../theme/variables.js';
@@ -12,3 +13,5 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch
   function change(next: boolean, event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) { if (blocked || next === current) return; if (!controlled) setLocal(next); onChange?.(next, event); }
   return <button {...rest} ref={ref} type="button" role="switch" aria-checked={current} aria-busy={loading || undefined} disabled={blocked} className={['pi-switch', current && 'pi-switch--checked', loading && 'pi-switch--loading', `pi-switch--${size}`, className].filter(Boolean).join(' ')} style={{ ...themeVariables(theme), ...style }} onClick={event => { if (blocked) return; const next = !current; change(next, event); onClick?.(next, event); }} onKeyDown={event => { onKeyDown?.(event); if (!event.defaultPrevented && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) { event.preventDefault(); change(event.key === 'ArrowRight', event); } }}><span className="pi-switch__handle" aria-hidden="true">{loading && <span className="pi-switch__spinner" />}</span><span className="pi-switch__label">{current ? checkedChildren : unCheckedChildren}</span></button>;
 });
+
+defineFieldBinding(Switch, { valueProp: 'checked', toControlValue: value => Boolean(value), status: false, defaultProps: ['defaultChecked'] });

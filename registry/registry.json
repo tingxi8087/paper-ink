@@ -61,7 +61,8 @@
       "registryDependencies": [
         "theme",
         "icons",
-        "button"
+        "button",
+        "field-binding"
       ],
       "files": [
         "input/index.ts",
@@ -164,7 +165,8 @@
       "name": "checkbox",
       "description": "Checkbox, CheckboxGroup common Ant Design-style API subset",
       "registryDependencies": [
-        "theme"
+        "theme",
+        "field-binding"
       ],
       "files": [
         "checkbox/index.tsx",
@@ -179,7 +181,8 @@
       "name": "radio",
       "description": "Radio, RadioGroup common Ant Design-style API subset",
       "registryDependencies": [
-        "theme"
+        "theme",
+        "field-binding"
       ],
       "files": [
         "radio/index.tsx",
@@ -194,7 +197,8 @@
       "name": "switch",
       "description": "Switch common Ant Design-style API subset",
       "registryDependencies": [
-        "theme"
+        "theme",
+        "field-binding"
       ],
       "files": [
         "switch/index.tsx",
@@ -226,7 +230,8 @@
       "registryDependencies": [
         "theme",
         "icons",
-        "motion"
+        "motion",
+        "field-binding"
       ],
       "files": [
         "select/index.ts",
@@ -551,7 +556,8 @@
       "name": "segmented",
       "description": "segmented common Ant Design-style API subset",
       "registryDependencies": [
-        "theme"
+        "theme",
+        "field-binding"
       ],
       "files": [
         "segmented/index.tsx",
@@ -596,7 +602,8 @@
       "registryDependencies": [
         "theme",
         "icons",
-        "input"
+        "input",
+        "field-binding"
       ],
       "files": [
         "input-number/index.tsx",
@@ -632,7 +639,8 @@
       "description": "Rate with common Ant Design-style APIs",
       "registryDependencies": [
         "theme",
-        "icons"
+        "icons",
+        "field-binding"
       ],
       "files": [
         "rate/index.tsx",
@@ -673,6 +681,32 @@
       "exports": [
         "export { Result } from './result/index';",
         "export type { ResultProps, ResultStatus, ResultSemantic } from './result/index';"
+      ]
+    },
+    {
+      "name": "field-binding",
+      "internal": true,
+      "description": "Shared declarative control binding protocol",
+      "files": [
+        "internal/field-binding.ts"
+      ],
+      "exports": []
+    },
+    {
+      "name": "form",
+      "description": "Independent lightweight top-level field form engine",
+      "registryDependencies": [
+        "theme",
+        "field-binding"
+      ],
+      "files": [
+        "form/index.tsx",
+        "form/types.ts",
+        "form/store.ts",
+        "form/style.css"
+      ],
+      "exports": [
+        "export * from './form/index';"
       ]
     }
   ]

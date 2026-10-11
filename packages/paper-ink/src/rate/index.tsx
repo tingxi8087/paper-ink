@@ -1,3 +1,4 @@
+import { defineFieldBinding } from '../internal/field-binding.js';
 import { forwardRef, useImperativeHandle, useRef, useState, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react';
 import { useTheme } from '../config-provider/index.js';
 import { themeVariables } from '../theme/variables.js';
@@ -24,3 +25,5 @@ export const Rate = forwardRef<RateRef, RateProps>(function Rate(props, ref) {
     {Array.from({ length }, (_, index) => { const glyph = typeof character === 'function' ? character({ ...props, value: current, index }) : character ?? <StarIcon width="1em" height="1em" />; const fill = Math.min(1, Math.max(0, display - index)); return <span key={index} className="pi-rate__star" aria-hidden="true" title={tooltips?.[index]} data-rate-index={index} onMouseMove={event => { if (inactive) return; const next = hit(event, index); if (hover !== next) { setHover(next); onHoverChange?.(next); } }} onClick={event => { if (inactive) return; const next = hit(event, index); if (hover !== null) onHoverChange?.(0); setHover(null); change(allowClear && next === current ? 0 : next); root.current?.focus({ preventScroll: true }); }}><span className="pi-rate__glyph pi-rate__glyph--empty">{glyph}</span><span className="pi-rate__fill" style={{ width: `${fill * 100}%` }}><span className="pi-rate__glyph">{glyph}</span></span></span>; })}
   </div>;
 });
+
+defineFieldBinding(Rate, { toControlValue: value => value ?? 0, status: false });

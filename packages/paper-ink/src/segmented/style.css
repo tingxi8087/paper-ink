@@ -2,3 +2,5 @@
 
 .pi-segmented__item { transition:background-color 120ms ease,color 120ms ease,box-shadow 120ms ease; }
 @media(prefers-reduced-motion:reduce) { .pi-segmented__item { transition:none; } }
+
+.pi-segmented[aria-invalid="true"] { outline: 1px solid var(--pi-color-error-solid); outline-offset: 2px; }

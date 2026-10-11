@@ -1,3 +1,4 @@
+import { defineFieldBinding } from '../internal/field-binding.js';
 import { usePresence } from '../internal/motion.js';
 import { CheckIcon, ChevronDownIcon, CloseIcon } from '../internal/icons.js';
 import { forwardRef, useEffect, useId, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactElement, type RefAttributes } from 'react';
@@ -198,3 +199,5 @@ const SelectControl = forwardRef<SelectRef, SelectProps>(function Select(props, 
   </div>;
 });
 export const Select = SelectControl as <ValueType extends SelectValue = SelectValue>(props: SelectProps<ValueType> & RefAttributes<SelectRef>) => ReactElement;
+
+defineFieldBinding(Select, {});

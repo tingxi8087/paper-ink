@@ -1,3 +1,4 @@
+import { defineFieldBinding, textFieldBinding } from '../internal/field-binding.js';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { useTheme } from '../config-provider/index.js';
 import { themeVariables } from '../theme/variables.js';
@@ -38,3 +39,5 @@ export const InputControl = forwardRef<InputRef, InputProps>(function Input({
     <Count value={text} maxLength={maxLength} showCount={showCount} />
   </span>;
 });
+
+defineFieldBinding(InputControl, textFieldBinding);

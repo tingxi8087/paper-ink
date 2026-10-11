@@ -12,3 +12,5 @@
 .pi-switch__spinner { width: 8px; height: 8px; border: 1.5px solid var(--pi-color-primary-solid); border-inline-end-color: transparent; border-radius: 50%; animation: pi-switch-spin .7s linear infinite; }
 @keyframes pi-switch-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .pi-switch, .pi-switch__handle { transition: none; } .pi-switch__spinner { animation-duration: 1.5s; } }
+
+.pi-switch[aria-invalid="true"]:not(:disabled) { box-shadow: 0 0 0 1px var(--pi-color-error-solid); }

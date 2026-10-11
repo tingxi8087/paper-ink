@@ -1,3 +1,4 @@
+import { defineFieldBinding } from '../internal/field-binding.js';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState, type InputHTMLAttributes, type ReactNode, type KeyboardEvent, type CSSProperties } from 'react';
 import { BigIntDecimal, toFixed } from '@rc-component/mini-decimal';
 const getDecimal = (value: number | string) => new BigIntDecimal(value);
@@ -105,3 +106,5 @@ export const InputNumber = forwardRef<InputNumberRef, InputNumberProps>(function
     </span>}
   </span>;
 });
+
+defineFieldBinding(InputNumber, { toControlValue: value => value ?? null });

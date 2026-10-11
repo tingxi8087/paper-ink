@@ -167,16 +167,17 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 - 同步 npm 导出、独立 CSS、CLI registry 与依赖清单。
 - 提供紧凑的文档、真实交互演示和必要的行为验证。
 
-## Paper Ink 独立组件（3）
+## Paper Ink 独立组件（4）
 
-分类：布局。API 独立设计，已有基础实现；不表示对应 antd API 已完成。
+分类：布局与数据录入。API 独立设计，已有基础实现；不表示对应 antd API 已完成。
 
 | 组件 | 推荐指数 | 成本 | 理由 |
 | --- | --- | --- | --- |
 | Stack 竖向布局（已有） | 4/5 | 低 | 竖向排列、对齐与主题间距，适合表单和内容分组 |
 | Inline 横向布局（已有） | 4/5 | 低 | 横向排列、对齐与换行，适合工具栏和按钮组 |
 | SimpleGrid 网格布局（已有） | 4/5 | 低—中 | 等宽列、列比例、自动列数、跨列和独立行列间距 |
+| Form 轻量表单（已有） | 4/5 | 中—高 | 独立顶层字段 API、统一绑定协议、异步校验与变化通知；不代表 antd Form API 完成 |
 
-15 个 5/5 条目均已有常用 API 子集。本轮再补齐 18 个 4/5 组件，连同 3 个独立布局组件，已有基础实现共 36 项；完整 API 支持范围以组件文档为准。
+15 个 5/5 条目均已有常用 API 子集。本轮再补齐 18 个 4/5 组件，以及 Rate、Timeline、Result，连同 4 个独立组件，已有基础实现共 40 项；完整 API 支持范围以组件文档为准。
 
-本阶段不实现 Space、DatePicker、Form、Table。普通间距统一使用 Inline / Stack；DatePicker、Form、Table 留待单独设计。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal，不包含 notification。
+本阶段不实现 Space、DatePicker、Table 与 antd Form；独立轻量 Form 已实现。普通间距统一使用 Inline / Stack；DatePicker、Table 留待单独设计。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal，不包含 notification。

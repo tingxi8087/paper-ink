@@ -1,0 +1,12 @@
+.pi-form { color: var(--pi-color-text-primary); font-size: var(--pi-font-size); }
+.pi-form-field { min-width: 0; margin: 0 0 12px; }
+.pi-form-field__label { display: inline-flex; align-items: center; gap: 4px; margin-bottom: 6px; font-weight: 500; cursor: pointer; }
+.pi-form-field__required { color: var(--pi-color-error-solid); }
+.pi-form-field__control { min-width: 0; }
+.pi-form-field__help, .pi-form-field__error { margin-top: 4px; font-size: 12px; line-height: 1.5; }
+.pi-form-field__help { color: var(--pi-color-text-secondary); }
+.pi-form-field__error { color: var(--pi-color-error-solid); }
+.pi-field-control { border: 1px solid var(--pi-color-border-default); border-radius: var(--pi-radius-control); padding: 8px; min-width: 0; }
+.pi-field-control--error { border-color: var(--pi-color-error-solid); }
+.pi-field-control--warning { border-color: var(--pi-color-warning-solid); }
+.pi-field-control--disabled { opacity: .5; }

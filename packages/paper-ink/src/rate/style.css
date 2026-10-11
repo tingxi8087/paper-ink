@@ -8,3 +8,5 @@
 .pi-rate--disabled .pi-rate__star { cursor:default; }
 .pi-rate__fill { transition:width 120ms ease; }
 @media(prefers-reduced-motion:reduce) { .pi-rate__fill { transition:none; } }
+
+.pi-rate[aria-invalid="true"] { outline: 1px solid var(--pi-color-error-solid); outline-offset: 3px; border-radius: var(--pi-radius-control); }

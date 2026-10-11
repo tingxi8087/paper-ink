@@ -26,3 +26,5 @@
 .pi-radio input:checked + .pi-radio__mark::after { animation:pi-radio-check 120ms ease-out; }
 @keyframes pi-radio-check { from { opacity:0; } to { opacity:1; } }
 @media(prefers-reduced-motion:reduce) { .pi-radio input:checked + .pi-radio__mark::after { animation:none; } }
+
+.pi-radio input[aria-invalid="true"] + .pi-radio__mark, .pi-radio-group[aria-invalid="true"] .pi-radio__mark { border-color: var(--pi-color-error-solid); }

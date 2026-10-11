@@ -1,0 +1,27 @@
+import { FormDemos } from '../../../components/FormDemos';
+import { FormApiTables } from '../../../components/FormApiTables';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# Form 表单
+
+独立设计的轻量表单。自动绑定、字段校验、批量更新；复杂对象和数组封装成自定义控件。
+
+## 代码演示
+
+<FormDemos />
+
+## API
+
+<FormApiTables />
+
+## 支持边界
+
+<DocBoundary>
+
+只管理顶层 key，点号是键名的一部分。对象和数组整体更新，不提供深层路径或 Form.List。自定义控件遵循 value/onChange(nextValue)，并转发状态、无障碍属性和聚焦 ref；包装组件需转发绑定声明或采用默认协议。原生元素、Fragment 和额外包装使用渲染函数。快照支持普通对象、数组和 Date；其他类实例需自行转换，字段值按不可变数据使用。相同值按 Object.is 判断，dirty 按基准数据内容判断。卸载移除不触发变化通知，preserve 暂存值不进入提交。独立 API，不兼容 antd Form。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="form" component="Form, useForm, useWatch, useFormState, useFieldState, FieldControl, defineFieldBinding" />

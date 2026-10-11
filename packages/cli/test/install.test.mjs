@@ -108,7 +108,7 @@ test('installs input and modal with shared theme/button once and guards ReactDOM
   writeFileSync(join(root, 'package.json'), JSON.stringify(pkg));
   invoke(root, ['add', 'input', 'modal']);
   const installed = snapshot(root);
-  assert.deepEqual(JSON.parse(installed['paper-ink.lock.json']).items, ['theme', 'icons', 'button', 'input', 'motion', 'modal']);
+  assert.deepEqual(JSON.parse(installed['paper-ink.lock.json']).items, ['theme', 'icons', 'button', 'field-binding', 'input', 'motion', 'modal']);
   assert.match(installed['src/components/paper-ink/index.ts'], /Input, TextArea/);
   assert.match(installed['src/components/paper-ink/index.ts'], /Modal/);
   assert.match(installed['src/components/paper-ink/style.css'], /modal\/style.css/);

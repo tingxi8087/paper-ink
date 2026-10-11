@@ -1,3 +1,4 @@
+import { defineFieldBinding, textFieldBinding } from '../internal/field-binding.js';
 import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useRef } from 'react';
 import { useTheme } from '../config-provider/index.js';
 import { themeVariables } from '../theme/variables.js';
@@ -71,3 +72,5 @@ export const TextArea = forwardRef<TextAreaRef, TextAreaProps>(function TextArea
     <Count value={text} maxLength={maxLength} showCount={showCount} />
   </span>;
 });
+
+defineFieldBinding(TextArea, textFieldBinding);

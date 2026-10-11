@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 const nav = [
  { group: '开始', items: [['guide', '快速开始'], ['theme', '主题实验室']] },
  { group: '通用与布局', items: [['button', 'Button 按钮'], ['layout', '布局'], ['tabs', 'Tabs 标签页'], ['typography', 'Typography 排版'], ['divider', 'Divider 分割线'], ['breadcrumb', 'Breadcrumb 面包屑'], ['dropdown', 'Dropdown 下拉菜单'], ['pagination', 'Pagination 分页']] },
- { group: '数据录入', items: [['input', 'Input 输入框'], ['checkbox', 'Checkbox 多选框'], ['radio', 'Radio 单选框'], ['switch', 'Switch 开关'], ['select', 'Select 选择器'], ['input-number', 'InputNumber 数字输入框'], ['segmented', 'Segmented 分段控制器'], ['rate', 'Rate 评分']] },
+ { group: '数据录入', items: [['form', 'Form 表单'], ['input', 'Input 输入框'], ['checkbox', 'Checkbox 多选框'], ['radio', 'Radio 单选框'], ['switch', 'Switch 开关'], ['select', 'Select 选择器'], ['input-number', 'InputNumber 数字输入框'], ['segmented', 'Segmented 分段控制器'], ['rate', 'Rate 评分']] },
  { group: '展示与反馈', items: [['tag', 'Tag 标签'], ['empty', 'Empty 空状态'], ['alert', 'Alert 警告提示'], ['spin', 'Spin 加载'], ['tooltip', 'Tooltip 文字提示'], ['message', 'Message 全局提示'], ['modal', 'Modal 对话框'], ['avatar', 'Avatar 头像'], ['badge', 'Badge 徽标'], ['card', 'Card 卡片'], ['collapse', 'Collapse 折叠面板'], ['descriptions', 'Descriptions 描述列表'], ['popover', 'Popover 气泡卡片'], ['popconfirm', 'Popconfirm 气泡确认'], ['drawer', 'Drawer 抽屉'], ['progress', 'Progress 进度条'], ['skeleton', 'Skeleton 骨架屏'], ['timeline', 'Timeline 时间轴'], ['result', 'Result 结果页']] },
  { group: '组合', items: [['app', 'App 应用入口'], ['examples', '实际场景']] },
 ];
