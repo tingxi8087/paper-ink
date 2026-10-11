@@ -708,6 +708,52 @@
       "exports": [
         "export * from './form/index';"
       ]
+    },
+    {
+      "name": "use-ref-state",
+      "description": "Public state hook with an immediately readable readonly ref",
+      "files": [
+        "use-ref-state/index.ts"
+      ],
+      "exports": [
+        "export * from './use-ref-state/index';"
+      ]
+    },
+    {
+      "name": "table-hooks",
+      "description": "Table query, cancellable requests, business-row selection and local data helpers",
+      "registryDependencies": [
+        "use-ref-state"
+      ],
+      "files": [
+        "table-hooks/index.ts"
+      ],
+      "exports": [
+        "export * from './table-hooks/index';"
+      ]
+    },
+    {
+      "name": "table",
+      "description": "Independent hook-oriented Table with pagination, fixed columns, selection and overflow tooltips",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "checkbox",
+        "radio",
+        "spin",
+        "empty",
+        "pagination",
+        "tooltip",
+        "table-hooks"
+      ],
+      "files": [
+        "table/index.tsx",
+        "table/types.ts",
+        "table/style.css"
+      ],
+      "exports": [
+        "export * from './table/index';"
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 # antd 组件清单与 Paper Ink 开发优先级
 
-记录日期：2026-10-10。
+记录日期：2026-10-12。
 
 组件范围依据 [Ant Design 官方组件目录](https://ant.design/components/overview/)，本次查询页面版本为 6.6.5。核心目录共 73 个条目，包含组件、配置入口和工具项；Input.TextArea、Checkbox.Group 等子组件不单独计数。另列官网展示的 6 个 Pro Components 扩展组件，它们不属于核心 antd 包。
 
@@ -95,7 +95,7 @@
 | QRCode 二维码 | 2/5 | 中 | 场景明确时可接成熟编码库，暂不优先 |
 | Segmented 分段控制器（已有） | 4/5 | 低—中 |紧凑切换很适合我们的风格，如视图和筛选模式；已补轻量动效 |
 | Statistic 统计数值 | 3/5 | 低 | 仪表盘有用，但多数展示可以先用排版完成 |
-| Table 表格 | 4/5 | 很高 | 业务价值大；先做基础表格，再逐步增加复杂能力 |
+| Table 表格 | 4/5 | 很高 | 已提供独立轻量 Table，采用 source/selection 协议；未实现 antd Table API |
 | Tag 标签（已有） | 5/5 | 低 | 颜色、外观、关闭和受控 CheckableTag 已实现 |
 | Timeline 时间轴（已有） | 3/5 | 低—中 | 垂直时间轴、标签、交错、加载和反转已实现 |
 | Tooltip 文字提示（已有） | 5/5 | 中 |12种位置、触发、延迟、主题 Portal 和定位已实现；已补轻量动效 |
@@ -167,9 +167,9 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 - 同步 npm 导出、独立 CSS、CLI registry 与依赖清单。
 - 提供紧凑的文档、真实交互演示和必要的行为验证。
 
-## Paper Ink 独立组件（4）
+## Paper Ink 独立组件（8）
 
-分类：布局与数据录入。API 独立设计，已有基础实现；不表示对应 antd API 已完成。
+分类：布局、数据录入、数据展示与公共 Hook。API 独立设计，已有基础实现；不表示对应 antd API 已完成。
 
 | 组件 | 推荐指数 | 成本 | 理由 |
 | --- | --- | --- | --- |
@@ -177,7 +177,11 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 | Inline 横向布局（已有） | 4/5 | 低 | 横向排列、对齐与换行，适合工具栏和按钮组 |
 | SimpleGrid 网格布局（已有） | 4/5 | 低—中 | 等宽列、列比例、自动列数、跨列和独立行列间距 |
 | Form 轻量表单（已有） | 4/5 | 中—高 | 独立顶层字段 API、统一绑定协议、异步校验与变化通知；不代表 antd Form API 完成 |
+| Table 轻量表格（已有） | 4/5 | 高 | source/selection 协议、内置分页、固定列、汇总及溢出 Tooltip；不代表 antd Table API 完成 |
+| useBasePageTable 表格数据 Hook（已有） | 4/5 | 中—高 | 受控查询、分页、AbortSignal 取消与过期隔离、缓存及本地更新 |
+| useTableChecked 表格选择 Hook（已有） | 4/5 | 低—中 | _checked 业务行状态、批量选择与最终 keys 同步 |
+| useRefState 即时状态 Hook（已有） | 4/5 | 低 | React state 与即时只读 ref，支持连续函数更新 |
 
-15 个 5/5 条目均已有常用 API 子集。本轮再补齐 18 个 4/5 组件，以及 Rate、Timeline、Result，连同 4 个独立组件，已有基础实现共 40 项；完整 API 支持范围以组件文档为准。
+15 个 5/5 条目均已有常用 API 子集。本轮再补齐 18 个 4/5 组件，以及 Rate、Timeline、Result，连同 8 个独立组件与 Hook，已有基础实现共 44 项；完整 API 支持范围以组件文档为准。
 
-本阶段不实现 Space、DatePicker、Table 与 antd Form；独立轻量 Form 已实现。普通间距统一使用 Inline / Stack；DatePicker、Table 留待单独设计。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal，不包含 notification。
+本阶段不实现 Space、DatePicker、antd Table 与 antd Form API；独立轻量 Form、Table 及公共表格 Hook 已实现。普通间距统一使用 Inline / Stack；DatePicker 留待单独设计。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal，不包含 notification。

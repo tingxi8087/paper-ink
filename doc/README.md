@@ -19,9 +19,10 @@
 
 - [布局组件](./layout-components.md)
 - [新表单设计草案](./form-design.md)：确定 API、字段绑定、校验、状态订阅、自定义控件协议及实现边界；独立 Form 已实现。
+- [轻量 Table 设计草案](./table-design.md)：source/selection 协议、内置分页、内置 useBasePageTable/useTableChecked、公共 useRefState、AbortSignal 与业务 Hook 适配、固定列与汇总、省略 Tooltip、低成本扩展、后续功能及验证计划；首版已实现。
 
 每次新增组件或变更实现状态后，必须同步更新 `component-priorities.md` 并运行 `node scripts/build-component-priorities.mjs`。独立组件单独记录；不将对应的 antd API 误标为已完成。
 
 5 分组件的常用 API 子集已齐备，详细支持边界见文档站各组件页和 `packages/paper-ink/src/<component>/README.md`。
 
-4 分组件本批完成 18 项，规划页共 40 项已有基础实现（包含 Rate、Timeline、Result 与独立 Form）。Space、DatePicker、Table 与 antd Form 暂缓。InputNumber 与 App 的使用边界见各组件文档。
+4 分组件本批完成 18 项，规划页共 44 项已有基础实现（包含 Rate、Timeline、Result、独立 Form/Table 与三个公共 Hook）。Space、DatePicker、antd Table 与 antd Form API 暂缓。InputNumber 与 App 的使用边界见各组件文档。

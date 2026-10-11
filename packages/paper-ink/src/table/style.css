@@ -1,0 +1,32 @@
+.pi-table { position: relative; box-sizing: border-box; width: 100%; min-width: 0; color: var(--pi-color-text-primary); font-family: var(--pi-font-family); font-size: var(--pi-font-size); line-height: 1.5; }
+.pi-table__viewport { position: relative; overflow: auto; width: 100%; border: 1px solid var(--pi-color-border-subtle); border-radius: var(--pi-radius-control); }
+.pi-table table { border-spacing: 0; border-collapse: separate; table-layout: fixed; }
+.pi-table th, .pi-table td { box-sizing: border-box; padding: 10px 12px; border-bottom: 1px solid var(--pi-color-border-subtle); overflow-wrap: anywhere; background: var(--pi-color-surface-container); }
+.pi-table th { font-weight: 600; background: var(--pi-color-surface-muted); }
+.pi-table tbody tr:last-child td { border-bottom: 0; }
+.pi-table tfoot td { border-top: 1px solid var(--pi-color-border-subtle); border-bottom: 0; font-weight: 600; background: var(--pi-color-surface-muted); }
+.pi-table--small th, .pi-table--small td { padding: 6px 8px; }
+.pi-table--large th, .pi-table--large td { padding: 14px 16px; }
+.pi-table--bordered th:not(:last-child), .pi-table--bordered td:not(:last-child) { border-right: 1px solid var(--pi-color-border-subtle); }
+.pi-table--hoverable tbody tr:not(.pi-table__placeholder):hover td { background: var(--pi-color-surface-muted); }
+.pi-table .pi-table__row--selected td { background: color-mix(in srgb, var(--pi-color-primary-solid) 5%, var(--pi-color-surface-container)); }
+.pi-table--sticky-header thead th { position: sticky; top: 0; z-index: 3; }
+.pi-table__fixed { background-clip: padding-box; }
+.pi-table .pi-table__selection { padding-inline: 8px; text-align: center; overflow-wrap: normal; }
+.pi-table__selection > span { display: inline-flex; vertical-align: middle; }
+.pi-table__selection .pi-checkbox, .pi-table__selection .pi-radio { vertical-align: middle; }
+.pi-table__sort { display: flex; align-items: center; justify-content: space-between; gap: 6px; width: 100%; padding: 0; border: 0; background: transparent; color: inherit; text-align: inherit; font: inherit; cursor: pointer; }
+.pi-table__sort:disabled { cursor: default; opacity: .6; }
+.pi-table__sort:focus-visible, .pi-table__ellipsis:focus-visible { outline: 2px solid var(--pi-color-primary-solid); outline-offset: 2px; border-radius: 2px; }
+.pi-table__sort > span:first-child { min-width: 0; flex: 1; }
+.pi-table__sort-icons { display: flex; flex-direction: column; flex: none; color: var(--pi-color-text-disabled); }
+.pi-table__sort-icons svg { width: 12px; height: 9px; }
+.pi-table__sort-icons .pi-table__sort-active { color: var(--pi-color-text-primary); }
+.pi-table__ellipsis { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.pi-table__placeholder td { text-align: center; padding: 20px 12px; }
+.pi-table__initial-loading { display: block; height: 48px; }
+.pi-table__loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 5; background: color-mix(in srgb, var(--pi-color-surface-container) 65%, transparent); }
+.pi-table__pagination { padding-top: 12px; }
+.pi-table__pagination:first-child { padding-top: 0; padding-bottom: 12px; }
+.pi-table__truncate > .pi-tooltip-trigger { display: flex; width: 100%; min-width: 0; }
+.pi-table__truncate .pi-table__ellipsis, .pi-table__truncate .pi-table__cell-content { flex: 1; min-width: 0; }

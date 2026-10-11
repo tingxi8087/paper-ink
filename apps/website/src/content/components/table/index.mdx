@@ -1,0 +1,40 @@
+import { TableDemos } from '../../../components/TableDemos';
+import { TableApiTables } from '../../../components/TableApiTables';
+import { DocBoundary } from '../../../components/DocDetails';
+
+# Table 表格
+
+独立设计：source 接业务 Hook，selection 接选择 Hook，分页内置。静态列表直接传 data。
+
+## 代码演示
+
+<TableDemos />
+
+## API
+
+<TableApiTables />
+
+## 支持边界
+
+<DocBoundary>
+
+不沿用 antd Table 控制模型。不内置请求、实际排序、过滤、编辑引擎，也不二次切页。字段仅顶层 key；固定列需数字宽度。省略只对实际溢出提示，复杂内容显式给 Tooltip。树形、展开行、多级表头、合并单元格、多列排序、拖拽和虚拟滚动暂未提供。选择 Hook 使用业务行内 _checked，跨页保留请自行维护 keys。示例接口均为浏览器内本地模拟。Hook 面向浏览器，不要求 SSR。
+
+</DocBoundary>
+
+## 导入
+
+```tsx
+import { Table, useBasePageTable, useTableChecked, useRefState } from 'paper-ink';
+import 'paper-ink/style.css';
+
+// 按功能引入
+import { Table } from 'paper-ink/table';
+import { useBasePageTable, useTableChecked } from 'paper-ink/table-hooks';
+import { useRefState } from 'paper-ink/use-ref-state';
+import 'paper-ink/table/style.css';
+```
+
+```sh
+paper-ink add table table-hooks use-ref-state
+```

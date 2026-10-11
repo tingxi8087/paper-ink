@@ -38,8 +38,14 @@ Checkbox/Group, Radio/Group/Button, Switch, Select (single/multiple/tags/search)
 
 Prefer `message.useMessage()` with its contextHolder inside your ConfigProvider for theme inheritance. Static message calls use the default theme. Select supports ordinary option sets without virtualization. Editable/vertical Tabs, Select labelInValue/grouped options, antd Form integration and semantic style functions remain outside this release. An independent Form engine is available.
 
-Additional common API subsets: Typography, Divider, Breadcrumb, Dropdown, Pagination, InputNumber, Avatar, Badge, Card, Collapse, Descriptions, Popover, Segmented, Drawer, Popconfirm, Progress, Skeleton and App. Each has a lowercase kebab-case subpath and stylesheet. Space, DatePicker, antd Form and Table are deferred. Our independent Form supports top-level fields, declarative bindings, async validation, subscriptions and atomic patches; import Form/useForm from paper-ink/form.
+Additional common API subsets: Typography, Divider, Breadcrumb, Dropdown, Pagination, InputNumber, Avatar, Badge, Card, Collapse, Descriptions, Popover, Segmented, Drawer, Popconfirm, Progress, Skeleton and App. Each has a lowercase kebab-case subpath and stylesheet. Space, DatePicker and the antd Form/Table APIs are deferred; independent Form and Table APIs are available. Our independent Form supports top-level fields, declarative bindings, async validation, subscriptions and atomic patches; import Form/useForm from paper-ink/form.
 
 InputNumber uses MIT-licensed @rc-component/mini-decimal for string-based decimal calculations; enable stringMode and pass strings for high precision. App.useApp() provides theme-aware message and modal APIs, including async confirmation handles. Notification is not included. Read each component README for supported API boundaries.
 
 新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。
+
+## Independent Table and hooks
+
+Table accepts either `data` or a `source` satisfying TableSource. Use `source={table}` from useBasePageTable and `selection={checked}` from useTableChecked; pagination is built in. Fixed columns, summaries, controlled sorting and overflow-only tooltips are supported. Request functions receive `(query, signal)`; selection remains on business rows as `_checked`.
+
+Import Table/types from `paper-ink/table` and its dependency-complete CSS from `paper-ink/table/style.css`. Hooks are exported from `paper-ink/table-hooks`; the public useRefState tuple is exported from `paper-ink/use-ref-state`. Root imports also work. Source installation: `paper-ink add table`, or install either Hook item individually. See their source READMEs for exact methods and boundaries. No SSR guarantee is required for these browser-oriented hooks.

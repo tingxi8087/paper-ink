@@ -97,8 +97,24 @@ MIT。贡献前请阅读 `doc` 中的设计约定；新增组件需要同步公�
 
 Message 推荐使用 `message.useMessage()` 与 contextHolder 继承主题。Select 支持单选、多选、tags 和键盘搜索；大型数据列表的虚拟化、antd Form 集成和 Tabs 可编辑模式暂未提供；已提供独立 Form。
 
-本批新增 18 个 4 分组件：Typography、Divider、Breadcrumb、Dropdown、Pagination、InputNumber、Avatar、Badge、Card、Collapse、Descriptions、Popover、Segmented、Drawer、Popconfirm、Progress、Skeleton、App。Space、DatePicker、antd Form、Table 暂不实现；独立轻量 Form 已实现，见 doc/form-design.md 和文档站表单案例；布局继续使用 Inline / Stack / SimpleGrid。
+本批新增 18 个 4 分组件：Typography、Divider、Breadcrumb、Dropdown、Pagination、InputNumber、Avatar、Badge、Card、Collapse、Descriptions、Popover、Segmented、Drawer、Popconfirm、Progress、Skeleton、App。Space、DatePicker、antd Form/Table API 暂不实现；独立轻量 Form 和 Table 已实现，见 doc/form-design.md、doc/table-design.md 和文档站案例；布局继续使用 Inline / Stack / SimpleGrid。
 
 InputNumber 使用 `@rc-component/mini-decimal` 的字符串十进制运算，支持 `stringMode`。App.useApp() 提供继承主题的 message 和 modal，确认弹窗支持异步回调、更新、销毁及等待结果。内置图标统一为 SVG。
 
 新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。
+
+## 轻量表格与公共 Hook
+
+```tsx
+import { Table, useBasePageTable, useTableChecked, useRefState } from 'paper-ink';
+import 'paper-ink/table/style.css';
+
+const table = useBasePageTable<User, SearchParams>({ getTableData });
+const selection = useTableChecked({
+  tableData: table.tableData, setTableData: table.setTableData, idName: 'id',
+});
+// 在组件内创建 Hook，然后直接把返回值交给 Table。
+<Table rowKey="id" source={table} selection={selection} columns={columns} />;
+```
+
+Table 内置分页，支持固定列、汇总和实际溢出 Tooltip；也可用 data 展示静态数据。getTableData(query, signal) 由业务提供，Hook 管理取消与过期响应；选择状态保存在业务行 _checked 中。三个入口支持 table、table-hooks、use-ref-state 子路径，CLI `paper-ink add table` 同时安装需要的 Hook 与样式依赖。useRefState 独立提供 [state, setState, stateRef]。树形、展开、合并、虚拟滚动留待后续。

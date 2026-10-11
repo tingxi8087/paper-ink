@@ -213,7 +213,20 @@
       "types": "./dist/form/index.d.ts",
       "import": "./dist/form/index.js"
     },
-    "./form/style.css": "./dist/form/style.css"
+    "./form/style.css": "./dist/form/style.css",
+    "./table": {
+      "types": "./dist/table/index.d.ts",
+      "import": "./dist/table/index.js"
+    },
+    "./table-hooks": {
+      "types": "./dist/table-hooks/index.d.ts",
+      "import": "./dist/table-hooks/index.js"
+    },
+    "./use-ref-state": {
+      "types": "./dist/use-ref-state/index.d.ts",
+      "import": "./dist/use-ref-state/index.js"
+    },
+    "./table/style.css": "./dist/table/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"
