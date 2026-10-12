@@ -11,13 +11,10 @@
 .pi-picker--warning { border-color:var(--pi-color-warning-solid)!important; }
 .pi-picker--disabled { color:var(--pi-color-text-disabled); background:var(--pi-color-surface-muted); cursor:not-allowed; }
 .pi-picker input:disabled { cursor:not-allowed; }
-.pi-picker__popup { box-sizing:border-box; z-index:1100; max-width:calc(100vw - 16px); overflow:auto; overscroll-behavior:none; padding:8px; border:1px solid var(--pi-color-border-subtle); border-radius:var(--pi-radius-control); background:var(--pi-color-surface-elevated); color:var(--pi-color-text-primary); font-family:var(--pi-font-family); font-size:var(--pi-font-size); line-height:1.5; box-shadow:0 6px 24px #00000014; }
+.pi-picker__popup { box-sizing:border-box; z-index:1100; max-width:calc(100vw - 16px); overflow:auto; overscroll-behavior:none; padding:8px; border:1px solid var(--pi-color-border-subtle); border-radius:var(--pi-radius-control); background:var(--pi-color-surface-elevated); color:var(--pi-color-text-primary); font-family:var(--pi-font-family); font-size:var(--pi-font-size); line-height:1.5; box-shadow:0 6px 24px #00000014; transition:opacity 160ms ease-out; }
 .pi-picker__popup button { font:inherit; }
 .pi-picker__popup button:focus-visible { outline:2px solid var(--pi-color-primary-solid); outline-offset:-2px; }
-.pi-picker__popup[data-motion=enter] { animation:pi-picker-enter 160ms ease-out both; }
-.pi-picker__popup[data-motion=leave] { animation:pi-picker-leave 160ms ease-in both; pointer-events:none; }
-@keyframes pi-picker-enter { from {opacity:0} to {opacity:1} }
-@keyframes pi-picker-leave { from {opacity:1} to {opacity:0} }
+.pi-picker__popup[data-motion=leave] { pointer-events:none; }
 .pi-picker-calendar { display:flex; gap:12px; }
 .pi-picker-calendar__panel { width:252px; flex:0 0 252px; }
 .pi-picker-calendar__header { display:flex; align-items:center; justify-content:space-between; height:32px; margin-bottom:4px; }
@@ -54,7 +51,7 @@
 .pi-picker__presets { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--pi-color-border-subtle); }
 .pi-picker__error { color:var(--pi-color-error-solid); font-size:12px; margin-top:4px; }
 @media(max-width:580px) { .pi-picker-calendar--range .pi-picker-calendar__panel:nth-child(2) { display:none; } .pi-picker__panels { flex-wrap:wrap; } }
-@media(prefers-reduced-motion:reduce) { .pi-picker { transition:none; } .pi-picker__popup[data-motion] { animation:none; } }
+@media(prefers-reduced-motion:reduce) { .pi-picker { transition:none; } .pi-picker__popup[data-motion] { transition:none!important; } }
 .pi-picker__input-wrap { display:flex; align-items:center; gap:8px; flex:1; min-width:0; }
 .pi-picker__extra { padding-top:8px; margin-top:8px; border-top:1px solid var(--pi-color-border-subtle); }
 .pi-picker-calendar--narrow .pi-picker-calendar__panel:nth-child(2) { display:none; }

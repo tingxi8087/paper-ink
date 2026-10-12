@@ -1,3 +1,4 @@
+import { CollapseApiTable, CollapseItemApiTable } from '../../../components/InteractiveApiTables';
 import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 import { CollapseDemos } from '../../../components/InteractiveDemos';
 
@@ -11,13 +12,19 @@ import { CollapseDemos } from '../../../components/InteractiveDemos';
 
 ## API
 
-items（key / label / children / extra / showArrow / collapsible / forceRender / className / style）、activeKey / defaultActiveKey、onChange(keys)、accordion、bordered、ghost、size、destroyOnHidden、expandIcon、expandIconPosition。
+<CollapseApiTable />
+
+### 面板 CollapseItem
+
+<CollapseItemApiTable />
 
 ## 支持边界
 
 <DocBoundary>
 
-使用 items，不提供旧 Collapse.Panel。没有展开动画；destroyOnHidden 优先于 forceRender。图标触发的按钮通过 label 提供无障碍名称。
+- 使用 `items`，不提供旧 `Collapse.Panel`。
+- 没有展开动画；`destroyOnHidden` 优先于 `forceRender`。
+- 图标触发模式通过 `label` 提供无障碍名称，自定义标题应保留可读文本。
 
 </DocBoundary>
 

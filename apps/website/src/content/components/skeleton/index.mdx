@@ -1,3 +1,4 @@
+import { SkeletonApiTable, SkeletonAvatarApiTable, SkeletonElementApiTable } from '../../../components/InteractiveApiTables';
 import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 import { SkeletonDemos } from '../../../components/InteractiveDemos';
 
@@ -11,13 +12,23 @@ import { SkeletonDemos } from '../../../components/InteractiveDemos';
 
 ## API
 
-loading、active、avatar（size / shape）、title（width）、paragraph（rows / width）、round、children；Skeleton.Avatar / Button / Input / Image / Node。
+<SkeletonApiTable />
+
+### Skeleton.Avatar
+
+<SkeletonAvatarApiTable />
+
+### Skeleton.Button / Input / Image / Node
+
+<SkeletonElementApiTable />
 
 ## 支持边界
 
 <DocBoundary>
 
-Skeleton.Avatar 支持 size / shape / active；其他独立元素支持 size / block / shape / active / className / style。独立元素仅用于占位，不提供点击交互；没有语义样式对象。
+- 独立元素用于占位，不内置点击交互；没有语义样式对象。
+- `Skeleton.Image` / `Skeleton.Node` 不使用 `size` 调整高度，可通过 `style` 覆盖尺寸。
+- `loading={false}` 时仅渲染 `children`，骨架根元素及其样式、`ref` 不再存在。
 
 </DocBoundary>
 

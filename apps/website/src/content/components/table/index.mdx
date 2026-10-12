@@ -1,6 +1,6 @@
 import { TableDemos } from '../../../components/TableDemos';
 import { TableApiTables } from '../../../components/TableApiTables';
-import { DocBoundary } from '../../../components/DocDetails';
+import { DocBoundary, DocImport } from '../../../components/DocDetails';
 
 # Table 表格
 
@@ -24,16 +24,4 @@ import { DocBoundary } from '../../../components/DocDetails';
 
 ## 导入
 
-```tsx
-import { Table, useBasePageTable, useTableChecked } from 'paper-ink';
-import 'paper-ink/style.css';
-
-// 按功能引入
-import { Table } from 'paper-ink/table';
-import { useBasePageTable, useTableChecked } from 'paper-ink/table-hooks';
-import 'paper-ink/table/style.css';
-```
-
-```sh
-paper-ink add table table-hooks
-```
+<DocImport npm={"import { Table } from 'paper-ink/table';\nimport { useBasePageTable, useTableChecked } from 'paper-ink/table-hooks';\nimport 'paper-ink/table/style.css';"} cli={"paper-ink add table table-hooks"} />

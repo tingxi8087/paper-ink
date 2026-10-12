@@ -1,3 +1,4 @@
+import { DrawerApiTable } from '../../../components/OverlayApiTables';
 import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 import { DrawerDemos } from '../../../components/OverlayDemos';
 
@@ -11,13 +12,15 @@ import { DrawerDemos } from '../../../components/OverlayDemos';
 
 ## API
 
-<table><thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead><tbody><tr><td>open / onClose</td><td>boolean / (event) => void</td><td>受控打开；关闭按钮、遮罩、Esc 通知业务</td></tr><tr><td>placement / width / height</td><td>方向 / number 或 CSS 长度</td><td>左右默认宽 378，上下默认高 378；large 为 736</td></tr><tr><td>footer / extra</td><td>ReactNode</td><td>底部区域、标题右侧内容</td></tr><tr><td>destroyOnHidden</td><td>boolean</td><td>默认保留已打开的内容</td></tr></tbody></table>
+<DrawerApiTable />
 
 ## 支持边界
 
 <DocBoundary>
 
-支持 title、extra、footer、mask/maskClosable、keyboard、closable、size、forceRender、destroyOnHidden、getContainer、zIndex、afterOpenChange。className/style 用于面板，rootClassName 用于根容器。首期不支持 push、loading、rootStyle、语义样式、自定义 closeIcon、autoFocus 和 ref。四个方向均支持 260ms 滑入/滑出，遮罩同步淡入/淡出。afterOpenChange 在动画结束后调用，关闭结束后再销毁内容、恢复焦点和滚动；遵循系统减少动态效果设置。getContainer=false 保留在当前 DOM 但仍固定于视口。
+支持原生面板属性。首期不支持 `push`、`loading`、`rootStyle`、语义样式、自定义 `closeIcon`、`autoFocus` 和 ref。
+
+四个方向均支持 260ms 滑入/滑出，遮罩同步淡入/淡出。`afterOpenChange` 在动画结束后调用，关闭结束后再销毁内容、恢复焦点和滚动；遵循系统减少动态效果设置。`getContainer={false}` 保留在当前 DOM 但仍固定于视口。
 
 </DocBoundary>
 

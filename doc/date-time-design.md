@@ -262,6 +262,12 @@ const form = useForm<Values>({
 
 完成各阶段后更新优先级 Markdown，运行 node scripts/build-component-priorities.mjs，检查状态筛选和统计。DatePicker、TimePicker 已标为已有基础实现；Calendar、时间范围及其他后续能力仍未实现。
 
+## 关闭动画修复（2026-10-12）
+
+原实现使用独立的淡入/淡出 keyframes，淡出固定从 opacity=1 开始；快速选中日期打断淡入时，会从当前半透明状态跳回全亮，出现闪动。此外，退出保留 150ms 短于动画 160ms，会提前移除弹层。
+
+现改为连续的 opacity transition，打开后在下一帧开始淡入，关闭和再次打开均从当前透明度过渡；退出保留覆盖 160ms 过渡并额外预留两帧，确保完全透明后移除。减少动态效果偏好下关闭 transition。DatePicker、RangePicker、TimePicker 共用此处理。新增浏览器回归检查快速选择不变亮、正常关闭完全透明后再移除。
+
 ## 实现与验证记录
 
 - 文档站提供 DatePicker 14 个、TimePicker 6 个可编辑案例，包含表单、限制、范围、严格输入、时间草稿、局部英文与主题。

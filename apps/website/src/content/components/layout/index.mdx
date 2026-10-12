@@ -1,3 +1,4 @@
+import { DocBoundary, DocNote, DocImport } from '../../../components/DocDetails';
 import { LayoutDemos, LayoutApiTable } from '../../../components/LayoutDemos';
 
 # 布局 Stack / Inline / SimpleGrid
@@ -14,21 +15,30 @@ Stack 竖排，Inline 横排，SimpleGrid 多列排列。每个容器只渲染�
 
 ## 使用边界
 
+<DocBoundary>
+
 需要跨列时使用 SimpleGrid.Item，或直接在子元素上设置 style.gridColumn。自动列数采用 CSS Grid 的 auto-fit，根据容器可用宽度决定列数；容器比最小宽度更窄时退到一列。
 
 columns 字符串直接使用 CSS grid-template-columns 语法，如 `240px minmax(0, 1fr)`。自定义列模板和通过 style 覆盖列定义时，跨列范围由使用者负责。
 
 不提供断点对象、跨行或指定起始位置的快捷属性；可以通过 className、style 和媒体查询扩展。默认不添加背景、内边距或固定高度。
 
-## 主题与导入
+</DocBoundary>
+
+## 主题间距
+
+<DocNote>
 
 `theme.token.spacing` 提供 small=4、medium=8、large=16。预设跟随主题，数字和 CSS 字符串保持显式设置。
 
-```tsx
-import { Stack, Inline, SimpleGrid } from 'paper-ink';
-import 'paper-ink/style.css';
-```
+</DocNote>
 
-也可以从 paper-ink/stack、paper-ink/inline、paper-ink/simple-grid 分别导入组件，并引入对应子路径的 style.css。
+## 导入
 
-源码安装：`paper-ink add stack inline simple-grid`。
+<DocImport npm={"import { Stack, Inline, SimpleGrid } from 'paper-ink';\nimport 'paper-ink/style.css';"} cli="paper-ink add stack inline simple-grid" />
+
+<DocNote>
+
+按需引用可分别使用 `paper-ink/stack`、`paper-ink/inline`、`paper-ink/simple-grid`，并引入对应子路径的 `style.css`。
+
+</DocNote>

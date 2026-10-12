@@ -1,3 +1,4 @@
+import { PopconfirmApiTable } from '../../../components/OverlayApiTables';
 import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 import { PopconfirmDemos } from '../../../components/OverlayDemos';
 
@@ -11,13 +12,13 @@ import { PopconfirmDemos } from '../../../components/OverlayDemos';
 
 ## API
 
-<table><thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead><tbody><tr><td>onConfirm</td><td>(event) => void 或 Promise</td><td>确认回调；异步期间显示加载并阻止关闭</td></tr><tr><td>title / description</td><td>ReactNode 或函数</td><td>确认标题、补充说明</td></tr><tr><td>open / defaultOpen / onOpenChange</td><td>受控或非受控显示</td><td>默认关闭；Drawer 仅支持受控 open</td></tr><tr><td>destroyOnHidden</td><td>boolean</td><td>默认保留已打开的内容</td></tr></tbody></table>
+<PopconfirmApiTable />
 
 ## 支持边界
 
 <DocBoundary>
 
-支持 icon、showCancel、okText/cancelText、okType、按钮 props、onCancel/onPopupClick 以及 Popover 定位和显示 API。首期不支持箭头、contextMenu。异步失败由业务显示反馈，组件保留内容；受控 open 由业务更新。
+支持 `icon`、`showCancel`、`okText` / `cancelText`、`okType`、按钮 props、`onCancel` / `onPopupClick` 以及 Popover 定位和显示 API。首期不支持箭头、contextMenu。异步失败由业务显示反馈，组件保留内容；受控 `open` 由业务更新。
 
 确认浮层沿用 Popover 的 180ms 淡入淡出与 4px 位移，不改变异步确认行为。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
 

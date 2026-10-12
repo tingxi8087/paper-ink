@@ -18,7 +18,7 @@ import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 
 <DocBoundary>
 
-只管理顶层 key，点号是键名的一部分。对象和数组整体更新，不提供深层路径或 Form.List。自定义控件遵循 value/onChange(nextValue)，并转发状态、无障碍属性和聚焦 ref；包装组件需转发绑定声明或采用默认协议。原生元素、Fragment 和额外包装使用渲染函数。快照支持普通对象、数组和 Date；其他类实例需自行转换，字段值按不可变数据使用。相同值按 Object.is 判断，dirty 按基准数据内容判断。卸载移除不触发变化通知，preserve 暂存值不进入提交。独立 API，不兼容 antd Form。
+只管理顶层 key，点号是键名的一部分。对象和数组整体更新，不提供深层路径或 Form.List。自定义控件遵循 value/onChange(nextValue)，并转发状态、无障碍属性和聚焦 ref；包装组件需转发绑定声明或采用默认协议。原生元素、Fragment 和额外包装使用渲染函数。快照复制普通对象、数组和 `Date`；`Dayjs` 等不可变值类保留实例，dirty 按相同原型和 `valueOf()` 的数字/字符串值比较。其他类实例需自行转换，字段值按不可变数据使用。相同值按 Object.is 判断，dirty 按基准数据内容判断。卸载移除不触发变化通知，preserve 暂存值不进入提交。独立 API，不兼容 antd Form。
 
 </DocBoundary>
 

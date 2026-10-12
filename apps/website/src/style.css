@@ -141,3 +141,35 @@ summary { cursor: pointer; }
 html, body { overscroll-behavior: none; }
 .sidebar { overscroll-behavior-y: none; }
 .table-scroll, pre { overscroll-behavior-x: none; }
+
+/* Documentation prose and API tables share the compact paper layout. */
+.main-content > h1 + p { margin:0 0 18px; color:#65625b; font-size:14px; line-height:1.65; }
+.main-content > p code,.doc-boundary code,.doc-note code { padding:1px 4px; border-radius:3px; background:#e8e7e1; color:#34332f; font-size:12px; overflow-wrap:anywhere; }
+.doc-note { padding:10px 12px; margin:10px 0 12px; border:1px solid #e5e3dc; border-radius:4px; background:#f4f3ef; font-size:13px; color:#65625b; line-height:1.7; }
+.doc-note p { margin:0; color:inherit; font-size:inherit; }
+.doc-note p + p { margin-top:6px; }
+.doc-boundary li { margin:4px 0; overflow-wrap:anywhere; }
+.doc-boundary li:first-child { margin-top:0; }
+.doc-boundary li:last-child { margin-bottom:0; }
+.doc-boundary ul + p,.doc-boundary p + ul { margin-top:8px; }
+.main-content > .table-scroll { border:1px solid #deddd7; border-radius:5px; background:#fff; max-width:100%; min-width:0; margin:10px 0 16px; }
+.main-content > .table-scroll > table { min-width:680px; }
+.main-content > .table-scroll th { padding:9px 12px; font-size:12px; color:#625f57; }
+.main-content > .table-scroll td { padding:9px 12px; vertical-align:top; }
+.main-content > .table-scroll td:first-child { color:#282724; font-weight:500; }
+.main-content > .table-scroll td code { white-space:normal; overflow-wrap:anywhere; line-height:1.65; }
+.main-content > .table-scroll td:last-child { min-width:200px; }
+.main-content > .table-scroll tbody tr:last-child td { border-bottom:0; }
+.main-content > .table-scroll tbody tr:hover { background:#faf9f6; }
+.main-content > details { border:1px solid #deddd7; border-radius:4px; background:#fff; overflow:hidden; }
+.main-content > details > summary { padding:9px 12px; cursor:pointer; color:#55524b; font-size:13px; }
+.main-content > details > pre { margin:0; border-radius:0; border-top:1px solid #deddd7; }
+@media(max-width:700px) { .doc-note { padding:9px 11px; } .main-content > .table-scroll th,.main-content > .table-scroll td { padding:8px 10px; } }
+.main-content > .table-scroll td:first-child code { white-space:nowrap; overflow-wrap:normal; }
+
+/* 文档侧栏使用真实 Menu；沿用紧凑文档导航密度。 */
+.sidebar > .pi-menu { width: 100%; }
+.sidebar .pi-menu__control { min-height: 32px; padding: 6px 10px; font-size: 13px; margin-bottom: 0; }
+.sidebar .pi-menu__control:hover { background: var(--pi-color-surface-muted, #eeede8); }
+.sidebar .pi-menu__control[aria-current] { background: var(--pi-color-surface-muted, #e8e6df); }
+.sidebar .pi-menu__list { gap: 0; }

@@ -244,7 +244,12 @@
       "types": "./dist/time-picker/index.d.ts",
       "import": "./dist/time-picker/index.js"
     },
-    "./time-picker/style.css": "./dist/time-picker/style.css"
+    "./time-picker/style.css": "./dist/time-picker/style.css",
+    "./menu": {
+      "types": "./dist/menu/index.d.ts",
+      "import": "./dist/menu/index.js"
+    },
+    "./menu/style.css": "./dist/menu/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"

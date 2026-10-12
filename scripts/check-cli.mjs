@@ -25,10 +25,10 @@ try {
   run('pnpm', ['install', '--offline', '--ignore-scripts']);
   run('pnpm', ['exec', 'paper-ink', '--version']);
   run('pnpm', ['exec', 'paper-ink', 'init']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', '--dry-run']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', '--dry-run']);
   assert.equal((await readdir(join(consumer, 'src'))).length, 0);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu']);
   await writeFile(join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8" /></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>');
   await writeFile(join(consumer, 'src/main.tsx'), `import { useState } from 'react';
 import dayjs, { type Dayjs } from 'dayjs';
@@ -53,6 +53,16 @@ function DateFeatures({ source }: { source: 'Local' | 'Npm' }) {
  const [time,setTime] = useState<Dayjs | null>(dayjs('2026-10-12T09:00:00'));
  const [rangeText,setRangeText] = useState('');
  return <div aria-label={source+' date features'}><C.DatePicker aria-label={source+' date'} value={date} onChange={setDate} /><output aria-label={source+' date saved'}>{date?.format('YYYY-MM-DD') ?? 'empty'}</output><C.DatePicker.RangePicker placeholder={[source+' range start',source+' range end']} onChange={(_,texts)=>setRangeText(texts.join('/'))} /><output aria-label={source+' range saved'}>{rangeText}</output><C.TimePicker aria-label={source+' time'} format="HH:mm" value={time} onChange={setTime} /><output aria-label={source+' time saved'}>{time?.format('HH:mm') ?? 'empty'}</output></div>;
+}
+function MenuFeatures({ source }: { source: 'Local' | 'Npm' }) {
+ const C=source==='Local'?LocalComponents:NpmComponents;
+ const [selected,setSelected]=useState<string[]>([]), [opened,setOpened]=useState<string[]>(['branch']);
+ return <div aria-label={source+' menu features'}>
+  <C.Menu aria-label={source+' side menu'} selectedKeys={selected} openKeys={opened} onOpenChange={setOpened} onSelect={info=>setSelected(info.selectedKeys)} items={[{key:'branch',label:source+' side branch',children:[{key:'leaf',label:source+' side leaf'}]},{key:'disabled',label:source+' disabled navigation',disabled:true}]} />
+  <output aria-label={source+' menu selected'}>{selected.join(',')}</output>
+  <C.Menu mode="horizontal" aria-label={source+' top menu'} items={[{key:'top',label:source+' top root',children:[{key:'top-leaf',label:source+' top leaf'}]}]} />
+  <C.Menu inlineCollapsed aria-label={source+' collapsed menu'} items={[{key:'collapsed',label:source+' collapsed root',children:[{key:'collapsed-leaf',label:source+' collapsed leaf'}]}]} />
+ </div>;
 }
 function TableFeatures({ source }: { source: 'Local' | 'Npm' }) {
  const C = source === 'Local' ? LocalComponents : NpmComponents;
@@ -89,8 +99,8 @@ function Demo() {
  const [localOpen, setLocalOpen] = useState(false); const [npmOpen, setNpmOpen] = useState(false);
  const theme = { token: { color: { primary: { solid: '#1677ff' } }, radius: { control: 12 } } };
  return <><h1>Paper Ink dual distribution</h1>
- <section aria-label="CLI source"><LocalProvider theme={theme}><FeatureSet source="Local" /><ModernFeatures source="Local" /><FormFeatures source="Local" /><TableFeatures source="Local" /><DateFeatures source="Local" /><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
- <section aria-label="npm package"><NpmProvider theme={theme}><FeatureSet source="Npm" /><ModernFeatures source="Npm" /><FormFeatures source="Npm" /><TableFeatures source="Npm" /><DateFeatures source="Npm" /><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
+ <section aria-label="CLI source"><LocalProvider theme={theme}><FeatureSet source="Local" /><ModernFeatures source="Local" /><FormFeatures source="Local" /><TableFeatures source="Local" /><DateFeatures source="Local" /><MenuFeatures source="Local" /><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
+ <section aria-label="npm package"><NpmProvider theme={theme}><FeatureSet source="Npm" /><ModernFeatures source="Npm" /><FormFeatures source="Npm" /><TableFeatures source="Npm" /><DateFeatures source="Npm" /><MenuFeatures source="Npm" /><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
 }
 createRoot(document.getElementById('root')!).render(<Demo />);`);
   run('pnpm', ['exec', 'tsc', '--noEmit']);
@@ -107,6 +117,20 @@ createRoot(document.getElementById('root')!).render(<Demo />);`);
   for (const [region, label] of [['CLI source', 'Local'], ['npm package', 'Npm']]) {
     const group = page.getByRole('region', { name: region });
     await group.getByRole('spinbutton', { name: label + ' precise number' }).waitFor();
+    const menuFeature=group.getByLabel(label+' menu features');
+    await menuFeature.getByRole('button',{name:label+' side leaf',exact:true}).click();
+    assert.equal(await menuFeature.getByLabel(label+' menu selected').textContent(),'leaf');
+    assert.equal(await menuFeature.getByRole('button',{name:label+' disabled navigation',exact:true}).isDisabled(),true);
+    await menuFeature.getByRole('button',{name:label+' side branch',exact:true}).click();
+    await menuFeature.getByRole('button',{name:label+' side leaf',exact:true}).waitFor({state:'hidden'});
+    await menuFeature.getByRole('button',{name:label+' top root',exact:true}).click();
+    await page.getByRole('button',{name:label+' top leaf',exact:true}).waitFor();
+    await page.getByRole('button',{name:label+' top leaf',exact:true}).click();
+    await page.getByRole('button',{name:label+' top leaf',exact:true}).waitFor({state:'hidden'});
+    await menuFeature.getByRole('button',{name:label+' collapsed root',exact:true}).click();
+    await page.getByRole('button',{name:label+' collapsed leaf',exact:true}).waitFor();
+    await page.keyboard.press('Escape');
+    await page.getByRole('button',{name:label+' collapsed leaf',exact:true}).waitFor({state:'hidden'});
     const dateFeature = group.getByLabel(label+' date features');
     const dateInput = dateFeature.getByRole('combobox',{name:label+' date',exact:true});
     await dateInput.fill('2026-10-20'); await dateInput.press('Enter');

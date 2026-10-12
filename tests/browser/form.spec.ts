@@ -52,7 +52,7 @@ test('compact desktop and mobile layouts do not overflow', async ({ page }) => {
 
 test('planning filters count independent Form separately from the antd Form alternative', async ({ page }) => {
   await page.goto(pathToFileURL(resolve('doc/component-priorities.html')).href + '#status=done');
-  await expect(page.locator('#total')).toHaveText('47 / 82'); await expect(page.locator('#done')).toHaveText('47');
+  await expect(page.locator('#total')).toHaveText('48 / 82'); await expect(page.locator('#done')).toHaveText('48');
   await page.locator('#scope').selectOption('own'); await expect(page.locator('#total')).toHaveText('9 / 9');
   await page.locator('#search').fill('Form'); await expect(page.locator('#total')).toHaveText('1 / 9');
   await expect(page.locator('#rows')).toContainText('轻量表单'); await expect(page.locator('#rows')).toContainText('数据录入');

@@ -75,3 +75,19 @@ test('picker selection during entry fades from current opacity without flashing 
  await expect(input).toHaveValue('2026-10-15');
  await expect(page.locator('.pi-picker__popup')).toHaveCount(0);
 });
+
+test('picker exit reaches transparent before its portal is removed', async ({ page }) => {
+ await page.goto('/#/date-picker');
+ await page.getByRole('combobox',{name:'基础日期',exact:true}).click();
+ await expect(page.locator('.pi-picker__popup')).toHaveCSS('opacity','1');
+ const samples=await page.evaluate(async () => {
+  const popup=document.querySelector<HTMLElement>('.pi-picker__popup')!;
+  popup.querySelector<HTMLButtonElement>('button[data-date="2026-10-15"]')!.click();
+  const opacities:number[]=[];
+  while(popup.isConnected){opacities.push(Number(getComputedStyle(popup).opacity));await new Promise<void>(resolve=>requestAnimationFrame(()=>resolve()));}
+  return opacities;
+ });
+ expect(samples.length).toBeGreaterThan(2);
+ expect(samples.at(-1)).toBeLessThanOrEqual(.02);
+ for(let index=1;index<samples.length;index++) expect(samples[index]).toBeLessThanOrEqual(samples[index-1]+.02);
+});

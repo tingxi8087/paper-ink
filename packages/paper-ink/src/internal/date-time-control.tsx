@@ -11,6 +11,7 @@ import { DatePanel, TimePanel } from './date-time-panels.js';
 import { defaultFormat, resolveLocale, normalizeDate, normalizeTime, parseDate, parseTime, isDateAllowed, isTimeAllowed, sameValue } from './date-time.js';
 type Props = (DatePickerProps | RangePickerProps | TimePickerProps) & { range?: boolean; timeOnly?: boolean };
 type Pair = [DateValue, DateValue];
+const fadeDuration = 160;
 export const DateTimeControl = forwardRef<PickerRef, Props>(function DateTimeControl(raw, ref) {
   const props = raw as RangePickerProps & TimePickerProps & { range?: boolean; timeOnly?: boolean };
   const { range = false, timeOnly = false, picker = 'date', showTime, disabled = false, allowClear = true, size = 'middle', inputReadOnly, placement = 'bottomLeft' } = props;
@@ -36,7 +37,9 @@ export const DateTimeControl = forwardRef<PickerRef, Props>(function DateTimeCon
   const [innerOpen, setInnerOpen] = useState(props.defaultOpen ?? false);
   const blocked: [boolean, boolean] = Array.isArray(disabled) ? disabled : [disabled, disabled];
   const expanded = !(blocked[0] && (!range || blocked[1])) && (openControlled ? !!props.open : innerOpen);
-  const present = usePresence(expanded, 150);
+  // Retain through the transition plus two frames for the browser to paint its final opacity.
+  const present = usePresence(expanded, fadeDuration + 32);
+  const [entered, setEntered] = useState(false);
   const root = useRef<HTMLDivElement>(null), popup = useRef<HTMLDivElement>(null);
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
   const generatedId = useId();
@@ -44,6 +47,13 @@ export const DateTimeControl = forwardRef<PickerRef, Props>(function DateTimeCon
   const theme = useTheme();
   const [container, setContainer] = useState<HTMLElement | null>(null);
   const [position, setPosition] = useState<CSSProperties>({ position: 'fixed', visibility: 'hidden' });
+  useLayoutEffect(() => {
+    if (!expanded || !container || !popup.current) { setEntered(false); return; }
+    // Establish the mounted opacity before starting entry; transitions can then reverse in place.
+    popup.current.getBoundingClientRect();
+    const frame = requestAnimationFrame(() => setEntered(true));
+    return () => cancelAnimationFrame(frame);
+  }, [expanded, container]);
   const committedKey = textsFor(toPair(committed)).join('|') + toPair(committed).map(v => v?.valueOf()).join('|');
   const previousKey = useRef(committedKey);
   const editing = useRef<[boolean, boolean]>([false, false]);
@@ -149,7 +159,7 @@ export const DateTimeControl = forwardRef<PickerRef, Props>(function DateTimeCon
   const aria = Object.fromEntries(Object.entries(props).filter(([key]) => key.startsWith('aria-')));
   const placeholders = range ? props.placeholder ?? locale.rangePlaceholder : [props.placeholder ?? (timeOnly ? locale.timePlaceholder : (picker === 'month' ? locale.monthPlaceholder : picker === 'year' ? locale.yearPlaceholder : locale.datePlaceholder))];
   const calendarRange: Pair = hover && range && active === 1 && draft[0] ? [draft[0], hover] : draft;
-  const popupNode = <div ref={popup} id={`${id}-popup`} role="dialog" aria-label={locale.locale.startsWith('en') ? timeOnly ? 'Select time' : range ? 'Select date range' : 'Select date' : timeOnly ? '时间选择' : range ? '日期范围选择' : '日期选择'} aria-hidden={!expanded} {...inertAttributes(!expanded)} className={`pi-picker__popup${range ? ' pi-picker__popup--range' : ''}`} data-motion={expanded ? 'enter' : 'leave'} style={{ ...themeVariables(theme), ...position }} onClick={event => event.stopPropagation()} onKeyDown={event => { if (event.key === 'Escape') { event.stopPropagation(); close(true, true); } }} onBlur={event => { const next = event.relatedTarget; if (next instanceof Node && (popup.current?.contains(next) || root.current?.contains(next))) return; close(); }}>
+  const popupNode = <div ref={popup} id={`${id}-popup`} role="dialog" aria-label={locale.locale.startsWith('en') ? timeOnly ? 'Select time' : range ? 'Select date range' : 'Select date' : timeOnly ? '时间选择' : range ? '日期范围选择' : '日期选择'} aria-hidden={!expanded} {...inertAttributes(!expanded)} className={`pi-picker__popup${range ? ' pi-picker__popup--range' : ''}`} data-motion={expanded ? 'enter' : 'leave'} style={{ ...themeVariables(theme), ...position, opacity: expanded && entered ? 1 : 0, transitionDuration: `${fadeDuration}ms` }} onClick={event => event.stopPropagation()} onKeyDown={event => { if (event.key === 'Escape') { event.stopPropagation(); close(true, true); } }} onBlur={event => { const next = event.relatedTarget; if (next instanceof Node && (popup.current?.contains(next) || root.current?.contains(next))) return; close(); }}>
     {props.presets && <div className="pi-picker__presets">{props.presets.map((preset, index) => <button type="button" key={index} onClick={() => { const value = typeof preset.value === 'function' ? preset.value() : preset.value; const pair: Pair = Array.isArray(value) ? [normalize(value[0]), normalize(value[1])] : [normalize(value), null]; const current = toPair(committed); if (range && pair.some((v, i) => blocked[i] && !sameValue(v, current[i]))) return; if (prepare(pair)) update(pair, active); }}>{preset.label}</button>)}</div>}
     <div className="pi-picker__panels">{!timeOnly && <DatePanel value={draft[active]} viewDate={viewDate} onViewDateChange={setViewDate} onSelect={choose} picker={picker} minDate={props.minDate} maxDate={props.maxDate} disabledDate={props.disabledDate} from={active === 1 ? draft[0] ?? undefined : undefined} range={range ? calendarRange : undefined} onHover={setHover} locale={locale} />}{withTime && <TimePanel {...timeOptions} value={draft[active] ?? dayjs().startOf('day')} onChange={value => { const next: Pair = [...draft]; next[active] = normalize(value); if (!blocked[active]) update(next, active); }} format={timeOnly ? format : timeFormat} disabledTime={timeDisabled(active, draft)} locale={locale} />}</div>
     <div className="pi-picker__footer"><button type="button" onClick={() => choose(dayjs())}>{timeOnly ? locale.now : locale.today}</button>{confirm && <button type="button" className="pi-picker__confirm" disabled={!pendingPair()} onClick={accept}>{locale.ok}</button>}</div>

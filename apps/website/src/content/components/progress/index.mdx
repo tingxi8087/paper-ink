@@ -1,3 +1,4 @@
+import { ProgressApiTable } from '../../../components/InteractiveApiTables';
 import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 import { ProgressDemos } from '../../../components/InteractiveDemos';
 
@@ -11,13 +12,15 @@ import { ProgressDemos } from '../../../components/InteractiveDemos';
 
 ## API
 
-percent、type、status、showInfo、format(percent, successPercent)、strokeColor、trailColor、strokeWidth、strokeLinecap、size、steps、success、gapDegree、gapPosition。
+<ProgressApiTable />
 
 ## 支持边界
 
 <DocBoundary>
 
-strokeColor 仅支持颜色字符串；steps 仅支持线形数值步数，未提供渐变、环形分段和语义样式对象。百分比限制在 0–100。
+- `strokeColor` 仅支持颜色字符串，不提供渐变或语义样式对象。
+- `steps` 仅用于线形进度；分段模式不显示单独的 `success` 叠加段，不提供环形分段。
+- `percent` 与 `success.percent` 限制在 0–100；可见成功段不超过总进度。
 
 </DocBoundary>
 

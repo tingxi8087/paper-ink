@@ -1,7 +1,10 @@
+import { DocBoundary, DocNote, ComponentImport } from '../../../components/DocDetails';
 import { ButtonDemos } from '../../../components/ButtonDemos';
 import { ApiTable } from '../../../components/ApiTable';
 
 # Button 按钮
+
+常用操作入口，支持按钮、链接、加载状态和自定义图标。
 
 ## 代码演示
 
@@ -9,7 +12,11 @@ import { ApiTable } from '../../../components/ApiTable';
 
 ## API
 
+<DocNote>
+
 支持的属性如下；此外可以传递适用的原生属性，包括 `aria-*`、`data-*` 和表单属性。
+
+</DocNote>
 
 <ApiTable />
 
@@ -21,6 +28,8 @@ import { ApiTable } from '../../../components/ApiTable';
 
 ## 与 antd 的兼容范围
 
+<DocBoundary>
+
 常规属性名称和用途参考 Ant Design Button，保留 type、size、shape、htmlType、loading 等使用习惯。支持 color（default / primary / danger）、六种 variant、对象形式的 classNames / styles（root / icon / content）和 autoInsertSpace。color + variant 成对提供时覆盖 type / danger；仅提供一项时按兼容回退规则解析，建议成对使用。
 
 加载时使用原生 disabled 阻止重复提交；链接禁用或加载时移除 href 并设置 aria-disabled。图标由使用者提供，不捆绑图标库。iconPlacement 优先于旧的 iconPosition；loading 支持自定义 icon。两汉字间距仅处理纯字符串的普通按钮内容，不处理 React 元素内部文本，不改变可访问名称。默认字号与三档高度参考 antd，但不承诺像素级一致。暂不支持预设色名称和函数形式的语义样式配置。
@@ -28,3 +37,9 @@ import { ApiTable } from '../../../components/ApiTable';
 ConfigProvider 的主题变量结构独立设计，且当前会渲染一个 display: contents 的作用域元素。暂不支持 antd 的 algorithm、prefixCls、全局 componentSize 或完整 ButtonRef。颜色派生和暗色预设尚未实现，当前覆盖只修改明确提供的变量，关联状态色需要一并配置。
 
 链接按钮默认使用网页蓝色（#1677ff），通过 `theme.token.color.link.default / hover / active` 单独配置。danger 链接仍使用危险色；显式 `color="primary" variant="link"` 跟随主色。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="button" component="Button" />

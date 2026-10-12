@@ -1,0 +1,43 @@
+import { MenuDemos } from '../../../components/MenuDemos';
+import { MenuApiTable, MenuItemApiTable } from '../../../components/MenuApiTable';
+import { DocBoundary, DocNote, ComponentImport } from '../../../components/DocDetails';
+
+# Menu 导航菜单
+
+侧边与顶部共用一棵菜单树。叶子负责导航，父项负责展开；路由、权限和侧栏尺寸交给业务。
+
+## 代码演示
+
+<MenuDemos />
+
+## API
+
+<MenuApiTable />
+
+### 菜单项
+
+<MenuItemApiTable />
+
+<DocNote>
+
+`MenuClickInfo` 包含 `key`、`keyPath`、`domEvent`；`MenuSelectInfo` 再包含 `selectedKeys`。`keyPath` 从叶子向外排列，分组不进入路径。先通知 `onClick`，默认行为未取消且选中变化时再通知 `onSelect`。
+
+</DocNote>
+
+## 支持边界
+
+<DocBoundary>
+
+- 支持侧边 `inline`、顶部 `horizontal`、多级展开、单项选中、分组/分隔线、禁用子树、受控状态、同层手风琴及折叠展示。
+- 默认 `inline`，只提供 `items`，不提供 JSX 子组件声明、`vertical` 级联、多选或 hover 展开。顶部溢出采用横向滚动，暂不自动收进“更多”。
+- 选中与展开独立。外部选中不自动展开；数据过滤不替业务选中其他页面；关闭父项保留后代记录。顶部根下拉最多一个，折叠弹层不占用根 `openKeys`。
+- `href` 保留原生链接语义。新标签页和修饰键激活不改变当前非受控选中，也不关闭弹层；业务可通过 `preventDefault()` 接入路由。
+- 根使用 `nav`，内部为列表、原生链接和展开按钮；支持 Tab、方向键、Home/End、Escape 及焦点恢复，不使用操作菜单的 `role="menu"`。
+- `group` 仅接受叶子；父项不同时导航与展开；复杂标签提供 `title`，`extra` 不嵌套额外控件。无图标折叠展示名称缩写。
+- 不内置 Router、权限、请求、搜索、虚拟列表、侧栏宽度和响应式抽屉；不承诺 SSR。动效平缓，尊重减少动态效果设置。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="menu" component="Menu" />

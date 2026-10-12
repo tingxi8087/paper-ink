@@ -1,3 +1,4 @@
+import { PopoverApiTable } from '../../../components/OverlayApiTables';
 import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 import { PopoverDemos } from '../../../components/OverlayDemos';
 
@@ -11,15 +12,15 @@ import { PopoverDemos } from '../../../components/OverlayDemos';
 
 ## API
 
-<table><thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead><tbody><tr><td>title / content</td><td>ReactNode 或函数</td><td>浮层标题、内容</td></tr><tr><td>trigger</td><td>hover / focus / click 或数组</td><td>触发方式，默认 hover</td></tr><tr><td>open / defaultOpen / onOpenChange</td><td>受控或非受控显示</td><td>默认关闭；Drawer 仅支持受控 open</td></tr><tr><td>destroyOnHidden</td><td>boolean</td><td>默认保留已打开的内容</td></tr></tbody></table>
+<PopoverApiTable />
 
 ## 支持边界
 
 <DocBoundary>
 
-定位和主题继承与 Tooltip 保持一致。默认挂到 body；在 Modal/Drawer 内自动挂到对应 dialog，保证浮层内交互可以获取焦点；getPopupContainer 可覆盖。首期不支持箭头、contextMenu、fresh 和语义样式函数。className/style 用于浮层，兼容 overlayClassName/overlayStyle。
+定位和主题继承与 Tooltip 保持一致。默认挂到 body；在 Modal/Drawer 内自动挂到对应 dialog，保证浮层内交互可以获取焦点；`getPopupContainer` 可覆盖。首期不支持箭头、contextMenu、fresh 和语义样式函数。`className` / `style` 用于浮层，兼容 `overlayClassName` / `overlayStyle`。
 
-默认 180ms 淡入淡出与 4px 位移；Dropdown、Popconfirm 复用该动画。关闭期间内容保留但不可交互，destroyOnHidden 在退出结束后生效。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
+默认 180ms 淡入淡出与 4px 位移；Dropdown、Popconfirm 复用该动画。关闭期间内容保留但不可交互，`destroyOnHidden` 在退出结束后生效。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
 
 </DocBoundary>
 

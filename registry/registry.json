@@ -843,6 +843,26 @@
       "exports": [
         "export * from './time-picker/index';"
       ]
+    },
+    {
+      "name": "menu",
+      "description": "Lightweight side and top navigation with controlled expansion, links, keyboard and collapsed popups",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "motion",
+        "inert",
+        "tooltip"
+      ],
+      "files": [
+        "menu/index.ts",
+        "menu/menu.tsx",
+        "menu/types.ts",
+        "menu/style.css"
+      ],
+      "exports": [
+        "export * from './menu/index';"
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 import { HooksDemos } from '../../components/HooksDemos';
 import { PropsTable } from '../../components/ComponentApiTables';
-import { DocBoundary } from '../../components/DocDetails';
+import { DocBoundary, DocImport } from '../../components/DocDetails';
 
 # Hooks 通用钩子
 
@@ -30,14 +30,4 @@ import { DocBoundary } from '../../components/DocDetails';
 
 ## 导入
 
-```tsx
-import { useRefState, useLocalstorageState } from 'paper-ink/hooks';
-// 根入口也支持：import { useRefState, useLocalstorageState } from 'paper-ink';
-
-const [name, setName] = useLocalstorageState('', 'profile.name');
-```
-
-```sh
-paper-ink add hooks
-# 也可单独安装 use-ref-state 或 use-localstorage-state
-```
+<DocImport npm={"import { useRefState, useLocalstorageState } from 'paper-ink/hooks';\n// 根入口也支持：import { useRefState, useLocalstorageState } from 'paper-ink';\n\nconst [name, setName] = useLocalstorageState('', 'profile.name');"} cli={"paper-ink add hooks\n# 也可单独安装 use-ref-state 或 use-localstorage-state"} />

@@ -137,3 +137,19 @@ test('installs standalone date/time sources with shared styles and declares Day.
     invoke(root, ['add', name]); assert.deepEqual(snapshot(root), after);
   }
 });
+
+test('installs Menu source and only its actual shared dependencies', t => {
+  const root = fixture(t);
+  const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+  pkg.dependencies['react-dom'] = '^19.0.0';
+  writeFileSync(join(root, 'package.json'), JSON.stringify(pkg));
+  invoke(root, ['init']); invoke(root, ['add', 'menu']);
+  const after = snapshot(root), lock = JSON.parse(after['paper-ink.lock.json']);
+  assert.ok(lock.items.includes('tooltip'));
+  assert.ok(!lock.items.includes('date-time'));
+  assert.ok(!lock.items.includes('dropdown'));
+  assert.match(after['src/components/paper-ink/index.ts'], /menu\/index/);
+  assert.match(after['src/components/paper-ink/style.css'], /menu\/style.css/);
+  assert.ok(existsSync(join(root, 'src/components/paper-ink/menu/index.ts')));
+  invoke(root, ['add', 'menu']); assert.deepEqual(snapshot(root), after);
+});

@@ -1,7 +1,10 @@
+import { DocBoundary, DocNote, ComponentImport } from '../../../components/DocDetails';
 import { InputApiTable } from '../../../components/ComponentApiTables';
 import { InputDemos } from '../../../components/InputDemos';
 
 # Input 输入框
+
+文本输入、搜索、密码与多行输入，支持统一的状态、主题和表单绑定。
 
 ## 代码演示
 
@@ -9,20 +12,36 @@ import { InputDemos } from '../../../components/InputDemos';
 
 ## API
 
+<DocNote>
+
 `Input.TextArea` 提供多行文本输入，`Input.Search` 提供搜索，`Input.Password` 提供密码可见性切换。也可以从 `paper-ink/input` 单独导入 `TextArea`、`Search`、`Password`。这些组件支持 `className`、`style` 和适用的原生属性，如 `name`、`required`、`aria-*`。
+
+</DocNote>
 
 <InputApiTable />
 
 ## 主题变量
 
+<DocNote>
+
 共用 `color.text`、`color.surface`、`color.border`、`color.primary`、`control.height`、`radius.control` 和 `font`。`status` 使用 error / warning 语义色。
 
 `components.Input.radius`、`components.Input.paddingInline` 只调整输入控件；TextArea 使用同一组覆盖。
 
+</DocNote>
+
 ## 兼容范围
 
-本期提供 Input、TextArea、Search 和 Password；暂不包含 OTP、addonBefore / addonAfter、variant、Form 联动、完整 count 配置和语义样式 API。ref 的实际支持范围见导出的 InputRef / TextAreaRef 类型。
+<DocBoundary>
+
+本期提供 Input、TextArea、Search 和 Password；暂不包含 OTP、addonBefore / addonAfter、variant、完整 count 配置和语义样式 API。支持 Form 统一字段绑定；ref 的实际支持范围见导出的 `InputRef` / `TextAreaRef` 类型。
 
 Search 普通输入只触发 onChange；回车和搜索按钮触发 source=input，清空按钮触发 source=clear。清空回调的 event 为携带空值的 ChangeEvent，原生来源仍是鼠标 click；回车为 KeyboardEvent、搜索按钮为 MouseEvent。loading 阻止回车和搜索按钮提交，仍允许清空及 source=clear 通知，与 antd 的常规行为一致。onPressEnter 或自定义按钮 onClick 调用 preventDefault() 可取消对应搜索。自定义 enterButton 支持本库 Button 和原生 button，其他 ReactNode 作为按钮内容。
 
 Password 支持 controlled/uncontrolled 输入和独立的受控可见性。只读密码仍可显示，disabled 会禁用可见性切换。暂不提供 hover action。内置搜索与密码图标均为 SVG。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="input" component="Input" />

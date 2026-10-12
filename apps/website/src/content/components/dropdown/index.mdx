@@ -1,3 +1,4 @@
+import { DropdownApiTable } from '../../../components/OverlayApiTables';
 import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 import { DropdownDemos } from '../../../components/OverlayDemos';
 
@@ -11,13 +12,13 @@ import { DropdownDemos } from '../../../components/OverlayDemos';
 
 ## API
 
-<table><thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead><tbody><tr><td>menu.items</td><td>DropdownMenuItem[]</td><td>key、label、icon、disabled、danger、type</td></tr><tr><td>onOpenChange</td><td>{"(open, { source }) => void"}</td><td>区分 trigger / menu 关闭来源</td></tr><tr><td>open / defaultOpen / onOpenChange</td><td>受控或非受控显示</td><td>默认关闭；Drawer 仅支持受控 open</td></tr><tr><td>destroyOnHidden</td><td>boolean</td><td>默认保留已打开的内容</td></tr></tbody></table>
+<DropdownApiTable />
 
 ## 支持边界
 
 <DocBoundary>
 
-支持 ArrowUp/Down、Home/End、Esc 和 Tab。首期不支持子菜单、多选、contextMenu、Dropdown.Button。分组使用 type="group"，普通项不支持 children 子菜单。
+支持 ArrowUp/Down、Home/End、Esc 和 Tab。首期不支持子菜单、多选、contextMenu、Dropdown.Button。分组使用 `type="group"`，普通项不支持 `children` 子菜单。
 
 菜单使用 Popover 的 180ms 淡入淡出与 4px 位移，键盘聚焦不会滚动容器。所有新增动效遵循 prefers-reduced-motion；减少动态效果时直接切换。
 
