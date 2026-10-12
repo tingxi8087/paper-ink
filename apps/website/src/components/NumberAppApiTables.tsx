@@ -25,9 +25,11 @@ export function InputNumberApiTable() { return <PropsTable rows={[
 export function AppApiTable() { return <PropsTable rows={[
  ['children', 'ReactNode', '—', '需要调用 App.useApp() 的后代组件'],
  ['message', 'MessageConfig', '—', '该 App 内的全局消息配置'],
+ ['notification', 'NotificationConfig', '—', '该 App 内的通知默认位置、持续时间与数量'],
+ ['notification.open / success / info / warning / error', '(NotificationArgs) => void', '—', '继承主题的通知；可按 key 更新或 destroy'],
  ['component', 'ElementType | false', 'div', '包装元素；false 不渲染包装节点'],
  ['className / style', 'string / CSSProperties', '—', '包装元素样式；支持适用的原生 div 属性'],
- ['App.useApp()', '() => { message, modal }', '—', '必须在 App 的后代组件内调用'],
+ ['App.useApp()', '() => { message, modal, notification }', '—', '必须在 App 的后代组件内调用'],
  ['message', 'MessageInstance', '—', 'success/info/warning/error/loading、open、destroy 等消息方法'],
  ['modal.confirm(config)', '(ModalConfirmConfig) => ModalConfirmHandle', '—', '确认弹窗；支持 title、content、onOk、onCancel 及常用 Modal 属性'],
  ['modal.info / success / error / warning', '(ModalConfirmConfig) => ModalConfirmHandle', '—', '只显示一个操作按钮的提示弹窗'],

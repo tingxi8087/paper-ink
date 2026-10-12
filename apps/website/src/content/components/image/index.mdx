@@ -1,0 +1,28 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { ImageDemos } from './demos';
+
+# Image 图片
+
+图片加载回退、占位和轻量预览。预览支持缩放、旋转与分组切换。
+
+## 代码演示
+
+<ImageDemos />
+
+## API
+
+<div className="table-scroll"><table><thead><tr><th>{"参数"}</th><th>{"类型"}</th><th>{"默认值"}</th><th>{"说明"}</th></tr></thead><tbody><tr><td><code>{"src / alt / width / height"}</code></td><td><code>{"原生 img 属性"}</code></td><td><code>{"—"}</code></td><td>{"图片地址、描述、尺寸"}</td></tr><tr><td><code>{"fallback"}</code></td><td><code>{"string"}</code></td><td><code>{"—"}</code></td><td>{"加载失败后只尝试一次回退地址"}</td></tr><tr><td><code>{"placeholder"}</code></td><td><code>{"ReactNode"}</code></td><td><code>{"—"}</code></td><td>{"加载完成前的占位内容，true 显示“加载中”"}</td></tr><tr><td><code>{"preview"}</code></td><td><code>{"boolean / ImagePreviewConfig"}</code></td><td><code>{"true"}</code></td><td>{"关闭或配置预览"}</td></tr><tr><td><code>{"className / style"}</code></td><td><code>{"string / CSSProperties"}</code></td><td><code>{"—"}</code></td><td>{"作用于 img"}</td></tr><tr><td><code>{"rootClassName / rootStyle"}</code></td><td><code>{"string / CSSProperties"}</code></td><td><code>{"—"}</code></td><td>{"作用于图片包裹元素"}</td></tr><tr><td><code>{"preview.open / defaultOpen / onOpenChange"}</code></td><td><code>{"boolean / boolean / (open) => void"}</code></td><td><code>{"false"}</code></td><td>{"受控或非受控预览"}</td></tr><tr><td><code>{"preview.src / mask"}</code></td><td><code>{"string / ReactNode"}</code></td><td><code>{"原图 / 图标与文字"}</code></td><td>{"独立预览地址与悬停遮罩"}</td></tr><tr><td><code>{"preview.scaleStep / minScale / maxScale"}</code></td><td><code>{"number"}</code></td><td><code>{"0.5 / 1 / 5"}</code></td><td>{"缩放步长和范围"}</td></tr><tr><td><code>{"Image.PreviewGroup.items"}</code></td><td><code>{"(string | { src, alt? })[]"}</code></td><td><code>{"子 Image 收集"}</code></td><td>{"独立预览列表"}</td></tr><tr><td><code>{"Group.preview.current / defaultCurrent"}</code></td><td><code>{"number"}</code></td><td><code>{"0"}</code></td><td>{"当前图片索引"}</td></tr><tr><td><code>{"Group.preview.onChange"}</code></td><td><code>{"(current, previous) => void"}</code></td><td><code>{"—"}</code></td><td>{"分组切换回调"}</td></tr></tbody></table></div>
+
+## 支持边界
+
+<DocBoundary>
+
+保留原生 img 属性与加载回调。支持工具栏和滚轮缩放、90°旋转、重置、Escape 与空白区域关闭。预览继承局部主题；焦点约束、滚动锁与焦点恢复复用 Modal。分组支持左右按钮与方向键，首尾循环。
+
+大图按视口适配，极大缩放会裁剪，不提供拖拽平移、下载、镜像或自定义工具栏。子项动态变化按数字索引管理。未提供旧 visible/onVisibleChange API；受控 open/current 需要由调用方更新。示例山水均为本地 SVG 数据图片。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="image" component="Image" />

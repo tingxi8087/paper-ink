@@ -1,0 +1,26 @@
+import { StatisticDemos } from './demos';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# Statistic 统计数值
+
+用清晰的数字展示指标和金额，支持精确数值字符串与自定义格式。
+
+## 代码演示
+
+<StatisticDemos />
+
+## API
+
+<div className="table-scroll"><table><thead><tr><th>{"属性"}</th><th>{"类型"}</th><th>{"默认值"}</th><th>{"说明"}</th></tr></thead><tbody><tr><td><code>{"title"}</code></td><td><code>{"ReactNode"}</code></td><td><code>{"—"}</code></td><td>{"指标标题"}</td></tr><tr><td><code>{"value"}</code></td><td><code>{"number | string"}</code></td><td><code>{"0"}</code></td><td>{"数值；大数使用字符串"}</td></tr><tr><td><code>{"precision"}</code></td><td><code>{"number"}</code></td><td><code>{"—"}</code></td><td>{"小数位，0–100；按十进制舍入"}</td></tr><tr><td><code>{"decimalSeparator / groupSeparator"}</code></td><td><code>{"string"}</code></td><td><code>{". / ,"}</code></td><td>{"小数与分组分隔符，空串可关闭分组"}</td></tr><tr><td><code>{"formatter"}</code></td><td><code>{"(value: number | string) => ReactNode"}</code></td><td><code>{"—"}</code></td><td>{"覆盖默认格式化"}</td></tr><tr><td><code>{"prefix / suffix"}</code></td><td><code>{"ReactNode"}</code></td><td><code>{"—"}</code></td><td>{"前缀与单位"}</td></tr><tr><td><code>{"loading"}</code></td><td><code>{"boolean"}</code></td><td><code>{"false"}</code></td><td>{"隐藏旧值并显示占位"}</td></tr><tr><td><code>{"valueStyle"}</code></td><td><code>{"CSSProperties"}</code></td><td><code>{"—"}</code></td><td>{"值区域样式，可用 styles.content 替代"}</td></tr><tr><td><code>{"classNames / styles"}</code></td><td><code>{"Partial<Record<StatisticSemantic, …>>"}</code></td><td><code>{"—"}</code></td><td>{"root/header/title/content/value/prefix/suffix 对象样式"}</td></tr><tr><td><code>{"className / style / ref"}</code></td><td><code>{"string / CSSProperties / HTMLDivElement"}</code></td><td><code>{"—"}</code></td><td>{"原生属性与 DOM 引用"}</td></tr></tbody></table></div>
+
+## 支持边界
+
+<DocBoundary>
+
+使用 mini-decimal 处理十进制格式化，不把数值字符串转换为 Number。非数值字符串原样显示；已发生的浮点精度损失需由调用方避免。formatter 接收原始 value，优先于 precision 和分隔符。不提供 Timer / Countdown、数值动画或函数形式 classNames / styles。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="statistic" component="Statistic" />

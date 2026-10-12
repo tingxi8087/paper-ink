@@ -1,0 +1,36 @@
+import { DocBoundary, DocImport, DocNote } from '../../../components/DocDetails';
+
+# Util 工具类型
+
+提取公开组件的属性与 ref 类型，类型工具在编译后消失。
+
+## 使用示例
+
+```tsx
+import { Input, Select } from 'paper-ink';
+import type { GetProps, GetProp, GetRef } from 'paper-ink';
+
+type InputProps = GetProps<typeof Input>;
+type InputHandle = GetRef<typeof Input>;
+type Option = GetProp<typeof Select, 'options'>[number];
+type OnChange = GetProp<InputProps, 'onChange'>;
+type Result = GetProp<{ load?: () => Promise<string> }, 'load', 'Return'>;
+```
+
+<DocNote>回调属性中的 undefined / null 会被 GetProp 去除，适合直接声明事件处理函数。</DocNote>
+
+## API
+
+<div className="table-scroll"><table><thead><tr><th>{"类型"}</th><th>{"参数"}</th><th>{"返回"}</th><th>{"说明"}</th></tr></thead><tbody><tr><td><code>{"GetProps<T>"}</code></td><td><code>{"组件、Context 或 props 对象"}</code></td><td><code>{"属性对象 / Context value"}</code></td><td>{"提取完整定义，保留可选属性"}</td></tr><tr><td><code>{"GetProp<T, K>"}</code></td><td><code>{"T 与有效属性名称 K"}</code></td><td><code>{"NonNullable 属性"}</code></td><td>{"可直接访问数组元素或声明回调"}</td></tr><tr><td><code>{"GetProp<T, K, 'Return'>"}</code></td><td><code>{"函数属性"}</code></td><td><code>{"返回类型"}</code></td><td>{"只提取可调用成员，保留 Promise"}</td></tr><tr><td><code>{"GetRef<T>"}</code></td><td><code>{"组件、原生元素名或带 ref 的 props 对象"}</code></td><td><code>{"ref 目标"}</code></td><td>{"如 InputRef、HTMLButtonElement；无 ref 则为 never"}</td></tr></tbody></table></div>
+
+## 支持边界
+
+<DocBoundary>
+
+仅提供类型，无运行时函数或 CSS。泛型组件优先传入已实例化的组件或公开 props 类型；不恢复已被擦除的泛型。GetProps 不接收原生标签名，原生属性使用 React.ComponentProps；GetRef 支持原生标签名。
+
+</DocBoundary>
+
+## 导入
+
+<DocImport npm={"import type { GetProps, GetProp, GetRef } from 'paper-ink/util';"} cli="paper-ink add util" />

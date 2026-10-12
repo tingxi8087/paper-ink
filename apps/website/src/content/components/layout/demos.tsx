@@ -1,0 +1,9 @@
+import { LiveDemo } from '../../../components/LiveDemo';
+const examples = [
+['顶部与内容', `<Layout style={{minHeight:180,border:'1px solid #eee'}}><Layout.Header>Paper Ink 工作台</Layout.Header><Layout.Content>用 Header、Content、Footer 组合页面。</Layout.Content><Layout.Footer>Paper Ink · 开源组件库</Layout.Footer></Layout>`],
+['可折叠侧栏', `() => { const [closed,setClosed]=useState(false); return <Layout style={{minHeight:210,border:'1px solid #eee'}}><Layout.Sider width={150} collapsedWidth={56} collapsible collapsed={closed} onCollapse={setClosed}><div style={{padding:12}}>{closed ? 'PI' : 'Paper Ink 导航'}</div></Layout.Sider><Layout><Layout.Header>项目管理</Layout.Header><Layout.Content>侧栏宽度与 Menu 的折叠状态由业务同步。</Layout.Content></Layout></Layout>; }`],
+['零宽侧栏', `<Layout style={{height:180,border:'1px solid #eee'}}><Layout.Sider width={130} collapsedWidth={0} collapsible><div style={{padding:12}}>可完全收起</div></Layout.Sider><Layout.Content>零宽折叠时保留展开按钮。</Layout.Content></Layout>`],
+['侧栏与菜单组合', `() => { const [closed,setClosed]=useState(false); return <Layout style={{height:220,border:'1px solid #eee'}}><Layout.Sider width={170} collapsedWidth={56} collapsible collapsed={closed} onCollapse={setClosed}><Menu inlineCollapsed={closed} defaultSelectedKeys={['home']} items={[{key:'home',label:'概览'},{key:'users',label:'成员'},{key:'settings',label:'设置'}]}/></Layout.Sider><Layout.Content>Layout 负责外壳，Menu 负责导航。</Layout.Content></Layout>; }`],
+['响应式暗色侧栏', `<Layout style={{height:180,border:'1px solid #eee'}}><Layout.Sider width={140} theme="dark" breakpoint="md" collapsible><div style={{padding:12}}>窄屏自动折叠</div></Layout.Sider><Layout.Content>通过 breakpoint 选择自动收起宽度。</Layout.Content></Layout>`],
+] as const;
+export function LayoutShellDemos(){return <div className="demo-list">{examples.map(([title,code])=><LiveDemo key={title} title={title} code={code}/>)}</div>;}

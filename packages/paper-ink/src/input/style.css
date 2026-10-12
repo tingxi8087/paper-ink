@@ -4,7 +4,7 @@
 }
 .pi-input { align-items: center; gap: 8px; min-height: var(--pi-control-height-middle); padding: 3px var(--pi-input-padding-inline, 11px); border: 1px solid var(--pi-color-border-default); border-radius: var(--pi-input-radius, var(--pi-radius-control)); background: var(--pi-color-surface-container); transition: border-color var(--pi-motion-duration), box-shadow var(--pi-motion-duration); }
 .pi-input__control { box-sizing: border-box; flex: 1; width: 0; min-width: 0; padding: 0; border: 0; outline: none; font: inherit; color: inherit; background: transparent; }
-.pi-input__control::placeholder, .pi-textarea__control::placeholder { color: var(--pi-color-text-disabled); opacity: 1; }
+.pi-input__control::placeholder, .pi-textarea__control::placeholder { color: var(--pi-color-text-secondary); opacity: 1; }
 .pi-input__affix { display: inline-flex; align-items: center; flex-shrink: 0; color: var(--pi-color-text-secondary); }
 .pi-input__count { flex-shrink: 0; color: var(--pi-color-text-secondary); font-size: 12px; }
 .pi-input__clear { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 18px; height: 18px; padding: 0; border: none; border-radius: 50%; color: var(--pi-color-text-secondary); background: transparent; font: inherit; font-size: 18px; line-height: 1; cursor: pointer; }
@@ -46,3 +46,6 @@
 .pi-input-password__toggle:focus-visible { outline: 2px solid var(--pi-color-primary-solid); outline-offset: 2px; border-radius: 2px; }
 
 .pi-textarea__control { overscroll-behavior-y: none; }
+
+.pi-input.pi-input--disabled,.pi-textarea.pi-input--disabled .pi-textarea__control { border-color:var(--pi-color-border-subtle); }
+.pi-input__control:disabled::placeholder,.pi-textarea__control:disabled::placeholder { color:var(--pi-color-text-disabled); }

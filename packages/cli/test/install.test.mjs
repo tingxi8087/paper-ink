@@ -153,3 +153,27 @@ test('installs Menu source and only its actual shared dependencies', t => {
   assert.ok(existsSync(join(root, 'src/components/paper-ink/menu/index.ts')));
   invoke(root, ['add', 'menu']); assert.deepEqual(snapshot(root), after);
 });
+
+test('installs all nine additions with complete imports and independent layout helpers', t => {
+  const root = fixture(t);
+  const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+  pkg.dependencies['react-dom'] = '^19.0.0';
+  pkg.dependencies['@rc-component/mini-decimal'] = '^1.1.4';
+  writeFileSync(join(root, 'package.json'), JSON.stringify(pkg));
+  invoke(root, ['init']);
+  const names = ['statistic','util','layout','splitter','steps','auto-complete','slider','notification','image','stack'];
+  invoke(root, ['add', ...names]);
+  const after = snapshot(root), lock = JSON.parse(after['paper-ink.lock.json']);
+  for (const name of names) {
+    assert.ok(lock.items.includes(name));
+    assert.match(after['src/components/paper-ink/index.ts'], new RegExp(name+'/index'));
+  }
+  assert.ok(lock.items.includes('layout-spacing'));
+  assert.ok(existsSync(join(root, 'src/components/paper-ink/layout/shared.ts')));
+  assert.ok(existsSync(join(root, 'src/components/paper-ink/layout/index.tsx')));
+  assert.ok(!lock.items.includes('date-time'));
+  assert.ok(!lock.items.includes('form'));
+  assert.doesNotMatch(after['src/components/paper-ink/style.css'], /util\/style.css/);
+  invoke(root, ['add', ...names]);
+  assert.deepEqual(snapshot(root), after);
+});

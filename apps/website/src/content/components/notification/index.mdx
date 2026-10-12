@@ -1,0 +1,28 @@
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+import { NotificationDemos } from './demos';
+
+# Notification 通知提醒
+
+四角通知支持标题、长描述、自定义操作与按 key 更新，适合持续任务和系统事件。
+
+## 代码演示
+
+<NotificationDemos />
+
+## API
+
+<div className="table-scroll"><table><thead><tr><th>{"参数"}</th><th>{"类型"}</th><th>{"默认值"}</th><th>{"说明"}</th></tr></thead><tbody><tr><td><code>{"notification.useNotification(config)"}</code></td><td><code>{"[NotificationInstance, ReactNode]"}</code></td><td><code>{"—"}</code></td><td>{"将 holder 放入目标主题上下文"}</td></tr><tr><td><code>{"open / success / info / warning / error"}</code></td><td><code>{"(args: NotificationArgs) => void"}</code></td><td><code>{"—"}</code></td><td>{"打开或更新通知"}</td></tr><tr><td><code>{"destroy"}</code></td><td><code>{"(key?: string | number) => void"}</code></td><td><code>{"—"}</code></td><td>{"关闭指定或全部通知"}</td></tr><tr><td><code>{"message / title / description"}</code></td><td><code>{"ReactNode"}</code></td><td><code>{"—"}</code></td><td>{"message 为常规标题；title 同义且优先，description 为描述"}</td></tr><tr><td><code>{"key"}</code></td><td><code>{"string / number"}</code></td><td><code>{"自动生成"}</code></td><td>{"相同 key 更新并重置计时"}</td></tr><tr><td><code>{"duration"}</code></td><td><code>{"number"}</code></td><td><code>{"4.5"}</code></td><td>{"秒，0 持续显示"}</td></tr><tr><td><code>{"placement"}</code></td><td><code>{"topLeft / topRight / bottomLeft / bottomRight"}</code></td><td><code>{"topRight"}</code></td><td>{"通知位置"}</td></tr><tr><td><code>{"icon / btn / closeIcon"}</code></td><td><code>{"ReactNode"}</code></td><td><code>{"—"}</code></td><td>{"自定义图标、操作区；closeIcon=null 隐藏关闭"}</td></tr><tr><td><code>{"onClose / onClick"}</code></td><td><code>{"() => void"}</code></td><td><code>{"—"}</code></td><td>{"真正移除、通知点击回调"}</td></tr><tr><td><code>{"role"}</code></td><td><code>{"alert / status"}</code></td><td><code>{"按类型决定"}</code></td><td>{"错误、警告默认 alert"}</td></tr><tr><td><code>{"className / style"}</code></td><td><code>{"string / CSSProperties"}</code></td><td><code>{"—"}</code></td><td>{"通知样式"}</td></tr><tr><td><code>{"config.duration / placement / top / bottom"}</code></td><td><code>{"number / placement"}</code></td><td><code>{"4.5 / topRight / 16 / 16"}</code></td><td>{"holder 的初始配置"}</td></tr><tr><td><code>{"config.maxCount / getContainer"}</code></td><td><code>{"number / () => HTMLElement"}</code></td><td><code>{"无限 / document.body"}</code></td><td>{"数量限制和挂载点"}</td></tr><tr><td><code>{"notification.config"}</code></td><td><code>{"(config) => void"}</code></td><td><code>{"—"}</code></td><td>{"配置静态调用"}</td></tr></tbody></table></div>
+
+## 支持边界
+
+<DocBoundary>
+
+提供 Hook、静态 API 和 App.useApp().notification。静态调用使用默认主题；Hook 配置在初次渲染时确定。按 key 更新会取消正在退出的通知；关闭回调在 180ms 退出后执行，淘汰与卸载直接清理，减少动态效果时直接移除。
+
+支持四角固定定位。自定义容器仍按视口定位。不提供折叠堆叠、拖拽、进度条或悬停暂停计时；需要暂停或任务控制时使用 duration=0。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="notification" component="notification" />

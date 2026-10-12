@@ -249,7 +249,51 @@
       "types": "./dist/menu/index.d.ts",
       "import": "./dist/menu/index.js"
     },
-    "./menu/style.css": "./dist/menu/style.css"
+    "./menu/style.css": "./dist/menu/style.css",
+    "./statistic": {
+      "types": "./dist/statistic/index.d.ts",
+      "import": "./dist/statistic/index.js"
+    },
+    "./statistic/style.css": "./dist/statistic/style.css",
+    "./util": {
+      "types": "./dist/util/index.d.ts",
+      "import": "./dist/util/index.js"
+    },
+    "./layout": {
+      "types": "./dist/layout/index.d.ts",
+      "import": "./dist/layout/index.js"
+    },
+    "./layout/style.css": "./dist/layout/style.css",
+    "./splitter": {
+      "types": "./dist/splitter/index.d.ts",
+      "import": "./dist/splitter/index.js"
+    },
+    "./splitter/style.css": "./dist/splitter/style.css",
+    "./steps": {
+      "types": "./dist/steps/index.d.ts",
+      "import": "./dist/steps/index.js"
+    },
+    "./steps/style.css": "./dist/steps/style.css",
+    "./auto-complete": {
+      "types": "./dist/auto-complete/index.d.ts",
+      "import": "./dist/auto-complete/index.js"
+    },
+    "./auto-complete/style.css": "./dist/auto-complete/style.css",
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.js"
+    },
+    "./slider/style.css": "./dist/slider/style.css",
+    "./notification": {
+      "types": "./dist/notification/index.d.ts",
+      "import": "./dist/notification/index.js"
+    },
+    "./notification/style.css": "./dist/notification/style.css",
+    "./image": {
+      "types": "./dist/image/index.d.ts",
+      "import": "./dist/image/index.js"
+    },
+    "./image/style.css": "./dist/image/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"

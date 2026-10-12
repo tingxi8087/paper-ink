@@ -17,3 +17,7 @@
 .pi-input-number__controls button + button { border-top: 1px solid var(--pi-color-border-subtle); }
 .pi-input-number__controls button:hover:enabled { background: var(--pi-color-surface-muted); color: var(--pi-color-text-primary); }
 .pi-input-number__controls button:disabled { color: var(--pi-color-text-disabled); cursor: not-allowed; }
+
+.pi-input-number > input::placeholder { color:var(--pi-color-text-secondary); opacity:1; }
+.pi-input-number--disabled { border-color:var(--pi-color-border-subtle); }
+.pi-input-number > input:disabled::placeholder { color:var(--pi-color-text-disabled); }

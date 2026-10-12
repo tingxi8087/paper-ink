@@ -1,0 +1,32 @@
+import { SliderApiTable } from './api';
+import { SliderDemos } from './demos';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# Slider 滑动输入条
+
+鼠标、触摸和键盘调节单值或双柄范围，支持小数步长与刻度选择。
+
+## 代码演示
+
+<SliderDemos />
+
+## API
+
+<SliderApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+- 支持 pointer capture 拖动和触摸，方向键、Home/End、PageUp/PageDown；双柄不允许交叉，不提供整体拖动或动态增删手柄。
+- 普通 step 按 min 为起点吸附，step=null 时边界与刻度都可选择。无效步长退回 1；超界值被限制，倒置范围按升序显示。
+- 使用 JavaScript number，按步长小数位消除常见 0.1 浮点尾数；不作为任意精度金融计算工具。
+- tooltip 复用 Tooltip，可格式化或隐藏；不提供完整 TooltipProps 透传、语义 styles 或 dots API。
+- Form.Field 支持自动绑定、错误状态和聚焦。range 场景请提供二元数组；独立原生 form 提交使用调用方隐藏字段。
+- 垂直模式默认高 200px，可使用 style.height 自定义。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="slider" component="Slider" />

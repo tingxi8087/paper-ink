@@ -103,7 +103,7 @@
       ]
     },
     {
-      "name": "layout",
+      "name": "layout-spacing",
       "internal": true,
       "description": "Shared layout spacing types and helpers",
       "files": [
@@ -118,7 +118,7 @@
       "description": "Stack lightweight layout",
       "registryDependencies": [
         "theme",
-        "layout"
+        "layout-spacing"
       ],
       "files": [
         "stack/index.tsx",
@@ -134,7 +134,7 @@
       "description": "Inline lightweight layout",
       "registryDependencies": [
         "theme",
-        "layout"
+        "layout-spacing"
       ],
       "files": [
         "inline/index.tsx",
@@ -150,7 +150,7 @@
       "description": "SimpleGrid lightweight layout",
       "registryDependencies": [
         "theme",
-        "layout"
+        "layout-spacing"
       ],
       "files": [
         "simple-grid/index.tsx",
@@ -627,7 +627,8 @@
         "icons",
         "button",
         "modal",
-        "message"
+        "message",
+        "notification"
       ],
       "files": [
         "app/index.tsx",
@@ -862,6 +863,146 @@
       ],
       "exports": [
         "export * from './menu/index';"
+      ]
+    },
+    {
+      "name": "statistic",
+      "description": "statistic lightweight common API subset",
+      "files": [
+        "statistic/index.tsx",
+        "statistic/style.css"
+      ],
+      "exports": [
+        "export * from './statistic/index';"
+      ],
+      "registryDependencies": [
+        "theme"
+      ],
+      "dependencies": {
+        "@rc-component/mini-decimal": "^1.1.4"
+      }
+    },
+    {
+      "name": "util",
+      "description": "util lightweight common API subset",
+      "files": [
+        "util/index.ts"
+      ],
+      "exports": [
+        "export * from './util/index';"
+      ]
+    },
+    {
+      "name": "layout",
+      "description": "layout lightweight common API subset",
+      "files": [
+        "layout/index.tsx",
+        "layout/style.css"
+      ],
+      "exports": [
+        "export * from './layout/index';"
+      ],
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ]
+    },
+    {
+      "name": "splitter",
+      "description": "splitter lightweight common API subset",
+      "files": [
+        "splitter/index.tsx",
+        "splitter/style.css"
+      ],
+      "exports": [
+        "export * from './splitter/index';"
+      ],
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ]
+    },
+    {
+      "name": "steps",
+      "description": "steps lightweight common API subset",
+      "files": [
+        "steps/index.tsx",
+        "steps/style.css"
+      ],
+      "exports": [
+        "export * from './steps/index';"
+      ],
+      "registryDependencies": [
+        "theme",
+        "icons"
+      ]
+    },
+    {
+      "name": "auto-complete",
+      "description": "auto-complete lightweight common API subset",
+      "files": [
+        "auto-complete/index.tsx",
+        "auto-complete/style.css"
+      ],
+      "exports": [
+        "export * from './auto-complete/index';"
+      ],
+      "registryDependencies": [
+        "theme",
+        "input",
+        "field-binding"
+      ]
+    },
+    {
+      "name": "slider",
+      "description": "slider lightweight common API subset",
+      "files": [
+        "slider/index.tsx",
+        "slider/style.css"
+      ],
+      "exports": [
+        "export * from './slider/index';"
+      ],
+      "registryDependencies": [
+        "theme",
+        "tooltip",
+        "field-binding"
+      ]
+    },
+    {
+      "name": "notification",
+      "description": "notification lightweight common API subset",
+      "files": [
+        "notification/index.ts",
+        "notification/notification.tsx",
+        "notification/style.css",
+        "notification/types.ts"
+      ],
+      "exports": [
+        "export * from './notification/index';"
+      ],
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "motion"
+      ]
+    },
+    {
+      "name": "image",
+      "description": "image lightweight common API subset",
+      "files": [
+        "image/image.tsx",
+        "image/index.ts",
+        "image/style.css",
+        "image/types.ts"
+      ],
+      "exports": [
+        "export * from './image/index';"
+      ],
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "modal"
       ]
     }
   ]

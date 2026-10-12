@@ -4,7 +4,7 @@
 .pi-menu__control { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 36px; padding: 7px 12px; margin: 2px 0; border: 0; border-radius: var(--pi-radius-control); background: transparent; color: inherit; text-align: start; font: inherit; text-decoration: none; cursor: pointer; transition: background-color 140ms ease-out, color 140ms ease-out; }
 .pi-menu__control:hover { background: var(--pi-color-surface-muted); }
 .pi-menu__control:focus-visible { outline: 1px solid var(--pi-color-border-default); outline-offset: -1px; background: var(--pi-color-surface-muted); }
-.pi-menu__item--selected > .pi-menu__control, .pi-menu__item--selected > .pi-tooltip-trigger > .pi-menu__control { background: var(--pi-color-surface-muted); color: var(--pi-color-text-primary); font-weight: 600; }
+.pi-menu__item--selected > .pi-menu__control, .pi-menu__item--selected > .pi-tooltip-trigger > .pi-menu__control { background: var(--pi-color-surface-muted); color: var(--pi-color-text-primary); font-weight: 600; box-shadow:inset 2px 0 0 var(--pi-color-primary-solid); }
 .pi-menu__item--ancestor > .pi-menu__control { font-weight: 600; }
 .pi-menu__item--disabled > .pi-menu__control, .pi-menu__item--disabled > .pi-tooltip-trigger > .pi-menu__control { color: var(--pi-color-text-disabled); cursor: not-allowed; background: transparent; }
 .pi-menu__icon, .pi-menu__initial { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; flex: 0 0 18px; }
@@ -29,3 +29,5 @@
 .pi-menu__popup { position: fixed; z-index: 1200; min-width: 180px; width: max-content; max-width: calc(100vw - 16px); max-height: calc(100vh - 16px); overflow: auto; overscroll-behavior: none; padding: 4px; border: 1px solid var(--pi-color-border-subtle); border-radius: var(--pi-radius-control); background: var(--pi-color-surface-elevated); box-shadow: 0 6px 24px #00000014; transition: opacity 160ms ease-out; }
 .pi-menu__popup[aria-hidden="true"] { pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .pi-menu__control, .pi-menu__arrow, .pi-menu__children, .pi-menu__popup { transition: none; } }
+
+.pi-menu--horizontal > .pi-menu__list .pi-menu__item--selected > .pi-menu__control { box-shadow:inset 0 -2px 0 var(--pi-color-primary-solid); }

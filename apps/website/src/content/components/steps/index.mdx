@@ -1,0 +1,28 @@
+import { StepsDemos } from './demos';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# Steps 步骤条
+
+用紧凑节点展示流程位置、完成和错误状态。
+
+## 代码演示
+
+<StepsDemos />
+
+## API
+
+<div className="table-scroll"><table><thead><tr><th>{"属性"}</th><th>{"类型"}</th><th>{"默认值"}</th><th>{"说明"}</th></tr></thead><tbody><tr><td><code>{"items"}</code></td><td><code>{"StepItem[]"}</code></td><td><code>{"[]"}</code></td><td>{"步骤数据，稳定 key 可选"}</td></tr><tr><td><code>{"current / initial"}</code></td><td><code>{"number"}</code></td><td><code>{"0 / 0"}</code></td><td>{"当前绝对索引和起始索引"}</td></tr><tr><td><code>{"status"}</code></td><td><code>{"wait | process | finish | error"}</code></td><td><code>{"process"}</code></td><td>{"当前步骤状态"}</td></tr><tr><td><code>{"direction"}</code></td><td><code>{"horizontal | vertical"}</code></td><td><code>{"horizontal"}</code></td><td>{"水平或垂直排列"}</td></tr><tr><td><code>{"size"}</code></td><td><code>{"default | small"}</code></td><td><code>{"default"}</code></td><td>{"默认或紧凑尺寸"}</td></tr><tr><td><code>{"labelPlacement"}</code></td><td><code>{"horizontal | vertical"}</code></td><td><code>{"horizontal"}</code></td><td>{"水平排列中的标签位置"}</td></tr><tr><td><code>{"onChange"}</code></td><td><code>{"(current: number) => void"}</code></td><td><code>{"—"}</code></td><td>{"提供时将步骤变为可点击原生按钮"}</td></tr><tr><td><code>{"StepItem.title / subTitle / description"}</code></td><td><code>{"ReactNode"}</code></td><td><code>{"—"}</code></td><td>{"标题、副标题和说明"}</td></tr><tr><td><code>{"StepItem.icon / status / disabled"}</code></td><td><code>{"ReactNode / StepStatus / boolean"}</code></td><td><code>{"—"}</code></td><td>{"自定义图标、覆盖状态、禁用点击"}</td></tr><tr><td><code>{"className / style / ref"}</code></td><td><code>{"原生 ol 属性"}</code></td><td><code>{"—"}</code></td><td>{"容器扩展"}</td></tr></tbody></table></div>
+
+## 支持边界
+
+<DocBoundary>
+
+- 支持水平/垂直、四种状态、紧凑尺寸、自定义 SVG 图标、上下标签及受控步骤点击。current 与 onChange 都使用 initial 偏移后的绝对索引。
+- 不负责表单校验、页面切换或异步请求；不给 onChange 时为展示列表，提供时为可键盘激活的按钮，禁用步骤不能点击。
+- 窄屏水平步骤在容器内横向滚动；暂不提供 progressDot、percent、navigation/inline 类型、自动响应式转垂直、Steps.Step 或语义样式函数。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="steps" component="Steps" />

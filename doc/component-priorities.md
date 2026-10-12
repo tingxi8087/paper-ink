@@ -18,7 +18,7 @@
 
 成本按做好常用 API 和交互估计，不按完整复制 antd 计算。标注“已有”的组件以完善现有实现为主；本表不是全部实现的承诺。独立设计的组件单独列出，不计入 antd 核心目录。
 
-状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 82 项：已有基础实现 48 项、待实现 29 项、已有独立方案 4 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
+状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 82 项：已有基础实现 57 项、待实现 20 项、已有独立方案 4 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
 
 保持既定方向：通用 React + TypeScript 组件库，默认黑白主色、保留语义色，常规 API 接近 antd，主题结构独立设计，支持 npm 与 CLI 源码双分发，完全开源，从简单组件逐步推进。
 
@@ -38,10 +38,10 @@
 | Divider 分割线（已有） | 4/5 | 低 | 简单通用，适合建立清晰的页面层次 |
 | Flex 弹性布局（独立方案） | 3/5 | 低 | 横排与竖排场景已由 Inline / Stack 覆盖，暂不复制 Flex API |
 | Grid 栅格（独立方案） | 3/5 | 中 | 已提供独立 SimpleGrid，支持自动列数、列比例和跨列；未实现 Row/Col API |
-| Layout 布局 | 3/5 | 中 | 应用外壳有价值，但具体布局差异较大 |
+| Layout 布局（已有） | 3/5 | 中 | Header / Content / Footer / Sider、响应式断点、受控折叠与零宽触发已实现 |
 | Masonry 瀑布流 | 2/5 | 高 | 更适合图片、内容流，不是当前基础需求 |
 | Space 间距（暂不实现） | 4/5 | 低 | 本阶段不做；普通间距使用 Inline / Stack，紧密控件组合后续单独设计 |
-| Splitter 分隔面板 | 3/5 | 中 | 编辑器和开发工具有用，普通业务页需求较少 |
+| Splitter 分隔面板（已有） | 3/5 | 中 | 横竖多面板、受控尺寸、最小最大约束、拖动、键盘与折叠恢复已实现 |
 
 ## 导航（7）
 
@@ -52,14 +52,14 @@
 | Dropdown 下拉菜单（已有） | 4/5 | 中 |操作菜单高频，也能建设共享弹层能力；已补轻量动效 |
 | Menu 导航菜单（已有） | 3/5 | 高 | 顶部/侧边、多级展开、单项选中、手风琴、折叠单弹层、原生链接与键盘操作已实现；不含 vertical 或多选 |
 | Pagination 分页（已有） | 4/5 | 中 | 分页、跳页与条数切换；条数下拉复用 Select 的样式、键盘操作和动画 |
-| Steps 步骤条 | 3/5 | 中 | 多步骤表单和流程展示有用，不急于首期 |
+| Steps 步骤条（已有） | 3/5 | 中 | 水平 / 垂直、尺寸、状态、图标、描述和可点击步骤已实现 |
 | Tabs 标签页（已有） | 5/5 | 中 | items、键盘、受控状态与面板保留/销毁已实现 |
 
 ## 数据录入（18）
 
 | 组件 | 推荐指数 | 成本 | 理由 |
 | --- | --- | --- | --- |
-| AutoComplete 自动完成 | 3/5 | 中 | 等 Input 和 Select 稳定后复用基础能力 |
+| AutoComplete 自动完成（已有） | 3/5 | 中 | 自由输入、建议过滤、键盘选择、中文组合输入、清空与 Form 绑定已实现 |
 | Cascader 级联选择 | 2/5 | 高 | 树形数据、路径选择和搜索都较复杂 |
 | Checkbox 多选框（已有） | 5/5 | 低—中 |单独、Group 与半选已实现，支持键盘、原生表单和 reset；已补轻量动效 |
 | ColorPicker 颜色选择器 | 2/5 | 高 | 设计工具有用，当前主题实验室可先用原生控件 |
@@ -71,7 +71,7 @@
 | Radio 单选框（已有） | 5/5 | 低—中 |单独、Group 与按钮模式已实现，支持键盘切换和原生表单；已补轻量动效 |
 | Rate 评分（已有） | 2/5 | 低—中 | 整星、半星、清空与键盘评分，支持自定义 SVG 符号 |
 | Select 选择器（已有） | 5/5 | 高 |单选、多选、tags、搜索、清空与键盘已实现；虚拟化等后续补充；已补轻量动效 |
-| Slider 滑动输入条 | 3/5 | 中 | 参数调节有用，可用于主题实验室和工具界面 |
+| Slider 滑动输入条（已有） | 3/5 | 中 | 单值 / 双值范围、step / marks、拖动、键盘、Tooltip 与 Form 绑定已实现 |
 | Switch 开关（已有） | 5/5 | 低—中 | 受控/非受控、加载、禁用、尺寸和文案已实现 |
 | TimePicker 时间选择器（已有） | 3/5 | 高 | 24 小时制、时分秒步长、禁用联动、严格输入、草稿确认和即时提交、连续淡入淡出；时间范围留待后续 |
 | Transfer 穿梭框 | 2/5 | 高 | 特定后台场景使用，常可由多选或表格替代 |
@@ -90,13 +90,13 @@
 | Collapse 折叠面板（已有） | 4/5 | 中 | 高级设置、帮助说明和分组内容都能用 |
 | Descriptions 描述列表（已有） | 4/5 | 低—中 | 详情页高频，成本低，适合紧凑业务界面 |
 | Empty 空状态（已有） | 5/5 | 低 | 黑白插图、描述和操作区已实现，可自定义内容 |
-| Image 图片 | 3/5 | 中—高 | 加载回退有用，预览缩放能力可后做 |
+| Image 图片（已有） | 3/5 | 中—高 | 加载回退、占位、受控预览、缩放旋转、分组切换与键盘操作已实现 |
 | List 列表 | 1/5 | 中 | 官方目录已标记弃用，暂不新建旧 API 实现 |
 | Listy 列表 | 3/5 | 高 | 可服务长列表，但分组和虚拟化应由真实需求推动 |
 | Popover 气泡卡片（已有） | 4/5 | 中 |轻量详情和操作面板常用，可复用共享弹层；已补轻量动效 |
 | QRCode 二维码 | 2/5 | 中 | 场景明确时可接成熟编码库，暂不优先 |
 | Segmented 分段控制器（已有） | 4/5 | 低—中 |紧凑切换很适合我们的风格，如视图和筛选模式；已补轻量动效 |
-| Statistic 统计数值 | 3/5 | 低 | 仪表盘有用，但多数展示可以先用排版完成 |
+| Statistic 统计数值（已有） | 3/5 | 低 | 精确十进制字符串、金额分组、精度、单位、格式化与加载占位已实现 |
 | Table 表格（独立方案） | 4/5 | 很高 | 已提供独立轻量 Table，采用 source/selection 协议；未实现 antd Table API |
 | Tag 标签（已有） | 5/5 | 低 | 颜色、外观、关闭和受控 CheckableTag 已实现 |
 | Timeline 时间轴（已有） | 3/5 | 低—中 | 垂直时间轴、标签、交错、加载和反转已实现 |
@@ -114,7 +114,7 @@
 | Drawer 抽屉（已有） | 4/5 | 中 | 四方向平缓滑动与遮罩渐变，无弹性曲线和滚动回弹，聚焦保持滚动位置，适合详情和编辑 |
 | Message 全局提示（已有） | 5/5 | 中 |静态及 hook API、主题继承、key更新、销毁与生命周期已实现；已补轻量动效 |
 | Modal 对话框（已有） | 5/5 | 中—高 |继续完善确认调用、生命周期和业务组合；淡入淡出，无缩放入场和滚动回弹 |
-| Notification 通知提醒 | 3/5 | 中 | 更适合长消息和持续通知，可在 Message 后建设 |
+| Notification 通知提醒（已有） | 3/5 | 中 | 静态与 hook、App 上下文、四角位置、key 更新、关闭与退出动效已实现 |
 | Popconfirm 气泡确认框（已有） | 4/5 | 中 |删除等操作常用，复用 Popover 与确认能力；已补轻量动效 |
 | Progress 进度条（已有） | 4/5 | 低—中 | 上传、任务执行和完成率展示都通用 |
 | Result 结果页（已有） | 3/5 | 低—中 | 七种结果状态、轻量 SVG、操作与详情区域已实现 |
@@ -130,7 +130,7 @@
 | App 应用入口（已有） | 4/5 | 中 |后续统一 Message、Modal 等调用，并继承应用上下文；已补轻量动效 |
 | BorderBeam 边框光束 | 1/5 | 中 | 装饰性动效，暂不符合我们克制、紧凑的优先方向 |
 | ConfigProvider 配置入口（已有） | 5/5 | 中—高 | 主题、默认配置和弹层上下文的基础，需要持续完善 |
-| Util 工具类型 | 3/5 | 低 | 类型提取辅助有价值，随公开 API 成熟逐步提供 |
+| Util 工具类型（已有） | 3/5 | 低 | GetProps / GetProp / GetRef 类型提取已实现，支持 Context 与函数返回类型，无运行时代码 |
 
 [BorderBeam](https://ant.design/components/border-beam/) 是装饰动效组件；[Util](https://ant.design/components/_util/) 是工具与类型辅助入口。
 
@@ -185,8 +185,10 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 | useRefState 即时状态 Hook（已有） | 4/5 | 低 | React state 与即时只读 ref，支持连续函数更新 |
 | useLocalstorageState 本地状态 Hook（已有） | 4/5 | 低 | 普通 state 增加存储 key、JSON 自动保存与刷新恢复 |
 
-15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker、Menu，连同 9 个独立组件与 Hook，已有基础实现共 48 项；完整 API 支持范围以组件文档为准。
+15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker、Menu，以及 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image，连同 9 个独立组件与 Hook，已有基础实现共 57 项；完整 API 支持范围以组件文档为准。
 
-本阶段不实现 Space、antd Table 与 antd Form API；独立轻量 Form、Table 及公共表格 Hook 已实现。普通间距统一使用 Inline / Stack；DatePicker、RangePicker 与 TimePicker 首期已实现，API 与边界见[日期时间设计文档](./date-time-design.md)；Calendar 与时间范围尚未实现。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal，不包含 notification。
+本阶段不实现 Space、antd Table 与 antd Form API；独立轻量 Form、Table 及公共表格 Hook 已实现。普通间距统一使用 Inline / Stack；DatePicker、RangePicker 与 TimePicker 首期已实现，API 与边界见[日期时间设计文档](./date-time-design.md)；Calendar 与时间范围尚未实现。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal / notification。
 
 Menu 的 API、功能与首期边界见[轻量 Menu 设计](./menu-design.md)。
+
+本批 3 分条目已提供常用 API 子集；完整 API 与首期边界以各组件文档为准。Layout 是应用外壳，Stack / Inline / SimpleGrid 的独立布局文档保留。Util 仅提供类型，无 CSS。Notification 默认静态调用不继承局部 Context，使用 App 或 hook 实现主题继承。

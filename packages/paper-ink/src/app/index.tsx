@@ -4,6 +4,8 @@ import { Modal } from '../modal/modal.js';
 import type { ModalProps } from '../modal/types.js';
 import { useMessage } from '../message/message.js';
 import type { MessageConfig, MessageInstance } from '../message/types.js';
+import { useNotification } from '../notification/index.js';
+import type { NotificationConfig, NotificationInstance } from '../notification/types.js';
 import { useTheme } from '../config-provider/index.js';
 import { themeVariables } from '../theme/variables.js';
 import { StatusIcon } from '../internal/icons.js';
@@ -20,8 +22,8 @@ export interface AppModalInstance {
   warning: (config: ModalConfirmConfig) => ModalConfirmHandle;
   destroyAll: () => void;
 }
-export interface AppInstance { message: MessageInstance; modal: AppModalInstance }
-export interface AppProps extends HTMLAttributes<HTMLDivElement> { component?: ElementType | false; message?: MessageConfig }
+export interface AppInstance { message: MessageInstance; modal: AppModalInstance; notification: NotificationInstance }
+export interface AppProps extends HTMLAttributes<HTMLDivElement> { component?: ElementType | false; message?: MessageConfig; notification?: NotificationConfig }
 interface Entry { closing?: boolean; key: number; config: ModalConfirmConfig; type: 'confirm' | 'info' | 'success' | 'error' | 'warning'; finish: (confirmed: boolean) => void }
 const Context = createContext<AppInstance | null>(null);
 function ConfirmDialog({ entry, close, complete }: { entry: Entry; close: (key: number, confirmed: boolean) => void; complete: (key: number) => void }) {
@@ -43,8 +45,9 @@ function ConfirmDialog({ entry, close, complete }: { entry: Entry; close: (key: 
     <div className="pi-app-confirm-content">{icon !== null && <span className={`pi-app-confirm-icon pi-app-confirm-icon--${status}`} aria-hidden="true">{icon ?? <StatusIcon type={status} circle width={20} height={20} />}</span>}<div>{content}{error && <p role="alert" className="pi-app-confirm-error">操作未完成，请重试。</p>}</div></div>
   </Modal>;
 }
-function AppRoot({ children, component = 'div', message: config, className, style, ...rest }: AppProps) {
+function AppRoot({ children, component = 'div', message: config, notification: notificationConfig, className, style, ...rest }: AppProps) {
   const theme = useTheme(); const [api, holder] = useMessage(config); const [entries, setEntries] = useState<Entry[]>([]);
+  const [notificationApi, notificationHolder] = useNotification(notificationConfig);
   const afterCloseQueue = useRef<Entry[]>([]);
   const entriesRef = useRef<Entry[]>([]); const sequence = useRef(0); const mounted = useRef(true); const lifecycle = useRef(0);
   function close(key: number, confirmed: boolean) {
@@ -80,8 +83,8 @@ function AppRoot({ children, component = 'div', message: config, className, styl
       for (const entry of pending) entry.finish(false);
     }); };
   }, []);
-  const instance = useMemo(() => ({ message: api, modal }), [api, modal]);
-  const content = <>{children}{holder}{entries.map(entry => <ConfirmDialog key={entry.key} entry={entry} close={close} complete={complete} />)}</>;
+  const instance = useMemo(() => ({ message: api, modal, notification: notificationApi }), [api, modal, notificationApi]);
+  const content = <>{children}{holder}{notificationHolder}{entries.map(entry => <ConfirmDialog key={entry.key} entry={entry} close={close} complete={complete} />)}</>;
   const Wrapper = component;
   return <Context.Provider value={instance}>{Wrapper === false ? content : <Wrapper {...rest} className={['pi-app', className].filter(Boolean).join(' ')} style={{ ...themeVariables(theme), ...style }}>{content}</Wrapper>}</Context.Provider>;
 }

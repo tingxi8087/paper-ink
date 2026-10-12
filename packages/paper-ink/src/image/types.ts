@@ -1,0 +1,4 @@
+import type { CSSProperties, ImgHTMLAttributes, ReactNode } from 'react';
+export interface ImagePreviewConfig { open?: boolean; defaultOpen?: boolean; onOpenChange?: (open: boolean) => void; src?: string; mask?: ReactNode; scaleStep?: number; minScale?: number; maxScale?: number; }
+export interface ImageProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'placeholder'> { fallback?: string; placeholder?: ReactNode; preview?: boolean | ImagePreviewConfig; rootClassName?: string; rootStyle?: CSSProperties; }
+export interface ImagePreviewGroupProps { children?: ReactNode; items?: Array<string | { src: string; alt?: string }>; preview?: boolean | (Omit<ImagePreviewConfig, 'src' | 'mask'> & { current?: number; defaultCurrent?: number; onChange?: (current: number, previous: number) => void }); }

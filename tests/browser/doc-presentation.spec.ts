@@ -52,6 +52,6 @@ test('Segmented reference uses typed API rows and compact styled description', a
   const options = table.locator('tbody tr').filter({ has: page.locator('td:first-child', { hasText: /^options$/ }) });
   await expect(options).toContainText('SegmentedOption');
   await expect(table.locator('tbody tr').filter({ has: page.locator('td:first-child', { hasText: /^onChange$/ }) })).toContainText('=>');
-  await expect(page.locator('.doc-boundary')).toHaveCSS('border-left-width', '3px');
+  await expect(page.locator('.doc-boundary')).toHaveCSS('border-left-width', '1px');
   await expect(page.locator('.doc-import-card')).toHaveCount(2);
 });

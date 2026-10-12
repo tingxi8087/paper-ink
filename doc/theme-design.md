@@ -2,7 +2,7 @@
 
 记录日期：2026-10-10
 
-状态：主题设计方向已认可；变量名称、完整清单和派生细节仍需在实现前细化。本文示例不是已发布的 API。
+状态：基础主题、语义变量与组件覆盖已实现；本文同时记录后续派生设计。实际 API 以源码为准，2026-10-12 更新默认水墨配色。
 
 ## 目标
 
@@ -12,7 +12,7 @@
 2. 修改某种视觉用途会影响哪些地方。
 3. 只修改一个组件在哪里配置。
 
-默认黑白灰主色，其他语义色参考 Ant Design。减少难以理解的命名和隐式派生，保留全局定制、组件定制及后续扩展能力。
+默认水墨黑白主色，以白纸、浓墨和少量极淡衬底建立层次，其他语义色参考 Ant Design。减少难以理解的命名和隐式派生，保留全局定制、组件定制及后续扩展能力。
 
 ## 分层
 
@@ -33,27 +33,27 @@ const token = {
   color: {
     text: {
       primary: '#171717',
-      secondary: '#737373',
+      secondary: '#404040',
       disabled: '#a3a3a3',
     },
     surface: {
       page: '#ffffff',
       container: '#ffffff',
       elevated: '#ffffff',
-      muted: '#f5f5f5',
+      muted: '#fafafa',
     },
     border: {
-      default: '#d4d4d4',
-      subtle: '#e5e5e5',
+      default: '#525252',
+      subtle: '#eeeeee',
     },
     primary: {
       solid: '#171717',
       solidHover: '#404040',
       solidActive: '#262626',
       onSolid: '#ffffff',
-      subtle: '#f5f5f5',
+      subtle: '#fafafa',
       onSubtle: '#171717',
-      border: '#a3a3a3',
+      border: '#525252',
     },
     // success / warning / error / info 使用相同的角色结构。
   },
@@ -148,3 +148,15 @@ color.primary.solidHover → --pi-color-primary-solid-hover
 Ant Design 当前采用 Seed、Map、Alias 的派生关系，并提供全局和组件覆盖。Paper Ink 借鉴其定制能力，独立设计变量结构和更明确的影响规则。
 
 - [Ant Design 定制主题](https://ant.design/docs/react/customize-theme-cn/)
+
+## 水墨配色约定（2026-10-12）
+
+白纸、浓墨、少量淡墨。有效信息使用近黑或暗灰文字，普通内容不通过降低文字对比度表示次要；通过字号、字重、位置和细线组织层次。
+
+- 默认主文字 #171717，次级文字 #404040；可用输入的占位信息使用次级文字，禁用文字保留独立用途。
+- 页面/容器/浮层使用 #ffffff，极淡衬底使用 #fafafa；减少大面积中灰与偏米灰背景。
+- 装饰边线使用 #eeeeee，输入/按钮等需要辨认的控件轮廓使用 #525252；禁用控件轮廓回落到装饰边线。
+- 分段控制器的选中项使用 primary.solid/onSolid，文档当前导航使用黑底白字；内容卡片、表头和说明区域保持轻。
+- 文档站通过 --doc-paper/wash/ink/text/secondary/line/outline/on-ink 统一用途，不维护一组用途不明的近似暖灰。
+- 普通可读文字按至少 4.5:1 检查；装饰线与禁用状态单独判断，焦点和有效控件轮廓保持清晰。链接蓝色和成功/警告/错误/信息色保留。
+- 用户显式主题覆盖仍优先；自定义背景需要配套前景，默认配色检查不代表任意自定义主题自动满足对比度。

@@ -1,0 +1,18 @@
+.pi-image { position:relative; display:inline-block; vertical-align:middle; max-width:100%; overflow:hidden; color:var(--pi-color-text-primary); }
+.pi-image-img { display:block; max-width:100%; object-fit:cover; }
+.pi-image-placeholder { position:absolute; inset:0; display:grid; place-items:center; background:var(--pi-color-surface-muted); pointer-events:none; }
+.pi-image-mask { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:6px; border:0; background:rgb(0 0 0 / 45%); color:white; opacity:0; cursor:zoom-in; font:inherit; transition:opacity 120ms ease-out; }
+.pi-image:hover .pi-image-mask,.pi-image-mask:focus-visible { opacity:1; }.pi-image-mask:focus-visible { outline:2px solid white; outline-offset:-4px; }
+.pi-image-preview-root .pi-modal-mask { background:rgb(0 0 0 / 85%); }
+.pi-image-preview-root .pi-modal-wrap { padding:0; overflow:hidden; }
+.pi-image-preview { margin:0; padding:0; height:100dvh; max-width:none; border:0; border-radius:0; background:transparent; box-shadow:none; color:white; }
+.pi-image-preview .pi-modal-body { height:100%; }
+.pi-image-toolbar { position:absolute; top:16px; right:16px; left:16px; z-index:1; display:flex; align-items:center; justify-content:flex-end; gap:8px; pointer-events:none; }
+.pi-image-toolbar > * { pointer-events:auto; }.pi-image-toolbar > span { margin-right:auto; }
+.pi-image-toolbar button,.pi-image-prev,.pi-image-next { display:inline-flex; align-items:center; justify-content:center; height:32px; min-width:32px; padding:0 8px; border:1px solid rgb(255 255 255 / 30%); background:#171717; color:white; border-radius:4px; cursor:pointer; }
+.pi-image-toolbar button:hover,.pi-image-prev:hover,.pi-image-next:hover { background:#404040; }.pi-image-toolbar button:disabled { opacity:.4; cursor:not-allowed; }
+.pi-image-toolbar button:focus-visible,.pi-image-prev:focus-visible,.pi-image-next:focus-visible { outline:2px solid white; outline-offset:2px; }
+.pi-image-stage { height:100%; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.pi-image-stage > img { max-width:80vw; max-height:80dvh; object-fit:contain; transform-origin:center; transition:transform 120ms ease-out; }
+.pi-image-prev,.pi-image-next { position:absolute; top:50%; z-index:1; }.pi-image-prev { left:16px; }.pi-image-next { right:16px; }.pi-image-prev svg { transform:rotate(180deg); }
+@media(prefers-reduced-motion:reduce) { .pi-image-mask,.pi-image-stage > img { transition:none; } }

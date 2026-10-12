@@ -1,0 +1,8 @@
+.pi-auto-complete { position:relative; display:inline-block; width:100%; }
+.pi-auto-complete > .pi-input { width:100%; }
+.pi-auto-complete__popup { position:absolute; top:calc(100% + 4px); inset-inline:0; z-index:1050; padding:4px; max-height:240px; overflow:auto; background:var(--pi-color-surface-elevated,#fff); color:var(--pi-color-text-primary,#171717); border:1px solid var(--pi-color-border-subtle,#eee); border-radius:var(--pi-radius-control,6px); box-shadow:0 4px 12px #00000014; }
+.pi-auto-complete__option { padding:6px 8px; cursor:pointer; border-radius:3px; font-size:14px; }
+.pi-auto-complete__option--active { background:var(--pi-color-surface-muted,#fafafa); }
+.pi-auto-complete__option[aria-selected=true] { font-weight:600; }
+.pi-auto-complete__option[aria-disabled=true] { color:var(--pi-color-text-disabled,#a3a3a3); cursor:not-allowed; }
+.pi-auto-complete__empty { padding:8px; color:var(--pi-color-text-secondary,#404040); }

@@ -103,3 +103,21 @@ export * from './date-picker/index.js';
 export * from './time-picker/index.js';
 
 export * from './menu/index.js';
+
+export * from './statistic/index.js';
+
+export * from './util/index.js';
+
+export * from './layout/index.js';
+
+export * from './splitter/index.js';
+
+export * from './steps/index.js';
+
+export * from './auto-complete/index.js';
+
+export * from './slider/index.js';
+
+export * from './notification/index.js';
+
+export * from './image/index.js';

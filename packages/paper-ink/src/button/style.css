@@ -38,7 +38,7 @@
 .pi-button--circle.pi-button--large { width: var(--pi-control-height-large); }
 .pi-button--icon-only { padding-inline: 0; aspect-ratio: 1; }
 .pi-button--block { display: flex; width: 100%; }
-.pi-button:disabled, .pi-button[aria-disabled=true] { cursor: not-allowed; color: var(--pi-color-text-disabled); background: var(--pi-color-surface-muted); border-color: var(--pi-color-border-default); }
+.pi-button:disabled, .pi-button[aria-disabled=true] { cursor: not-allowed; color: var(--pi-color-text-disabled); background: var(--pi-color-surface-muted); border-color: var(--pi-color-border-subtle); }
 .pi-button--loading:not(.pi-button--disabled) { opacity: .65; cursor: default; }
 .pi-button--loading.pi-button--variant-solid:not(.pi-button--disabled) { color: var(--btn-on); background: var(--btn-color); border-color: var(--btn-color); }
 .pi-button--loading.pi-button--variant-outlined:not(.pi-button--disabled), .pi-button--loading.pi-button--variant-dashed:not(.pi-button--disabled) { color: var(--pi-color-text-primary); background: var(--pi-color-surface-container); border-color: var(--pi-color-border-default); }

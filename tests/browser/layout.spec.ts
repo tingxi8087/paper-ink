@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('layout presets inherit theme; Grid reflows without overflow and supports full rows', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
-  await page.goto('/#/layout', { waitUntil: 'domcontentloaded' });
+  await page.goto('/#/arrangement', { waitUntil: 'domcontentloaded' });
   await expect(page.getByRole('heading', { name: '布局 Stack / Inline / SimpleGrid' })).toBeVisible();
   const form = page.getByRole('region', { name: '竖向表单', exact: true });
   await expect(form.locator('.pi-stack')).toHaveCSS('gap', '16px');

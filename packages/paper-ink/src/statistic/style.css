@@ -1,0 +1,7 @@
+.pi-statistic { box-sizing:border-box; min-width:0; color:var(--pi-color-text-primary); font:var(--pi-font-size)/1.5 var(--pi-font-family); }
+.pi-statistic__header { margin-bottom:4px; }
+.pi-statistic__title { color:var(--pi-color-text-secondary); font-size:13px; overflow-wrap:anywhere; }
+.pi-statistic__content { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px; font-size:24px; line-height:1.4; font-variant-numeric:tabular-nums; }
+.pi-statistic__value { min-width:0; overflow-wrap:anywhere; }
+.pi-statistic__prefix,.pi-statistic__suffix { font-size:.65em; }
+.pi-statistic__placeholder { display:block; width:112px; max-width:100%; height:32px; background:var(--pi-color-surface-muted); border:1px solid var(--pi-color-border-subtle); border-radius:var(--pi-radius-control); }

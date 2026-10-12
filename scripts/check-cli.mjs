@@ -25,14 +25,20 @@ try {
   run('pnpm', ['install', '--offline', '--ignore-scripts']);
   run('pnpm', ['exec', 'paper-ink', '--version']);
   run('pnpm', ['exec', 'paper-ink', 'init']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', '--dry-run']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image', '--dry-run']);
   assert.equal((await readdir(join(consumer, 'src'))).length, 0);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image']);
   await writeFile(join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8" /></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>');
   await writeFile(join(consumer, 'src/main.tsx'), `import { useState } from 'react';
 import dayjs, { type Dayjs } from 'dayjs';
 import { createRoot } from 'react-dom/client';
+import type { GetProp as LocalGetProp, GetRef as LocalGetRef } from './components/paper-ink/util';
+import type { GetProp as NpmGetProp } from 'paper-ink/util';
+type LocalOptions = LocalGetProp<{options?: string[]},'options'>;
+const typedOptions:LocalOptions=['ok'];
+const typedNumber:NpmGetProp<{value?:number},'value'>=1;
+void typedOptions;void typedNumber;
 import * as LocalComponents from './components/paper-ink/index';
 import * as NpmComponents from 'paper-ink';
 import * as Npm from 'paper-ink';
@@ -53,6 +59,19 @@ function DateFeatures({ source }: { source: 'Local' | 'Npm' }) {
  const [time,setTime] = useState<Dayjs | null>(dayjs('2026-10-12T09:00:00'));
  const [rangeText,setRangeText] = useState('');
  return <div aria-label={source+' date features'}><C.DatePicker aria-label={source+' date'} value={date} onChange={setDate} /><output aria-label={source+' date saved'}>{date?.format('YYYY-MM-DD') ?? 'empty'}</output><C.DatePicker.RangePicker placeholder={[source+' range start',source+' range end']} onChange={(_,texts)=>setRangeText(texts.join('/'))} /><output aria-label={source+' range saved'}>{rangeText}</output><C.TimePicker aria-label={source+' time'} format="HH:mm" value={time} onChange={setTime} /><output aria-label={source+' time saved'}>{time?.format('HH:mm') ?? 'empty'}</output></div>;
+}
+function NewFeatures({ source }: { source: 'Local' | 'Npm' }) {
+ const C=source==='Local'?LocalComponents:NpmComponents;
+ const [api,holder]=C.useNotification({duration:0});
+ return <div aria-label={source+' additions'}>{holder}<C.Statistic title={source+' total'} value="12345678901234567890.125" precision={2} />
+ <C.Layout><C.Layout.Sider collapsible width={120}>{source+' sidebar'}</C.Layout.Sider><C.Layout.Content>{source+' content'}</C.Layout.Content></C.Layout>
+ <C.Splitter style={{height:100,width:300}}><C.Splitter.Panel defaultSize={120} min={60}>A</C.Splitter.Panel><C.Splitter.Panel>B</C.Splitter.Panel></C.Splitter>
+ <C.Steps items={[{title:source+' first'},{title:source+' second'}]} />
+ <C.AutoComplete aria-label={source+' suggestions'} options={[{value:source+' choice'}]} />
+ <C.Slider ariaLabelForHandle={source+' adjustment'} defaultValue={30} tooltip={{formatter:null}} />
+ <C.Button onClick={()=>api.success({message:source+' notice'})}>{source+' notify'}</C.Button>
+ <C.Image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='60'%3E%3Crect width='100' height='60' fill='black'/%3E%3C/svg%3E" alt={source+' picture'} width={100} />
+ </div>;
 }
 function MenuFeatures({ source }: { source: 'Local' | 'Npm' }) {
  const C=source==='Local'?LocalComponents:NpmComponents;
@@ -99,8 +118,8 @@ function Demo() {
  const [localOpen, setLocalOpen] = useState(false); const [npmOpen, setNpmOpen] = useState(false);
  const theme = { token: { color: { primary: { solid: '#1677ff' } }, radius: { control: 12 } } };
  return <><h1>Paper Ink dual distribution</h1>
- <section aria-label="CLI source"><LocalProvider theme={theme}><FeatureSet source="Local" /><ModernFeatures source="Local" /><FormFeatures source="Local" /><TableFeatures source="Local" /><DateFeatures source="Local" /><MenuFeatures source="Local" /><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
- <section aria-label="npm package"><NpmProvider theme={theme}><FeatureSet source="Npm" /><ModernFeatures source="Npm" /><FormFeatures source="Npm" /><TableFeatures source="Npm" /><DateFeatures source="Npm" /><MenuFeatures source="Npm" /><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
+ <section aria-label="CLI source"><LocalProvider theme={theme}><FeatureSet source="Local" /><ModernFeatures source="Local" /><FormFeatures source="Local" /><TableFeatures source="Local" /><DateFeatures source="Local" /><MenuFeatures source="Local" /><NewFeatures source="Local" /><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
+ <section aria-label="npm package"><NpmProvider theme={theme}><FeatureSet source="Npm" /><ModernFeatures source="Npm" /><FormFeatures source="Npm" /><TableFeatures source="Npm" /><DateFeatures source="Npm" /><MenuFeatures source="Npm" /><NewFeatures source="Npm" /><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
 }
 createRoot(document.getElementById('root')!).render(<Demo />);`);
   run('pnpm', ['exec', 'tsc', '--noEmit']);
@@ -116,6 +135,16 @@ createRoot(document.getElementById('root')!).render(<Demo />);`);
 
   for (const [region, label] of [['CLI source', 'Local'], ['npm package', 'Npm']]) {
     const group = page.getByRole('region', { name: region });
+    const additions=group.getByLabel(label+' additions');
+    assert.equal(await additions.getByText('12,345,678,901,234,567,890.13',{exact:true}).count(),1);
+    await additions.getByRole('button',{name:'折叠侧栏',exact:true}).click();
+    await additions.getByRole('button',{name:'展开侧栏',exact:true}).waitFor();
+    const separator=additions.getByRole('separator');await separator.focus();await separator.press('ArrowRight');
+    assert.equal(await separator.getAttribute('aria-valuenow'),'130');
+    const suggestions=additions.getByRole('combobox',{name:label+' suggestions'});await suggestions.fill(label);await suggestions.press('ArrowDown');await suggestions.press('Enter');assert.equal(await suggestions.inputValue(),label+' choice');
+    const adjustment=additions.getByRole('slider',{name:label+' adjustment'});await adjustment.focus();await adjustment.press('ArrowRight');assert.equal(await adjustment.getAttribute('aria-valuenow'),'31');
+    await additions.getByRole('button',{name:label+' notify'}).click();const notice=page.locator('.pi-notification').filter({hasText:label+' notice'});await notice.waitFor();await notice.getByRole('button',{name:'关闭通知'}).click();await notice.waitFor({state:'detached'});
+    await additions.getByRole('button',{name:'预览 '+label+' picture'}).click();const imageDialog=page.getByRole('dialog',{name:'图片预览'});await imageDialog.waitFor();await imageDialog.getByRole('button',{name:'放大图片'}).click();await page.keyboard.press('Escape');await imageDialog.waitFor({state:'detached'});
     await group.getByRole('spinbutton', { name: label + ' precise number' }).waitFor();
     const menuFeature=group.getByLabel(label+' menu features');
     await menuFeature.getByRole('button',{name:label+' side leaf',exact:true}).click();

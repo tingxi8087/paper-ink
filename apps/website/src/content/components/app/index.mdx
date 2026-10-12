@@ -4,7 +4,7 @@ import { AppDemos } from '../../../components/NumberAppDemos';
 
 # App 应用入口
 
-通过 App.useApp() 调用继承当前 ConfigProvider 主题的 message 和 modal，无需手动挂载 holder。
+通过 App.useApp() 调用继承当前 ConfigProvider 主题的 message、modal 和 notification，无需手动挂载 holder。
 
 ## 代码演示
 
@@ -20,7 +20,7 @@ import { AppDemos } from '../../../components/NumberAppDemos';
 
 ConfigProvider 应在 App 外层。确认回调支持 Promise，执行期间显示 loading；拒绝时保持弹窗并允许重试。每个 App 的消息和弹窗独立，卸载会清理并结束等待。
 
-本期提供 message、modal，未实现 notification。App 不替代 ConfigProvider，不包含路由或全局状态管理。组件外调用仍使用 message 静态入口，其主题为默认主题。
+本期提供 message、modal、notification。App 不替代 ConfigProvider，不包含路由或全局状态管理。组件外调用仍使用 message 静态入口，其主题为默认主题。通知优先使用 App.useApp().notification 或 useNotification 挂载 holder。
 
 `modal` 保留退出动画，动画结束后完成 handle 并调用 `afterClose`；减少动态效果时直接切换。
 

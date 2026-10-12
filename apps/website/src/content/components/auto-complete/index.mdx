@@ -1,0 +1,33 @@
+import { AutoCompleteApiTable } from './api';
+import { AutoCompleteDemos } from './demos';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# AutoComplete 自动完成
+
+输入任意文本，同时提供可选择的建议。适合邮箱、搜索词和简单名称补全。
+
+## 代码演示
+
+<AutoCompleteDemos />
+
+## API
+
+<AutoCompleteApiTable />
+
+其余原生 input 属性、prefix、suffix、placeholder、onFocus、onBlur、onKeyDown、onPressEnter 与 Input 一致。
+
+## 支持边界
+
+<DocBoundary>
+
+- 建议值为字符串，不提供多选、分组、虚拟列表或任意自定义输入组件；复杂选择使用 Select。
+- 建议层位于组件内部，overflow 裁剪容器中需为弹层留出空间；不提供 Portal 和 getPopupContainer。
+- 支持方向键跳过禁用项、Enter 选择、Escape 关闭、点击外部关闭；中文输入合成阶段不选择建议。
+- 异步搜索由调用方管理 options 和竞态取消。value 是输入内容，选择仅替换文本，不限制用户自由输入。
+- 支持 Form.Field 自动绑定、校验状态和聚焦；独立原生 form reset 暂不支持，使用 Form.reset 或受控值。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="auto-complete" component="AutoComplete" />

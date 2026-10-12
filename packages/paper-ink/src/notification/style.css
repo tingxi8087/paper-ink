@@ -1,0 +1,17 @@
+.pi-notification-holder { position:fixed; z-index:1300; display:flex; flex-direction:column; gap:8px; width:min(360px,calc(100vw - 32px)); pointer-events:none; font:var(--pi-font-size)/1.5 var(--pi-font-family); }
+.pi-notification-holder--topLeft,.pi-notification-holder--bottomLeft { left:16px; }
+.pi-notification-holder--topRight,.pi-notification-holder--bottomRight { right:16px; }
+.pi-notification { position:relative; display:flex; gap:12px; box-sizing:border-box; padding:16px 36px 16px 16px; border:1px solid var(--pi-color-border-subtle); border-radius:var(--pi-radius-control); background:var(--pi-color-surface-elevated); color:var(--pi-color-text-primary); box-shadow:0 4px 20px rgb(0 0 0 / 10%); pointer-events:auto; overflow-wrap:anywhere; }
+.pi-notification-content { min-width:0; flex:1; }
+.pi-notification-title { font-size:16px; font-weight:600; }
+.pi-notification-description { margin-top:4px; color:var(--pi-color-text-secondary); }
+.pi-notification-actions { display:flex; justify-content:flex-end; margin-top:12px; }
+.pi-notification-close { position:absolute; right:10px; top:12px; display:grid; place-items:center; width:24px; height:24px; border:0; background:transparent; color:var(--pi-color-text-secondary); cursor:pointer; border-radius:var(--pi-radius-control); }
+.pi-notification-close:hover { background:var(--pi-color-surface-muted); color:var(--pi-color-text-primary); }
+.pi-notification-close:focus-visible { outline:1px solid var(--pi-color-primary-solid); }
+.pi-notification-icon { display:inline-flex; padding-top:1px; flex:none; color:var(--pi-color-info-solid); }
+.pi-notification-icon--success { color:var(--pi-color-success-solid); }.pi-notification-icon--warning { color:var(--pi-color-warning-solid); }.pi-notification-icon--error { color:var(--pi-color-error-solid); }
+.pi-notification[data-motion=enter] { animation:pi-notification-enter 180ms ease-out both; }.pi-notification[data-motion=leave] { animation:pi-notification-leave 180ms ease-in both; pointer-events:none; }
+@keyframes pi-notification-enter { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pi-notification-leave { to { opacity:0; transform:translateY(-6px); } }
+@media(prefers-reduced-motion:reduce) { .pi-notification[data-motion] { animation:none; } }

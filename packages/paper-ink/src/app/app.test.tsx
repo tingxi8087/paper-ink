@@ -5,6 +5,14 @@ import { StrictMode, useEffect } from 'react';
 import { App, type ModalConfirmHandle } from './index';
 import { ConfigProvider } from '../config-provider';
 describe('App',()=>{
+ it('provides scoped notification configuration, theme and cleanup',async()=>{
+  function Demo(){const {notification}=App.useApp();return <button onClick={()=>notification.open({key:'notice',message:'Scoped notification'})}>Notify</button>;}
+  const view=render(<ConfigProvider theme={{token:{color:{primary:{solid:'#663399'}}}}}><App notification={{duration:0,placement:'bottomLeft'}}><Demo /></App></ConfigProvider>);
+  await userEvent.setup().click(screen.getByText('Notify'));
+  const notice=screen.getByText('Scoped notification');
+  expect(notice.closest('.pi-notification-holder')).toHaveStyle('--pi-color-primary-solid: #663399');
+  view.unmount();expect(screen.queryByText('Scoped notification')).not.toBeInTheDocument();
+ });
  it('inherits theme for contextual messages and modal confirmation',async()=>{
   let handle:ModalConfirmHandle | undefined;
   function Demo(){const {message,modal}=App.useApp();return <><button onClick={()=>message.success('Done',0)}>Message</button><button onClick={()=>{handle=modal.confirm({title:'Confirm',content:'Continue?'});}}>Confirm</button></>;}

@@ -34,12 +34,12 @@ test('planning pending four-point filter excludes independent and deferred APIs'
 
 test('planning status totals reconcile across scopes and compact mobile layout', async ({ page }) => {
   await page.goto(url);
-  for (const [id, value] of Object.entries({ total: '82 / 82', done: '48', pending: '29', independent: '4', deferred: '1' })) {
+  for (const [id, value] of Object.entries({ total: '82 / 82', done: '57', pending: '20', independent: '4', deferred: '1' })) {
     await expect(page.locator('#' + id)).toHaveText(value);
   }
   await page.locator('#scope').selectOption('all');
   await expect(page.locator('#total')).toHaveText('88 / 88');
-  await expect(page.locator('#pending')).toHaveText('35');
+  await expect(page.locator('#pending')).toHaveText('26');
   await page.locator('#scope').selectOption('own');
   await expect(page.locator('#total')).toHaveText('9 / 9');
   await expect(page.locator('#done')).toHaveText('9');

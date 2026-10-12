@@ -1,0 +1,9 @@
+import { LiveDemo } from '../../../components/LiveDemo';
+export function SliderDemos() { return <div className="demo-list">
+<LiveDemo title="受控数值与完成回调" code={`function Demo() { const [value, setValue] = useState(35); const [done, setDone] = useState(35); return <Stack gap={8}><Slider value={value} onChange={setValue} onChangeComplete={setDone} ariaLabelForHandle="亮度" /><span>亮度：{value}，已确认：{done}</span></Stack>; }`} />
+<LiveDemo title="双柄范围" code={`function Demo() { const [value, setValue] = useState([20, 70]); return <Stack gap={8}><Slider range value={value} onChange={setValue} marks={{ 0: '0', 50: '50', 100: '100' }} ariaLabelForHandle={['最低价格', '最高价格']} /><span>价格：{value.join(' – ')}</span></Stack>; }`} />
+<LiveDemo title="小数步长" code={`function Demo() { const [value, setValue] = useState(0.3); return <Stack gap={8}><Slider min={0} max={1} step={0.1} value={value} onChange={setValue} tooltip={{ formatter: value => value.toFixed(1) }} /><span>比例：{value}</span></Stack>; }`} />
+<LiveDemo title="只选刻度与隐藏提示" code={`<Stack gap={12}><Slider step={null} defaultValue={25} marks={{ 0: '关闭', 25: '低', 75: '高', 100: '最大' }} tooltip={{ formatter: null }} /><Slider defaultValue={60} disabled /><Slider defaultValue={45} included={false} /></Stack>`} />
+<LiveDemo title="垂直与反向" code={`<Inline gap={48}><Slider vertical defaultValue={40} marks={{ 0: '0', 50: '50', 100: '100' }} /><Slider vertical reverse range defaultValue={[20, 80]} marks={{ 0: '0', 100: '100' }} /></Inline>`} />
+<LiveDemo title="表单中的区间" code={`function Demo() { const [saved, setSaved] = useState(''); const form = useForm({ defaultValues: { budget: [20, 80] } }); return <Form form={form} onSubmit={values => setSaved(JSON.stringify(values))}><Form.Field name="budget" label="预算区间"><Slider range marks={{ 0: '0', 100: '100' }} /></Form.Field><Button htmlType="submit">提交</Button>{saved && <span aria-label="提交结果">{saved}</span>}</Form>; }`} />
+</div>; }

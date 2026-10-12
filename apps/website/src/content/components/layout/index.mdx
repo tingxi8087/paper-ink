@@ -1,44 +1,28 @@
-import { DocBoundary, DocNote, DocImport } from '../../../components/DocDetails';
-import { LayoutDemos, LayoutApiTable } from '../../../components/LayoutDemos';
+import { LayoutShellDemos } from './demos';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
 
-# 布局 Stack / Inline / SimpleGrid
+# Layout 页面布局
 
-Stack 竖排，Inline 横排，SimpleGrid 多列排列。每个容器只渲染一个 div；普通子元素无需包装。布局属于独立设计的 API。
+通过语义区域组合页面外壳，尺寸和路由交给业务。
 
 ## 代码演示
 
-<LayoutDemos />
+<LayoutShellDemos />
 
 ## API
 
-<LayoutApiTable />
+<div className="table-scroll"><table><thead><tr><th>{"属性"}</th><th>{"类型"}</th><th>{"默认值"}</th><th>{"说明"}</th></tr></thead><tbody><tr><td><code>{"Layout.hasSider"}</code></td><td><code>{"boolean"}</code></td><td><code>{"自动识别直接 Sider 子节点"}</code></td><td>{"显式设置横向侧栏布局，包装组件需要手动指定"}</td></tr><tr><td><code>{"Layout.Header / Content / Footer"}</code></td><td><code>{"HTMLAttributes"}</code></td><td><code>{"—"}</code></td><td>{"语义 header / main / footer，支持原生属性与 ref"}</td></tr><tr><td><code>{"Sider.width / collapsedWidth"}</code></td><td><code>{"number | string"}</code></td><td><code>{"200 / 64"}</code></td><td>{"展开和收起宽度，数字为像素"}</td></tr><tr><td><code>{"Sider.collapsible"}</code></td><td><code>{"boolean"}</code></td><td><code>{"false"}</code></td><td>{"显示折叠按钮"}</td></tr><tr><td><code>{"Sider.collapsed / defaultCollapsed"}</code></td><td><code>{"boolean"}</code></td><td><code>{"false"}</code></td><td>{"受控 / 初始折叠状态"}</td></tr><tr><td><code>{"Sider.onCollapse"}</code></td><td><code>{"(collapsed, type) => void"}</code></td><td><code>{"—"}</code></td><td>{"type 为 clickTrigger 或 responsive"}</td></tr><tr><td><code>{"Sider.trigger"}</code></td><td><code>{"ReactNode | null"}</code></td><td><code>{"SVG箭头"}</code></td><td>{"自定义触发内容；null 隐藏按钮"}</td></tr><tr><td><code>{"Sider.reverseArrow"}</code></td><td><code>{"boolean"}</code></td><td><code>{"false"}</code></td><td>{"反向箭头，供右侧侧栏使用"}</td></tr><tr><td><code>{"Sider.theme"}</code></td><td><code>{"light | dark"}</code></td><td><code>{"light"}</code></td><td>{"侧栏明暗配色"}</td></tr><tr><td><code>{"Sider.breakpoint"}</code></td><td><code>{"xs | sm | md | lg | xl | xxl"}</code></td><td><code>{"—"}</code></td><td>{"480/576/768/992/1200/1600px 以下触发响应式折叠"}</td></tr><tr><td><code>{"Sider.onBreakpoint"}</code></td><td><code>{"(broken: boolean) => void"}</code></td><td><code>{"—"}</code></td><td>{"断点初次匹配与变更通知"}</td></tr><tr><td><code>{"className / style / ref"}</code></td><td><code>{"原生属性"}</code></td><td><code>{"—"}</code></td><td>{"各区域均支持"}</td></tr></tbody></table></div>
 
-## 使用边界
+## 支持边界
 
 <DocBoundary>
 
-需要跨列时使用 SimpleGrid.Item，或直接在子元素上设置 style.gridColumn。自动列数采用 CSS Grid 的 auto-fit，根据容器可用宽度决定列数；容器比最小宽度更窄时退到一列。
-
-columns 字符串直接使用 CSS grid-template-columns 语法，如 `240px minmax(0, 1fr)`。自定义列模板和通过 style 覆盖列定义时，跨列范围由使用者负责。
-
-不提供断点对象、跨行或指定起始位置的快捷属性；可以通过 className、style 和媒体查询扩展。默认不添加背景、内边距或固定高度。
+- 支持嵌套布局、左右侧栏、受控折叠、零宽折叠、响应式断点和自定义按钮内容。Header / Footer 默认内边距 16px；尺寸可由 style 覆盖。
+- 自动识别仅检查直接 Sider 子节点；包装后通过 hasSider 指定。Content 使用 main，同一页面的多个区域请避免同时显示多个主内容地标。
+- 断点只控制折叠状态，不内置抽屉、固定定位、滚动容器、路由或权限；受控模式由 onCollapse 的调用方回写。Menu 的 inlineCollapsed 由业务同步。
 
 </DocBoundary>
 
-## 主题间距
-
-<DocNote>
-
-`theme.token.spacing` 提供 small=4、medium=8、large=16。预设跟随主题，数字和 CSS 字符串保持显式设置。
-
-</DocNote>
-
 ## 导入
 
-<DocImport npm={"import { Stack, Inline, SimpleGrid } from 'paper-ink';\nimport 'paper-ink/style.css';"} cli="paper-ink add stack inline simple-grid" />
-
-<DocNote>
-
-按需引用可分别使用 `paper-ink/stack`、`paper-ink/inline`、`paper-ink/simple-grid`，并引入对应子路径的 `style.css`。
-
-</DocNote>
+<ComponentImport name="layout" component="Layout" />
