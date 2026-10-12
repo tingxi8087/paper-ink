@@ -183,3 +183,35 @@ html, body { overscroll-behavior: none; }
 /* Long property names must not squeeze reference types into single-character columns. */
 .main-content > .table-scroll th:nth-child(2),.main-content > .table-scroll td:nth-child(2) { min-width:200px; }
 .main-content > .table-scroll th:nth-child(3),.main-content > .table-scroll td:nth-child(3) { min-width:80px; }
+
+/* A few living ink drops in the margins, beneath the reading surfaces. */
+.site-shell { position:relative; isolation:isolate; min-height:100svh; }
+.site-body { position:relative; z-index:1; }
+.sidebar { background:var(--doc-paper); }
+.ink-background,.ink-layer { position:absolute; inset:0; overflow:hidden; pointer-events:none; user-select:none; }
+.ink-background { z-index:0; }
+.ink-layer { visibility:hidden; }
+.site-shell[data-ink-mode=home] .ink-layer--home,.site-shell[data-ink-mode=docs] .ink-layer--docs { visibility:visible; }
+.ink-mark { position:absolute; display:block; height:auto; }
+.ink-mark--home-drops { width:360px; right:24px; top:84px; }
+.ink-mark--doc-drops { width:150px; right:-20px; top:62px; }
+.ink-follow { transform:translate(var(--ink-x,0px),var(--ink-y,0px)) scaleX(var(--ink-stretch,1)); transition:transform 650ms ease-out; }
+.ink-spread { transform-origin:0 0; animation:ink-spread 1700ms cubic-bezier(.16,.7,.2,1) both; }
+.ink-fluid { animation:ink-flow 12s ease-in-out infinite; }
+.ink-layer .ink-fluid { animation-play-state:paused; }
+.site-shell[data-ink-mode=home] .ink-layer--home .ink-fluid,.site-shell[data-ink-mode=docs] .ink-layer--docs .ink-fluid { animation-play-state:running; }
+@keyframes ink-flow {
+  0%,100% { d:path('M0-56C31-60 57-31 56 0C58 34 27 57 0 55C-32 57-57 29-55 0C-58-31-30-57 0-56Z'); transform:rotate(-3deg); }
+  50% { d:path('M0-54C34-51 51-27 55 0C60 29 32 59 0 57C-29 52-60 33-57 0C-53-34-27-61 0-54Z'); transform:rotate(3deg); }
+}
+@keyframes ink-spread {
+  0% { opacity:0; transform:scale(.12); }
+  18% { opacity:1; }
+  70% { transform:scale(.94); }
+  100% { opacity:1; transform:scale(1); }
+}
+@media(max-width:700px) {
+  .ink-mark--home-drops { width:150px; right:-35px; top:80px; }
+  .ink-mark--doc-drops { width:100px; right:-35px; top:58px; }
+}
+@media(prefers-reduced-motion:reduce) { .ink-spread,.ink-fluid { animation:none; } .ink-follow { transform:none; transition:none; } }
