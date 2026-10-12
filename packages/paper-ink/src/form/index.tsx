@@ -66,7 +66,7 @@ function FormRoot<T extends object>({ form, disabled = false, validateTrigger = 
 }
 function assignRef<T>(ref: Ref<T> | undefined, value: T | null) {
   if (typeof ref === 'function') return ref(value);
-  if (ref) ref.current = value;
+  if (ref) (ref as { current: T | null }).current = value;
 }
 function elementRef(child: ReactElement<any>): Ref<FieldControlRef> | undefined {
   // React 19 moved ref into props. Read the descriptor on React 18 without invoking its warning getter.

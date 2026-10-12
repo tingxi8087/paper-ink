@@ -30,3 +30,11 @@
 .pi-table__pagination:first-child { padding-top: 0; padding-bottom: 12px; }
 .pi-table__truncate > .pi-tooltip-trigger { display: flex; width: 100%; min-width: 0; }
 .pi-table__truncate .pi-table__ellipsis, .pi-table__truncate .pi-table__cell-content { flex: 1; min-width: 0; }
+.pi-table .pi-table__expansion { padding-inline: 8px; text-align: center; }
+.pi-table__expand { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; padding: 0; border: 1px solid var(--pi-color-border-subtle); border-radius: 3px; background: var(--pi-color-surface-container); color: var(--pi-color-text-secondary); cursor: pointer; vertical-align: middle; }
+.pi-table__expand:hover:not(:disabled) { color: var(--pi-color-text-primary); border-color: var(--pi-color-border-default); }
+.pi-table__expand:focus-visible { outline: 2px solid var(--pi-color-primary-solid); outline-offset: 2px; }
+.pi-table__expand:disabled { cursor: default; opacity: .5; }
+.pi-table .pi-table__expanded-row > td { padding: 12px 16px; background: var(--pi-color-surface-muted); }
+.pi-table__expanded-content { min-width: 0; }
+.pi-table--hoverable tbody .pi-table__expanded-row:hover > td { background: var(--pi-color-surface-muted); }

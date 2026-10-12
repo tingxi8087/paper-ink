@@ -5,7 +5,9 @@ interface User { id: number; name: string; age: number; detail: { city: string }
 function TypedExample() {
   const columns: TableColumn<User>[] = [
     { dataIndex: 'name', render: value => value.toUpperCase(), onCell: () => ({ 'data-testid': 'cell' }), onHeaderCell: () => ({ 'data-testid': 'head' }) },
-    { dataIndex: 'age', render: value => value.toFixed(2) },
+    { dataIndex: 'age', render: value => value.toFixed(2), onCell: () => ({ rowSpan: 2, colSpan: 1 }) },
+    // @ts-expect-error header rowSpan is not supported
+    { dataIndex: 'id', onHeaderCell: () => ({ rowSpan: 2 }) },
     { key: 'action', render: (value, row) => { const empty: undefined = value; void empty; return row.name; } },
     // @ts-expect-error invalid top-level field
     { dataIndex: 'detail.city' },
@@ -29,6 +31,6 @@ function TypedExample() {
   // @ts-expect-error no duplicate pagination state
   const duplicate: TableProps<User> = { columns, source, rowKey: 'id', pagination: { current: 1 } };
   void [both, overridden, staticPage, objectKey, optionalKey, duplicate];
-  return <Table {...good} ref={createRef<HTMLDivElement>()} onRow={() => ({ 'data-testid': 'row' })} onHeaderRow={() => ({ 'data-testid': 'head-row' })} />;
+  return <Table {...good} ref={createRef<HTMLDivElement>()} onRow={() => ({ 'data-testid': 'row' })} onHeaderRow={() => ({ 'data-testid': 'head-row' })} expansion={{ expandedIds: [1], setExpandedIds: ids => { const keys: (string | number)[] = ids; void keys; }, render: row => row.name, rowExpandable: row => row.age > 18 }} />;
 }
 it('keeps Table generic constraints available to tsc', () => expect(typeof TypedExample).toBe('function'));

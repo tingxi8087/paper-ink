@@ -52,9 +52,9 @@ test('compact desktop and mobile layouts do not overflow', async ({ page }) => {
 
 test('planning filters count independent Form separately from pending antd Form', async ({ page }) => {
   await page.goto(pathToFileURL(resolve('doc/component-priorities.html')).href + '#status=done');
-  await expect(page.locator('#total')).toHaveText('44 / 81'); await expect(page.locator('#done')).toHaveText('44');
-  await page.locator('#scope').selectOption('own'); await expect(page.locator('#total')).toHaveText('8 / 8');
-  await page.locator('#search').fill('Form'); await expect(page.locator('#total')).toHaveText('1 / 8');
+  await expect(page.locator('#total')).toHaveText('45 / 82'); await expect(page.locator('#done')).toHaveText('45');
+  await page.locator('#scope').selectOption('own'); await expect(page.locator('#total')).toHaveText('9 / 9');
+  await page.locator('#search').fill('Form'); await expect(page.locator('#total')).toHaveText('1 / 9');
   await expect(page.locator('#rows')).toContainText('轻量表单'); await expect(page.locator('#rows')).toContainText('数据录入');
   await page.locator('#scope').selectOption('core'); await page.locator('#status').selectOption('pending');
   await expect(page.locator('#total')).toHaveText('1 / 73'); await expect(page.locator('#pending')).toHaveText('1'); await expect(page.locator('#done')).toHaveText('0');

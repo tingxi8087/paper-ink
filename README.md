@@ -117,4 +117,8 @@ const selection = useTableChecked({
 <Table rowKey="id" source={table} selection={selection} columns={columns} />;
 ```
 
-Table 内置分页，支持固定列、汇总和实际溢出 Tooltip；也可用 data 展示静态数据。getTableData(query, signal) 由业务提供，Hook 管理取消与过期响应；选择状态保存在业务行 _checked 中。三个入口支持 table、table-hooks、use-ref-state 子路径，CLI `paper-ink add table` 同时安装需要的 Hook 与样式依赖。useRefState 独立提供 [state, setState, stateRef]。树形、展开、合并、虚拟滚动留待后续。
+Table 内置分页，支持固定列、汇总、受控展开、单元格合并和实际溢出 Tooltip；也可用 data 展示静态数据。getTableData(query, signal) 由业务提供，Hook 管理取消与过期响应；选择状态保存在业务行 _checked 中。三个入口支持 table、table-hooks、use-ref-state 子路径，CLI `paper-ink add table` 同时安装需要的 Hook 与样式依赖。useRefState 独立提供 [state, setState, stateRef]。树形、多级表头、汇总合并和虚拟滚动留待后续。
+
+## 通用 Hooks
+
+通用状态工具位于独立 hooks 模块与文档页，支持 `import { useRefState, useLocalstorageState } from 'paper-ink/hooks'`。`useLocalstorageState(initialState, storageKey)` 在普通 state 上增加 JSON 本地持久化，自动读取初值并保存提交后的变化。CLI：`paper-ink add hooks`；旧 use-ref-state 子路径保持兼容。详见 doc/hooks.md。

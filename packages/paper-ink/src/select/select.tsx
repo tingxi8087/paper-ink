@@ -1,3 +1,4 @@
+import { inertAttributes } from '../internal/inert.js';
 import { defineFieldBinding } from '../internal/field-binding.js';
 import { usePresence } from '../internal/motion.js';
 import { CheckIcon, ChevronDownIcon, CloseIcon } from '../internal/icons.js';
@@ -149,7 +150,7 @@ const SelectControl = forwardRef<SelectRef, SelectProps>(function Select(props, 
   const selected = values.map(optionOf);
   const classes = ['pi-select', `pi-select--${size}`, multiple && 'pi-select--multiple', expanded && 'pi-select--open', disabled && 'pi-select--disabled', status && `pi-select--${status}`, className, rootClassName].filter(Boolean).join(' ');
   const positionMode = container && container !== container.ownerDocument.body && container !== container.ownerDocument.documentElement ? 'absolute' : 'fixed';
-  const popupNode = <div ref={popup} className="pi-select__popup" aria-hidden={!expanded} inert={!expanded} data-motion={expanded ? 'enter' : 'leave'} style={{ ...themeVariables(theme), ...position, position: positionMode }} onClick={event => event.stopPropagation()}>
+  const popupNode = <div ref={popup} className="pi-select__popup" aria-hidden={!expanded} {...inertAttributes(!expanded)} data-motion={expanded ? 'enter' : 'leave'} style={{ ...themeVariables(theme), ...position, position: positionMode }} onClick={event => event.stopPropagation()}>
     <div id={listId} role="listbox" aria-multiselectable={multiple || undefined} aria-label={rest['aria-label'] ?? '选项'}>
       {visible.map((option, index) => <div key={`${typeof option.value}:${option.value}`} id={`${listId}-${index}`} role="option" aria-selected={values.includes(option.value)} aria-disabled={option.disabled || undefined}
         data-option-index={index} className={['pi-select__option', active === index && 'pi-select__option--active', values.includes(option.value) && 'pi-select__option--selected', option.disabled && 'pi-select__option--disabled'].filter(Boolean).join(' ')}

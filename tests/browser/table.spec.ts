@@ -3,9 +3,9 @@ import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 const region = (page: import('@playwright/test').Page, name: string) => page.getByRole('region', { name, exact: true });
 test.beforeEach(async ({ page }) => { await page.goto('/#/table'); await expect(page.getByRole('heading', { name: 'Table 表格', exact: true })).toBeVisible(); });
-test('twelve live examples render, hidden columns and live editor work', async ({ page }) => {
+test('eighteen live examples render, hidden columns and live editor work', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
-  await expect(page.locator('.demo')).toHaveCount(12); await expect(page.locator('.demo-error')).toHaveCount(0);
+  await expect(page.locator('.demo')).toHaveCount(18); await expect(page.locator('.demo-error')).toHaveCount(0);
   const demo = region(page, '基础展示与隐藏列'); await expect(demo.getByRole('columnheader', { name: '年龄' })).toBeVisible();
   expect(await demo.locator('tbody tr').first().locator('td').first().evaluate(cell => cell.getBoundingClientRect().width)).toBeGreaterThanOrEqual(160);
   await demo.getByRole('checkbox', { name: '隐藏年龄' }).check(); await expect(demo.getByRole('columnheader', { name: '年龄' })).toHaveCount(0);
@@ -53,11 +53,11 @@ test('overflow text tooltip supports hover and short text avoids a focus stop', 
   await demo.locator('tbody tr').first().locator('td').nth(2).hover(); await expect(page.getByRole('tooltip')).toContainText('完整地址：');
   await page.mouse.move(0, 0); await demo.getByRole('checkbox', { name: '加宽文本列' }).check(); await long.hover(); await expect(page.getByRole('tooltip')).toHaveCount(0); await expect(long.locator('.pi-table__ellipsis')).not.toHaveAttribute('tabindex', '0');
 });
-test('editing updates cells and summary; failure retries; controlled query and ref state work', async ({ page }) => {
+test('editing updates cells and summary; failure retries; controlled query and empty state work', async ({ page }) => {
   const edit = region(page, '自定义编辑与本地更新'); await edit.getByRole('spinbutton', { name: '修改金额 1' }).fill('99'); await expect(edit.locator('span[role="status"]').last()).toHaveText('第一行金额：99'); await expect(edit.locator('tfoot')).toContainText('149');
   const failed = region(page, '失败处理与手动重试（本地模拟）'); await expect(failed.locator('span[role="status"]').last()).toHaveText('失败，等待重试'); await failed.getByRole('button', { name: '重试', exact: true }).click(); await expect(failed.locator('span[role="status"]').last()).toHaveText('加载完成'); await expect(failed.locator('tbody tr')).toHaveCount(3);
   const controlled = region(page, '受控查询与顶部简洁分页'); await controlled.getByRole('button', { name: '外部跳到第四页' }).click(); await expect(controlled.locator('span[role="status"]').last()).toHaveText('受控页码：4'); await expect(controlled.locator('tbody')).toContainText('成员 10');
-  const ref = region(page, 'useRefState 与加载空状态'); await ref.getByRole('button', { name: '连续增加两次' }).click(); await expect(ref.locator('span[role="status"]').last()).toHaveText('渲染值 2，即时 ref 2'); await ref.getByRole('checkbox', { name: '模拟加载' }).check(); await expect(ref.getByText('还没有记录')).toHaveCount(0);
+  const ref = region(page, '加载与自定义空状态'); await ref.getByRole('checkbox', { name: '模拟加载' }).check(); await expect(ref.getByText('还没有记录')).toHaveCount(0);
 });
 test('abort cancels waiting work and ignored old response cannot overwrite newest', async ({ page }) => {
   const demo = region(page, '取消请求与过期响应（本地模拟）'); await expect(demo.locator('tbody')).toContainText('初始');
@@ -76,10 +76,10 @@ test('desktop and mobile docs stay within viewport', async ({ page }) => {
 
 test('planning identifies independent Table and hooks as done, antd Table stays pending', async ({ page }) => {
   await page.goto(pathToFileURL(resolve('doc/component-priorities.html')).href + '#status=done');
-  await expect(page.locator('#total')).toHaveText('44 / 81'); await expect(page.locator('#done')).toHaveText('44');
-  await page.locator('#scope').selectOption('own'); await page.locator('#search').fill('轻量表格'); await expect(page.locator('#total')).toHaveText('1 / 8');
+  await expect(page.locator('#total')).toHaveText('45 / 82'); await expect(page.locator('#done')).toHaveText('45');
+  await page.locator('#scope').selectOption('own'); await page.locator('#search').fill('轻量表格'); await expect(page.locator('#total')).toHaveText('1 / 9');
   await expect(page.locator('#rows')).toContainText('Table'); await expect(page.locator('#rows')).toContainText('数据展示');
-  await page.locator('#search').fill(''); await expect(page.locator('#total')).toHaveText('8 / 8');
+  await page.locator('#search').fill(''); await expect(page.locator('#total')).toHaveText('9 / 9');
   await page.locator('#scope').selectOption('core'); await page.locator('#status').selectOption('pending'); await page.locator('#search').fill('Table');
   await expect(page.locator('#total')).toHaveText('1 / 73'); await expect(page.locator('#pending')).toHaveText('1'); await expect(page.locator('#done')).toHaveText('0');
 });

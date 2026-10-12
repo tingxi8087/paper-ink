@@ -231,7 +231,8 @@
         "theme",
         "icons",
         "motion",
-        "field-binding"
+        "field-binding",
+        "inert"
       ],
       "files": [
         "select/index.ts",
@@ -252,7 +253,8 @@
       "description": "Tooltip common Ant Design-style API subset",
       "registryDependencies": [
         "theme",
-        "motion"
+        "motion",
+        "inert"
       ],
       "files": [
         "tooltip/index.ts",
@@ -460,7 +462,8 @@
       "description": "popover common Ant Design-style API subset",
       "registryDependencies": [
         "theme",
-        "motion"
+        "motion",
+        "inert"
       ],
       "files": [
         "popover/index.ts",
@@ -713,6 +716,7 @@
       "name": "use-ref-state",
       "description": "Public state hook with an immediately readable readonly ref",
       "files": [
+        "hooks/use-ref-state.ts",
         "use-ref-state/index.ts"
       ],
       "exports": [
@@ -734,7 +738,7 @@
     },
     {
       "name": "table",
-      "description": "Independent hook-oriented Table with pagination, fixed columns, selection and overflow tooltips",
+      "description": "Independent hook-oriented Table with pagination, expansion, merged cells, fixed columns and overflow tooltips",
       "registryDependencies": [
         "theme",
         "icons",
@@ -749,11 +753,44 @@
       "files": [
         "table/index.tsx",
         "table/types.ts",
+        "table/spans.ts",
         "table/style.css"
       ],
       "exports": [
         "export * from './table/index';"
       ]
+    },
+    {
+      "name": "inert",
+      "internal": true,
+      "description": "Native inert attributes compatible with React 18 and 19",
+      "files": [
+        "internal/inert.ts"
+      ],
+      "exports": []
+    },
+    {
+      "name": "use-localstorage-state",
+      "description": "State with JSON localStorage persistence",
+      "files": [
+        "hooks/use-localstorage-state.ts",
+        "use-localstorage-state/index.ts"
+      ],
+      "exports": [
+        "export * from './hooks/use-localstorage-state';"
+      ]
+    },
+    {
+      "name": "hooks",
+      "description": "Generic state hooks",
+      "registryDependencies": [
+        "use-ref-state",
+        "use-localstorage-state"
+      ],
+      "files": [
+        "hooks/index.ts"
+      ],
+      "exports": []
     }
   ]
 }

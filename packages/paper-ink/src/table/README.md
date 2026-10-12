@@ -32,6 +32,34 @@ const columns: TableColumn<User>[] = [
 - `hidden`、`minWidth`、`showHeader`、`rowHoverable`、`bordered`、`size` 与 `locale` 控制展示。
 - `onRow`、`onHeaderRow`、`onCell`、`onHeaderCell` 开放原生属性。排序事件先调用调用方表头事件，可 preventDefault 取消内部排序。
 
-完整设计与边界见 `doc/table-design.md`。不支持树形、多级表头、展开行、合并单元格、虚拟滚动、拖拽或内置编辑。该组件不等同于完整 antd Table。
+完整设计与边界见 `doc/table-design.md`。不支持树形、多级表头、虚拟滚动、拖拽或内置编辑。该组件不等同于完整 antd Table。
 
 按组件导入使用 `paper-ink/table` 与 `paper-ink/table/style.css`；CLI：`paper-ink add table`。
+
+
+## 展开详情与单元格合并
+
+```tsx
+<Table
+  rowKey="id"
+  data={rows}
+  columns={[
+    { dataIndex: 'group', title: '分组', onCell: (_, index) => ({ rowSpan: index === 0 ? 2 : 1 }) },
+    { dataIndex: 'name', title: '姓名' },
+  ]}
+  expansion={{
+    expandedIds,
+    setExpandedIds,
+    render: (row) => <Detail row={row} />,
+    rowExpandable: (row) => row.hasDetail,
+  }}
+/>
+```
+
+- expansion 受控，保留页外 keys；render 只在当前展示且允许展开的行展开时调用。按钮不触发行点击或选择，可覆盖 SVG 图标和 locale.expandRow/collapseRow 文案。
+- 详情区域关闭即卸载；外部关闭时，如果焦点原本在区域内并落到 document.body，会恢复到父行展开按钮。不会抢走其他控件已有焦点。
+- 展开列放在选择列之前，遇到左固定列时同步固定；数字 columnWidth 默认 40。详情行跨所有当前可见列与工具列。
+- onCell 支持 rowSpan/colSpan，onHeaderCell 只支持 colSpan；0 表示隐藏该格，正整数表示跨度。覆盖的单元格自动跳过，无需为每个被覆盖格重复写 0；被覆盖格不执行 render。
+- 合并不会跨页、跨隐藏后可见列范围或跨固定方向边界；选择列和展开列不参与合并。非法跨度回退为 1。
+- 存在纵向合并时，详情放在该行所属的连续合并组末尾，同组详情按父行顺序展示，避免原生 rowspan 穿过详情行破坏布局。汇总行单独显示，不参与数据合并。
+- aria-label、aria-labelledby 和 aria-describedby 应用于原生 table，便于区分嵌套表格；其他容器属性保持原行为。

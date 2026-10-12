@@ -46,6 +46,8 @@ InputNumber uses MIT-licensed @rc-component/mini-decimal for string-based decima
 
 ## Independent Table and hooks
 
-Table accepts either `data` or a `source` satisfying TableSource. Use `source={table}` from useBasePageTable and `selection={checked}` from useTableChecked; pagination is built in. Fixed columns, summaries, controlled sorting and overflow-only tooltips are supported. Request functions receive `(query, signal)`; selection remains on business rows as `_checked`.
+Table accepts either `data` or a `source` satisfying TableSource. Use `source={table}` from useBasePageTable and `selection={checked}` from useTableChecked; pagination is built in. Fixed columns, summaries, controlled sorting, expansion, merged cells and overflow-only tooltips are supported. Request functions receive `(query, signal)`; selection remains on business rows as `_checked`.
 
 Import Table/types from `paper-ink/table` and its dependency-complete CSS from `paper-ink/table/style.css`. Hooks are exported from `paper-ink/table-hooks`; the public useRefState tuple is exported from `paper-ink/use-ref-state`. Root imports also work. Source installation: `paper-ink add table`, or install either Hook item individually. See their source READMEs for exact methods and boundaries. No SSR guarantee is required for these browser-oriented hooks.
+
+Generic hooks live separately in `paper-ink/hooks`: `useRefState(initialState)` and `useLocalstorageState(initialState, storageKey)`. The latter reads/writes JSON localStorage with ordinary state and functional updates. Source installation: `paper-ink add hooks`; individual subpaths remain available. No styles or runtime dependencies required.

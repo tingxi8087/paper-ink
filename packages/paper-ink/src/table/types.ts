@@ -19,7 +19,17 @@ export interface TableSelection {
   hideSelectAll?: boolean;
   columnTitle?: ReactNode;
 }
+export interface TableExpansion<T> {
+  expandedIds: readonly TableKey[];
+  setExpandedIds: (ids: TableKey[]) => void;
+  render: (record: T, index: number) => ReactNode;
+  rowExpandable?: (record: T) => boolean;
+  columnWidth?: number | string;
+  expandIcon?: (expanded: boolean, record: T) => ReactNode;
+}
 export interface TableLocale<T> {
+  expandRow: (record: T) => string;
+  collapseRow: (record: T) => string;
   selectAll: string;
   selectRow: (record: T) => string;
   sortAscending: string;
@@ -31,8 +41,8 @@ export type TablePaginationOptions = Pick<PaginationProps,
 > & { position?: 'top' | 'bottom' };
 type DataAttributes = { [key: `data-${string}`]: string | number | boolean | undefined };
 type RowAttributes = HTMLAttributes<HTMLTableRowElement> & DataAttributes;
-type CellAttributes = Omit<TdHTMLAttributes<HTMLTableCellElement>, 'rowSpan' | 'colSpan'> & DataAttributes;
-type HeaderAttributes = Omit<ThHTMLAttributes<HTMLTableCellElement>, 'rowSpan' | 'colSpan'> & DataAttributes;
+type CellAttributes = TdHTMLAttributes<HTMLTableCellElement> & DataAttributes;
+type HeaderAttributes = Omit<ThHTMLAttributes<HTMLTableCellElement>, 'rowSpan'> & { rowSpan?: never } & DataAttributes;
 interface ColumnBase<T> {
   key?: string;
   title?: ReactNode;
@@ -73,6 +83,7 @@ interface TableBaseProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'childr
   onSortChange?: (next: TableSort | null) => void;
   sortDirections?: readonly ('ascend' | 'descend' | null)[];
   selection?: TableSelection;
+  expansion?: TableExpansion<T>;
   rowSelectable?: (record: T) => boolean;
   scroll?: { x?: number | string; y?: number | string };
   stickyHeader?: boolean;

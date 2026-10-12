@@ -226,7 +226,15 @@
       "types": "./dist/use-ref-state/index.d.ts",
       "import": "./dist/use-ref-state/index.js"
     },
-    "./table/style.css": "./dist/table/style.css"
+    "./table/style.css": "./dist/table/style.css",
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.js"
+    },
+    "./use-localstorage-state": {
+      "types": "./dist/use-localstorage-state/index.d.ts",
+      "import": "./dist/use-localstorage-state/index.js"
+    }
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"

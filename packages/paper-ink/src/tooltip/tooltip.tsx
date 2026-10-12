@@ -1,3 +1,4 @@
+import { inertAttributes } from '../internal/inert.js';
 import { usePresence } from '../internal/motion.js';
 import { Fragment, cloneElement, isValidElement, useEffect, useId, useRef, useState, type CSSProperties, type ReactElement } from 'react';
 import { createPortal } from 'react-dom';
@@ -89,6 +90,6 @@ export function Tooltip({ title, children, placement = 'top', trigger = 'hover',
     onFocus={() => (triggers.includes('focus') || triggers.includes('hover')) && change(true)}
     onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) change(false); }}
     onClick={() => triggers.includes('click') && change(!visible)}>{child}</span>
-    {container && (present || (ever.current && !destroyOnHidden)) && createPortal(<div ref={popup} id={id} role="tooltip" hidden={!present} aria-hidden={!visible} inert={!visible} data-motion={visible ? 'enter' : 'leave'} className={`pi-tooltip ${className}`} onMouseEnter={() => triggers.includes('hover') && change(true)} onMouseLeave={() => triggers.includes('hover') && change(false, mouseLeaveDelay)} style={{ ...themeVariables(theme), ...style, background: color ?? style?.background, position: container === node?.ownerDocument.body ? 'fixed' : 'absolute', ...position }}>{content}</div>, container)}
+    {container && (present || (ever.current && !destroyOnHidden)) && createPortal(<div ref={popup} id={id} role="tooltip" hidden={!present} aria-hidden={!visible} {...inertAttributes(!visible)} data-motion={visible ? 'enter' : 'leave'} className={`pi-tooltip ${className}`} onMouseEnter={() => triggers.includes('hover') && change(true)} onMouseLeave={() => triggers.includes('hover') && change(false, mouseLeaveDelay)} style={{ ...themeVariables(theme), ...style, background: color ?? style?.background, position: container === node?.ownerDocument.body ? 'fixed' : 'absolute', ...position }}>{content}</div>, container)}
   </>;
 }

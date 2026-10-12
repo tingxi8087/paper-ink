@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type DependencyList, type Dispatch, type SetStateAction } from 'react';
-import { useRefState } from '../use-ref-state/index.js';
+import { useRefState } from '../hooks/use-ref-state.js';
 
 export type TableQuery<S> = { pageNum: number; pageSize: number; searchParams: S };
 export type GetTableDataResult<T, M = unknown> = {

@@ -1,6 +1,6 @@
 # 轻量 Table 设计草案
 
-状态：2026-10-12 已实现第一期独立 Table、表格 Hook 与公共 useRefState。本文记录确定的 API、实现边界和后续计划；实际导出以源码、组件 README 与文档站 API 为准。独立 Table 不代表 antd Table API 已完成。
+状态：2026-10-12 已实现独立 Table、表格 Hook 与公共 useRefState；第二批补充展开行与合并单元格。本文记录确定的 API、实现边界和后续计划；实际导出以源码、组件 README 与文档站 API 为准。独立 Table 不代表 antd Table API 已完成。
 
 采用 `source + selection + columns` 的独立设计，优先让业务 Hook 的返回值能够直接传给 Table。Table 内部组合现有 Pagination；静态列表使用 data。列声明保留易理解的 columns、rowKey 和 render，不要求遵循 antd Table API。
 
@@ -38,9 +38,9 @@
 | 简单展示配置 | 首版 | 隐藏表头、关闭悬停、隐藏全选、选择列标题 |
 | 排序周期、分页位置、常用文案 | 首版 | 明确周期、顶部或底部分页、局部文字覆盖 |
 | 换页回顶 | 首版 | 仅内部数据滚动区回顶，可关闭 |
-| 展开行 | 第二批候选 | 受控展开详情；与树形数据分开设计 |
+| 展开行 | 第二批实现 | expansion 受控 keys、详情渲染、禁用展开、自定义 SVG 图标与键盘操作 |
 | 列内筛选菜单 | 后续按需 | 有实际业务案例后设计，不先暴露占位 API |
-| 单元格合并 | 第二批候选 | rowSpan / colSpan，需验证固定列和选择列组合 |
+| 单元格合并 | 第二批实现 | onCell 的 rowSpan/colSpan、onHeaderCell 的 colSpan，支持隐藏覆盖单元格 |
 | 树形数据、多级表头 | 暂缓 | 首版不支持 |
 | 多列排序、拖拽、虚拟滚动 | 暂缓 | 首版不支持 |
 | 内置编辑与请求系统 | 不纳入基础 Table | 业务组件组合；重复需求可另行设计薄封装 |
@@ -70,6 +70,7 @@
 | `onSortChange` | `(next: TableSort \| null) => void` | 排序操作通知，状态由外部回传 |
 | `sortDirections` | `readonly ('ascend' \| 'descend' \| null)[]` | 默认升序、降序、无排序，循环顺序 |
 | `selection` | `TableSelection` | 直接传选择 Hook 的返回值；不传不显示选择列 |
+| `expansion` | `TableExpansion<T>` | 受控展开详情；不传不显示展开列 |
 | `rowSelectable` | `(record: T) => boolean` | 默认全部可选；false 禁止该行选择 |
 | `scroll` | `{ x?: number \| string; y?: number \| string }` | x 为表格宽度，y 为数据滚动区域最大高度；数字按 px |
 | `stickyHeader` | `boolean` | 设置 scroll.y 时默认 true，否则 false；可显式关闭 |
@@ -78,6 +79,7 @@
 | `onRow` | `(record: T, index: number) => 行原生属性` | 行事件、title、data-*、aria-* 等 |
 | `onHeaderRow` | `(visibleColumns: readonly TableColumn<T>[]) => 行原生属性` | 单行表头属性；隐藏表头时不调用 |
 | `className / style` | 容器样式属性 | 应用于最外层容器 |
+| `aria-label / aria-labelledby / aria-describedby` | 原生无障碍属性 | 标注真实 table，仅传递一次，方便区分嵌套表格 |
 | `ref` | `HTMLDivElement` 引用 | 指向最外层容器，不提供业务命令式实例 |
 
 data 与 source 通过类型联合约束，必须提供且只能提供一个。source 模式不允许顶层 loading 或分页状态覆盖；data 模式不提供内置分页，需要分页时提供 source。
@@ -110,7 +112,7 @@ scroll.x 支持 CSS 宽度，例如 `960`、`'100%'`、`'max-content'`；未设�
 - 没有 dataIndex 时，render 的 value 为 undefined，通过 record 读取数据。
 - index 为本次展示顺序的行下标，不作为业务身份，也不是跨页全局序号。
 - ellipsis 的默认 Tooltip 和复杂内容规则见下节；不同时添加自动原生 title。
-- onCell/onHeaderCell 的 class 与样式合并，调用方事件与内部交互串联；不能覆盖内部 key/ref、排序语义或固定定位。rowSpan/colSpan 留到第二批，不因开放原生属性而承诺首版合并支持。
+- onCell/onHeaderCell 的 class 与样式合并，调用方事件与内部交互串联；不能覆盖内部 key/ref、排序语义或固定定位。数据单元格已支持 rowSpan/colSpan；单层表头只支持 colSpan，表头 rowSpan 不开放。合并不能跨越功能列或固定区域边界。
 - 复杂对象不自动序列化；对象、数组等内容应显式提供 render。
 
 ```tsx
@@ -195,6 +197,76 @@ type TableSort = {
 - 服务端模式在回调里更新查询参数并重置页码；列 key 与接口字段的映射由业务负责。
 - 本地模式在外部用 useMemo 生成新数组，不对原始数组调用原地 sort。
 - sort 指向不存在或未开启 sorter 的列时不显示激活态，开发环境提示；不在渲染期间触发回调修正外部状态。
+
+## 展开行 TableExpansion
+
+采用与 selection 类似的受控协议，不增加第二套内部展开状态：
+
+```tsx
+const [expandedIds, setExpandedIds] = useState<(string | number)[]>([]);
+
+<Table
+  rowKey="id"
+  source={table}
+  columns={columns}
+  expansion={{
+    expandedIds,
+    setExpandedIds,
+    render: (row) => <UserDetail user={row} />,
+    rowExpandable: (row) => !row.locked,
+  }}
+/>;
+```
+
+| 属性 | 类型 / 默认行为 |
+| --- | --- |
+| expandedIds | readonly (string / number)[]，唯一的展开状态来源 |
+| setExpandedIds | (ids) => void，每次操作只通知一次最终 keys |
+| render | (record, index) => ReactNode，必填，渲染详情内容 |
+| rowExpandable | (record) => boolean，默认 true；false 不展示该行详情，也不允许用户展开 |
+| columnWidth | number / string，默认 40px；随左固定区固定时需要数字 |
+| expandIcon | (expanded, record) => ReactNode，可选，默认使用统一 SVG 箭头 |
+
+- 展开列位于选择列之前；存在左固定数据列时，展开列与选择列一起固定，并参与宽度与偏移计算。
+- 点击展开按钮只修改展开 keys，不触发行点击或选择；支持 Enter、Space，提供 aria-expanded 与 aria-controls。
+- 默认展开/收起文案通过 locale.expandRow(record)、locale.collapseRow(record) 覆盖。
+- 不使用行下标识别详情，不自动删除非当前页 keys。当前页没出现的行不渲染详情，回到该页时按传入状态恢复。
+- rowExpandable 为 false 时，即使 key 仍在 expandedIds 中也不渲染详情，不主动回调清理外部状态。
+- 未展开的详情不挂载；收起后卸载。内部组件状态如需保留，应提升到业务状态，不增加默认缓存机制。
+- 详情中的输入、按钮和嵌套 Table 独立工作；程序收起仍存在的父行详情时，必要时将详情内焦点归还该行展开按钮。
+- 详情整行跨过展开、选择和可见数据列。默认紧凑容器，不加入复杂高度动画，不将普通展开转换为树形数据。
+
+## 合并单元格
+
+```tsx
+const columns: TableColumn<User>[] = [
+  {
+    title: '部门', dataIndex: 'department',
+    onCell: (_, index) => ({ rowSpan: index === 0 ? 2 : index === 1 ? 0 : 1 }),
+  },
+  { title: '姓名', dataIndex: 'name' },
+];
+```
+
+- onCell 支持 rowSpan、colSpan；未提供时为 1。0 表示该单元格不渲染，正整数表示合并范围。
+- 合并范围按当前展示行和过滤 hidden 后的可见数据列计算，不使用接口 total，也不跨页。
+- 已被前一个合并矩形覆盖的单元格自动跳过，无须给每个覆盖位置再写 0；已有显式 0 的常见写法仍然支持。
+- onCell 对每个可见数据位置计算一次，covered 单元格不调用 render 或创建 Tooltip。回调保持纯函数。
+- 非法跨度回退普通单元格并提示；超出当前行列范围的跨度截断。0 应与覆盖区域配合使用，任意隐藏单元格不负责自动填补空洞。
+- 横向合并仅覆盖数据列，不覆盖展开/选择功能列；也不能跨 left、普通、right 固定区域边界，超过边界的跨度截断。
+- 与既有覆盖矩形相交时缩小到可用范围，不覆盖已有合并单元格；调用方应避免重叠配置。
+- 单层表头通过 onHeaderCell 返回 colSpan，同样支持 0 和自动覆盖跳过；不提供多级表头或表头 rowSpan。
+- 隐藏列、分页、排序或数据替换后重新计算。分组数据的跨度由业务按当前顺序生成，不自动按字段值合并。
+- 汇总行仍按列 key 一列一个单元格，不在 summary 中开放合并。
+
+### 跨行合并与展开同时使用
+
+原生 rowSpan 按实际 DOM 行计数。如果在合并区域中间插入全宽详情行，会让跨行单元格与详情相互挤占。因此：
+
+- 没有跨行合并时，详情紧跟对应数据行。
+- 有跨行合并时，所有相连的跨行区间形成一个行组，详情统一插入该组末尾，按父数据行顺序展示。
+- 展开状态仍绑定父行 key，详情通过稳定 ID 与其按钮关联；不会因为插入详情而改变 rowSpan 数值、数据行下标或选择范围。
+- 固定列偏移测量使用真实 colgroup 列宽，不读取合并后的单元格宽度，保持表头、数据和汇总对齐。
 
 ## 数据协议 TableSource
 
@@ -282,6 +354,8 @@ type TableLocale<T> = {
   sortAscending: string;
   sortDescending: string;
   cancelSort: string;
+  expandRow: (record: T) => string;
+  collapseRow: (record: T) => string;
 };
 ```
 
@@ -376,31 +450,9 @@ const table = useBasePageTable<User, SearchParams>({
 - 业务请求失败仍通过 error 返回，支持 reloadTable 重试；保留原 Hook 的错误结果清理约定。
 - 上游订阅、等待计时器和请求在卸载时全部清理，不默认增加自动重试。
 
-### useRefState 公共 API
+### 通用 Hook 归属
 
-保留现有元组顺序与调用方式：
-
-```tsx
-const [state, setState, stateRef] = useRefState<T>(initialState);
-```
-
-```ts
-type ReadonlyStateRef<T> = { readonly current: T };
-
-function useRefState<T>(initialState: T | (() => T)): [
-  T,
-  React.Dispatch<React.SetStateAction<T>>,
-  ReadonlyStateRef<T>,
-];
-```
-
-- 支持惰性初始化、直接值更新与函数更新；setter 和 ref 身份稳定。
-- setter 同步写入 ref，再提交 React 状态更新；事件和异步回调在 setter 返回后可读取最新值。
-- 同一事件中连续函数更新基于最新 ref 值计算；更新函数应保持纯函数，不承担业务副作用。
-- ref.current 为只读入口，不支持绕过 setter 修改；对象值也应通过不可变更新维护。
-- 页面渲染使用 state，ref 用于事件和异步回调，不把即时 ref 值视为已经提交的 React 界面快照。
-- 这是独立通用 Hook，不依赖 Table、请求或分页，不提供第二套不同语义的 useRefState。
-
+useRefState 是独立通用 Hook，源码位于 hooks 目录，文档与案例移到 [通用 Hooks](./hooks.md)。Table 不提供该 API；表格业务 Hook 内部可以复用它。
 
 ### useBasePageTable 补充 setPagination
 
@@ -522,17 +574,18 @@ rowKey 与选择 Hook 的 idName 必须对应同一身份字段。局部刷新�
 7. 覆盖初次加载与保留旧数据、隐藏表头、关闭悬停、隐藏全选、选择列标题、排序周期、文案覆盖与移动端溢出。
    覆盖分页顶部/底部、换页回顶、横向位置和焦点保留；省略 Tooltip 检查实际溢出、尺寸变化、自定义内容、键盘与重复提示。
 8. 文档站提供基础展示、现有 Hook 直接适配、服务端查询、本地排序分页、当前页及独立跨页选择、自定义编辑等可操作案例。
-9. 验证 npm、按组件引入、CLI 源码安装及样式分发，测量实际体积。
-10. Hook 检查受控/非受控查询、缓存、筛选回第一页、手动刷新、本地更新和 _checked 派生；AbortSignal 检查真正取消、忽略 signal 的旧响应、loading 竞态、错误与卸载清理。
-11. useRefState 检查惰性初始化、连续函数更新、setter/ref 稳定身份、只读类型与 StrictMode 下的行为。
-12. 实现后按真实支持范围更新组件优先级 Markdown、生成 HTML，并检查状态筛选与统计；独立 Table 与三个公共 Hook 单独记录，不将 antd Table API 标为已完成。
+9. 展开/合并覆盖受控回传、禁用展开、typed keys、键盘/焦点、跨页、详情卸载与嵌套控件；跨度归一化、0/自动覆盖、重叠、边界截断、隐藏列、固定区、colgroup 对齐、合并行组内详情顺序。
+10. 验证 npm、按组件引入、CLI 源码安装及样式分发，测量实际体积。
+11. Hook 检查受控/非受控查询、缓存、筛选回第一页、手动刷新、本地更新和 _checked 派生；AbortSignal 检查真正取消、忽略 signal 的旧响应、loading 竞态、错误与卸载清理。
+12. useRefState 检查惰性初始化、连续函数更新、setter/ref 稳定身份、只读类型与 StrictMode 下的行为。
+13. 实现后按真实支持范围更新组件优先级 Markdown、生成 HTML，并检查状态筛选与统计；独立 Table 与三个公共 Hook 单独记录，不将 antd Table API 标为已完成。
 
 ## 分发与案例
 
 - 根入口：Table、useBasePageTable、useTableChecked、useRefState 及辅助 Hook。
 - npm 子路径：paper-ink/table、paper-ink/table-hooks、paper-ink/use-ref-state；Table 单组件样式使用 paper-ink/table/style.css，含所需组件样式。
 - CLI：paper-ink add table 自动安装表格、Hook 与所需控件；table-hooks、use-ref-state 也可独立安装。
-- 文档站 /#/table 提供 12 个可编辑案例：静态展示、Hook 分页、筛选排序、业务选择、独立跨页选择、固定列与汇总、溢出 Tooltip、编辑、取消竞态、失败重试、受控查询和 useRefState。
+- 第一批文档站 /#/table 提供 12 个可编辑案例：静态展示、Hook 分页、筛选排序、业务选择、独立跨页选择、固定列与汇总、溢出 Tooltip、编辑、取消竞态、失败重试、受控查询和 useRefState。
 - 案例接口使用已标注的本地模拟。浏览器验证覆盖桌面和移动端；SSR 不是这些 Hook 的兼容目标。
 
 ## 验证记录（2026-10-12）
@@ -549,4 +602,21 @@ rowKey 与选择 Hook 的 idName 必须对应同一身份字段。局部刷新�
 | 视觉 | 桌面与 390px 移动端查看；固定列/表头/汇总按真实坐标检查，无页面横向溢出 |
 | 体积 | Table 含控件依赖 JS gzip 14423 字节，依赖完整 CSS gzip 3539 字节；主表格 Hook JS gzip 1577 字节，useRefState 175 字节，React 外置 |
 
-本次未增加运行时依赖；Button 既有体积检查通过。请求案例为本地模拟，尚不代表特定后端已集成；SSR 不作为 Hook 兼容承诺。后续展开、合并、树形与虚拟化仍不在首版范围。
+本次未增加运行时依赖；Button 既有体积检查通过。请求案例为本地模拟，尚不代表特定后端已集成；SSR 不作为 Hook 兼容承诺。树形、多级表头、汇总合并与虚拟化仍在后续范围。展开行与数据/单层表头合并的第二批验证见后续记录。
+
+## 第二批：展开行与合并单元格（2026-10-12）
+
+已新增 6 个可编辑案例，文档站共 18 个案例：受控展开与详情输入、嵌套表格/自定义 SVG、纵向合并、横向/单层表头合并、展开与固定列/选择/汇总组合、分页/隐藏列/展开 keys 保留。
+
+扩展只改变独立 Table 的支持范围，antd Table 条目保持待实现；汇总合并、多级表头、树形、虚拟滚动仍不支持。原有 Hook API 保持不变。展开详情使用稳定父行 key：合并组边界或数据顺序改变时保留仍然挂载的详情组件状态；实际收起、禁用或移出当前页则卸载。
+
+### 第二批验证结果
+
+- 类型检查、完整构建通过；46 个单元文件共 235 项通过，CLI 单元检查 8 项通过。
+- Chrome 全量浏览器 78 项通过；展开/合并专项新增 7 项，覆盖真实 rowSpan/colSpan 几何、详情顺序、嵌套表格、键盘、跨页和移动端。
+- React 18.3.1、19.3.0 的 npm 导出、样式与声明检查通过；两版均实际验证 CLI 安装源码、类型检查、生产构建、展开/收起、跨行与表头合并，以及退出弹层的 inert 状态。
+- 分发检查中修正了 React 18 源码的只读 ref 类型及弹层 inert 属性兼容；不增加运行时依赖，不改变 React 19 的退出状态行为。
+- 规划页生成并验证：44/81 已完成、独立条目 8/8，antd Table 保持待实现。桌面/移动端和展开+合并+固定列案例已查看截图。
+- Button 既有体积检查通过。原第一批体积数字为当时快照，新增能力的实际体积以最新产物测量为准。
+
+复现 React 18 CLI 消费检查：`PAPER_INK_REACT_VERSION=18.3.1 PLAYWRIGHT_CHANNEL=chrome node scripts/check-cli.mjs`；默认使用 React 19.3.0。

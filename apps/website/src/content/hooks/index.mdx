@@ -1,0 +1,43 @@
+import { HooksDemos } from '../../components/HooksDemos';
+import { PropsTable } from '../../components/ComponentApiTables';
+import { DocBoundary } from '../../components/DocDetails';
+
+# Hooks 通用钩子
+
+独立于组件的状态工具。useRefState 提供即时读取，useLocalstorageState 在普通 state 上增加本地持久化。
+
+## 代码演示
+
+<HooksDemos />
+
+## API
+
+<PropsTable rows={[
+ ['useRefState(initialState)', '[state, setState, stateRef]', '—', '支持惰性初始化；setter 同步更新只读 ref，渲染仍使用 state'],
+ ['useLocalstorageState(initialState, storageKey)', '[state, setState]', '—', '第二个参数是 localStorage key；读取 JSON 初值，提交变化后自动保存'],
+ ['initialState', 'T 或 () => T', '必填', '本地无有效缓存时使用；同一 key 下后续修改此参数不覆盖状态'],
+ ['storageKey', 'string', '必填', '切换 key 时读取对应槽位，不将旧值写进新 key'],
+ ['setState', '值或函数更新', '—', '身份稳定；批量更新保存最终提交值，不在更新函数内执行存储副作用'],
+]} />
+
+## 支持边界
+
+<DocBoundary>
+
+使用 JSON 保存，适合字符串、数字、布尔值、null 和普通对象/数组。undefined 删除存储项，下次挂载使用初值。无效 JSON、存储不可用或写入失败不阻断 state；不可序列化值不保证恢复。只保存本组件提交的最终状态，不提供同 key 多组件共享状态或跨标签页同步。Hook 面向浏览器，不要求 SSR。
+
+</DocBoundary>
+
+## 导入
+
+```tsx
+import { useRefState, useLocalstorageState } from 'paper-ink/hooks';
+// 根入口也支持：import { useRefState, useLocalstorageState } from 'paper-ink';
+
+const [name, setName] = useLocalstorageState('', 'profile.name');
+```
+
+```sh
+paper-ink add hooks
+# 也可单独安装 use-ref-state 或 use-localstorage-state
+```
