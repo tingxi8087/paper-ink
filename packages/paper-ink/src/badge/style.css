@@ -5,5 +5,5 @@
 .pi-badge__indicator--dot { min-width: 6px; width: 6px; height: 6px; padding: 0; }
 .pi-badge__text { margin-inline-start: var(--pi-spacing-medium); }
 .pi-badge__indicator--processing::after { content: ''; position: absolute; inset: -3px; border: 1px solid currentColor; border-radius: 50%; color: var(--pi-color-info-solid); animation: pi-badge-pulse 1.4s ease-out infinite; }
-@keyframes pi-badge-pulse { to { transform: scale(1.4); opacity: 0; } }
+@keyframes pi-badge-pulse { from { opacity: .7; } to { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .pi-badge__indicator--processing::after { animation: none; } }

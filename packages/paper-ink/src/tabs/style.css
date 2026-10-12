@@ -14,3 +14,5 @@
 .pi-tabs--card .pi-tabs__nav { gap: 4px; }
 .pi-tabs--card .pi-tabs__tab { padding-inline: 14px; border: 1px solid var(--pi-color-border-default); border-bottom: 0; border-radius: var(--pi-radius-control) var(--pi-radius-control) 0 0; background: var(--pi-color-surface-muted); }
 .pi-tabs--card .pi-tabs__tab[aria-selected=true] { background: var(--pi-color-surface-container); }
+
+.pi-tabs__nav { overscroll-behavior-x: none; }

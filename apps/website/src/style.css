@@ -136,3 +136,8 @@ summary { cursor: pointer; }
 .doc-import-header button:focus-visible { outline:1px solid #20201e; outline-offset:2px; }
 .doc-import-card pre { margin:0; padding:12px; background:transparent; border-radius:0; font-size:12px; line-height:1.7; }
 @media(max-width:700px) { .doc-imports { grid-template-columns:minmax(0,1fr); gap:8px; } .doc-boundary { padding:10px 12px; } }
+
+/* No elastic motion or boundary bounce; retain ordinary scrolling. */
+html, body { overscroll-behavior: none; }
+.sidebar { overscroll-behavior-y: none; }
+.table-scroll, pre { overscroll-behavior-x: none; }

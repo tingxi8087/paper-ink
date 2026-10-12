@@ -4,7 +4,7 @@
 .pi-drawer .pi-modal-body { display:flex; flex:1; flex-direction:column; min-height:0; }
 .pi-drawer-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
 .pi-drawer-extra { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:400; }
-.pi-drawer-content { flex:1; overflow:auto; overscroll-behavior:contain; padding:20px; }
+.pi-drawer-content { flex:1; overflow:auto; overscroll-behavior:none; padding:20px; }
 .pi-drawer:not(:has(.pi-modal-title)) .pi-drawer-content { padding-top:52px; }
 .pi-drawer-footer { flex-shrink:0; padding:12px 20px; border-top:1px solid var(--pi-color-border-subtle); }
 
@@ -12,8 +12,8 @@
 .pi-drawer-root--left { --pi-drawer-offset-x:-100%; --pi-drawer-offset-y:0; }
 .pi-drawer-root--top { --pi-drawer-offset-x:0; --pi-drawer-offset-y:-100%; }
 .pi-drawer-root--bottom { --pi-drawer-offset-x:0; --pi-drawer-offset-y:100%; }
-.pi-drawer-root--enter .pi-drawer { animation:pi-drawer-enter 260ms cubic-bezier(.22,1,.36,1) both; }
-.pi-drawer-root--leave .pi-drawer { animation:pi-drawer-leave 260ms cubic-bezier(.4,0,1,1) both; }
+.pi-drawer-root--enter .pi-drawer { animation:pi-drawer-enter 260ms ease-out both; }
+.pi-drawer-root--leave .pi-drawer { animation:pi-drawer-leave 260ms ease-in both; }
 .pi-drawer-root--enter .pi-modal-mask { animation:pi-drawer-mask-enter 260ms ease both; }
 .pi-drawer-root--leave .pi-modal-mask { animation:pi-drawer-mask-leave 260ms ease both; }
 @keyframes pi-drawer-enter { from { transform:translate(var(--pi-drawer-offset-x),var(--pi-drawer-offset-y)); } to { transform:translate(0,0); } }

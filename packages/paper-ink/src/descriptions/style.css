@@ -5,3 +5,5 @@
 .pi-descriptions--bordered .pi-descriptions__table { border: 1px solid var(--pi-color-border-subtle); }.pi-descriptions--bordered .pi-descriptions__table td,.pi-descriptions--bordered .pi-descriptions__table th { border: 1px solid var(--pi-color-border-subtle); padding: 12px 16px; }.pi-descriptions--bordered .pi-descriptions__label { background: var(--pi-color-surface-muted); }
 .pi-descriptions--small .pi-descriptions__table td,.pi-descriptions--small .pi-descriptions__table th { padding-block: 4px; }.pi-descriptions--bordered.pi-descriptions--small .pi-descriptions__table td,.pi-descriptions--bordered.pi-descriptions--small .pi-descriptions__table th { padding: 6px 8px; }
 .pi-descriptions--medium .pi-descriptions__table td,.pi-descriptions--medium .pi-descriptions__table th,.pi-descriptions--middle .pi-descriptions__table td,.pi-descriptions--middle .pi-descriptions__table th { padding-block: 8px; }
+
+.pi-descriptions__scroll { overscroll-behavior-x: none; }

@@ -44,3 +44,5 @@
 .pi-input-password__toggle:hover:not(:disabled) { color: var(--pi-color-text-primary); }
 .pi-input-password__toggle:disabled { color: var(--pi-color-text-disabled); cursor: not-allowed; }
 .pi-input-password__toggle:focus-visible { outline: 2px solid var(--pi-color-primary-solid); outline-offset: 2px; border-radius: 2px; }
+
+.pi-textarea__control { overscroll-behavior-y: none; }

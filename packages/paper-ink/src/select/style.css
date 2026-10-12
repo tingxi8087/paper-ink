@@ -45,3 +45,5 @@
 @keyframes pi-select-motion-enter { from { opacity:0;  } to { opacity:1;  } }
 @keyframes pi-select-motion-leave { from { opacity:1;  } to { opacity:0;  } }
 @media(prefers-reduced-motion:reduce) { .pi-select__popup[data-motion] { animation:none; } }
+
+.pi-select__popup { overscroll-behavior-y: none; }

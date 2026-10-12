@@ -15,11 +15,12 @@ for(const [name, selector, component, duration] of cases) test(`${name} animates
   document.querySelector<HTMLElement>('[data-testid=motion-toggle]')!.click();
   for(let i=0;i<3;i++)await new Promise(requestAnimationFrame);
   const panel=document.querySelector<HTMLElement>(selector)!;const animation=panel.getAnimations()[0];animation.pause();animation.currentTime=0;
-  const start=Number(getComputedStyle(panel).opacity);animation.currentTime=duration/2;const middle=Number(getComputedStyle(panel).opacity);animation.currentTime=duration;const end=Number(getComputedStyle(panel).opacity);
+  const start=Number(getComputedStyle(panel).opacity);const startTransform=getComputedStyle(panel).transform;animation.currentTime=duration/2;const middle=Number(getComputedStyle(panel).opacity);const middleTransform=getComputedStyle(panel).transform;animation.currentTime=duration;const end=Number(getComputedStyle(panel).opacity);const endTransform=getComputedStyle(panel).transform;
   document.querySelector<HTMLElement>('[data-testid=motion-toggle]')!.click();await new Promise(requestAnimationFrame);
-  return {start,middle,end,exit:panel.isConnected,exitName:getComputedStyle(panel).animationName};
+  return {start,middle,end,startTransform,middleTransform,endTransform,exit:panel.isConnected,exitName:getComputedStyle(panel).animationName};
  },{selector,duration});
  expect(sample.start).toBe(0);expect(sample.middle).toBeGreaterThan(0);expect(sample.middle).toBeLessThan(1);expect(sample.end).toBe(1);expect(sample.exit).toBe(true);expect(sample.exitName).toContain('leave');
+ if(name==='Modal')expect([sample.startTransform,sample.middleTransform,sample.endTransform]).toEqual(['none','none','none']);
  await expect(page.locator(selector.replace('.pi-modal-root--enter ',''))).not.toBeVisible();
 });
 test('Message fades and closes after its exit; keyed update does not replay entrance',async({page})=>{
@@ -34,4 +35,21 @@ test('Selection controls use short transitions and reduced motion disables new m
  for(const selector of ['.pi-checkbox__mark','.pi-radio__mark','.pi-segmented__item'])await expect(demo.locator(selector).first()).toHaveCSS('transition-duration', /0.12s/);
  await page.emulateMedia({reducedMotion:'reduce'});await expect(page.locator('.pi-modal')).toHaveCSS('animation-name','none');
  for(const selector of ['.pi-checkbox__mark','.pi-radio__mark','.pi-segmented__item'])await expect(demo.locator(selector).first()).toHaveCSS('transition-duration','0s');
+});
+
+test('website and widget scrollers disable boundary bounce without blocking horizontal-area vertical chaining', async ({page}) => {
+ await page.goto('/#/button');
+ const demo=page.getByRole('region',{name:'按钮类型',exact:true});await demo.getByRole('button',{name:'编辑代码'}).click();
+ await demo.locator('textarea').fill('<><Modal open title="plain" /><Badge status="processing" text="Processing" /><Tabs items={[{key:"a",label:"A",children:"Panel"}]} /><Table data={[]} rowKey="id" columns={[{dataIndex:"name"}]} scroll={{y:120}} /></>');
+ await expect(page.getByRole('dialog',{name:'plain'})).toBeVisible();
+ const state=await page.evaluate(()=>({
+  html:getComputedStyle(document.documentElement).overscrollBehavior,
+  body:getComputedStyle(document.body).overscrollBehavior,
+  modal:getComputedStyle(document.querySelector('.pi-modal-wrap')!).overscrollBehaviorY,
+  tabsX:getComputedStyle(document.querySelector('.pi-tabs__nav')!).overscrollBehaviorX,
+  tabsY:getComputedStyle(document.querySelector('.pi-tabs__nav')!).overscrollBehaviorY,
+  table:getComputedStyle(document.querySelector('.pi-table__viewport')!).overscrollBehaviorY,
+  pulse:getComputedStyle(document.querySelector('.pi-badge__indicator--processing')!,'::after').transform,
+ }));
+ expect(state).toEqual({html:'none',body:'none',modal:'none',tabsX:'none',tabsY:'auto',table:'none',pulse:'none'});
 });

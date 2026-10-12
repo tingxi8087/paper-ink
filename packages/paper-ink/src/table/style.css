@@ -38,3 +38,5 @@
 .pi-table .pi-table__expanded-row > td { padding: 12px 16px; background: var(--pi-color-surface-muted); }
 .pi-table__expanded-content { min-width: 0; }
 .pi-table--hoverable tbody .pi-table__expanded-row:hover > td { background: var(--pi-color-surface-muted); }
+
+.pi-table__viewport { overscroll-behavior-x: none; }

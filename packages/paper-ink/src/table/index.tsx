@@ -228,7 +228,7 @@ const TableRoot = forwardRef(function Table<T extends object>(props: TableProps<
   return <div {...rest} ref={ref} className={join('pi-table', `pi-table--${size}`, bordered && 'pi-table--bordered', rowHoverable && 'pi-table--hoverable', stickyHeader && 'pi-table--sticky-header', className)} style={{ ...themeVariables(theme), ...style }} aria-busy={loading}>
     {pageOptions?.position === 'top' && pager}
     <MeasureContext.Provider value={register}>
-      <div className="pi-table__viewport" ref={viewport} style={{ maxHeight: scroll?.y }}>
+      <div className="pi-table__viewport" ref={viewport} style={{ maxHeight: scroll?.y, overscrollBehaviorY: scroll?.y === undefined ? undefined : 'none' }}>
         <table ref={tableRef} aria-label={ariaLabel} aria-labelledby={ariaLabelledBy} aria-describedby={ariaDescribedBy} style={{ width: scroll?.x ?? '100%', minWidth: minTableWidth || undefined }}>
           <colgroup>{expansion && <col style={{ width: expandWidth }} />}{selection && <col style={{ width: selectWidth }} />}{visible.map((column, index) => <col key={keys[index]} style={{ width: effectiveWidths[index], minWidth: column.minWidth }} />)}</colgroup>
           {showHeader && <thead><tr {...headerProps}>
