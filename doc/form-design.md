@@ -61,7 +61,7 @@ const form = useForm<Values>({
 | `validate()` | 校验所有当前注册字段 |
 | `validate(names)` | 校验指定字段，不触发业务提交 |
 
-`reset` 不通过重新挂载控件实现。name、setValue、useWatch、dependencies 和 validate(names) 统一使用顶层字段 key，按 `keyof Values` 推导字段值类型；不提供点路径解析、数组下标路径或深层合并。快照复制普通对象、数组和 Date；其他类实例需业务适配。validate 返回 status、values、errors。
+`reset` 不通过重新挂载控件实现。name、setValue、useWatch、dependencies 和 validate(names) 统一使用顶层字段 key，按 `keyof Values` 推导字段值类型；不提供点路径解析、数组下标路径或深层合并。快照复制普通对象、数组和 Date；不可变值类（如 Dayjs）按相同原型与 valueOf() 的数值或字符串结果比较，快照保留实例；其他类实例需业务适配。validate 返回 status、values、errors。
 
 ```tsx
 type Values = {

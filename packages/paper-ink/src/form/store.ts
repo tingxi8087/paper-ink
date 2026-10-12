@@ -24,7 +24,12 @@ function equal(a: any, b: any, seen = new WeakMap<object, object>()): boolean {
   if (!a || !b || typeof a !== 'object' || typeof b !== 'object') return false;
   if (a instanceof Date || b instanceof Date) return a instanceof Date && b instanceof Date && a.getTime() === b.getTime();
   if (Object.getPrototypeOf(a) !== Object.getPrototypeOf(b)) return false;
-  if (!Array.isArray(a) && Object.getPrototypeOf(a) !== Object.prototype && Object.getPrototypeOf(a) !== null) return false;
+  if (!Array.isArray(a) && Object.getPrototypeOf(a) !== Object.prototype && Object.getPrototypeOf(a) !== null) {
+    // Immutable scalar wrappers (such as Dayjs) expose their value without a date-library dependency.
+    if (typeof a.valueOf !== 'function' || typeof b.valueOf !== 'function') return false;
+    const left = a.valueOf(), right = b.valueOf();
+    return (typeof left === 'number' || typeof left === 'string') && typeof left === typeof right && Object.is(left, right);
+  }
   if (seen.get(a) === b) return true; seen.set(a, b);
   const keys = Object.keys(a); return keys.length === Object.keys(b).length && keys.every(key => own(b, key) && equal(a[key], b[key], seen));
 }

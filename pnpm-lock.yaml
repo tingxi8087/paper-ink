@@ -50,6 +50,9 @@ importers:
 
   apps/website:
     dependencies:
+      dayjs:
+        specifier: ^1.11.23
+        version: 1.11.23
       paper-ink:
         specifier: workspace:*
         version: link:../../packages/paper-ink
@@ -80,6 +83,9 @@ importers:
       '@rc-component/mini-decimal':
         specifier: ^1.1.4
         version: 1.1.4
+      dayjs:
+        specifier: ^1.11.23
+        version: 1.11.23
     devDependencies:
       react:
         specifier: ^19.0.0
@@ -89,9 +95,6 @@ importers:
         version: 19.3.0(react@19.3.0)
 
 packages:
-
-  '@rc-component/mini-decimal@1.1.4':
-    resolution: {integrity: sha512-xiuXcaCwyOWpD8a8scdExFl+bntNphAW8XeenL1ig2en0AAZY0Pcp4pC0dI22qJ+NvxKn9RoNIoRdqYU3BLH4w==}
 
   '@adobe/css-tools@4.5.0':
     resolution: {integrity: sha512-6OzddxPio9UiWTCemp4N8cYLV2ZN1ncRnV1cVGtve7dhPOtRkleRyx32GQCYSwDYgaHU3USMm84tNsvKzRCa1Q==}
@@ -562,6 +565,10 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
+  '@rc-component/mini-decimal@1.1.4':
+    resolution: {integrity: sha512-xiuXcaCwyOWpD8a8scdExFl+bntNphAW8XeenL1ig2en0AAZY0Pcp4pC0dI22qJ+NvxKn9RoNIoRdqYU3BLH4w==}
+    engines: {node: '>=8.x'}
+
   '@rolldown/pluginutils@1.0.0-rc.3':
     resolution: {integrity: sha512-eybk3TjzzzV97Dlj5c+XrBFW57eTNhzod66y9HrBlzJ6NsCrWCp/2kaPS3K9wJmurBC0Tdw4yPjXKZqlznim3Q==}
 
@@ -956,6 +963,9 @@ packages:
   data-urls@5.0.0:
     resolution: {integrity: sha512-ZYP5VBHshaDAiVZxjbRVcFJpc+4xGgT0bK3vzy1HLN8jTO975HEbuYzZJcHoQEY5K1a0z8YayJkyVETa08eNTg==}
     engines: {node: '>=18'}
+
+  dayjs@1.11.23:
+    resolution: {integrity: sha512-QDTCU0M0MxR3hQfnlDJfwekQiaanm1ubOD231u73WBckQ/fsamwRLiE2GBz6D3a/xF1NgfiDLJjXBa1hYOYTtQ==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -1708,10 +1718,6 @@ packages:
 
 snapshots:
 
-  '@rc-component/mini-decimal@1.1.4':
-    dependencies:
-      '@babel/runtime': 7.29.10
-
   '@adobe/css-tools@4.5.0': {}
 
   '@asamuzakjp/css-color@3.2.0':
@@ -2078,6 +2084,10 @@ snapshots:
     dependencies:
       playwright: 1.64.0
 
+  '@rc-component/mini-decimal@1.1.4':
+    dependencies:
+      '@babel/runtime': 7.29.10
+
   '@rolldown/pluginutils@1.0.0-rc.3': {}
 
   '@rollup/pluginutils@5.4.0(rollup@4.64.4)':
@@ -2407,6 +2417,8 @@ snapshots:
     dependencies:
       whatwg-mimetype: 4.0.0
       whatwg-url: 14.2.0
+
+  dayjs@1.11.23: {}
 
   debug@4.4.3:
     dependencies:

@@ -234,7 +234,17 @@
     "./use-localstorage-state": {
       "types": "./dist/use-localstorage-state/index.d.ts",
       "import": "./dist/use-localstorage-state/index.js"
-    }
+    },
+    "./date-picker": {
+      "types": "./dist/date-picker/index.d.ts",
+      "import": "./dist/date-picker/index.js"
+    },
+    "./date-picker/style.css": "./dist/date-picker/style.css",
+    "./time-picker": {
+      "types": "./dist/time-picker/index.d.ts",
+      "import": "./dist/time-picker/index.js"
+    },
+    "./time-picker/style.css": "./dist/time-picker/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"
@@ -248,6 +258,7 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@rc-component/mini-decimal": "^1.1.4"
+    "@rc-component/mini-decimal": "^1.1.4",
+    "dayjs": "^1.11.23"
   }
 }

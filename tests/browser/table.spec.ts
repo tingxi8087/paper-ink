@@ -74,12 +74,12 @@ test('desktop and mobile docs stay within viewport', async ({ page }) => {
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390); await page.screenshot({ path: '.artifacts/table-mobile.png', fullPage: true });
 });
 
-test('planning identifies independent Table and hooks as done, antd Table stays pending', async ({ page }) => {
+test('planning identifies independent Table and hooks as done, antd Table uses an independent alternative', async ({ page }) => {
   await page.goto(pathToFileURL(resolve('doc/component-priorities.html')).href + '#status=done');
-  await expect(page.locator('#total')).toHaveText('45 / 82'); await expect(page.locator('#done')).toHaveText('45');
+  await expect(page.locator('#total')).toHaveText('47 / 82'); await expect(page.locator('#done')).toHaveText('47');
   await page.locator('#scope').selectOption('own'); await page.locator('#search').fill('轻量表格'); await expect(page.locator('#total')).toHaveText('1 / 9');
   await expect(page.locator('#rows')).toContainText('Table'); await expect(page.locator('#rows')).toContainText('数据展示');
   await page.locator('#search').fill(''); await expect(page.locator('#total')).toHaveText('9 / 9');
-  await page.locator('#scope').selectOption('core'); await page.locator('#status').selectOption('pending'); await page.locator('#search').fill('Table');
-  await expect(page.locator('#total')).toHaveText('1 / 73'); await expect(page.locator('#pending')).toHaveText('1'); await expect(page.locator('#done')).toHaveText('0');
+  await page.locator('#scope').selectOption('core'); await page.locator('#status').selectOption('independent'); await page.locator('#search').fill('Table');
+  await expect(page.locator('#total')).toHaveText('1 / 73'); await expect(page.locator('#pending')).toHaveText('0'); await expect(page.locator('#independent')).toHaveText('1'); await expect(page.locator('#done')).toHaveText('0');
 });

@@ -51,3 +51,13 @@ export function FileSearchIcon(props: IconProps) {
 export function ServerIcon(props: IconProps) {
   return <svg {...base} {...props}><rect x="2" y="2" width="12" height="5" rx="1" /><rect x="2" y="9" width="12" height="5" rx="1" /><path d="M5 4.5h.01M5 11.5h.01M9 4.5h3M9 11.5h3" /></svg>;
 }
+
+export function CalendarIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="2" y="3.5" width="12" height="11" rx="1.5" /><path d="M5 1.5v4m6-4v4M2 7h12M5 10h.01M8 10h.01M11 10h.01M5 12.5h.01M8 12.5h.01" /></svg>;
+}
+export function ClockIcon(props: IconProps) {
+  return <svg {...base} {...props}><circle cx="8" cy="8" r="6.5" /><path d="M8 4v4l3 2" /></svg>;
+}
+export function ArrowRightIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M2 8h12m-4-4 4 4-4 4" /></svg>;
+}

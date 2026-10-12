@@ -791,6 +791,58 @@
         "hooks/index.ts"
       ],
       "exports": []
+    },
+    {
+      "name": "date-time",
+      "internal": true,
+      "description": "Shared date arithmetic, calendar/time panels and picker control",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "motion",
+        "inert",
+        "field-binding"
+      ],
+      "dependencies": {
+        "dayjs": "^1.11.23"
+      },
+      "files": [
+        "internal/date-time.ts",
+        "internal/date-time-types.ts",
+        "internal/date-time-panels.tsx",
+        "internal/date-time-control.tsx",
+        "internal/date-time.css"
+      ],
+      "exports": []
+    },
+    {
+      "name": "date-picker",
+      "description": "Date, month, year and range picker with time, strict input and presets",
+      "registryDependencies": [
+        "date-time"
+      ],
+      "files": [
+        "date-picker/index.tsx",
+        "date-picker/types.ts",
+        "date-picker/style.css"
+      ],
+      "exports": [
+        "export * from './date-picker/index';"
+      ]
+    },
+    {
+      "name": "time-picker",
+      "description": "24-hour time picker with steps, disabled times and confirmation",
+      "registryDependencies": [
+        "date-time"
+      ],
+      "files": [
+        "time-picker/index.tsx",
+        "time-picker/style.css"
+      ],
+      "exports": [
+        "export * from './time-picker/index';"
+      ]
     }
   ]
 }

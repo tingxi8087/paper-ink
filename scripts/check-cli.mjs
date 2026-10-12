@@ -20,17 +20,18 @@ try {
   const cliArchive = archives.find(name => /cli.*\.tgz$/.test(name));
   assert.ok(libArchive && cliArchive);
   await mkdir(join(consumer, 'src'), { recursive: true });
-  await writeFile(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module', dependencies: { 'paper-ink': `file:${join(temp, libArchive)}`, '@paper-ink/cli': `file:${join(temp, cliArchive)}`, react: consumerReactVersion, 'react-dom': consumerReactVersion }, devDependencies: { vite: '7.3.7', typescript: '5.9.3', '@types/react': consumerReactTypes, '@types/react-dom': consumerReactTypes } }));
+  await writeFile(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module', dependencies: { 'paper-ink': `file:${join(temp, libArchive)}`, '@paper-ink/cli': `file:${join(temp, cliArchive)}`, react: consumerReactVersion, 'react-dom': consumerReactVersion, dayjs: '^1.11.23' }, devDependencies: { vite: '7.3.7', typescript: '5.9.3', '@types/react': consumerReactTypes, '@types/react-dom': consumerReactTypes } }));
   await writeFile(join(consumer, 'tsconfig.json'), JSON.stringify({ compilerOptions: { target: 'ES2022', lib: ['ES2022', 'DOM'], module: 'ESNext', moduleResolution: 'Bundler', jsx: 'react-jsx', strict: true, skipLibCheck: true, noEmit: true }, include: ['src'] }));
   run('pnpm', ['install', '--offline', '--ignore-scripts']);
   run('pnpm', ['exec', 'paper-ink', '--version']);
   run('pnpm', ['exec', 'paper-ink', 'init']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', '--dry-run']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', '--dry-run']);
   assert.equal((await readdir(join(consumer, 'src'))).length, 0);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker']);
   await writeFile(join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8" /></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>');
   await writeFile(join(consumer, 'src/main.tsx'), `import { useState } from 'react';
+import dayjs, { type Dayjs } from 'dayjs';
 import { createRoot } from 'react-dom/client';
 import * as LocalComponents from './components/paper-ink/index';
 import * as NpmComponents from 'paper-ink';
@@ -45,6 +46,13 @@ function FormFeatures({ source }: { source: 'Local' | 'Npm' }) {
  const form = C.useForm({ defaultValues: { name: '', on: false } });
  const [saved, setSaved] = useState('');
  return <C.Form form={form} onSubmit={values => setSaved(JSON.stringify(values))}><C.Form.Field name="name" required><C.Input aria-label={source + ' form name'} /></C.Form.Field><C.Form.Field name="on"><C.Switch aria-label={source + ' form switch'} /></C.Form.Field><C.Button htmlType="submit">{source} form submit</C.Button><output aria-label={source + ' form saved'}>{saved}</output></C.Form>;
+}
+function DateFeatures({ source }: { source: 'Local' | 'Npm' }) {
+ const C = source === 'Local' ? LocalComponents : NpmComponents;
+ const [date,setDate] = useState<Dayjs | null>(dayjs('2026-10-12'));
+ const [time,setTime] = useState<Dayjs | null>(dayjs('2026-10-12T09:00:00'));
+ const [rangeText,setRangeText] = useState('');
+ return <div aria-label={source+' date features'}><C.DatePicker aria-label={source+' date'} value={date} onChange={setDate} /><output aria-label={source+' date saved'}>{date?.format('YYYY-MM-DD') ?? 'empty'}</output><C.DatePicker.RangePicker placeholder={[source+' range start',source+' range end']} onChange={(_,texts)=>setRangeText(texts.join('/'))} /><output aria-label={source+' range saved'}>{rangeText}</output><C.TimePicker aria-label={source+' time'} format="HH:mm" value={time} onChange={setTime} /><output aria-label={source+' time saved'}>{time?.format('HH:mm') ?? 'empty'}</output></div>;
 }
 function TableFeatures({ source }: { source: 'Local' | 'Npm' }) {
  const C = source === 'Local' ? LocalComponents : NpmComponents;
@@ -81,8 +89,8 @@ function Demo() {
  const [localOpen, setLocalOpen] = useState(false); const [npmOpen, setNpmOpen] = useState(false);
  const theme = { token: { color: { primary: { solid: '#1677ff' } }, radius: { control: 12 } } };
  return <><h1>Paper Ink dual distribution</h1>
- <section aria-label="CLI source"><LocalProvider theme={theme}><FeatureSet source="Local" /><ModernFeatures source="Local" /><FormFeatures source="Local" /><TableFeatures source="Local" /><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
- <section aria-label="npm package"><NpmProvider theme={theme}><FeatureSet source="Npm" /><ModernFeatures source="Npm" /><FormFeatures source="Npm" /><TableFeatures source="Npm" /><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
+ <section aria-label="CLI source"><LocalProvider theme={theme}><FeatureSet source="Local" /><ModernFeatures source="Local" /><FormFeatures source="Local" /><TableFeatures source="Local" /><DateFeatures source="Local" /><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
+ <section aria-label="npm package"><NpmProvider theme={theme}><FeatureSet source="Npm" /><ModernFeatures source="Npm" /><FormFeatures source="Npm" /><TableFeatures source="Npm" /><DateFeatures source="Npm" /><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
 }
 createRoot(document.getElementById('root')!).render(<Demo />);`);
   run('pnpm', ['exec', 'tsc', '--noEmit']);
@@ -99,6 +107,21 @@ createRoot(document.getElementById('root')!).render(<Demo />);`);
   for (const [region, label] of [['CLI source', 'Local'], ['npm package', 'Npm']]) {
     const group = page.getByRole('region', { name: region });
     await group.getByRole('spinbutton', { name: label + ' precise number' }).waitFor();
+    const dateFeature = group.getByLabel(label+' date features');
+    const dateInput = dateFeature.getByRole('combobox',{name:label+' date',exact:true});
+    await dateInput.fill('2026-10-20'); await dateInput.press('Enter');
+    assert.equal(await dateFeature.getByLabel(label+' date saved').textContent(),'2026-10-20');
+    await dateInput.press('Escape');
+    const timeInput = dateFeature.getByRole('combobox',{name:label+' time',exact:true});
+    await timeInput.fill('10:15'); await timeInput.press('Enter');
+    assert.equal(await dateFeature.getByLabel(label+' time saved').textContent(),'09:00');
+    await page.getByRole('dialog',{name:'时间选择',exact:true}).getByRole('button',{name:'确定',exact:true}).click();
+    assert.equal(await dateFeature.getByLabel(label+' time saved').textContent(),'10:15');
+    await dateFeature.getByPlaceholder(label+' range start',{exact:true}).fill('2026-10-01');
+    await dateFeature.getByPlaceholder(label+' range start',{exact:true}).press('Enter');
+    await dateFeature.getByPlaceholder(label+' range end',{exact:true}).fill('2026-10-20');
+    await dateFeature.getByPlaceholder(label+' range end',{exact:true}).press('Enter');
+    assert.equal(await dateFeature.getByLabel(label+' range saved').textContent(),'2026-10-01/2026-10-20');
     const tableFeature = group.getByLabel(label+' table features');
     await tableFeature.getByText(label+' table row 1',{exact:true}).waitFor();
     assert.equal(await tableFeature.locator('tbody tr').first().locator('td[rowspan="2"]').count(),1);

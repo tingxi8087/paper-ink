@@ -18,6 +18,8 @@
 
 成本按做好常用 API 和交互估计，不按完整复制 antd 计算。标注“已有”的组件以完善现有实现为主；本表不是全部实现的承诺。独立设计的组件单独列出，不计入 antd 核心目录。
 
+状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 82 项：已有基础实现 47 项、待实现 30 项、已有独立方案 4 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
+
 保持既定方向：通用 React + TypeScript 组件库，默认黑白主色、保留语义色，常规 API 接近 antd，主题结构独立设计，支持 npm 与 CLI 源码双分发，完全开源，从简单组件逐步推进。
 
 ## 通用（4）
@@ -34,11 +36,11 @@
 | 组件 | 推荐指数 | 成本 | 理由 |
 | --- | --- | --- | --- |
 | Divider 分割线（已有） | 4/5 | 低 | 简单通用，适合建立清晰的页面层次 |
-| Flex 弹性布局 | 3/5 | 低 | 横排与竖排场景已由 Inline / Stack 覆盖，暂不复制 Flex API |
-| Grid 栅格 | 3/5 | 中 | 已提供独立 SimpleGrid，支持自动列数、列比例和跨列；未实现 Row/Col API |
+| Flex 弹性布局（独立方案） | 3/5 | 低 | 横排与竖排场景已由 Inline / Stack 覆盖，暂不复制 Flex API |
+| Grid 栅格（独立方案） | 3/5 | 中 | 已提供独立 SimpleGrid，支持自动列数、列比例和跨列；未实现 Row/Col API |
 | Layout 布局 | 3/5 | 中 | 应用外壳有价值，但具体布局差异较大 |
 | Masonry 瀑布流 | 2/5 | 高 | 更适合图片、内容流，不是当前基础需求 |
-| Space 间距 | 4/5 | 低 | 本阶段不做；普通间距使用 Inline / Stack，紧密控件组合后续单独设计 |
+| Space 间距（暂不实现） | 4/5 | 低 | 本阶段不做；普通间距使用 Inline / Stack，紧密控件组合后续单独设计 |
 | Splitter 分隔面板 | 3/5 | 中 | 编辑器和开发工具有用，普通业务页需求较少 |
 
 ## 导航（7）
@@ -61,8 +63,8 @@
 | Cascader 级联选择 | 2/5 | 高 | 树形数据、路径选择和搜索都较复杂 |
 | Checkbox 多选框（已有） | 5/5 | 低—中 |单独、Group 与半选已实现，支持键盘、原生表单和 reset；已补轻量动效 |
 | ColorPicker 颜色选择器 | 2/5 | 高 | 设计工具有用，当前主题实验室可先用原生控件 |
-| DatePicker 日期选择器 | 4/5 | 高 | 使用频繁，但日期、范围和国际化值得单独设计 |
-| Form 表单 | 4/5 | 高 | 对业务效率很重要，先稳定输入控件再建设字段系统 |
+| DatePicker 日期选择器（已有） | 4/5 | 高 | 单日期与范围、月/年、日期附带时间、严格输入、限制与快捷项、局部中英文和 Form 绑定；保留首期 API 边界 |
+| Form 表单（独立方案） | 4/5 | 高 | 已提供独立轻量 Form，采用顶层字段、统一绑定协议与异步校验；未实现 antd Form API |
 | Input 输入框（已有） | 5/5 | 中 | 基础输入、Search 搜索、Password 密码与 TextArea 多行文本；持续完善边界与组合体验 |
 | InputNumber 数字输入框（已有） | 4/5 | 中—高 | 数量、金额、配置值常用；需认真处理精度和中间态 |
 | Mentions 提及 | 2/5 | 高 | 协作和编辑场景专用，当前收益有限 |
@@ -71,7 +73,7 @@
 | Select 选择器（已有） | 5/5 | 高 |单选、多选、tags、搜索、清空与键盘已实现；虚拟化等后续补充；已补轻量动效 |
 | Slider 滑动输入条 | 3/5 | 中 | 参数调节有用，可用于主题实验室和工具界面 |
 | Switch 开关（已有） | 5/5 | 低—中 | 受控/非受控、加载、禁用、尺寸和文案已实现 |
-| TimePicker 时间选择器 | 3/5 | 高 | 适合跟日期能力一起建设 |
+| TimePicker 时间选择器（已有） | 3/5 | 高 | 24 小时制、时分秒步长、禁用联动、严格输入、草稿确认和即时提交；时间范围留待后续 |
 | Transfer 穿梭框 | 2/5 | 高 | 特定后台场景使用，常可由多选或表格替代 |
 | TreeSelect 树选择 | 2/5 | 高 | 应在 Tree、Select 都稳定后考虑 |
 | Upload 上传 | 3/5 | 高 | 常用但范围大，文件列表、请求、进度和取消需明确边界 |
@@ -95,7 +97,7 @@
 | QRCode 二维码 | 2/5 | 中 | 场景明确时可接成熟编码库，暂不优先 |
 | Segmented 分段控制器（已有） | 4/5 | 低—中 |紧凑切换很适合我们的风格，如视图和筛选模式；已补轻量动效 |
 | Statistic 统计数值 | 3/5 | 低 | 仪表盘有用，但多数展示可以先用排版完成 |
-| Table 表格 | 4/5 | 很高 | 已提供独立轻量 Table，采用 source/selection 协议；未实现 antd Table API |
+| Table 表格（独立方案） | 4/5 | 很高 | 已提供独立轻量 Table，采用 source/selection 协议；未实现 antd Table API |
 | Tag 标签（已有） | 5/5 | 低 | 颜色、外观、关闭和受控 CheckableTag 已实现 |
 | Timeline 时间轴（已有） | 3/5 | 低—中 | 垂直时间轴、标签、交错、加载和反转已实现 |
 | Tooltip 文字提示（已有） | 5/5 | 中 |12种位置、触发、延迟、主题 Portal 和定位已实现；已补轻量动效 |
@@ -183,6 +185,6 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 | useRefState 即时状态 Hook（已有） | 4/5 | 低 | React state 与即时只读 ref，支持连续函数更新 |
 | useLocalstorageState 本地状态 Hook（已有） | 4/5 | 低 | 普通 state 增加存储 key、JSON 自动保存与刷新恢复 |
 
-15 个 5/5 条目均已有常用 API 子集。本轮再补齐 18 个 4/5 组件，以及 Rate、Timeline、Result，连同 9 个独立组件与 Hook，已有基础实现共 45 项；完整 API 支持范围以组件文档为准。
+15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker，连同 9 个独立组件与 Hook，已有基础实现共 47 项；完整 API 支持范围以组件文档为准。
 
-本阶段不实现 Space、DatePicker、antd Table 与 antd Form API；独立轻量 Form、Table 及公共表格 Hook 已实现。普通间距统一使用 Inline / Stack；DatePicker 留待单独设计。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal，不包含 notification。
+本阶段不实现 Space、antd Table 与 antd Form API；独立轻量 Form、Table 及公共表格 Hook 已实现。普通间距统一使用 Inline / Stack；DatePicker、RangePicker 与 TimePicker 首期已实现，API 与边界见[日期时间设计文档](./date-time-design.md)；Calendar 与时间范围尚未实现。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal，不包含 notification。

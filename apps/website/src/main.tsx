@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { DocLayout } from './layouts/DocLayout';
+const DatePickerDoc = lazy(() => import('./content/components/date-picker/index.mdx'));
+const TimePickerDoc = lazy(() => import('./content/components/time-picker/index.mdx'));
 const LayoutDoc = lazy(() => import('./content/components/layout/index.mdx'));
 const CheckboxDoc = lazy(() => import('./content/components/checkbox/index.mdx'));
 const RadioDoc = lazy(() => import('./content/components/radio/index.mdx'));
@@ -85,11 +87,14 @@ import '../../../packages/paper-ink/src/timeline/style.css';
 import '../../../packages/paper-ink/src/result/style.css';
 import '../../../packages/paper-ink/src/form/style.css';
 import '../../../packages/paper-ink/src/table/style.css';
+import '../../../packages/paper-ink/src/internal/date-time.css';
+import '../../../packages/paper-ink/src/date-picker/style.css';
+import '../../../packages/paper-ink/src/time-picker/style.css';
 import './style.css';
 function App() {
  const [route, setRoute] = useState(window.location.hash.replace(/^#\/?/, ''));
  useEffect(() => { const update = () => setRoute(window.location.hash.replace(/^#\/?/, '')); window.addEventListener('hashchange', update); return () => window.removeEventListener('hashchange', update); }, []);
- const pages: Record<string, React.ReactNode> = { 'hooks': <HooksDoc />, 'table': <TableDoc />, 'form': <FormDoc />, 'result': <ResultDoc />, 'timeline': <TimelineDoc />, 'rate': <RateDoc />, 'typography': <TypographyDoc />, 'divider': <DividerDoc />, 'avatar': <AvatarDoc />, 'badge': <BadgeDoc />, 'card': <CardDoc />, 'descriptions': <DescriptionsDoc />, 'dropdown': <DropdownDoc />, 'popover': <PopoverDoc />, 'popconfirm': <PopconfirmDoc />, 'drawer': <DrawerDoc />, 'breadcrumb': <BreadcrumbDoc />, 'pagination': <PaginationDoc />, 'collapse': <CollapseDoc />, 'segmented': <SegmentedDoc />, 'progress': <ProgressDoc />, 'skeleton': <SkeletonDoc />, 'input-number': <InputNumberDoc />, 'app': <AppDoc />, '': <HomePage />, layout: <LayoutDoc />, checkbox: <CheckboxDoc />, radio: <RadioDoc />, switch: <SwitchDoc />, tabs: <TabsDoc />, select: <SelectDoc />, tooltip: <TooltipDoc />, message: <MessageDoc />, tag: <TagDoc />, alert: <AlertDoc />, spin: <SpinDoc />, empty: <EmptyDoc />, button: <ButtonDoc />, input: <InputDoc />, modal: <ModalDoc />, guide: <Guide />, theme: <ThemePage />, examples: <ExamplesPage /> };
+ const pages: Record<string, React.ReactNode> = { 'date-picker': <DatePickerDoc />, 'time-picker': <TimePickerDoc />, 'hooks': <HooksDoc />, 'table': <TableDoc />, 'form': <FormDoc />, 'result': <ResultDoc />, 'timeline': <TimelineDoc />, 'rate': <RateDoc />, 'typography': <TypographyDoc />, 'divider': <DividerDoc />, 'avatar': <AvatarDoc />, 'badge': <BadgeDoc />, 'card': <CardDoc />, 'descriptions': <DescriptionsDoc />, 'dropdown': <DropdownDoc />, 'popover': <PopoverDoc />, 'popconfirm': <PopconfirmDoc />, 'drawer': <DrawerDoc />, 'breadcrumb': <BreadcrumbDoc />, 'pagination': <PaginationDoc />, 'collapse': <CollapseDoc />, 'segmented': <SegmentedDoc />, 'progress': <ProgressDoc />, 'skeleton': <SkeletonDoc />, 'input-number': <InputNumberDoc />, 'app': <AppDoc />, '': <HomePage />, layout: <LayoutDoc />, checkbox: <CheckboxDoc />, radio: <RadioDoc />, switch: <SwitchDoc />, tabs: <TabsDoc />, select: <SelectDoc />, tooltip: <TooltipDoc />, message: <MessageDoc />, tag: <TagDoc />, alert: <AlertDoc />, spin: <SpinDoc />, empty: <EmptyDoc />, button: <ButtonDoc />, input: <InputDoc />, modal: <ModalDoc />, guide: <Guide />, theme: <ThemePage />, examples: <ExamplesPage /> };
  return <DocLayout route={route}><Suspense fallback={<p role="status">正在载入文档…</p>}>{pages[route] ?? <><h1>页面未找到</h1><a href="#/">回到首页</a></>}</Suspense></DocLayout>;
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);

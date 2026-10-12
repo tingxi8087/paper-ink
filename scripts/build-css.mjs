@@ -2,8 +2,8 @@ import { mkdir, writeFile, readFile } from 'node:fs/promises';
 const base = new URL('../packages/paper-ink/', import.meta.url);
 const theme = await readFile(new URL('src/styles/theme.css', base), 'utf8');
 const manifest = JSON.parse(await readFile(new URL('../registry/registry.json', import.meta.url), 'utf8'));
-const components = manifest.items.filter(item => item.files.includes(`${item.name}/style.css`));
-const styles = Object.fromEntries(await Promise.all(components.map(async item => [item.name, await readFile(new URL(`src/${item.name}/style.css`, base), 'utf8')])));
+const components = manifest.items.filter(item => item.name !== 'theme' && item.files.some(file => file.endsWith('.css')));
+const styles = Object.fromEntries(await Promise.all(components.map(async item => [item.name, (await Promise.all(item.files.filter(file => file.endsWith('.css')).map(file => readFile(new URL(`src/${file}`, base), 'utf8')))).join('\n')])));
 await mkdir(new URL('dist/styles/', base), { recursive: true });
 await writeFile(new URL('dist/styles/theme.css', base), theme);
 function dependencies(name, seen = new Set()) {

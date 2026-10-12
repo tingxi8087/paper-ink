@@ -116,3 +116,24 @@ test('installs input and modal with shared theme/button once and guards ReactDOM
   invoke(root, ['add', 'modal', 'input']);
   assert.deepEqual(snapshot(root), installed);
 });
+
+test('installs standalone date/time sources with shared styles and declares Day.js', t => {
+  for (const name of ['date-picker', 'time-picker']) {
+    const root = fixture(t);
+    const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+    pkg.dependencies['react-dom'] = '^19.0.0';
+    pkg.dependencies.dayjs = '^1.11.0';
+    writeFileSync(join(root, 'package.json'), JSON.stringify(pkg));
+    invoke(root, ['init']); invoke(root, ['add', name]);
+    const after = snapshot(root);
+    const lock = JSON.parse(after['paper-ink.lock.json']);
+    assert.ok(lock.items.includes('date-time'));
+    assert.ok(!lock.items.includes('form'));
+    assert.ok(existsSync(join(root, `src/components/paper-ink/${name}/index.tsx`)));
+    assert.match(after['src/components/paper-ink/style.css'], /internal\/date-time.css/);
+    assert.match(after['src/components/paper-ink/internal/date-time.ts'], /from 'dayjs'/);
+    assert.ok(registry.items.find(item => item.name === 'date-time').dependencies.dayjs);
+    if (name === 'time-picker') assert.equal(existsSync(join(root, 'src/components/paper-ink/date-picker')), false);
+    invoke(root, ['add', name]); assert.deepEqual(snapshot(root), after);
+  }
+});

@@ -1,0 +1,10 @@
+import { forwardRef } from 'react';
+import { DateTimeControl } from '../internal/date-time-control.js';
+import { defineFieldBinding } from '../internal/field-binding.js';
+import type { DatePickerProps, RangePickerProps, PickerRef } from './types.js';
+const binding = { toControlValue: (value: unknown) => value ?? null, defaultProps: ['defaultValue'] };
+export const RangePicker = defineFieldBinding(forwardRef<PickerRef, RangePickerProps>(function RangePicker(props, ref) { return <DateTimeControl {...props} range ref={ref} />; }), binding);
+const Single = defineFieldBinding(forwardRef<PickerRef, DatePickerProps>(function DatePicker(props, ref) { return <DateTimeControl {...props} ref={ref} />; }), binding);
+export const DatePicker = Object.assign(Single, { RangePicker });
+export { zhCN, enUS } from '../internal/date-time.js';
+export type { DatePickerProps, RangePickerProps, PickerRef, DateValue, RangeValue, RangeTexts, Picker, PickerLocale, TimeOptions, DisabledTime } from './types.js';

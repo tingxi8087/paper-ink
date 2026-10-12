@@ -1,0 +1,41 @@
+import { DatePickerDemos } from '../../../components/DateTimeDemos';
+import { DatePickerApiTable, RangePickerApiTable } from '../../../components/DateTimeApiTables';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# DatePicker 日期选择器
+
+单日期、月份、年份和范围；可组合时间面板。值使用 Dayjs，清空为 null。
+
+## 代码演示
+
+<DatePickerDemos />
+
+## DatePicker API
+
+<DatePickerApiTable />
+
+## RangePicker API
+
+通过 `DatePicker.RangePicker` 使用，或从日期入口导入 `RangePicker`。默认按先后排序，排序后重新校验禁用规则；禁用端点已有值不会被交换覆盖。
+
+<RangePickerApiTable />
+
+## 支持边界
+
+<DocBoundary>
+
+- 支持日/月/年、日期时间、范围、严格输入、快捷项、中文/英文、键盘操作和 Form 自动绑定。
+- `showTime` 仅与 `picker="date"` 组合。分钟精度同时设置 `format="YYYY-MM-DD HH:mm"` 和 `showTime={{ format: 'HH:mm' }}`。
+- 纯日期选择即提交，日期时间默认点确定。关闭取消未提交草稿；Escape 还原文本。无效输入保留并标记错误，不会自动变成另一日期。
+- `minDate/maxDate` 按选择粒度限制日期；当天的时分秒边界使用 `disabledTime`。时间步长与输入同样校验，既有值不自动舍入。
+- Dayjs 采用本地时间，业务自行决定接口格式、时区和范围端点是否包含；不自动给结束日期加 23:59:59。
+- 范围在宽屏显示双月，窄屏使用单月。范围作为一个 Form 字段管理。
+- 暂不提供周、季度、多日期、Calendar、时间范围、12 小时制、时区模式、任意日期格渲染、受控面板模式或 SSR 保证。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="date-picker" component="DatePicker, RangePicker, zhCN, enUS" />
+
+运行时依赖 Day.js，CLI 安装时会声明。使用 `import dayjs from 'dayjs'` 创建值，业务提交显式调用 `value.format(...)`。完整样式可使用 `paper-ink/style.css`。

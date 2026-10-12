@@ -55,3 +55,5 @@ FieldControl 是可选外观容器，继承 Field 状态，不管理值。组合
 独立入口 paper-ink/form、paper-ink/form/style.css；控件 CSS 单独导入。CLI：paper-ink add form input button，协议文件作为共享依赖安装。
 
 详细设计见 ../../../../doc/form-design.md；文档站有 12 个可编辑案例。
+
+- 不可变值类（如 Dayjs）以相同原型和 valueOf() 的数字/字符串值比较 dirty；快照保留实例。可变类仍需业务转换，不通过修改实例更新字段。

@@ -1,0 +1,35 @@
+import { TimePickerDemos } from '../../../components/DateTimeDemos';
+import { TimePickerApiTable } from '../../../components/DateTimeApiTables';
+import { DocBoundary, ComponentImport } from '../../../components/DocDetails';
+
+# TimePicker 时间选择器
+
+24 小时制的时分秒选择，默认确认后提交。使用 Dayjs 值，业务只读取时间字段。
+
+## 代码演示
+
+<TimePickerDemos />
+
+## API
+
+<TimePickerApiTable />
+
+`DisabledTime` 提供 `disabledHours(): number[]`、`disabledMinutes(hour): number[]` 和 `disabledSeconds(hour, minute): number[]`，面板与手动输入采用同一校验。
+
+## 支持边界
+
+<DocBoundary>
+
+- 支持 `HH:mm` 与 `HH:mm:ss`、步长、禁用组合、受控值、清空、此刻、严格输入及 Form 自动绑定。
+- `HH:mm` 提交时将秒和毫秒归零；`HH:mm:ss` 将毫秒归零，保留既有值的日期部分。空值开始选择以当天为载体。
+- 默认使用确认草稿，`needConfirm={false}` 有效选择即时提交。非法输入和不符合步长的值不会提交，也不自动舍入。
+- 内置中文与英文文案，组件局部 locale 不改变 Day.js 全局语言；弹层继承主题。
+- 暂不支持 RangePicker、跨午夜策略、12 小时制、毫秒、时区选择和任意格式 token。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="time-picker" component="TimePicker, zhCN, enUS" />
+
+运行时依赖 Day.js。创建值使用 `dayjs(...)`，提交接口时明确调用 `value.format('HH:mm')` 或 `value.format('HH:mm:ss')`。
