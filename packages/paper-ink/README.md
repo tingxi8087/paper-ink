@@ -57,3 +57,5 @@ Generic hooks live separately in `paper-ink/hooks`: `useRefState(initialState)` 
 Statistic, Layout (Header/Content/Footer/Sider), Splitter, Steps, AutoComplete, Slider, notification/useNotification and Image/PreviewGroup are available as root exports and kebab-case subpaths with dependency-complete styles. Each supports the documented common API subset; see its README and website for boundaries. Statistic uses mini-decimal to preserve decimal strings. AutoComplete and Slider integrate with the independent Form. Prefer App.useApp().notification for scoped theme inheritance.
 
 GetProps, GetProp and GetRef are type-only exports from paper-ink/util or the root; they need no stylesheet. DatePicker/RangePicker, TimePicker and Menu are also available with documented subsets.
+
+ColorPicker 纯色首期：透明度、HEX/RGB/HSB、预设、键盘与 Form。npm 子路径 `paper-ink/color-picker`，CSS `paper-ink/color-picker/style.css`；CLI `paper-ink add color-picker` 自动添加 @ctrl/tinycolor。支持范围见组件文档，渐变与屏幕取色留待后续。

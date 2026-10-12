@@ -1004,6 +1004,31 @@
         "icons",
         "modal"
       ]
+    },
+    {
+      "name": "color-picker",
+      "description": "Pure color picker with alpha, formats, presets and keyboard interaction",
+      "registryDependencies": [
+        "theme",
+        "icons",
+        "popover",
+        "input",
+        "select",
+        "field-binding"
+      ],
+      "dependencies": {
+        "@ctrl/tinycolor": "^4.2.1"
+      },
+      "files": [
+        "color-picker/index.ts",
+        "color-picker/color.ts",
+        "color-picker/types.ts",
+        "color-picker/color-picker.tsx",
+        "color-picker/style.css"
+      ],
+      "exports": [
+        "export * from './color-picker/index';"
+      ]
     }
   ]
 }

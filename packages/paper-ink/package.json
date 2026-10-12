@@ -293,7 +293,12 @@
       "types": "./dist/image/index.d.ts",
       "import": "./dist/image/index.js"
     },
-    "./image/style.css": "./dist/image/style.css"
+    "./image/style.css": "./dist/image/style.css",
+    "./color-picker": {
+      "types": "./dist/color-picker/index.d.ts",
+      "import": "./dist/color-picker/index.js"
+    },
+    "./color-picker/style.css": "./dist/color-picker/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"
@@ -307,6 +312,7 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
+    "@ctrl/tinycolor": "^4.2.1",
     "@rc-component/mini-decimal": "^1.1.4",
     "dayjs": "^1.11.23"
   }

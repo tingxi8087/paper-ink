@@ -7,7 +7,7 @@ console.log(`Button JS gzip: ${gzipSync(result.outputFiles[0].contents).length} 
 console.log(`Button CSS gzip: ${gzipSync(css).length} bytes`);
 if (gzipSync(result.outputFiles[0].contents).length > 8000) throw new Error('Button JS exceeds initial 8 KB gzip budget');
 // Measure picker entrypoints independently and catch accidental date-library leakage.
-for (const name of ['date-picker', 'time-picker', 'menu', 'statistic', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image']) {
+for (const name of ['date-picker', 'time-picker', 'menu', 'statistic', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image', 'color-picker']) {
   const entry = `./packages/paper-ink/dist/${name}/index.js`;
   const bundle = await build({ entryPoints: [entry], bundle: true, write: false, minify: true, metafile: true, format: 'esm', external: ['react', 'react/jsx-runtime', 'react-dom'] });
   const style = await readFile(`packages/paper-ink/dist/${name}/style.css`);

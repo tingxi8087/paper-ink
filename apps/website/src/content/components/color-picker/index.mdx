@@ -1,0 +1,43 @@
+import { ColorPickerDemos } from './demos';
+import { ColorPickerApiTable, ColorMethodsTable } from './api';
+import { DocBoundary, DocNote, ComponentImport } from '../../../components/DocDetails';
+
+# ColorPicker 颜色选择器
+
+纯色、透明度、文本输入与预设选择；保留色相，交互和表单绑定保持轻量。
+
+## 代码演示
+
+<ColorPickerDemos />
+
+## API
+
+<ColorPickerApiTable />
+
+## Color 颜色对象
+
+<ColorMethodsTable />
+
+<DocNote>
+
+建议受控场景直接保存 onChange 的 Color 对象，提交时调用 toCssString()。保存回调的 css 字符串也可用；同一次交互的字符串回写会保留内部色相和精度。HEX / RGB / HSB 仅控制展示，HSB 字符串不是 CSS 颜色，业务样式使用 css 或 toCssString()。
+
+Form.Field 自动保存 CSS 字符串或 null。需要颜色对象时使用 Field render 函数显式绑定。清空不是透明：透明色仍然是合法值，可通过 required 校验。
+
+</DocNote>
+
+## 支持边界
+
+<DocBoundary>
+
+- 首期纯色：二维色板、色相、透明度、HEX / RGB / HSB 输入、预设、键盘、清空、禁用、受控状态和 Form。颜色转换使用 MIT 许可的 @ctrl/tinycolor，内部保存 HSB 浮点值，展示时取整。
+- 输入过程中不触发颜色变化；Enter 或失焦时校验和提交，非法文本保留并提示。Escape 关闭选择器且丢弃尚未提交的输入。关闭不会撤销已经触发的 onChange。format 下拉的 Escape 只关闭下拉。
+- 色板方向键调整 1%，Shift 为 10%；色相方向键调整 1°，透明度调整 1%。Home / End 支持端点；文本输入提供键盘等效方式。指针捕获支持拖出区域继续调节，pointercancel 不触发完成回调。
+- 只提供单色，不包含渐变、屏幕取色、复杂面板自定义、函数式语义样式或自动对比度推荐。value 不解析 CSS 变量、currentColor、OKLCH / Display-P3 等现代色域。预设保留业务自定义颜色，组件框架使用水墨主题。
+- size 使用库内统一的 middle；自定义 children 负责自身样式与 ref，需使用可聚焦、正确透传事件的元素。非法受控颜色不抛错，保持上次合法值；数值 HSB / RGB 输入按合法范围规范化。
+
+</DocBoundary>
+
+## 导入
+
+<ComponentImport name="color-picker" component="ColorPicker, Color" />

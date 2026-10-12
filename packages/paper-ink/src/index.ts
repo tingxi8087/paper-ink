@@ -121,3 +121,5 @@ export * from './slider/index.js';
 export * from './notification/index.js';
 
 export * from './image/index.js';
+
+export * from './color-picker/index.js';

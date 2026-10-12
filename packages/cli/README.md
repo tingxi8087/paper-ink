@@ -65,3 +65,5 @@ Source items now also include typography, divider, breadcrumb, dropdown, paginat
 新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。
 
 Additional source items: `paper-ink add statistic util layout splitter steps auto-complete slider notification image`. Layout is the application shell; Stack/Inline/SimpleGrid continue to share internal spacing helpers. Util contains only types and has no CSS. Image pulls in Modal; AutoComplete pulls in Input; Slider pulls in Tooltip. App includes Notification along with Message and Modal.
+
+ColorPicker 纯色首期：透明度、HEX/RGB/HSB、预设、键盘与 Form。npm 子路径 `paper-ink/color-picker`，CSS `paper-ink/color-picker/style.css`；CLI `paper-ink add color-picker` 自动添加 @ctrl/tinycolor。支持范围见组件文档，渐变与屏幕取色留待后续。

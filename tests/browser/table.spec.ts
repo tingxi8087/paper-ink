@@ -76,7 +76,7 @@ test('desktop and mobile docs stay within viewport', async ({ page }) => {
 
 test('planning identifies independent Table and hooks as done, antd Table uses an independent alternative', async ({ page }) => {
   await page.goto(pathToFileURL(resolve('doc/component-priorities.html')).href + '#status=done');
-  await expect(page.locator('#total')).toHaveText('57 / 82'); await expect(page.locator('#done')).toHaveText('57');
+  await expect(page.locator('#total')).toHaveText('58 / 82'); await expect(page.locator('#done')).toHaveText('58');
   await page.locator('#scope').selectOption('own'); await page.locator('#search').fill('轻量表格'); await expect(page.locator('#total')).toHaveText('1 / 9');
   await expect(page.locator('#rows')).toContainText('Table'); await expect(page.locator('#rows')).toContainText('数据展示');
   await page.locator('#search').fill(''); await expect(page.locator('#total')).toHaveText('9 / 9');

@@ -28,6 +28,8 @@
 
 5 分组件的常用 API 子集已齐备，详细支持边界见文档站各组件页和 `packages/paper-ink/src/<component>/README.md`。
 
-4 分组件已完成 19 项，规划页共 57 项已有基础实现（包含 Rate、Timeline、Result、独立 Form/Table 与四个公共 Hook）。DatePicker、RangePicker、TimePicker 和 Menu 首期已实现；Space 暂不实现，antd Table/Form 使用独立方案。InputNumber 与 App 的使用边界见各组件文档。
+4 分组件已完成 19 项，规划页共 58 项已有基础实现（包含 Rate、Timeline、Result、独立 Form/Table 与四个公共 Hook）。DatePicker、RangePicker、TimePicker 和 Menu 首期已实现；Space 暂不实现，antd Table/Form 使用独立方案。InputNumber 与 App 的使用边界见各组件文档。
 
 新增 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image，API、演示和支持边界见文档站；App 已接入 Notification。
+
+ColorPicker 纯色首期已实现：支持透明度、HEX/RGB/HSB、预设、键盘、Form，使用独立高精度颜色状态。

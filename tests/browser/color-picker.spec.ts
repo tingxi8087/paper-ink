@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+test('ColorPicker docs, all eight examples and styled references fit desktop and mobile',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ for(const width of [1440,390]){await page.setViewportSize({width,height:1000});await page.goto('/#/color-picker');await expect(page.getByRole('heading',{name:'ColorPicker 颜色选择器',exact:true})).toBeVisible();await expect(page.locator('.demo')).toHaveCount(8);await expect(page.locator('.demo-error')).toHaveCount(0);await expect(page.locator('.main-content > .table-scroll')).toHaveCount(2);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:`.artifacts/color-picker-doc-${width}.png`,fullPage:true});}
+ expect(errors).toEqual([]);
+});
+test('format selection is nested, draft input validates, transparency and Escape preserve state',async({page})=>{
+ await page.goto('/#/color-picker');await page.getByRole('button',{name:'RGB颜色',exact:true}).click();let popup=page.getByRole('dialog',{name:'选择颜色',exact:true});await expect(popup).toBeVisible();
+ const input=popup.getByRole('textbox',{name:'颜色值'});await input.fill('#12');await input.press('Enter');await expect(popup.getByRole('alert')).toContainText('有效');
+ await input.fill('hsba(240, 100%, 100%, 0.5)');await input.press('Enter');await expect(input).toHaveValue('rgba(0, 0, 255, 0.5)');
+ const format=popup.getByRole('combobox',{name:'颜色格式'});await format.click();await popup.getByRole('option',{name:'HSB',exact:true}).click();await expect(input).toHaveValue('hsba(240, 100%, 100%, 0.5)');
+ await format.click();await format.press('Escape');await expect(popup.getByRole('listbox')).toHaveCount(0);await expect(popup).toBeVisible();
+ const alpha=popup.getByRole('slider',{name:'透明度'});await alpha.focus();await alpha.press('Home');await expect(input).toHaveValue('hsba(240, 100%, 100%, 0)');
+ await input.fill('#ff0000');await input.press('Escape');await expect(popup).toHaveCount(0);await page.getByRole('button',{name:'RGB颜色',exact:true}).click();popup=page.getByRole('dialog',{name:'选择颜色',exact:true});await expect(popup.getByRole('textbox',{name:'颜色值'})).toHaveValue('hsba(240, 100%, 100%, 0)');
+});
+test('square captures dragging outside, completion fires at release and hue survives black with CSS echo',async({page})=>{
+ await page.goto('/#/color-picker');const demo=page.getByRole('region',{name:'完成回调与键盘',exact:true});await demo.getByRole('button',{name:'键盘颜色',exact:true}).click();const popup=page.getByRole('dialog',{name:'选择颜色',exact:true});const square=popup.getByRole('group',{name:/颜色区域/});const hue=popup.getByRole('slider',{name:'色相'});
+ await square.focus();await square.press('Home');await hue.focus();await hue.press('ArrowRight');await hue.press('ArrowRight');await expect(hue).toHaveAttribute('aria-valuenow','2');await square.focus();await square.press('End');await expect(hue).toHaveAttribute('aria-valuenow','2');
+ const box=(await square.boundingBox())!;await page.mouse.move(box.x+box.width*.5,box.y+box.height*.5);await page.mouse.down();await page.mouse.move(box.x+box.width+30,box.y-20);await page.mouse.up();await expect(square).toHaveAccessibleName(/饱和度 100%，亮度 100%/);await expect(demo.locator('output')).toContainText('已完成：#');
+ await expect(popup).toHaveCSS('opacity','1');await expect(popup).toHaveCSS('background-color','rgb(255, 255, 255)');await page.screenshot({path:'.artifacts/color-picker-panel-desktop.png'});
+});
+test('presets, clear, required Form, reset and mobile panel keyboard are functional',async({page})=>{
+ await page.goto('/#/color-picker');const demo=page.getByRole('region',{name:'表单绑定与重置',exact:true});await demo.getByRole('button',{name:'保存配色',exact:true}).click();await expect(demo).toContainText('请填写品牌色');await demo.getByRole('button',{name:'品牌色',exact:true}).click();let popup=page.getByRole('dialog',{name:'选择颜色',exact:true});await popup.getByRole('button',{name:'选择 #1677ff',exact:true}).click();await page.keyboard.press('Escape');await demo.getByRole('button',{name:'保存配色',exact:true}).click();await expect(demo.locator('output')).toHaveText('{"accent":"#1677ff"}');await demo.getByRole('button',{name:'品牌色',exact:true}).click();await popup.getByRole('button',{name:'清空颜色',exact:true}).click();await page.keyboard.press('Escape');await demo.getByRole('button',{name:'保存配色',exact:true}).click();await expect(demo).toContainText('请填写品牌色');await demo.getByRole('button',{name:'重置配色',exact:true}).click();
+ await page.setViewportSize({width:390,height:844});await page.getByRole('region',{name:'基本颜色与尺寸',exact:true}).getByRole('button',{name:'选择颜色',exact:true}).nth(1).click();popup=page.getByRole('dialog',{name:'选择颜色',exact:true});await expect(popup).toBeVisible();const box=(await popup.boundingBox())!;expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(390);await expect(popup).toHaveCSS('opacity','1');await page.screenshot({path:'.artifacts/color-picker-panel-mobile.png'});
+});

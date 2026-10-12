@@ -18,7 +18,7 @@
 
 成本按做好常用 API 和交互估计，不按完整复制 antd 计算。标注“已有”的组件以完善现有实现为主；本表不是全部实现的承诺。独立设计的组件单独列出，不计入 antd 核心目录。
 
-状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 82 项：已有基础实现 57 项、待实现 20 项、已有独立方案 4 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
+状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 82 项：已有基础实现 58 项、待实现 19 项、已有独立方案 4 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
 
 保持既定方向：通用 React + TypeScript 组件库，默认黑白主色、保留语义色，常规 API 接近 antd，主题结构独立设计，支持 npm 与 CLI 源码双分发，完全开源，从简单组件逐步推进。
 
@@ -62,7 +62,7 @@
 | AutoComplete 自动完成（已有） | 3/5 | 中 | 自由输入、建议过滤、键盘选择、中文组合输入、清空与 Form 绑定已实现 |
 | Cascader 级联选择 | 2/5 | 高 | 树形数据、路径选择和搜索都较复杂 |
 | Checkbox 多选框（已有） | 5/5 | 低—中 |单独、Group 与半选已实现，支持键盘、原生表单和 reset；已补轻量动效 |
-| ColorPicker 颜色选择器 | 2/5 | 高 | 设计工具有用，当前主题实验室可先用原生控件 |
+| ColorPicker 颜色选择器（已有） | 2/5 | 中 | 纯色与透明度、HEX/RGB/HSB、预设、键盘和 Form 已实现；渐变与屏幕取色不在首期 |
 | DatePicker 日期选择器（已有） | 4/5 | 高 | 单日期与范围、月/年、日期附带时间、严格输入、限制与快捷项、局部中英文和 Form 绑定；已修关闭闪动，保留首期 API 边界 |
 | Form 表单（独立方案） | 4/5 | 高 | 已提供独立轻量 Form，采用顶层字段、统一绑定协议与异步校验；未实现 antd Form API |
 | Input 输入框（已有） | 5/5 | 中 | 基础输入、Search 搜索、Password 密码与 TextArea 多行文本；持续完善边界与组合体验 |
@@ -185,10 +185,12 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 | useRefState 即时状态 Hook（已有） | 4/5 | 低 | React state 与即时只读 ref，支持连续函数更新 |
 | useLocalstorageState 本地状态 Hook（已有） | 4/5 | 低 | 普通 state 增加存储 key、JSON 自动保存与刷新恢复 |
 
-15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker、Menu，以及 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image，连同 9 个独立组件与 Hook，已有基础实现共 57 项；完整 API 支持范围以组件文档为准。
+15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker、Menu，以及 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image、ColorPicker，连同 9 个独立组件与 Hook，已有基础实现共 58 项；完整 API 支持范围以组件文档为准。
 
 本阶段不实现 Space、antd Table 与 antd Form API；独立轻量 Form、Table 及公共表格 Hook 已实现。普通间距统一使用 Inline / Stack；DatePicker、RangePicker 与 TimePicker 首期已实现，API 与边界见[日期时间设计文档](./date-time-design.md)；Calendar 与时间范围尚未实现。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal / notification。
 
 Menu 的 API、功能与首期边界见[轻量 Menu 设计](./menu-design.md)。
 
 本批 3 分条目已提供常用 API 子集；完整 API 与首期边界以各组件文档为准。Layout 是应用外壳，Stack / Inline / SimpleGrid 的独立布局文档保留。Util 仅提供类型，无 CSS。Notification 默认静态调用不继承局部 Context，使用 App 或 hook 实现主题继承。
+
+ColorPicker 首期已实现，使用 @ctrl/tinycolor 的解析与转换函数，颜色对象保留高精度 HSB。纯色范围成本调整为中；尚不含渐变、屏幕取色和复杂面板定制。

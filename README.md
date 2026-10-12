@@ -124,3 +124,5 @@ Table 内置分页，支持固定列、汇总、受控展开、单元格合并�
 通用状态工具位于独立 hooks 模块与文档页，支持 `import { useRefState, useLocalstorageState } from 'paper-ink/hooks'`。`useLocalstorageState(initialState, storageKey)` 在普通 state 上增加 JSON 本地持久化，自动读取初值并保存提交后的变化。CLI：`paper-ink add hooks`；旧 use-ref-state 子路径保持兼容。详见 doc/hooks.md。
 
 新增 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image，包含常用 API 子集、41 组组件演示与类型工具示例。Notification 已接入 App.useApp()。具体支持范围见文档站及各源码 README；组件状态统计见 [组件规划](doc/component-priorities.html)。
+
+ColorPicker 纯色首期：透明度、HEX/RGB/HSB、预设、键盘与 Form。npm 子路径 `paper-ink/color-picker`，CSS `paper-ink/color-picker/style.css`；CLI `paper-ink add color-picker` 自动添加 @ctrl/tinycolor。支持范围见组件文档，渐变与屏幕取色留待后续。

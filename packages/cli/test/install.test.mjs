@@ -177,3 +177,17 @@ test('installs all nine additions with complete imports and independent layout h
   invoke(root, ['add', ...names]);
   assert.deepEqual(snapshot(root), after);
 });
+
+test('installs ColorPicker with dependency-complete styles and its color engine', t => {
+  const root = fixture(t), pkg = JSON.parse(readFileSync(join(root,'package.json'),'utf8'));
+  pkg.dependencies['react-dom']='^19.0.0';pkg.dependencies['@ctrl/tinycolor']='^4.2.1';
+  writeFileSync(join(root,'package.json'),JSON.stringify(pkg));
+  invoke(root,['init']);invoke(root,['add','color-picker']);
+  const after=snapshot(root), lock=JSON.parse(after['paper-ink.lock.json']);
+  for(const name of ['color-picker','popover','input','select','field-binding','icons','theme'])assert.ok(lock.items.includes(name));
+  assert.ok(!lock.items.includes('date-time'));assert.ok(!lock.items.includes('form'));
+  assert.match(after['src/components/paper-ink/index.ts'],/color-picker\/index/);
+  assert.match(after['src/components/paper-ink/style.css'],/color-picker\/style.css/);
+  assert.match(after['src/components/paper-ink/color-picker/color.ts'],/@ctrl\/tinycolor/);
+  invoke(root,['add','color-picker']);assert.deepEqual(snapshot(root),after);
+});
