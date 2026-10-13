@@ -39,7 +39,7 @@
 
 ## 快速开始与页签标识
 
-快速开始提供 npm、cnpm、Yarn、pnpm 四种安装命令切换。默认展示已发布包的 registry 安装命令，本地 tgz 安装折叠展示；仓库开发仍使用既定 pnpm workspace。
+快速开始提供 npm、cnpm、Yarn、pnpm 四种安装命令切换。只展示已发布包的 registry 安装命令；本地构建安装方式放在 README；仓库开发仍使用既定 pnpm workspace。
 
 文档页签标题从共享目录生成，采用“中文名 英文名 - Paper Ink”格式；中文页面保留“页面名 - Paper Ink”，首页展示品牌和组件库定位，未知路由展示未找到状态。favicon 使用本地黑白 SVG 墨滴与 π 标记，静态入口使用相对路径，支持子目录部署。
 
@@ -58,3 +58,5 @@
 顶部提供 SVG GitHub 仓库链接，新窗口打开并包含可访问名称。公开文档地址为 https://tingxi8087.github.io/paper-ink/，仓库 About 与 README 使用同一地址。
 
 `.github/workflows/pages.yml` 在 main 推送或手动触发时执行锁定依赖安装、类型检查、Vite 构建、Pages 制品上传与部署。GitHub Pages 的发布源使用 GitHub Actions；网站沿用相对资源路径和 Hash 路由。
+
+快速开始以使用者为对象：组件包 / CLI 源码页签共用同一个可运行例子，切换时只改变安装与导入方式。保留按需引入和继续探索入口，仓库开发命令、编辑器边界与组件概览不占用快速开始主线。

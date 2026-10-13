@@ -1,101 +1,26 @@
-import { InstallCommands } from '../../components/InstallCommands';
+import { QuickStart } from '../../components/QuickStart';
 
 # 快速开始
 
-## 安装与引入
+在已有的 React 18+ 项目中使用 Paper Ink。React 和 ReactDOM 由项目提供；源码方式还需要 TypeScript。
 
-组件包已发布到 npm，支持 React 18+。消费项目可使用 npm、cnpm、Yarn 或 pnpm；React 与 ReactDOM 由项目提供。
+## 选择安装方式
 
-<InstallCommands />
+<QuickStart />
 
-安装后，在应用入口引入组件与样式：
+## 按需引入
 
-```tsx
-import { Button } from 'paper-ink';
-import 'paper-ink/style.css';
-
-export default function App() {
-  return <Button type="primary">保存</Button>;
-}
-```
-
-## CLI 安装源码
-
-也可以把 Button 安装到业务项目，直接拥有并修改源码。CLI 与 npm 包来自同一份实现。
-
-在你的 React + TypeScript 项目根目录执行（Node.js 20+）：
-
-```bash
-npx @tingxi8087/paper-ink-cli init
-npx @tingxi8087/paper-ink-cli add button input modal --dry-run
-npx @tingxi8087/paper-ink-cli add button input modal
-```
-
-也可以使用 pnpm dlx @tingxi8087/paper-ink-cli。无需安装组件包即可使用源码形式。
-
-默认安装到 src/components/paper-ink，包含所选组件、共享主题、ConfigProvider 和 CSS；Modal 会同时安装 Button，且目标项目需要已安装与 React 版本一致的 react-dom。从目标项目的 src/App.tsx 引用：
-
-```tsx
-import { Button, ConfigProvider } from './components/paper-ink';
-import './components/paper-ink/style.css';
-```
-
-init 的 --path 可以选择目录，CLI 不修改已有路径别名或应用入口。已有别名可自行使用。
-
-重复安装会保留已有组件和本地修改；无归属的冲突文件会中止安装。只有显式传入 --overwrite 才替换。--dry-run 不写文件、不安装依赖。把 paper-ink.json、paper-ink.lock.json 和安装的源码一起提交。
-
-源码形式和 npm 形式的主题 Context 独立，单个组件树中应一致选择一种方式。当前没有自动合并上游更新的功能。
-
-## 按组件引入
-
-JS 支持 tree shaking；样式可以选择完整入口或组件入口。Button 自带默认主题变量，不强制要求包裹 ConfigProvider。
+组件包的 JS 支持 tree shaking。也可以使用组件子路径，并只引入对应的样式：
 
 ```tsx
 import { Button } from 'paper-ink/button';
 import 'paper-ink/button/style.css';
 ```
 
-## 主题配置
+完整样式和按需样式选择一种即可。组件自带默认主题，普通使用无需包裹 ConfigProvider。
 
-ConfigProvider 接收嵌套的语义变量，未覆盖的字段继承上层配置。inherit 为 false 时从内置默认主题开始。
+## 继续探索
 
-```tsx
-import { Button, ConfigProvider } from 'paper-ink';
-
-<ConfigProvider theme={{
-  token: {
-    color: { primary: {
-      solid: '#1677ff', solidHover: '#4096ff',
-      solidActive: '#0958d9', onSolid: '#ffffff'
-    } },
-    radius: { control: 8 }
-  },
-  components: { Button: { paddingInline: 20 } }
-}}>
-  <Button type="primary">保存</Button>
-</ConfigProvider>
-```
-
-当前采用显式覆盖，不自动派生颜色。主题结构与 antd 不同，这是有意设计的兼容差异。
-
-## 在线编辑示例
-
-组件页里的每个示例都能编辑 JSX 并实时编译预览，支持函数组件和 Hooks。编辑器是站内示例执行环境，不支持任意 npm 包安装或模块 import；修改后的代码不会自动写入项目文件。语法或渲染错误会显示在示例下方，修正或重置即可恢复。
-
-## 开发命令
-
-```bash
-pnpm install
-pnpm dev           # 官网与实时组件预览
-pnpm typecheck
-pnpm test
-pnpm build         # 组件库和静态官网
-pnpm test:browser
-pnpm check:size
-pnpm check:package
-PLAYWRIGHT_CHANNEL=chrome pnpm check:cli
-```
-
-## 当前范围
-
-已提供输入、选择、布局、展示、反馈等常用组件，以及独立 Form、Table、Upload 与公共 Hooks。具体 API 和边界见各组件文档；未实现的 API 不列入公开类型。项目采用 MIT 许可证。
+- [组件文档](#/button)：查阅用法、示例和 API。
+- [组件画廊](#/showcase)：体验常用组件组成的界面。
+- [主题实验室](#/theme)：调整颜色与尺寸，导出 ConfigProvider 配置。

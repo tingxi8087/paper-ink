@@ -32,3 +32,14 @@
 .github-link:hover { opacity:.7; }
 .github-link:focus-visible { outline:2px solid var(--doc-ink); outline-offset:3px; border-radius:3px; }
 @media(max-width:360px) { .header-links { gap:7px; } .site-header { padding-inline:12px; } }
+
+.site-header .brand, .site-header .header-links > a, .site-header .doc-search-trigger { white-space:nowrap; flex-shrink:0; }
+@media(max-width:420px) {
+  .site-shell .site-header { padding-inline:12px; }
+  .site-header .header-links { gap:6px; }
+  .site-header .mobile-menu { padding:2px; flex-shrink:0; }
+}
+@media(max-width:360px) {
+  .site-header .brand { gap:6px; font-size:15px; }
+  .site-header .header-links { gap:5px; }
+}
