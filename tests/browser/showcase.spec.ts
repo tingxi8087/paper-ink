@@ -21,6 +21,7 @@ for (const width of [1440, 390]) {
     const sample = home.getByRole('region', { name: '组件预览' });
     const image = sample.getByRole('img', { name: /Paper Ink 中文组件总览/ });
     await expect(image).toBeVisible();
+    await expect(image).toHaveAttribute('src', /images\/components-overview\.png$/);
     await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true);
     await expect(sample.getByRole('link', { name: '查看组件画廊' })).toHaveAttribute('href', '#/showcase');
     await expect(sample.getByRole('button')).toHaveCount(0);

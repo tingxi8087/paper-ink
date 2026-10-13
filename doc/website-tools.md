@@ -47,7 +47,7 @@
 
 ## 首页与组件画廊
 
-首页保留品牌标题和墨水成形入场，主入口为“查看演示”和“开始使用”。右侧使用真实组件渲染的中文预览截图，点击进入组件画廊；完整总览用于 README，首页使用精简版本以保证缩小后的可读性。完整场景交互放在组件画廊。
+首页保留品牌标题和墨水成形入场，主入口为“查看演示”和“开始使用”。右侧使用真实组件渲染的中文预览截图，点击进入组件画廊；首页与 README 使用同一张完整组件总览图，保持原始比例。完整场景交互放在组件画廊。
 
 `#/showcase` 是独立组件画廊，与首页一样不显示完整侧栏，保留品牌、搜索和顶部文档入口。画廊使用默认黑白主题和少量语义色，以操作、输入、项目列表、浮层反馈和工作室表单五组场景展示真实组件交互。各区域提供对应文档链接，不重复 API 表格或代码编辑器。现有“实际场景”页继续作为文档中的组合案例。
 
@@ -65,6 +65,6 @@
 
 `apps/website/src/components/ComponentOverview.tsx` 是截图排版源，使用实际组件默认主题，全部文案为中文。浮层仅为截图限制位置，不改变库内组件样式。该排版组件不添加公共组件 API 或导航路由。
 
-运行 `pnpm capture:overview` 可重新生成 `apps/website/public/images/components-overview.png`（README 完整图）和 `components-home.png`（首页精简图）。脚本以本地临时 HTTP 服务渲染组件，等待字体与图片加载，关闭动画，以 2 倍像素密度截图；默认使用本机 Chrome，可通过 PLAYWRIGHT_CHANNEL 设置浏览器。
+运行 `pnpm capture:overview` 可重新生成 `apps/website/public/images/components-overview.png`（README 与首页共用的完整图）和 `components-home.png`（备用精简图，首页不使用）。脚本以本地临时 HTTP 服务渲染组件，等待字体与图片加载，关闭动画，以 2 倍像素密度截图；默认使用本机 Chrome，可通过 PLAYWRIGHT_CHANNEL 设置浏览器。
 
 根 README 使用仓库内相对图片路径，组件包 README 使用 GitHub raw 图片地址。源码维护与截图脚本用于保持图片和真实组件一致；仅更新图片不会发布新的 npm 版本。

@@ -54,7 +54,7 @@ export function HomePage() {
     </div>
     <section className="home-specimen home-overview" aria-label="组件预览">
       <a className="home-overview-link" href="#/showcase" aria-label="查看组件画廊">
-        <img src={`${import.meta.env.BASE_URL}images/components-home.png`} width={1600} height={1260} alt="Paper Ink 中文组件总览：按钮、输入框、日期选择、复选框、开关、标签、进度和表格" fetchPriority="high" />
+        <img src={`${import.meta.env.BASE_URL}images/components-overview.png`} width={2880} height={1994} alt="Paper Ink 中文组件总览：输入选择、表格、弹窗、进度、标签与状态" fetchPriority="high" />
         <span className="home-overview-caption"><span>中文组件总览</span><span>查看组件画廊 <ArrowRightIcon /></span></span>
       </a>
     </section>
