@@ -1,65 +1,135 @@
 # Paper Ink
 
-Monochrome-first React components with familiar Ant Design-style APIs. MIT licensed; independently implemented.
+**以黑白为底、语义为色的轻量 React 组件库。**
 
-Local development release, not yet published to npm. Requires React 18+.
+Paper Ink 追求清晰、克制的水墨风格：足够对比度的黑白、淡色边界，以及简洁的交互。常用组件 API 参考 Ant Design，提供组件包和 CLI 源码安装两种使用方式，既能直接使用，也能将源码带回项目自由修改。
 
-```tsx
-import { Button } from 'paper-ink';
-import 'paper-ink/style.css';
+[在线文档](https://tingxi8087.github.io/paper-ink/) · [组件画廊](https://tingxi8087.github.io/paper-ink/#/showcase) · [快速开始](https://tingxi8087.github.io/paper-ink/#/guide) · [主题实验室](https://tingxi8087.github.io/paper-ink/#/theme)
 
-<Button type="primary">Save</Button>
+> 当前版本为 **0.1.0 开发版，组件包和 CLI 尚未发布到 npm**。可以从本仓库构建安装。面向 React 18+、ReactDOM 和 TypeScript 项目。
+
+## 为什么选择 Paper Ink
+
+- **聚焦常用能力。** 精简 API 的重复配置，支持组件 JS 与 CSS 按需引入；React 和 ReactDOM 为 peer dependencies，不打包进组件库。
+- **追求更少的包装层。** 使用简洁的 DOM 与 CSS，减少不必要的节点嵌套，便于理解结构、覆盖样式和调试。这是设计原则，不代表所有组件都比其他库节点更少。
+- **包与源码两种分发。** 包引入方便统一升级；CLI 按需安装组件源码、共享模块和所需依赖，适合二次开发。
+- **极简的默认风格。** 黑白主色、清晰对比度、统一 SVG 图标与克制动效，链接和状态保留必要的语义色。
+- **熟悉的 API，明确的范围。** 常用属性参考 Ant Design；复杂的 Form、Table、布局和 Upload 按轻量思路独立设计，各组件文档列出支持的 API 与边界。
+- **清晰的主题结构。** 按视觉用途组织主题变量，支持 ConfigProvider、嵌套继承和组件覆盖；主题实验室可以直接试验与导出配置。
+- **可以实际体验的文档。** 交互案例、在线 JSX 编辑预览、组件画廊与主题工具，帮助你确认组件是否适合自己的项目。
+- **MIT 开源。** TypeScript 源码、公开类型与行为测试，使用和修改自由。
+
+“轻量”指聚焦能力、按需分发与可理解的实现。当前 Button 示例测量为 JS **1,944 bytes**、CSS **1,318 bytes**（gzip；JS 经 esbuild 打包压缩，React / ReactDOM 外置，CSS 为构建后的独立样式）。可用 `pnpm check:size` 复测；不同组件会带入各自需要的依赖，这不是与其他库的对比基准。
+
+## 安装与使用
+
+### 方式一：组件包
+
+当前先从仓库构建组件包，要求 Node.js 22.12+、pnpm 10：
+
+```bash
+git clone https://github.com/tingxi8087/paper-ink.git
+cd paper-ink
+pnpm install
+pnpm --filter paper-ink build
+pnpm --dir packages/paper-ink pack --pack-destination ../../.artifacts
 ```
 
-For component-level imports:
+将 `.artifacts/paper-ink-0.1.0.tgz` 复制到你的 React 项目根目录，选择项目使用的包管理器安装：
+
+```bash
+npm install ./paper-ink-0.1.0.tgz
+# 或 cnpm install ./paper-ink-0.1.0.tgz
+# 或 yarn add ./paper-ink-0.1.0.tgz
+# 或 pnpm add ./paper-ink-0.1.0.tgz
+```
+
+在应用中导入组件和样式：
+
+```tsx
+import { Button, Input, Stack } from 'paper-ink';
+import 'paper-ink/style.css';
+
+export default function App() {
+  return (
+    <Stack gap="medium">
+      <Input placeholder="输入一些文字" />
+      <Button type="primary">保存</Button>
+    </Stack>
+  );
+}
+```
+
+也可以只引入需要的组件与样式：
 
 ```tsx
 import { Button } from 'paper-ink/button';
 import 'paper-ink/button/style.css';
 ```
 
-Button supports common types, sizes, shapes, color/variant, className/style, semantic classNames/styles, delayed/custom loading icons, links and native element refs.
+组件 CSS 子路径包含该组件所需的样式依赖。全量样式和按需样式选择一种即可。React 与 ReactDOM 由消费项目提供。
 
-Input, Input.Search, Input.Password and Input.TextArea (also exported as Search, Password and TextArea) support native attributes, controlled/uncontrolled values, clear, status, count and refs. TextArea supports autoSize. Search supports enterButton, loading and onSearch with input/clear source. Password supports iconRender and controlled visibilityToggle. Input CSS includes its Button dependency. Modal provides controlled dialogs, focus management, portal theme inheritance and custom footers. Ordinary Modal callbacks do not automatically close or start loading; a business ref.open(config) example is available on the website.
+### 方式二：CLI 安装源码
 
-Input and Modal also have subpath exports and CSS. Modal CSS includes its Button dependency.
+在 Paper Ink 仓库中执行，替换路径为你的 React + TypeScript 项目：
 
-Theme configuration uses `ConfigProvider` with grouped semantic tokens under `theme.token` and component overrides under `theme.components.Button`, `Input` and `Modal`. It intentionally differs from antd. Current themes use explicit overrides, not automatic color derivation.
+```bash
+pnpm build:registry
+pnpm cli init --cwd /absolute/path/to/your-app
+pnpm cli add button input --cwd /absolute/path/to/your-app --dry-run
+pnpm cli add button input --cwd /absolute/path/to/your-app
+```
 
-See the repository website and `doc` directory for the supported API and design decisions.
+从目标项目的 `src/App.tsx` 引入：
 
-Stack, Inline and SimpleGrid provide vertical, horizontal and grid layouts with independent APIs. Spacing presets are small=4px, medium=8px, large=16px under theme.token.spacing; default gap is medium. All support native div attributes, className/style and refs. SimpleGrid accepts columns (number/CSS template) or minChildWidth, plus rowGap/columnGap; SimpleGrid.Item supports span (positive integer/full). Automatic columns allow span=1/full only. Numeric fixed columns clamp span to their column count. CSS overrides take precedence, and custom templates require the caller to manage spanning.
+```tsx
+import { Button, Input } from './components/paper-ink';
+import './components/paper-ink/style.css';
 
-Import each from paper-ink/stack, paper-ink/inline or paper-ink/simple-grid with its corresponding style.css, or use the root exports and full stylesheet.
+export default function App() {
+  return <><Input placeholder="可以直接修改组件源码" /><Button>保存</Button></>;
+}
+```
 
-## Common components
+有 `src` 时默认安装到 `src/components/paper-ink`，否则为 `components/paper-ink`。可用 `init --path src/ui/paper-ink` 自定义目录；已有 `@/` 别名也可用于引入，CLI 不修改项目别名。
 
-Checkbox/Group, Radio/Group/Button, Switch, Select (single/multiple/tags/search), Tabs (items/keyboard/panel lifecycle), Tag/CheckableTag, Empty, Alert/ErrorBoundary, Spin, Tooltip and message/useMessage are available from the root or their lowercase subpaths. Each has a standalone style.css. These are documented subsets of familiar Ant Design APIs, not full API implementations.
+CLI 自动解析共享模块与组件依赖，支持 `list`、`--dry-run` 和 `--no-install`。再次安装保留已修改文件；无归属的冲突文件会停止安装，明确传入 `--overwrite` 才覆盖。请将源码、`paper-ink.json` 与 `paper-ink.lock.json` 一起提交。当前没有自动合并上游修改的更新命令。
 
-Prefer `message.useMessage()` with its contextHolder inside your ConfigProvider for theme inheritance. Static message calls use the default theme. Select supports ordinary option sets without virtualization. Editable/vertical Tabs, Select labelInValue/grouped options, antd Form integration and semantic style functions remain outside this release. An independent Form engine is available.
+包与源码分别拥有主题上下文，同一个组件树中建议保持一种来源。源码分发细节见 [分发说明](https://github.com/tingxi8087/paper-ink/blob/main/doc/distribution.md) 和 [CLI 文档](https://github.com/tingxi8087/paper-ink/blob/main/packages/cli/README.md)。
 
-Additional common API subsets: Typography, Divider, Breadcrumb, Dropdown, Pagination, InputNumber, Avatar, Badge, Card, Collapse, Descriptions, Popover, Segmented, Drawer, Popconfirm, Progress, Skeleton and App. Each has a lowercase kebab-case subpath and stylesheet. Space and the antd Form/Table APIs are deferred; independent Form and Table APIs are available. Our independent Form supports top-level fields, declarative bindings, async validation, subscriptions and atomic patches; import Form/useForm from paper-ink/form.
+<details>
+<summary>发布到 npm 后的安装方式（当前不可用）</summary>
 
-InputNumber uses MIT-licensed @rc-component/mini-decimal for string-based decimal calculations; enable stringMode and pass strings for high precision. App.useApp() provides theme-aware message, modal and notification APIs, including async confirmation handles. Read each component README for supported API boundaries.
+```bash
+npm install paper-ink
+# 或 pnpm add paper-ink / yarn add paper-ink / cnpm install paper-ink
 
-新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。
+npx @paper-ink/cli init
+npx @paper-ink/cli add button input
+```
 
-## Independent Table and hooks
+</details>
 
-Table accepts either `data` or a `source` satisfying TableSource. Use `source={table}` from useBasePageTable and `selection={checked}` from useTableChecked; pagination is built in. Fixed columns, summaries, controlled sorting, expansion, merged cells and overflow-only tooltips are supported. Request functions receive `(query, signal)`; selection remains on business rows as `_checked`.
+## 组件与工具
 
-Import Table/types from `paper-ink/table` and its dependency-complete CSS from `paper-ink/table/style.css`. Hooks are exported from `paper-ink/table-hooks`; the public useRefState tuple is exported from `paper-ink/use-ref-state`. Root imports also work. Source installation: `paper-ink add table`, or install either Hook item individually. See their source READMEs for exact methods and boundaries. No SSR guarantee is required for these browser-oriented hooks.
+| 类型 | 代表组件 |
+| --- | --- |
+| 通用与布局 | Button、Typography、Divider、Stack、Inline、SimpleGrid、Layout、Splitter |
+| 数据录入 | Input / Search / Password / TextArea、Select、AutoComplete、Checkbox、Radio、Switch、InputNumber、Slider、Rate、DatePicker、TimePicker、ColorPicker、Upload |
+| 数据展示 | Card、Avatar、Badge、Tag、Descriptions、Statistic、Image、Timeline、Table |
+| 导航与反馈 | Menu、Tabs、Breadcrumb、Steps、Pagination、Dropdown、Tooltip、Popover、Popconfirm、Modal、Drawer、Alert、Message、Notification、Progress、Spin、Skeleton、Empty、Result |
+| 状态与业务工具 | Form、ConfigProvider、App、useBasePageTable、useTableChecked、useRefState、useLocalstorageState、useUpload |
 
-Generic hooks live separately in `paper-ink/hooks`: `useRefState(initialState)` and `useLocalstorageState(initialState, storageKey)`. The latter reads/writes JSON localStorage with ordinary state and functional updates. Source installation: `paper-ink add hooks`; individual subpaths remain available. No styles or runtime dependencies required.
+这是概览，不代表完整实现对应 Ant Design API。具体用法、示例与支持范围以 [在线文档](https://tingxi8087.github.io/paper-ink/) 为准。组件规划见 [状态清单](https://github.com/tingxi8087/paper-ink/blob/main/doc/component-priorities.md)。
 
-## Additional components
+## 与 Ant Design 的关系
 
-Statistic, Layout (Header/Content/Footer/Sider), Splitter, Steps, AutoComplete, Slider, notification/useNotification and Image/PreviewGroup are available as root exports and kebab-case subpaths with dependency-complete styles. Each supports the documented common API subset; see its README and website for boundaries. Statistic uses mini-decimal to preserve decimal strings. AutoComplete and Slider integrate with the independent Form. Prefer App.useApp().notification for scoped theme inheritance.
+Paper Ink 的常用组件 API 与交互习惯参考 [Ant Design](https://ant.design/)，采用独立实现，不依赖 `antd`；提供常用 API 子集，主题及部分复杂组件采用独立设计。它不是 Ant Design 的完整替代，也不保证直接迁移所有现有用法。
 
-GetProps, GetProp and GetRef are type-only exports from paper-ink/util or the root; they need no stylesheet. DatePicker/RangePicker, TimePicker and Menu are also available with documented subsets.
+感谢 Ant Design 提供的设计与 API 参考。项目使用的 Day.js、@ctrl/tinycolor 和 @rc-component/mini-decimal 等依赖各自遵循其开源许可证。
 
-ColorPicker 纯色首期：透明度、HEX/RGB/HSB、预设、键盘与 Form。npm 子路径 `paper-ink/color-picker`，CSS `paper-ink/color-picker/style.css`；CLI `paper-ink add color-picker` 自动添加 @ctrl/tinycolor。支持范围见组件文档，渐变与屏幕取色留待后续。
+## 开发与贡献
 
-## Upload and useUpload
+源码、设计文档与贡献说明见 [GitHub 仓库](https://github.com/tingxi8087/paper-ink)。
 
-Upload / Upload.Dragger are pure file-list controls: selection, validation, add/remove/replace notifications, thumbnails, image preview and Form binding. The independent useUpload hook manages requests, concurrency, progress, cancellation and retries using caller-provided Promise requests and AbortSignal. Spread upload.props into Upload; no request prop exists on the component. Import Upload from paper-ink/upload with paper-ink/upload/style.css, and useUpload from paper-ink/hooks or paper-ink/use-upload. CLI source installation uses paper-ink add upload use-upload. See the component README and doc/upload-design.md for the supported independent API.
+[MIT License](LICENSE)。

@@ -46,3 +46,25 @@ test('document titles follow navigation, history and missing routes; the SVG fav
   await page.locator('.brand').click();await expect(page).toHaveTitle('Paper Ink - 水墨风格的 React 组件库');
   await page.goto('/#/no-such-page');await expect(page).toHaveTitle('页面未找到 - Paper Ink');
 });
+
+for (const width of [1440, 390, 320]) {
+  test(`GitHub repository link remains accessible at ${width}px`, async ({page}) => {
+    await page.setViewportSize({width, height:900});
+    await page.emulateMedia({reducedMotion:'reduce'});
+    for (const route of ['/', '/button']) {
+      await page.goto(`/#${route}`);
+      const link = page.getByRole('link', {name:'GitHub 仓库（新窗口打开）'});
+      await expect(link).toBeVisible();
+      await expect(link).toHaveAttribute('href','https://github.com/tingxi8087/paper-ink');
+      await expect(link).toHaveAttribute('target','_blank');
+      await expect(link).toHaveAttribute('rel','noopener noreferrer');
+      await expect(link.locator('svg')).toHaveCount(1);
+      await link.focus(); await expect(link).toBeFocused();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    }
+    if (width !== 320) {
+      await page.goto('/#/');
+      await page.screenshot({path:`.artifacts/github-header-${width}.png`,fullPage:true});
+    }
+  });
+}

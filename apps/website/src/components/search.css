@@ -27,3 +27,8 @@
 
 .doc-sidebar-search input:focus-visible,.doc-search-field input:focus-visible { outline:none; }
 @media(max-width:360px) { .doc-search-trigger > span { display:none; } }
+
+.header-links .github-link { display:flex; align-items:center; justify-content:center; flex:none; width:24px; height:28px; color:var(--doc-ink); }
+.github-link:hover { opacity:.7; }
+.github-link:focus-visible { outline:2px solid var(--doc-ink); outline-offset:3px; border-radius:3px; }
+@media(max-width:360px) { .header-links { gap:7px; } .site-header { padding-inline:12px; } }

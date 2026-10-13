@@ -1,128 +1,166 @@
 # Paper Ink
 
-默认黑白主色、保留语义色的 React UI 组件库。常规组件 API 参考 Ant Design，支持范围逐步扩展，主题结构独立设计。
+**以黑白为底、语义为色的轻量 React 组件库。**
 
-当前为 **0.1.0 本地开发版本，尚未发布到 npm**。已实现 Button、Input / Search / Password / TextArea、受控 Modal、Checkbox / Radio / Switch / Select、Tabs、Tag / Empty / Alert / Spin / Tooltip / Message、Stack / Inline / SimpleGrid 布局、基础 ConfigProvider、源码安装 CLI，以及 React + Vite + MDX 文档站和在线 JSX 编辑预览。
+Paper Ink 追求清晰、克制的水墨风格：足够对比度的黑白、淡色边界，以及简洁的交互。常用组件 API 参考 Ant Design，提供组件包和 CLI 源码安装两种使用方式，既能直接使用，也能将源码带回项目自由修改。
 
-## 开发
+[在线文档](https://tingxi8087.github.io/paper-ink/) · [组件画廊](https://tingxi8087.github.io/paper-ink/#/showcase) · [快速开始](https://tingxi8087.github.io/paper-ink/#/guide) · [主题实验室](https://tingxi8087.github.io/paper-ink/#/theme)
 
-要求 Node.js 22.12+、pnpm 10。
+> 当前版本为 **0.1.0 开发版，组件包和 CLI 尚未发布到 npm**。可以从本仓库构建安装。面向 React 18+、ReactDOM 和 TypeScript 项目。
+
+## 为什么选择 Paper Ink
+
+- **聚焦常用能力。** 精简 API 的重复配置，支持组件 JS 与 CSS 按需引入；React 和 ReactDOM 为 peer dependencies，不打包进组件库。
+- **追求更少的包装层。** 使用简洁的 DOM 与 CSS，减少不必要的节点嵌套，便于理解结构、覆盖样式和调试。这是设计原则，不代表所有组件都比其他库节点更少。
+- **包与源码两种分发。** 包引入方便统一升级；CLI 按需安装组件源码、共享模块和所需依赖，适合二次开发。
+- **极简的默认风格。** 黑白主色、清晰对比度、统一 SVG 图标与克制动效，链接和状态保留必要的语义色。
+- **熟悉的 API，明确的范围。** 常用属性参考 Ant Design；复杂的 Form、Table、布局和 Upload 按轻量思路独立设计，各组件文档列出支持的 API 与边界。
+- **清晰的主题结构。** 按视觉用途组织主题变量，支持 ConfigProvider、嵌套继承和组件覆盖；主题实验室可以直接试验与导出配置。
+- **可以实际体验的文档。** 交互案例、在线 JSX 编辑预览、组件画廊与主题工具，帮助你确认组件是否适合自己的项目。
+- **MIT 开源。** TypeScript 源码、公开类型与行为测试，使用和修改自由。
+
+“轻量”指聚焦能力、按需分发与可理解的实现。当前 Button 示例测量为 JS **1,944 bytes**、CSS **1,318 bytes**（gzip；JS 经 esbuild 打包压缩，React / ReactDOM 外置，CSS 为构建后的独立样式）。可用 `pnpm check:size` 复测；不同组件会带入各自需要的依赖，这不是与其他库的对比基准。
+
+## 安装与使用
+
+### 方式一：组件包
+
+当前先从仓库构建组件包，要求 Node.js 22.12+、pnpm 10：
+
+```bash
+git clone https://github.com/tingxi8087/paper-ink.git
+cd paper-ink
+pnpm install
+pnpm --filter paper-ink build
+pnpm --dir packages/paper-ink pack --pack-destination ../../.artifacts
+```
+
+将 `.artifacts/paper-ink-0.1.0.tgz` 复制到你的 React 项目根目录，选择项目使用的包管理器安装：
+
+```bash
+npm install ./paper-ink-0.1.0.tgz
+# 或 cnpm install ./paper-ink-0.1.0.tgz
+# 或 yarn add ./paper-ink-0.1.0.tgz
+# 或 pnpm add ./paper-ink-0.1.0.tgz
+```
+
+在应用中导入组件和样式：
+
+```tsx
+import { Button, Input, Stack } from 'paper-ink';
+import 'paper-ink/style.css';
+
+export default function App() {
+  return (
+    <Stack gap="medium">
+      <Input placeholder="输入一些文字" />
+      <Button type="primary">保存</Button>
+    </Stack>
+  );
+}
+```
+
+也可以只引入需要的组件与样式：
+
+```tsx
+import { Button } from 'paper-ink/button';
+import 'paper-ink/button/style.css';
+```
+
+组件 CSS 子路径包含该组件所需的样式依赖。全量样式和按需样式选择一种即可。React 与 ReactDOM 由消费项目提供。
+
+### 方式二：CLI 安装源码
+
+在 Paper Ink 仓库中执行，替换路径为你的 React + TypeScript 项目：
+
+```bash
+pnpm build:registry
+pnpm cli init --cwd /absolute/path/to/your-app
+pnpm cli add button input --cwd /absolute/path/to/your-app --dry-run
+pnpm cli add button input --cwd /absolute/path/to/your-app
+```
+
+从目标项目的 `src/App.tsx` 引入：
+
+```tsx
+import { Button, Input } from './components/paper-ink';
+import './components/paper-ink/style.css';
+
+export default function App() {
+  return <><Input placeholder="可以直接修改组件源码" /><Button>保存</Button></>;
+}
+```
+
+有 `src` 时默认安装到 `src/components/paper-ink`，否则为 `components/paper-ink`。可用 `init --path src/ui/paper-ink` 自定义目录；已有 `@/` 别名也可用于引入，CLI 不修改项目别名。
+
+CLI 自动解析共享模块与组件依赖，支持 `list`、`--dry-run` 和 `--no-install`。再次安装保留已修改文件；无归属的冲突文件会停止安装，明确传入 `--overwrite` 才覆盖。请将源码、`paper-ink.json` 与 `paper-ink.lock.json` 一起提交。当前没有自动合并上游修改的更新命令。
+
+包与源码分别拥有主题上下文，同一个组件树中建议保持一种来源。源码分发细节见 [分发说明](doc/distribution.md) 和 [CLI 文档](packages/cli/README.md)。
+
+<details>
+<summary>发布到 npm 后的安装方式（当前不可用）</summary>
+
+```bash
+npm install paper-ink
+# 或 pnpm add paper-ink / yarn add paper-ink / cnpm install paper-ink
+
+npx @paper-ink/cli init
+npx @paper-ink/cli add button input
+```
+
+</details>
+
+## 组件与工具
+
+| 类型 | 代表组件 |
+| --- | --- |
+| 通用与布局 | Button、Typography、Divider、Stack、Inline、SimpleGrid、Layout、Splitter |
+| 数据录入 | Input / Search / Password / TextArea、Select、AutoComplete、Checkbox、Radio、Switch、InputNumber、Slider、Rate、DatePicker、TimePicker、ColorPicker、Upload |
+| 数据展示 | Card、Avatar、Badge、Tag、Descriptions、Statistic、Image、Timeline、Table |
+| 导航与反馈 | Menu、Tabs、Breadcrumb、Steps、Pagination、Dropdown、Tooltip、Popover、Popconfirm、Modal、Drawer、Alert、Message、Notification、Progress、Spin、Skeleton、Empty、Result |
+| 状态与业务工具 | Form、ConfigProvider、App、useBasePageTable、useTableChecked、useRefState、useLocalstorageState、useUpload |
+
+这是概览，不代表完整实现对应 Ant Design API。具体用法、示例与支持范围以 [在线文档](https://tingxi8087.github.io/paper-ink/) 为准。组件规划见 [状态清单](doc/component-priorities.md)。
+
+## 与 Ant Design 的关系
+
+Paper Ink 的常用组件 API 与交互习惯参考 [Ant Design](https://ant.design/)，采用独立实现，不依赖 `antd`；提供常用 API 子集，主题及部分复杂组件采用独立设计。它不是 Ant Design 的完整替代，也不保证直接迁移所有现有用法。
+
+感谢 Ant Design 提供的设计与 API 参考。项目使用的 Day.js、@ctrl/tinycolor 和 @rc-component/mini-decimal 等依赖各自遵循其开源许可证。
+
+## 本地开发与验证
 
 ```bash
 pnpm install
 pnpm dev
-```
 
-打开终端显示的地址，进入组件页可以修改代码实时预览；主题实验室可以调整主色、圆角与按钮内边距。
-
-```bash
 pnpm typecheck
 pnpm test
 pnpm build
 pnpm check:size
 pnpm check:package
 PLAYWRIGHT_CHANNEL=chrome pnpm check:cli
-pnpm exec playwright install chromium  # 首次执行浏览器测试
-pnpm test:browser
-# 也可使用本机 Chrome：PLAYWRIGHT_CHANNEL=chrome pnpm test:browser
+PLAYWRIGHT_CHANNEL=chrome pnpm test:browser
 ```
 
-官网构建结果在 `apps/website/dist`，可部署到静态托管服务。采用 Hash 路由和相对资源路径，支持静态子目录部署。
+文档站地址以终端输出为准。浏览器测试可使用本机 Chrome；使用 Playwright Chromium 时先执行 `pnpm exec playwright install chromium`，再运行 `pnpm test:browser`。
 
-## CLI 安装源码
+| 目录 | 用途 |
+| --- | --- |
+| `packages/paper-ink` | 组件实现、类型、样式和行为测试 |
+| `packages/cli` / `registry` | 源码安装 CLI 与分发清单 |
+| `apps/website` | 官网、组件文档、案例和主题实验室 |
+| `doc` | 设计方案与组件支持状态 |
+| `tests/browser` / `scripts` | 浏览器、体积、组件包与 CLI 消费验证 |
 
-目前 CLI 尚未发布，可以从仓库操作你的 React + TS 项目：
+## 文档部署
 
-```bash
-pnpm build:registry
-pnpm cli init --cwd /absolute/path/to/your-app
-pnpm cli add button input modal --cwd /absolute/path/to/your-app --dry-run
-pnpm cli add button input modal --cwd /absolute/path/to/your-app
-```
+文档通过 [GitHub Pages](https://tingxi8087.github.io/paper-ink/) 托管。推送到 `main` 后，GitHub Actions 自动完成类型检查、构建和部署；也可手动触发 `Deploy documentation`。工作流见 [.github/workflows/pages.yml](.github/workflows/pages.yml)。
 
-从目标项目的 `src/App.tsx` 使用：
+网站使用 Hash 路由与相对资源路径，支持静态子目录部署。在线案例的数据与保存是本地演示，不连接业务后台。
 
-```tsx
-import { Button, ConfigProvider } from './components/paper-ink';
-import './components/paper-ink/style.css';
-```
+## 贡献与许可
 
-支持自定义目录、依赖解析和重复安装。默认保留已安装文件，发现无归属冲突时停止；`--overwrite` 才覆盖。样式需在业务入口导入一次；Modal 要求目标项目已有与 React 版本匹配的 react-dom。详见 [源码分发说明](doc/distribution.md)。
+欢迎提交问题、改进建议与 Pull Request。实现前请阅读 [设计文档](doc/README.md)，明确组件 API、主题和支持边界；新增能力需要同步类型、示例与测试，新增组件或状态变更需同步组件清单。
 
-## 使用构建后的组件库
-
-```bash
-pnpm build
-pnpm --dir packages/paper-ink pack
-```
-
-在消费项目安装生成的 tgz 后：
-
-```tsx
-import { Button, ConfigProvider } from 'paper-ink';
-import 'paper-ink/style.css';
-
-export default function App() {
-  return <Button type="primary">保存</Button>;
-}
-```
-
-也可以按需引入 `paper-ink/button`、`paper-ink/input`、`paper-ink/modal` 与对应的 `style.css`；Modal 样式入口包含 Button。React 和 ReactDOM 是 peer dependencies，不打包到组件库中。
-
-## 目录
-
-- `packages/paper-ink`：对外发布的组件库实现、类型、样式和行为测试。
-- `packages/cli`：安装本地组件源码的 CLI，零运行时依赖。
-- `registry`：组件文件和共享依赖清单，源码由构建脚本生成。
-- `apps/website`：官网、MDX 使用文档、组件演示和主题实验室。
-- `doc`：内部规划、主题设计与项目结构记录。
-- `tests/browser`：构建后官网的浏览器交互验证。
-- `scripts`：样式构建、消费验证和体积检查。
-
-## 范围与差异
-
-Button 支持常用属性、color/variant、className/style、语义 classNames/styles、自定义 loading 图标和原生 ref。Input/TextArea 支持清空、状态、计数、原生表单与高度自适应；Input.Search 提供搜索按钮、清空来源与加载状态，Input.Password 支持自定义图标和受控显隐。Modal 支持受控显示、焦点管理、Portal 主题和内容生命周期；业务 ref.open(config) 示例见文档站。详见各组件页。
-
-在线编辑器支持 JSX／函数组件和 Hooks，提供站内组件 scope，不支持任意模块 import 或包安装。源码修改仅保留在当前页面。
-
-主题当前支持显式深层覆盖、嵌套继承、inherit: false 和少量组件变量；自动颜色派生和暗色预设留待后续设计。ConfigProvider 会渲染 display: contents 作用域元素。组件为默认值和 React 主题提供内联 CSS 变量；直接覆盖同名 CSS 变量需要遵循内联样式优先级，不是当前推荐入口。
-
-## 开源
-
-MIT。贡献前请阅读 `doc` 中的设计约定；新增组件需要同步公开类型、行为、演示、API 支持范围及兼容差异。此项目独立实现，不依赖 antd。
-
-布局组件支持 4 / 8 / 16px 主题间距、自动列数、列比例和跨列。使用方式见 [布局组件](doc/layout-components.md)。源码安装：`pnpm cli add stack inline simple-grid --cwd /absolute/path/to/your-app`。
-
-推荐指数为 5 的组件现已全部提供常用 API 子集：Button、Input、Modal、ConfigProvider、Checkbox、Radio、Switch、Select、Tabs、Tag、Empty、Alert、Spin、Tooltip、Message。API 与暂未支持的能力见文档站各组件页；不表示实现了 antd 的完整 API。
-
-Message 推荐使用 `message.useMessage()` 与 contextHolder 继承主题。Select 支持单选、多选、tags 和键盘搜索；大型数据列表的虚拟化、antd Form 集成和 Tabs 可编辑模式暂未提供；已提供独立 Form。
-
-本批新增 18 个 4 分组件：Typography、Divider、Breadcrumb、Dropdown、Pagination、InputNumber、Avatar、Badge、Card、Collapse、Descriptions、Popover、Segmented、Drawer、Popconfirm、Progress、Skeleton、App。Space、DatePicker、antd Form/Table API 暂不实现；独立轻量 Form 和 Table 已实现，见 doc/form-design.md、doc/table-design.md 和文档站案例；布局继续使用 Inline / Stack / SimpleGrid。
-
-InputNumber 使用 `@rc-component/mini-decimal` 的字符串十进制运算，支持 `stringMode`。App.useApp() 提供继承主题的 message 和 modal，确认弹窗支持异步回调、更新、销毁及等待结果。内置图标统一为 SVG。
-
-新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。
-
-## 轻量表格与公共 Hook
-
-```tsx
-import { Table, useBasePageTable, useTableChecked, useRefState } from 'paper-ink';
-import 'paper-ink/table/style.css';
-
-const table = useBasePageTable<User, SearchParams>({ getTableData });
-const selection = useTableChecked({
-  tableData: table.tableData, setTableData: table.setTableData, idName: 'id',
-});
-// 在组件内创建 Hook，然后直接把返回值交给 Table。
-<Table rowKey="id" source={table} selection={selection} columns={columns} />;
-```
-
-Table 内置分页，支持固定列、汇总、受控展开、单元格合并和实际溢出 Tooltip；也可用 data 展示静态数据。getTableData(query, signal) 由业务提供，Hook 管理取消与过期响应；选择状态保存在业务行 _checked 中。三个入口支持 table、table-hooks、use-ref-state 子路径，CLI `paper-ink add table` 同时安装需要的 Hook 与样式依赖。useRefState 独立提供 [state, setState, stateRef]。树形、多级表头、汇总合并和虚拟滚动留待后续。
-
-## 通用 Hooks
-
-通用状态工具位于独立 hooks 模块与文档页，支持 `import { useRefState, useLocalstorageState } from 'paper-ink/hooks'`。`useLocalstorageState(initialState, storageKey)` 在普通 state 上增加 JSON 本地持久化，自动读取初值并保存提交后的变化。CLI：`paper-ink add hooks`；旧 use-ref-state 子路径保持兼容。详见 doc/hooks.md。
-
-新增 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image，包含常用 API 子集、41 组组件演示与类型工具示例。Notification 已接入 App.useApp()。具体支持范围见文档站及各源码 README；组件状态统计见 [组件规划](doc/component-priorities.html)。
-
-ColorPicker 纯色首期：透明度、HEX/RGB/HSB、预设、键盘与 Form。npm 子路径 `paper-ink/color-picker`，CSS `paper-ink/color-picker/style.css`；CLI `paper-ink add color-picker` 自动添加 @ctrl/tinycolor。支持范围见组件文档，渐变与屏幕取色留待后续。
+[MIT License](LICENSE)。
