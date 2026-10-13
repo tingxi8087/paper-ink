@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 for (const width of [1440, 390]) {
-  test(`home has two useful entrances and a clear component preview at ${width}px`, async ({ page }) => {
+  test(`home has two useful entrances and a real screenshot linked to the gallery at ${width}px`, async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.setViewportSize({ width, height: 900 });
@@ -19,17 +19,14 @@ for (const width of [1440, 390]) {
       await expect(home.getByRole('link', { name, exact: true })).toHaveCount(0);
     }
     const sample = home.getByRole('region', { name: '组件预览' });
-    await expect(sample).not.toContainText('工作室');
-    await expect(sample.getByRole('button', { name: '禁用按钮' })).toBeDisabled();
-    await sample.getByLabel('输入框预览').fill('试用输入框');
-    await expect(sample.getByLabel('输入框预览')).toHaveValue('试用输入框');
-    await sample.getByRole('combobox', { name: '选择器预览' }).click();
-    await page.getByRole('option', { name: '纸白', exact: true }).click();
-    await expect(sample.locator('.pi-select__selection')).toContainText('纸白');
-    await sample.getByRole('switch', { name: '开关预览' }).click();
-    await expect(sample.getByRole('switch')).not.toBeChecked();
-    await sample.getByRole('checkbox', { name: '复选框' }).uncheck();
-    await expect(sample.getByRole('checkbox')).not.toBeChecked();
+    const image = sample.getByRole('img', { name: /Paper Ink 中文组件总览/ });
+    await expect(image).toBeVisible();
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true);
+    await expect(sample.getByRole('link', { name: '查看组件画廊' })).toHaveAttribute('href', '#/showcase');
+    await expect(sample.getByRole('button')).toHaveCount(0);
+    await sample.getByRole('link', { name: '查看组件画廊' }).click();
+    await expect(page.getByRole('heading', { name: '组件画廊', exact: true })).toBeVisible();
+    await page.locator('.brand').click();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     await page.screenshot({ path: `.artifacts/home-redesign-${width}.png`, fullPage: true });
     await home.getByRole('link', { name: '查看演示', exact: true }).click();

@@ -4,6 +4,8 @@
 
 Paper Ink 追求清晰、克制的水墨风格：足够对比度的黑白、淡色边界，以及简洁的交互。常用组件 API 参考 Ant Design，提供组件包和 CLI 源码安装两种使用方式，既能直接使用，也能将源码带回项目自由修改。
 
+[![Paper Ink 中文组件总览](apps/website/public/images/components-overview.png)](https://tingxi8087.github.io/paper-ink/#/showcase)
+
 [在线文档](https://tingxi8087.github.io/paper-ink/) · [组件画廊](https://tingxi8087.github.io/paper-ink/#/showcase) · [快速开始](https://tingxi8087.github.io/paper-ink/#/guide) · [主题实验室](https://tingxi8087.github.io/paper-ink/#/theme)
 
 > 首个公开版本为 **0.1.0**。面向 React 18+、ReactDOM 和 TypeScript 项目。

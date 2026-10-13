@@ -1,5 +1,5 @@
 import { useEffect, useId, useState } from 'react';
-import { Button, Checkbox, Input, Select, Switch, Tag } from 'paper-ink';
+import { Button } from 'paper-ink';
 import { ArrowRightIcon } from '../../../../packages/paper-ink/src/internal/icons';
 import './home.css';
 
@@ -52,23 +52,11 @@ export function HomePage() {
       </div>
     </div>
     </div>
-    <section className="home-specimen" aria-label="组件预览">
-      <header className="home-sample-heading"><span>组件预览</span><span>试试这些组件</span></header>
-      <div className="home-preview-group">
-        <h2>按钮 <span>Button</span></h2>
-        <div className="home-preview-row"><Button type="primary">主要按钮</Button><Button>默认按钮</Button><Button disabled>禁用按钮</Button></div>
-      </div>
-      <div className="home-preview-group">
-        <h2>输入与选择 <span>Input / Select</span></h2>
-        <div className="home-preview-inputs">
-          <Input aria-label="输入框预览" placeholder="试着输入一些文字" allowClear />
-          <Select aria-label="选择器预览" defaultValue="ink" options={[{ value: 'ink', label: '墨黑' }, { value: 'paper', label: '纸白' }]} />
-        </div>
-      </div>
-      <div className="home-preview-group">
-        <h2>选中与状态 <span>Checkbox / Switch / Tag</span></h2>
-        <div className="home-preview-row"><Checkbox defaultChecked>复选框</Checkbox><Switch aria-label="开关预览" defaultChecked size="small" /><Tag>默认标签</Tag><Tag color="success" variant="outlined">成功</Tag></div>
-      </div>
+    <section className="home-specimen home-overview" aria-label="组件预览">
+      <a className="home-overview-link" href="#/showcase" aria-label="查看组件画廊">
+        <img src={`${import.meta.env.BASE_URL}images/components-home.png`} width={1600} height={1260} alt="Paper Ink 中文组件总览：按钮、输入框、日期选择、复选框、开关、标签、进度和表格" fetchPriority="high" />
+        <span className="home-overview-caption"><span>中文组件总览</span><span>查看组件画廊 <ArrowRightIcon /></span></span>
+      </a>
     </section>
     </div>
     <div className="principles">
