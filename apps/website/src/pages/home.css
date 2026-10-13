@@ -1,0 +1,37 @@
+.home-page { padding-top: 22px; }
+.home-page .home-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); gap: 64px; align-items: center; }
+.home-page .home-copy { min-width: 0; }
+.home-page .home-title { margin-bottom: 24px; }
+.home-page .home-title h1 { font-size: clamp(42px, 4.6vw, 60px); line-height: 1.32; letter-spacing: -2px; }
+.home-page .home-title h1 span { color: var(--doc-ink); }
+.home-page .lead { margin-bottom: 26px; line-height: 1.85; }
+.home-page .home-actions { gap: 8px; margin-top: 0; flex-wrap: wrap; }
+.home-page .home-actions .pi-button { padding-inline: 20px; }
+.home-page .home-specimen { min-width: 0; margin: 0; padding: 24px; border: 0; border-top: 2px solid var(--doc-ink); border-bottom: 1px solid var(--doc-line); border-radius: 0; background: var(--doc-paper); }
+.home-page .home-sample-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--doc-secondary); }
+.home-page .home-sample-heading span:first-child { color: var(--doc-ink); font-weight: 600; }
+.home-page .home-preview-group { padding: 20px 0; }
+.home-page .home-preview-group + .home-preview-group { border-top: 1px solid var(--doc-line); }
+.home-page .home-preview-group:last-child { padding-bottom: 0; }
+.home-page .home-preview-group h2 { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; font-size: 13px; font-weight: 600; }
+.home-page .home-preview-group h2 span { font-size: 11px; font-weight: 400; color: var(--doc-secondary); }
+.home-page .home-preview-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.home-page .home-preview-row .pi-tag { margin: 0; }
+.home-page .home-preview-inputs { display: grid; grid-template-columns: minmax(0, 1fr) 112px; gap: 8px; }
+.home-page .principles { margin-top: 56px; gap: 32px; }
+.home-page .principles > div { padding-top: 16px; }
+.home-page .principles h3 { font-size: 15px; font-weight: 600; }
+@media(max-width: 1000px) {
+  .home-page .home-hero { gap: 32px; }
+  .home-page .home-specimen { padding: 20px 16px; }
+}
+@media(max-width: 800px) {
+  .home-page { padding-top: 4px; }
+  .home-page .home-hero { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .home-page .home-title { margin-bottom: 16px; }
+  .home-page .home-title h1 { font-size: 44px; }
+  .home-page .lead { font-size: 15px; margin-bottom: 20px; }
+  .home-page .home-specimen { padding: 20px 0; }
+  .home-page .principles { margin-top: 32px; gap: 16px; }
+}
+@media(max-width: 360px) { .home-page .home-title h1 { font-size: 38px; } }

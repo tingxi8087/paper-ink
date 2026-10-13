@@ -7,6 +7,7 @@
 
 设计文档记录目标；当前已实现范围以组件源码、文档站 API 和测试为准。
 - [项目目录与文档站](./project-structure.md)：workspace、在线编辑器与验证流程。
+- [文档站搜索与主题实验室](./website-tools.md)：共享检索目录、快捷搜索、主题编辑、真实预览与配置保存。
 - [npm 包与 CLI 源码分发](./distribution.md)：安装命令、registry、文件保护及验证。
 
 - [Modal 与输入控件](./modal-and-input.md)：受控弹窗、业务 open(config)、输入 API 与实现边界。

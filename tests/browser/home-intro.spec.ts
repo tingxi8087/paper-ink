@@ -34,11 +34,12 @@ for(const width of [1440,390]) {
     expect(await home.evaluate(el=>el.getAnimations({subtree:true}).length)).toBe(0);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     await page.clock.resume();
-    await page.getByRole('link',{name:'探索 Button'}).click();
-    await expect(page.getByRole('heading',{name:'Button 按钮',exact:true})).toBeVisible();
+    await page.getByRole('link',{name:'查看演示'}).click();
+    await expect(page.getByRole('heading',{name:'组件画廊',exact:true})).toBeVisible();
     await page.locator('.brand').click();
     await expect(page.locator('.home-page')).toHaveAttribute('data-intro','done');
-    expect(await page.locator('.home-page').evaluate(el=>el.getAnimations({subtree:true}).length)).toBe(0);
+    // Checked sample controls may animate their marks on mount; only the intro must stay settled.
+    expect(await page.locator('.home-page').evaluate(el=>el.getAnimations({subtree:true}).filter(animation => animation instanceof CSSAnimation && animation.animationName.startsWith('home-')).length)).toBe(0);
   });
 }
 

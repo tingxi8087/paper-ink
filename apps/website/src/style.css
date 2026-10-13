@@ -9,8 +9,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible 
 ::selection { background: var(--doc-ink); color:var(--doc-on-ink); }
 .site-header { height: 56px; display: flex; justify-content: space-between; align-items: center; padding: 0 28px; border-bottom: 1px solid var(--doc-line); background: var(--doc-paper); position: sticky; top: 0; z-index: 10; }
 .brand { text-decoration: none; display: flex; align-items: center; gap: 12px; font-size: 18px; letter-spacing: -.5px; font-weight: 600; }
-.brand-mark { font-family: Georgia, serif; font-size: 30px; font-style: italic; letter-spacing: -4px; }
-.brand-mark span { color: var(--doc-secondary); padding-left: 4px; }
+.brand-mark { display:block; width:28px; height:28px; flex-shrink:0; }
 .header-links { display: flex; gap: 24px; align-items: center; font-size: 13px; }
 .header-links a { text-decoration: none; color: var(--doc-secondary); }
 .header-links .selected { color: #171717; }

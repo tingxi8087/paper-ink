@@ -1,14 +1,19 @@
+import { InstallCommands } from '../../components/InstallCommands';
+
 # 快速开始
 
 ## 安装与引入
 
-当前为本地开发版本，尚未发布到 npm。下面展示未来的包使用方式；现在可以先构建并打包，然后在项目中安装生成的 tgz。
+当前为本地开发版本，尚未发布到 npm。先在 Paper Ink 仓库构建并打包，再将生成的 tgz 文件复制到消费项目。消费项目可使用 npm、cnpm、Yarn 或 pnpm。
 
 ```bash
 pnpm build
 pnpm --dir packages/paper-ink pack
-# 在消费项目安装生成的 paper-ink-0.1.0.tgz
 ```
+
+<InstallCommands />
+
+安装后，在应用入口引入组件与样式：
 
 ```tsx
 import { Button } from 'paper-ink';
@@ -97,4 +102,4 @@ PLAYWRIGHT_CHANNEL=chrome pnpm check:cli
 
 ## 当前范围
 
-已经实现 Button、Input、Input.TextArea、受控 Modal 和基础 ConfigProvider。其他组件按实际需要逐步加入；未实现的 API 不列入公开类型。项目采用 MIT 许可证。
+已提供输入、选择、布局、展示、反馈等常用组件，以及独立 Form、Table、Upload 与公共 Hooks。具体 API 和边界见各组件文档；未实现的 API 不列入公开类型。项目采用 MIT 许可证。
