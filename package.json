@@ -5,13 +5,13 @@
   "packageManager": "pnpm@10.22.0",
   "scripts": {
     "dev": "pnpm --filter @paper-ink/website dev",
-    "build": "pnpm --filter paper-ink build && pnpm --filter @paper-ink/cli build && pnpm --filter @paper-ink/website build",
+    "build": "pnpm --filter paper-ink build && pnpm --filter @tingxi8087/paper-ink-cli build && pnpm --filter @paper-ink/website build",
     "typecheck": "tsc --noEmit",
     "test": "pnpm build:registry && vitest run && node --test packages/cli/test/*.test.mjs",
     "test:browser": "playwright test",
     "check:size": "node scripts/check-size.mjs",
     "check:package": "node scripts/check-package.mjs",
-    "build:registry": "pnpm --filter @paper-ink/cli build",
+    "build:registry": "pnpm --filter @tingxi8087/paper-ink-cli build",
     "cli": "node packages/cli/dist/index.mjs",
     "check:cli": "pnpm --filter paper-ink build && pnpm build:registry && node scripts/check-cli.mjs"
   },

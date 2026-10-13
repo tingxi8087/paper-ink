@@ -1,11 +1,45 @@
 {
-  "name": "@paper-ink/cli",
+  "name": "@tingxi8087/paper-ink-cli",
   "version": "0.1.0",
   "description": "Install Paper Ink component source into your React TypeScript project",
   "type": "module",
   "license": "MIT",
-  "engines": { "node": ">=20" },
-  "bin": { "paper-ink": "./dist/index.mjs" },
-  "files": ["dist", "README.md", "LICENSE"],
-  "scripts": { "build": "node ../../scripts/build-registry.mjs" }
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "paper-ink": "./dist/index.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node ../../scripts/build-registry.mjs",
+    "prepack": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tingxi8087/paper-ink.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://tingxi8087.github.io/paper-ink/",
+  "bugs": {
+    "url": "https://github.com/tingxi8087/paper-ink/issues"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "ui",
+    "components",
+    "monochrome",
+    "paper-ink",
+    "cli",
+    "source-code"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
 }

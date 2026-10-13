@@ -6,7 +6,7 @@ Paper Ink 追求清晰、克制的水墨风格：足够对比度的黑白、淡�
 
 [在线文档](https://tingxi8087.github.io/paper-ink/) · [组件画廊](https://tingxi8087.github.io/paper-ink/#/showcase) · [快速开始](https://tingxi8087.github.io/paper-ink/#/guide) · [主题实验室](https://tingxi8087.github.io/paper-ink/#/theme)
 
-> 当前版本为 **0.1.0 开发版，组件包和 CLI 尚未发布到 npm**。可以从本仓库构建安装。面向 React 18+、ReactDOM 和 TypeScript 项目。
+> 首个公开版本为 **0.1.0**。面向 React 18+、ReactDOM 和 TypeScript 项目。
 
 ## 为什么选择 Paper Ink
 
@@ -25,24 +25,16 @@ Paper Ink 追求清晰、克制的水墨风格：足够对比度的黑白、淡�
 
 ### 方式一：组件包
 
-当前先从仓库构建组件包，要求 Node.js 22.12+、pnpm 10：
+在已有 React 项目中，选择项目使用的包管理器安装：
 
 ```bash
-git clone https://github.com/tingxi8087/paper-ink.git
-cd paper-ink
-pnpm install
-pnpm --filter paper-ink build
-pnpm --dir packages/paper-ink pack --pack-destination ../../.artifacts
+npm install paper-ink
+# 或 cnpm install paper-ink
+# 或 yarn add paper-ink
+# 或 pnpm add paper-ink
 ```
 
-将 `.artifacts/paper-ink-0.1.0.tgz` 复制到你的 React 项目根目录，选择项目使用的包管理器安装：
-
-```bash
-npm install ./paper-ink-0.1.0.tgz
-# 或 cnpm install ./paper-ink-0.1.0.tgz
-# 或 yarn add ./paper-ink-0.1.0.tgz
-# 或 pnpm add ./paper-ink-0.1.0.tgz
-```
+React 和 ReactDOM 需要由项目提供；已有 React 项目一般已安装。
 
 在应用中导入组件和样式：
 
@@ -71,14 +63,15 @@ import 'paper-ink/button/style.css';
 
 ### 方式二：CLI 安装源码
 
-在 Paper Ink 仓库中执行，替换路径为你的 React + TypeScript 项目：
+在你的 React + TypeScript 项目根目录执行：
 
 ```bash
-pnpm build:registry
-pnpm cli init --cwd /absolute/path/to/your-app
-pnpm cli add button input --cwd /absolute/path/to/your-app --dry-run
-pnpm cli add button input --cwd /absolute/path/to/your-app
+npx @tingxi8087/paper-ink-cli init
+npx @tingxi8087/paper-ink-cli add button input --dry-run
+npx @tingxi8087/paper-ink-cli add button input
 ```
+
+也可以使用 `pnpm dlx @tingxi8087/paper-ink-cli`。CLI 需要 Node.js 20+，无需安装组件包即可使用本地源码。
 
 从目标项目的 `src/App.tsx` 引入：
 
@@ -98,15 +91,19 @@ CLI 自动解析共享模块与组件依赖，支持 `list`、`--dry-run` 和 `-
 包与源码分别拥有主题上下文，同一个组件树中建议保持一种来源。源码分发细节见 [分发说明](https://github.com/tingxi8087/paper-ink/blob/main/doc/distribution.md) 和 [CLI 文档](https://github.com/tingxi8087/paper-ink/blob/main/packages/cli/README.md)。
 
 <details>
-<summary>发布到 npm 后的安装方式（当前不可用）</summary>
+<summary>从仓库构建安装（组件开发与离线分发）</summary>
+
+要求 Node.js 22.12+、pnpm 10：
 
 ```bash
-npm install paper-ink
-# 或 pnpm add paper-ink / yarn add paper-ink / cnpm install paper-ink
-
-npx @paper-ink/cli init
-npx @paper-ink/cli add button input
+git clone https://github.com/tingxi8087/paper-ink.git
+cd paper-ink
+pnpm install
+pnpm --filter paper-ink build
+pnpm --dir packages/paper-ink pack --pack-destination ../../.artifacts
 ```
+
+将生成的 tgz 文件复制到消费项目后执行 `npm install ./paper-ink-0.1.0.tgz`。本仓库也可通过 `pnpm build:registry` 与 `pnpm cli` 使用未发布的本地 CLI 源码。
 
 </details>
 

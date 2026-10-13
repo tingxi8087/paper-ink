@@ -20,7 +20,7 @@ try {
   const cliArchive = archives.find(name => /cli.*\.tgz$/.test(name));
   assert.ok(libArchive && cliArchive);
   await mkdir(join(consumer, 'src'), { recursive: true });
-  await writeFile(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module', dependencies: { 'paper-ink': `file:${join(temp, libArchive)}`, '@paper-ink/cli': `file:${join(temp, cliArchive)}`, react: consumerReactVersion, 'react-dom': consumerReactVersion, dayjs: '^1.11.23', '@ctrl/tinycolor': '^4.2.1' }, devDependencies: { vite: '7.3.7', typescript: '5.9.3', '@types/react': consumerReactTypes, '@types/react-dom': consumerReactTypes } }));
+  await writeFile(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module', dependencies: { 'paper-ink': `file:${join(temp, libArchive)}`, '@tingxi8087/paper-ink-cli': `file:${join(temp, cliArchive)}`, react: consumerReactVersion, 'react-dom': consumerReactVersion, dayjs: '^1.11.23', '@ctrl/tinycolor': '^4.2.1' }, devDependencies: { vite: '7.3.7', typescript: '5.9.3', '@types/react': consumerReactTypes, '@types/react-dom': consumerReactTypes } }));
   await writeFile(join(consumer, 'tsconfig.json'), JSON.stringify({ compilerOptions: { target: 'ES2022', lib: ['ES2022', 'DOM'], module: 'ESNext', moduleResolution: 'Bundler', jsx: 'react-jsx', strict: true, skipLibCheck: true, noEmit: true }, include: ['src'] }));
   run('pnpm', ['install', '--offline', '--ignore-scripts']);
   run('pnpm', ['exec', 'paper-ink', '--version']);

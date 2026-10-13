@@ -4,17 +4,17 @@ test.beforeEach(async({page})=>{
   await page.route('https://fonts.googleapis.com/**',route=>route.abort());
 });
 
-test('quick start exposes working local-file commands for all package managers without implying a registry release',async({page})=>{
+test('quick start exposes registry install commands and optional local-file commands for all package managers',async({page})=>{
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
   await page.goto('/#/guide');
   await expect(page.getByRole('heading',{name:'快速开始',exact:true})).toBeVisible();
-  await expect(page.locator('.main-content')).toContainText('尚未发布到 npm');
+  await expect(page.locator('.main-content')).toContainText('已发布到 npm');
   const commands=page.getByLabel('选择包管理器');
   for(const [name,command,future] of [
-    ['npm','npm install ./paper-ink-0.1.0.tgz','npm install paper-ink'],
-    ['cnpm','cnpm install ./paper-ink-0.1.0.tgz','cnpm install paper-ink'],
-    ['Yarn','yarn add ./paper-ink-0.1.0.tgz','yarn add paper-ink'],
-    ['pnpm','pnpm add ./paper-ink-0.1.0.tgz','pnpm add paper-ink'],
+    ['npm','npm install paper-ink','npm install ./paper-ink-0.1.0.tgz'],
+    ['cnpm','cnpm install paper-ink','cnpm install ./paper-ink-0.1.0.tgz'],
+    ['Yarn','yarn add paper-ink','yarn add ./paper-ink-0.1.0.tgz'],
+    ['pnpm','pnpm add paper-ink','pnpm add ./paper-ink-0.1.0.tgz'],
   ]){
     await commands.getByRole('tab',{name,exact:true}).click();
     const panel=commands.getByRole('tabpanel');

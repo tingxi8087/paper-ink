@@ -1,69 +1,61 @@
 # Paper Ink CLI
 
-Install Paper Ink source into a React 18+ TypeScript project. MIT licensed, zero runtime npm dependencies. The registry payload ships inside the CLI package and is generated from the same source used by the `paper-ink` npm library.
+将 Paper Ink 组件源码安装到你的 React + TypeScript 项目。与组件包来自同一份实现，支持按需选择、共享依赖解析和本地二次开发。MIT 许可，CLI 零运行时 npm 依赖。
 
-**Local development release; not yet published to npm.**
+[在线文档](https://tingxi8087.github.io/paper-ink/) · [快速开始](https://tingxi8087.github.io/paper-ink/#/guide) · [GitHub](https://github.com/tingxi8087/paper-ink)
 
-## Local use
+## 安装源码
 
-From the Paper Ink repository:
+要求 Node.js 20+、React 18+ 和 TypeScript。在消费项目根目录执行：
+
+```bash
+npx @tingxi8087/paper-ink-cli init
+npx @tingxi8087/paper-ink-cli add button input --dry-run
+npx @tingxi8087/paper-ink-cli add button input
+```
+
+也可以使用 `pnpm dlx @tingxi8087/paper-ink-cli`，或安装 CLI 后使用 `paper-ink` 命令。无需安装 `paper-ink` 组件包。
+
+从消费项目的 `src/App.tsx` 引入：
+
+```tsx
+import { Button, Input } from './components/paper-ink';
+import './components/paper-ink/style.css';
+
+export default function App() {
+  return <><Input placeholder="可以直接修改源码" /><Button>保存</Button></>;
+}
+```
+
+有 src 时默认安装到 `src/components/paper-ink`，否则为 `components/paper-ink`。生成的内部引用是相对路径，适用于 Vite 等 bundler 模式的 React TypeScript 项目。
+
+## 命令
+
+- `init --path src/ui/paper-ink`：指定源码目录，不修改项目别名和应用入口。
+- `add button input modal`：添加组件及共享依赖；Modal 要求消费项目有兼容的 ReactDOM。
+- `list`：查看可安装条目。
+- `--cwd /absolute/path/to/your-app`：操作指定项目。
+- `--dry-run`：预览，不写文件、不安装依赖。
+- `--no-install`：写入源码，由你手动安装缺失的 npm 依赖。
+- `--overwrite`：明确替换已安装的源码。
+- `--help` / `--version`：查看帮助和版本。
+
+CLI 根据项目配置与锁文件识别 npm、pnpm、Yarn 或 Bun，自动解析组件的源码和 npm 依赖。共享模块安装一次，不需要手动复制文件。
+
+## 修改与升级
+
+源码属于你的项目，可直接修改。重复添加默认保留本地修改，无归属冲突会停止操作。请一起提交源码、`paper-ink.json` 和 `paper-ink.lock.json`。当前不提供自动合并上游改动的更新命令。
+
+组件包与源码拥有独立的主题上下文，一个组件树中建议保持同一种来源。
+
+## 仓库开发
 
 ```bash
 pnpm build:registry
 pnpm cli init --cwd /absolute/path/to/your-app
-pnpm cli add button input modal --cwd /absolute/path/to/your-app --dry-run
-pnpm cli add button input modal --cwd /absolute/path/to/your-app
+pnpm cli add button input --cwd /absolute/path/to/your-app
 ```
 
-Alternatively, pack this package, install the generated tgz in your project, then run `pnpm exec paper-ink init` and `pnpm exec paper-ink add button input modal`.
+常用组件 API 参考 [Ant Design](https://ant.design/)，采用独立实现，不依赖 antd，支持范围以组件文档为准。
 
-After npm publication the equivalent commands will be:
-
-```bash
-pnpm dlx @paper-ink/cli init
-pnpm dlx @paper-ink/cli add button input modal
-```
-
-## Commands
-
-- `init`: create `paper-ink.json`. Existing configuration is preserved.
-- `init --path src/ui/paper-ink`: choose the source directory.
-- `add button input modal`: install component source, shared modules, CSS and license.
-- `list`: list available public components.
-- `--cwd`: target another project.
-- `--dry-run`: preview without file writes or dependency installation.
-- `--overwrite`: explicitly restore/replace conflicting installed source files.
-- `--no-install`: leave missing npm dependencies for manual installation.
-- `--help` / `--version`.
-
-Button and Input only need the project's React dependency. Modal also needs an existing ReactDOM version compatible with React; the CLI checks this host dependency before writing any files. Future registry items can declare npm dependencies. The CLI detects npm, pnpm, yarn or bun from project configuration and lockfiles.
-
-## Use installed source
-
-Default directory: `src/components/paper-ink` when `src` exists, otherwise `components/paper-ink`.
-
-```tsx
-// From src/App.tsx:
-import { Button, ConfigProvider } from './components/paper-ink';
-import './components/paper-ink/style.css';
-```
-
-An existing `@/` alias can also be used; the CLI does not change your tsconfig or bundler aliases. Installed internal imports are relative and extensionless, intended for bundler-mode React TypeScript projects such as Vite.
-
-`paper-ink.lock.json` records installed groups and generated file hashes. Commit it alongside `paper-ink.json` and the installed source. Shared theme and ConfigProvider files are stored once under the chosen directory.
-
-Existing tracked files are preserved even if modified. Untracked conflicting files abort before component writes; use another directory or explicitly opt into `--overwrite`. User exports outside the managed block in index.ts are preserved. There is no automatic upstream merge/update command.
-
-Use local source or the npm package consistently within a component tree: the two distributions have independent theme contexts, and editing local source does not alter the npm package.
-
-Layout source installation: `paper-ink add stack inline simple-grid`. These components share spacing helpers and theme modules, installed once.
-
-Available source items also include checkbox, radio, switch, tabs, select, tooltip, message, tag, alert, spin and empty. Install any combination with `paper-ink add checkbox radio switch tabs select tooltip message tag alert spin empty`. Select, Tooltip, Message and fullscreen Spin require the project's compatible ReactDOM dependency, which the CLI validates before writing files.
-
-Source items now also include typography, divider, breadcrumb, dropdown, pagination, input-number, avatar, badge, card, collapse, descriptions, popover, segmented, drawer, popconfirm, progress, skeleton and app. Shared dependencies are installed once. Adding input-number installs @rc-component/mini-decimal; Statistic also uses this decimal dependency.
-
-新增 Rate、Timeline、Result：支持常用 antd 风格 API、共享主题与 SVG 图标，提供 npm 子路径和 CLI 源码安装，完整 API 与支持边界见文档站。
-
-Additional source items: `paper-ink add statistic util layout splitter steps auto-complete slider notification image`. Layout is the application shell; Stack/Inline/SimpleGrid continue to share internal spacing helpers. Util contains only types and has no CSS. Image pulls in Modal; AutoComplete pulls in Input; Slider pulls in Tooltip. App includes Notification along with Message and Modal.
-
-ColorPicker 纯色首期：透明度、HEX/RGB/HSB、预设、键盘与 Form。npm 子路径 `paper-ink/color-picker`，CSS `paper-ink/color-picker/style.css`；CLI `paper-ink add color-picker` 自动添加 @ctrl/tinycolor。支持范围见组件文档，渐变与屏幕取色留待后续。
+[MIT License](LICENSE)。

@@ -7,9 +7,9 @@
 同一份 `packages/paper-ink/src` 组件源码提供两条分发路径：
 
 1. TypeScript 构建为 ESM、声明文件和 CSS，发布为 `paper-ink`。
-2. 从 registry 清单收集源码，生成随 `@paper-ink/cli` 发布的安装资源；CLI 把所选组件安装到使用项目。
+2. 从 registry 清单收集源码，生成随 `@tingxi8087/paper-ink-cli` 发布的安装资源；CLI 把所选组件安装到使用项目。
 
-目前都是本地开发版本，尚未发布到 npm。包名需在正式发布时确认可用性与 scope 权限。
+首个公开版本为 0.1.0：组件包 paper-ink，源码 CLI @tingxi8087/paper-ink-cli。CLI 可执行命令仍为 paper-ink。
 
 ## 目录
 

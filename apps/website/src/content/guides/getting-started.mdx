@@ -4,12 +4,7 @@ import { InstallCommands } from '../../components/InstallCommands';
 
 ## 安装与引入
 
-当前为本地开发版本，尚未发布到 npm。先在 Paper Ink 仓库构建并打包，再将生成的 tgz 文件复制到消费项目。消费项目可使用 npm、cnpm、Yarn 或 pnpm。
-
-```bash
-pnpm build
-pnpm --dir packages/paper-ink pack
-```
+组件包已发布到 npm，支持 React 18+。消费项目可使用 npm、cnpm、Yarn 或 pnpm；React 与 ReactDOM 由项目提供。
 
 <InstallCommands />
 
@@ -28,14 +23,15 @@ export default function App() {
 
 也可以把 Button 安装到业务项目，直接拥有并修改源码。CLI 与 npm 包来自同一份实现。
 
-当前 CLI 尚未发布到 npm。从 Paper Ink 仓库操作你的 React 18+ TypeScript 项目：
+在你的 React + TypeScript 项目根目录执行（Node.js 20+）：
 
 ```bash
-pnpm build:registry
-pnpm cli init --cwd /absolute/path/to/your-app
-pnpm cli add button input modal --cwd /absolute/path/to/your-app --dry-run
-pnpm cli add button input modal --cwd /absolute/path/to/your-app
+npx @tingxi8087/paper-ink-cli init
+npx @tingxi8087/paper-ink-cli add button input modal --dry-run
+npx @tingxi8087/paper-ink-cli add button input modal
 ```
+
+也可以使用 pnpm dlx @tingxi8087/paper-ink-cli。无需安装组件包即可使用源码形式。
 
 默认安装到 src/components/paper-ink，包含所选组件、共享主题、ConfigProvider 和 CSS；Modal 会同时安装 Button，且目标项目需要已安装与 React 版本一致的 react-dom。从目标项目的 src/App.tsx 引用：
 

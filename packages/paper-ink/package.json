@@ -310,7 +310,8 @@
     "./upload/style.css": "./dist/upload/style.css"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"
+    "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs",
+    "prepack": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -324,5 +325,26 @@
     "@ctrl/tinycolor": "^4.2.1",
     "@rc-component/mini-decimal": "^1.1.4",
     "dayjs": "^1.11.23"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tingxi8087/paper-ink.git",
+    "directory": "packages/paper-ink"
+  },
+  "homepage": "https://tingxi8087.github.io/paper-ink/",
+  "bugs": {
+    "url": "https://github.com/tingxi8087/paper-ink/issues"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "ui",
+    "components",
+    "monochrome",
+    "paper-ink"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

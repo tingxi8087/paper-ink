@@ -9,6 +9,6 @@ export function InstallCommands() {
   return <Tabs aria-label="选择包管理器" defaultActiveKey="npm" items={managers.map(manager => ({
     key: manager.key,
     label: manager.label,
-    children: <><p>在消费项目中安装本地打包文件：</p><pre><code>{manager.local}</code></pre><details><summary>发布后的安装命令</summary><pre><code>{manager.registry}</code></pre></details></>,
+    children: <><p>在 React 项目中安装组件包：</p><pre><code>{manager.registry}</code></pre><details><summary>本地构建文件安装方式</summary><pre><code>{manager.local}</code></pre></details></>,
   }))} />;
 }
