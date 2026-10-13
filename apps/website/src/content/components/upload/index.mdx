@@ -1,0 +1,48 @@
+import { UploadDemos } from '../../../components/UploadDemos';
+import { UploadApiTable, UseUploadApiTable, UploadProtocolTable } from './api';
+import { DocBoundary, DocNote, DocImport } from '../../../components/DocDetails';
+
+# Upload 上传
+
+选择和展示文件，useUpload 独立管理上传任务。组件不绑定请求地址、接口结构或请求库。
+
+## 代码演示
+
+<UploadDemos />
+
+## Upload API
+
+<UploadApiTable />
+
+## useUpload API
+
+<UseUploadApiTable />
+
+## 文件与事件协议
+
+<UploadProtocolTable />
+
+<DocNote>
+
+Upload 的 onChange 只在用户增删替换文件时触发。上传进度和状态由外部更新 fileList，组件不会反向触发 onChange。新文件校验完成后，一次选择只产生一个批量通知；被拒绝文件单独进入 onReject。
+
+表单仅选择文件时直接使用 Form.Field 自动绑定 fileList。立即上传时让 Hook 独立持有列表，提交读取 upload.fileList；不要同时用 Form 自动接管这一份列表。以上带上传任务的案例使用可取消的本地模拟请求，不上传到服务器，演示百分比只表示模拟任务进度。
+
+</DocNote>
+
+## 支持边界
+
+<DocBoundary>
+
+- 支持点击、多选、拖拽、同名重复选择、异步校验、数量限制和三种列表。maxCount 为 1 时通过校验的新文件替换旧文件；多文件超限按顺序接纳剩余容量，不静默删除旧文件。
+- request 只存在于 Hook。取消、删除、替换、清空和卸载会终止对应任务，旧请求结果和进度不会回写。请求库需实际传递 AbortSignal 才能停止网络；未支持取消的请求仍会被忽略。
+- 上传成功需要 request 自行检查业务响应；没有进度能力时不制造百分比。upload() 仅开始 idle 文件，重试需指定 uid；完成文件和缺少原始 File 的远端文件不会重新上传。
+- 本地图片临时 URL 仅用于展示，移除与卸载后释放，不写入持久数据。默认提供图片预览，其他文件或复杂预览使用 onPreview。删除不会删除服务器资源，远端删除放进 onRemove；false 或拒绝阻止本次移除。
+- accept 是类型提示与筛选规则，不替代服务端验证。目录上传、粘贴、裁剪、排序、分片和断点续传不内置；压缩与签名等可在 request 内完成。
+- 常规属性参考 antd；任务 Hook、操作类型和状态协议独立设计。不支持 action、customRequest、beforeUpload、复杂 showUploadList 配置或完整 antd Upload API。
+
+</DocBoundary>
+
+## 导入
+
+<DocImport npm={"import { Upload } from 'paper-ink/upload';\nimport { useUpload } from 'paper-ink/hooks';\nimport 'paper-ink/upload/style.css';"} cli={"paper-ink add upload use-upload\n# 只选择文件时，仅需 add upload"} />

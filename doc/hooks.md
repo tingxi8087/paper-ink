@@ -40,3 +40,7 @@ CLI：`paper-ink add hooks` 安装两者；也可分别安装 use-ref-state 或 
 ## 验证（2026-10-12）
 
 类型检查、完整构建通过；244 项单元与类型检查、8 项 CLI 单元检查、81 项 Chrome 浏览器检查通过。新增 Hook 覆盖 8 项行为与 1 项类型约束；浏览器新增 3 项检查，实际刷新恢复对象/数值/布尔值并切换 key，移动端无页面横向溢出。React 18.3.1、19.3.0 的 npm 与 CLI 源码安装、类型检查、生产构建及本地存储交互通过。规划页同步为 45/82 已完成、独立条目 9/9；旧 useRefState 引入路径仍可用。
+
+## useUpload（2026-10-13）
+
+独立上传任务 Hook，支持业务 Promise 请求、AbortSignal、并发队列、自动/手动上传、真实进度、取消及重试。不会导入 Upload 或其他 UI 组件；可从 paper-ink/hooks 或 paper-ink/use-upload 引入，CLI 使用 paper-ink add use-upload。与纯 Upload 通过 props 协议组合，详见 [Upload 与 useUpload 设计文档](./upload-design.md)。前文验证数字为历史快照。

@@ -1,6 +1,6 @@
 # antd 组件清单与 Paper Ink 开发优先级
 
-记录日期：2026-10-12。
+记录日期：2026-10-13。
 
 组件范围依据 [Ant Design 官方组件目录](https://ant.design/components/overview/)，本次查询页面版本为 6.6.5。核心目录共 73 个条目，包含组件、配置入口和工具项；Input.TextArea、Checkbox.Group 等子组件不单独计数。另列官网展示的 6 个 Pro Components 扩展组件，它们不属于核心 antd 包。
 
@@ -18,7 +18,7 @@
 
 成本按做好常用 API 和交互估计，不按完整复制 antd 计算。标注“已有”的组件以完善现有实现为主；本表不是全部实现的承诺。独立设计的组件单独列出，不计入 antd 核心目录。
 
-状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 82 项：已有基础实现 58 项、待实现 19 项、已有独立方案 4 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
+状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 84 项：已有基础实现 60 项、待实现 18 项、已有独立方案 5 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
 
 保持既定方向：通用 React + TypeScript 组件库，默认黑白主色、保留语义色，常规 API 接近 antd，主题结构独立设计，支持 npm 与 CLI 源码双分发，完全开源，从简单组件逐步推进。
 
@@ -76,7 +76,7 @@
 | TimePicker 时间选择器（已有） | 3/5 | 高 | 24 小时制、时分秒步长、禁用联动、严格输入、草稿确认和即时提交、连续淡入淡出；时间范围留待后续 |
 | Transfer 穿梭框 | 2/5 | 高 | 特定后台场景使用，常可由多选或表格替代 |
 | TreeSelect 树选择 | 2/5 | 高 | 应在 Tree、Select 都稳定后考虑 |
-| Upload 上传 | 3/5 | 高 | 常用但范围大，文件列表、请求、进度和取消需明确边界 |
+| Upload 上传（独立方案） | 3/5 | 高 | 已有纯文件 Upload 与独立 useUpload；请求和操作类型独立设计，不代表 antd Upload API 完成 |
 
 ## 数据展示（21）
 
@@ -169,7 +169,7 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 - 同步 npm 导出、独立 CSS、CLI registry 与依赖清单。
 - 提供紧凑的文档、真实交互演示和必要的行为验证。
 
-## Paper Ink 独立组件（9）
+## Paper Ink 独立组件（11）
 
 分类：布局、数据录入、数据展示与公共 Hook。API 独立设计，已有基础实现；不表示对应 antd API 已完成。
 
@@ -183,9 +183,11 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 | useBasePageTable 表格数据 Hook（已有） | 4/5 | 中—高 | 受控查询、分页、AbortSignal 取消与过期隔离、缓存及本地更新 |
 | useTableChecked 表格选择 Hook（已有） | 4/5 | 低—中 | _checked 业务行状态、批量选择与最终 keys 同步 |
 | useRefState 即时状态 Hook（已有） | 4/5 | 低 | React state 与即时只读 ref，支持连续函数更新 |
+| Upload 纯文件控件（已有） | 3/5 | 中 | 纯选择、拖拽、批量校验、操作类型、图片与 Form；不发请求 |
+| useUpload 上传任务 Hook（已有） | 3/5 | 中—高 | 独立 Promise 请求、并发、真实进度、AbortSignal、取消重试与旧结果隔离 |
 | useLocalstorageState 本地状态 Hook（已有） | 4/5 | 低 | 普通 state 增加存储 key、JSON 自动保存与刷新恢复 |
 
-15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker、Menu，以及 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image、ColorPicker，连同 9 个独立组件与 Hook，已有基础实现共 58 项；完整 API 支持范围以组件文档为准。
+15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker、Menu，以及 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image、ColorPicker，连同 11 个独立组件与 Hook，已有基础实现共 60 项；完整 API 支持范围以组件文档为准。
 
 本阶段不实现 Space、antd Table 与 antd Form API；独立轻量 Form、Table 及公共表格 Hook 已实现。普通间距统一使用 Inline / Stack；DatePicker、RangePicker 与 TimePicker 首期已实现，API 与边界见[日期时间设计文档](./date-time-design.md)；Calendar 与时间范围尚未实现。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal / notification。
 
@@ -194,3 +196,5 @@ Menu 的 API、功能与首期边界见[轻量 Menu 设计](./menu-design.md)。
 本批 3 分条目已提供常用 API 子集；完整 API 与首期边界以各组件文档为准。Layout 是应用外壳，Stack / Inline / SimpleGrid 的独立布局文档保留。Util 仅提供类型，无 CSS。Notification 默认静态调用不继承局部 Context，使用 App 或 hook 实现主题继承。
 
 ColorPicker 首期已实现，使用 @ctrl/tinycolor 的解析与转换函数，颜色对象保留高精度 HSB。纯色范围成本调整为中；尚不含渐变、屏幕取色和复杂面板定制。
+
+Upload 与 useUpload 首期已实现，API 独立设计；功能和边界见[上传设计文档](./upload-design.md)。纯 Upload 不依赖上传 Hook，请求由业务提供；目录、粘贴、分片及断点续传暂不内置。

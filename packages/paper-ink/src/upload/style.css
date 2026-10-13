@@ -1,0 +1,36 @@
+.pi-upload { color:var(--pi-color-text-primary); font-size:var(--pi-font-size); min-width:0; width:100%; }
+.pi-upload__input { display:none; }
+.pi-upload__list { list-style:none; padding:0; margin:8px 0 0; display:flex; flex-direction:column; gap:6px; }
+.pi-upload__item { display:flex; align-items:center; gap:8px; min-width:0; padding:8px 10px; border:1px solid var(--pi-color-border-subtle); border-radius:var(--pi-radius-control); background:var(--pi-color-surface-container); }
+.pi-upload__details { flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; }
+.pi-upload__name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height:1.5; }
+.pi-upload__state { display:flex; align-items:center; gap:4px; font-size:12px; color:var(--pi-color-text-secondary); }
+.pi-upload__file-icon { display:flex; align-items:center; }
+.pi-upload__item--error .pi-upload__state,.pi-upload__error,.pi-upload__rejections { color:var(--pi-color-error-on-subtle); }
+.pi-upload__item--done .pi-upload__state > svg { color:var(--pi-color-success-solid); }
+.pi-upload__error { font-size:12px; overflow-wrap:anywhere; }
+.pi-upload__operations { display:flex; align-items:center; gap:4px; flex-shrink:0; }
+.pi-upload__operations button { display:inline-flex; align-items:center; justify-content:center; min-width:24px; min-height:28px; padding:2px 5px; border:0; border-radius:var(--pi-radius-control); background:transparent; color:var(--pi-color-text-secondary); cursor:pointer; font:inherit; font-size:12px; }
+.pi-upload__operations button:hover { background:var(--pi-color-surface-muted); color:var(--pi-color-text-primary); }
+.pi-upload__operations button:focus-visible { outline:1px solid var(--pi-color-primary-solid); outline-offset:1px; }
+.pi-upload__operations button:disabled { color:var(--pi-color-text-disabled); cursor:not-allowed; }
+.pi-upload__thumbnail { width:44px; height:44px; flex-shrink:0; display:grid; place-items:center; background:var(--pi-color-surface-muted); border-radius:var(--pi-radius-control); overflow:hidden; }
+.pi-upload__thumbnail img { width:100%; height:100%; object-fit:cover; }
+.pi-upload--picture-card .pi-upload__list { display:grid; grid-template-columns:repeat(auto-fill,minmax(124px,1fr)); }
+.pi-upload--picture-card .pi-upload__item { align-items:stretch; flex-direction:column; gap:6px; }
+.pi-upload--picture-card .pi-upload__thumbnail { width:100%; height:100px; }
+.pi-upload--picture-card .pi-upload__operations { justify-content:flex-end; }
+.pi-upload__dropzone { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:24px 12px; border:1px dashed var(--pi-color-border-default); border-radius:var(--pi-radius-control); background:var(--pi-color-surface-muted); transition:background-color 120ms ease-out,border-color 120ms ease-out; }
+.pi-upload__dropzone p { margin:0; font-size:12px; color:var(--pi-color-text-secondary); }
+.pi-upload__dropzone--over { border-color:var(--pi-color-primary-solid); background:var(--pi-color-surface-container); }
+.pi-upload--error .pi-upload__dropzone,.pi-upload--error .pi-upload__trigger > * { border-color:var(--pi-color-error-on-subtle); }
+.pi-upload--warning .pi-upload__dropzone,.pi-upload--warning .pi-upload__trigger > * { border-color:var(--pi-color-warning-solid); }
+.pi-upload__progress { height:3px; border-radius:2px; background:var(--pi-color-border-subtle); overflow:hidden; }
+.pi-upload__progress > span { display:block; height:100%; background:var(--pi-color-primary-solid); transition:width 120ms ease-out; }
+.pi-upload__progress--unknown > span { width:35%; animation:pi-upload-progress 1400ms ease-in-out infinite; }
+.pi-upload__item--uploading .pi-upload__state svg { animation:pi-upload-spin 1000ms linear infinite; }
+.pi-upload__rejections { margin-top:8px; font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+.pi-upload__preview { display:block; width:100%; max-height:70vh; object-fit:contain; }
+@keyframes pi-upload-progress { from { transform:translateX(-100%); } to { transform:translateX(300%); } }
+@keyframes pi-upload-spin { to { transform:rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .pi-upload__progress > span,.pi-upload__state svg,.pi-upload__dropzone { animation:none !important; transition:none; } }

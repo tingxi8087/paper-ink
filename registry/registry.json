@@ -786,7 +786,8 @@
       "description": "Generic state hooks",
       "registryDependencies": [
         "use-ref-state",
-        "use-localstorage-state"
+        "use-localstorage-state",
+        "use-upload"
       ],
       "files": [
         "hooks/index.ts"
@@ -1028,6 +1029,49 @@
       ],
       "exports": [
         "export * from './color-picker/index';"
+      ]
+    },
+    {
+      "name": "upload-types",
+      "internal": true,
+      "description": "Shared Upload file and operation types",
+      "files": [
+        "upload/types.ts"
+      ],
+      "exports": []
+    },
+    {
+      "name": "upload",
+      "description": "Pure file selector with lists, drag and drop, validation and Form binding",
+      "files": [
+        "upload/index.ts",
+        "upload/upload.tsx",
+        "upload/style.css"
+      ],
+      "registryDependencies": [
+        "upload-types",
+        "theme",
+        "icons",
+        "button",
+        "modal",
+        "field-binding"
+      ],
+      "exports": [
+        "export * from './upload/index';"
+      ]
+    },
+    {
+      "name": "use-upload",
+      "description": "Independent cancellable upload task hook",
+      "files": [
+        "use-upload/index.ts",
+        "hooks/useUpload.ts"
+      ],
+      "registryDependencies": [
+        "upload-types"
+      ],
+      "exports": [
+        "export * from './use-upload/index';"
       ]
     }
   ]

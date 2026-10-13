@@ -59,3 +59,7 @@ Statistic, Layout (Header/Content/Footer/Sider), Splitter, Steps, AutoComplete, 
 GetProps, GetProp and GetRef are type-only exports from paper-ink/util or the root; they need no stylesheet. DatePicker/RangePicker, TimePicker and Menu are also available with documented subsets.
 
 ColorPicker 纯色首期：透明度、HEX/RGB/HSB、预设、键盘与 Form。npm 子路径 `paper-ink/color-picker`，CSS `paper-ink/color-picker/style.css`；CLI `paper-ink add color-picker` 自动添加 @ctrl/tinycolor。支持范围见组件文档，渐变与屏幕取色留待后续。
+
+## Upload and useUpload
+
+Upload / Upload.Dragger are pure file-list controls: selection, validation, add/remove/replace notifications, thumbnails, image preview and Form binding. The independent useUpload hook manages requests, concurrency, progress, cancellation and retries using caller-provided Promise requests and AbortSignal. Spread upload.props into Upload; no request prop exists on the component. Import Upload from paper-ink/upload with paper-ink/upload/style.css, and useUpload from paper-ink/hooks or paper-ink/use-upload. CLI source installation uses paper-ink add upload use-upload. See the component README and doc/upload-design.md for the supported independent API.

@@ -298,7 +298,16 @@
       "types": "./dist/color-picker/index.d.ts",
       "import": "./dist/color-picker/index.js"
     },
-    "./color-picker/style.css": "./dist/color-picker/style.css"
+    "./color-picker/style.css": "./dist/color-picker/style.css",
+    "./upload": {
+      "types": "./dist/upload/index.d.ts",
+      "import": "./dist/upload/index.js"
+    },
+    "./use-upload": {
+      "types": "./dist/use-upload/index.d.ts",
+      "import": "./dist/use-upload/index.js"
+    },
+    "./upload/style.css": "./dist/upload/style.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs"
