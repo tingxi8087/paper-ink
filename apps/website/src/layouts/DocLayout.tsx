@@ -1,6 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Menu, type MenuItem } from 'paper-ink';
-import { InkBackground } from '../components/InkBackground';
 const nav = [
  { group: '开始', items: [['guide', '快速开始'], ['theme', '主题实验室']] },
  { group: '通用与布局', items: [['button', 'Button 按钮'], ['arrangement', 'Stack / Inline / SimpleGrid'], ['layout', 'Layout 布局'], ['splitter', 'Splitter 分隔面板'], ['steps', 'Steps 步骤条'], ['tabs', 'Tabs 标签页'], ['typography', 'Typography 排版'], ['divider', 'Divider 分割线'], ['breadcrumb', 'Breadcrumb 面包屑'], ['dropdown', 'Dropdown 下拉菜单'], ['menu', 'Menu 导航菜单'], ['pagination', 'Pagination 分页']] },
@@ -13,7 +12,7 @@ const navigationItems: MenuItem[] = nav.map(g => ({ key: `group-${g.group}`, typ
 export function DocLayout({ route, children }: { route: string; children: ReactNode }) {
  const [menu, setMenu] = useState(false);
  useEffect(() => { setMenu(false); window.scrollTo(0, 0); }, [route]);
- return <div className="site-shell" data-ink-mode={route === '' ? 'home' : 'docs'}><InkBackground mode={route === '' ? 'home' : 'docs'} /><header className="site-header"><a href="#/" className="brand"><span className="brand-mark">pi<span>·</span></span><span>paper ink</span></a><div className="header-links"><a href="#/button" className={route === 'button' ? 'selected' : ''}>组件</a><a href="#/theme" className={route === 'theme' ? 'selected' : ''}>主题</a><span className="version">v0.1.0</span><button className="mobile-menu" onClick={() => setMenu(v => !v)} aria-expanded={menu} aria-label="展开导航">☰</button></div></header>
+ return <div className="site-shell"><header className="site-header"><a href="#/" className="brand"><span className="brand-mark">pi<span>·</span></span><span>paper ink</span></a><div className="header-links"><a href="#/button" className={route === 'button' ? 'selected' : ''}>组件</a><a href="#/theme" className={route === 'theme' ? 'selected' : ''}>主题</a><span className="version">v0.1.0</span><button className="mobile-menu" onClick={() => setMenu(v => !v)} aria-expanded={menu} aria-label="展开导航">☰</button></div></header>
  <div className={`site-body ${route === '' ? 'site-body--home' : ''}`}>
  {route !== '' && <aside className={`sidebar ${menu ? 'sidebar--open' : ''}`}><Menu aria-label="文档导航" items={navigationItems} selectedKeys={[route]} /></aside>}
  <main className="main-content" key={route}>{children}</main>
