@@ -93,3 +93,16 @@ test('Drawer entrance moves the panel from outside the viewport while focusing i
   expect(positions.middle).toBeGreaterThan(positions.end);
   expect(positions.end).toBeCloseTo(positions.viewport - positions.width, 0);
 });
+
+test('Modal is vertically centered by default on desktop and mobile', async ({page})=>{
+  for(const viewport of [{width:1440,height:1000},{width:390,height:844}]){
+    await page.setViewportSize(viewport);
+    await page.goto('/#/modal');
+    await page.getByRole('button',{name:'打开基础弹窗',exact:true}).click();
+    const dialog=page.getByRole('dialog',{name:'基础弹窗',exact:true});
+    await expect(dialog).toBeVisible();
+    await expect.poll(async()=>{const box=(await dialog.boundingBox())!;return Math.abs(box.y+box.height/2-viewport.height/2);}).toBeLessThan(1);
+    await page.keyboard.press('Escape');
+    await expect(dialog).not.toBeVisible();
+  }
+});

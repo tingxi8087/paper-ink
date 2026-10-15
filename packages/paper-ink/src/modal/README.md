@@ -2,7 +2,7 @@
 
 受控基础弹窗。`open` 默认 `false`，`onOk` 和 `onCancel` 只通知调用方，不会隐式关闭弹窗；返回 Promise 不会自动开启 loading，提交状态通过 `confirmLoading` 控制。
 
-支持：`title`、`children`、`footer`、`width`（默认 520）、`centered`、`mask`、`maskClosable`、`keyboard`、`closable`、`okText`、`cancelText`、`okButtonProps`、`cancelButtonProps`、`afterClose`、`destroyOnHidden`、`forceRender`、`getContainer`、`className`、`rootClassName`、`style`、`zIndex`、`focusTriggerAfterClose`，以及 dialog 元素的原生属性。
+支持：`title`、`children`、`footer`、`width`（默认 520）、`centered`（默认 true，传 false 使用顶部布局）、`mask`、`maskClosable`、`keyboard`、`closable`、`okText`、`cancelText`、`okButtonProps`、`cancelButtonProps`、`afterClose`、`destroyOnHidden`、`forceRender`、`getContainer`、`className`、`rootClassName`、`style`、`zIndex`、`focusTriggerAfterClose`，以及 dialog 元素的原生属性。
 
 - `className` / `style` 应用于 dialog 卡片，`rootClassName` 应用于覆盖视口的根元素。
 - 默认 Portal 到 `document.body`，支持 DOM 元素、返回 DOM 元素的函数、选择器及 `false` 原地渲染。选择器无匹配时回退到 body。Portal 根节点携带当前主题变量。

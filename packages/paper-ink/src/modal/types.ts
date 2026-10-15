@@ -10,6 +10,7 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   confirmLoading?: boolean;
   footer?: ReactNode;
   width?: number | string;
+  /** Vertically center the dialog. @default true */
   centered?: boolean;
   mask?: boolean;
   maskClosable?: boolean;

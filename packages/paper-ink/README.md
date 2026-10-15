@@ -8,7 +8,7 @@ Paper Ink 追求清晰、克制的水墨风格：足够对比度的黑白、淡�
 
 [在线文档](https://tingxi8087.github.io/paper-ink/) · [组件画廊](https://tingxi8087.github.io/paper-ink/#/showcase) · [快速开始](https://tingxi8087.github.io/paper-ink/#/guide) · [主题实验室](https://tingxi8087.github.io/paper-ink/#/theme)
 
-> 当前版本为 **0.2.0**。面向 React 18+、ReactDOM 和 TypeScript 项目。
+> 当前版本为 **0.2.1**。面向 React 18+、ReactDOM 和 TypeScript 项目。
 
 ## 为什么选择 Paper Ink
 
@@ -105,7 +105,7 @@ pnpm --filter paper-ink build
 pnpm --dir packages/paper-ink pack --pack-destination ../../.artifacts
 ```
 
-将生成的 tgz 文件复制到消费项目后执行 `npm install ./paper-ink-0.2.0.tgz`。本仓库也可通过 `pnpm build:registry` 与 `pnpm cli` 使用未发布的本地 CLI 源码。
+将生成的 tgz 文件复制到消费项目后执行 `npm install ./paper-ink-0.2.1.tgz`。本仓库也可通过 `pnpm build:registry` 与 `pnpm cli` 使用未发布的本地 CLI 源码。
 
 </details>
 

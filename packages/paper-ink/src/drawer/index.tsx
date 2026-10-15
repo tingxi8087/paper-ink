@@ -28,7 +28,7 @@ export function Drawer({ title, children, open = false, onClose, placement = 'ri
   }, [open]);
   const horizontal = placement === 'left' || placement === 'right';
   const panelStyle: CSSProperties = { ...(horizontal ? { top: 0, bottom: 0, [placement]: 0, width: width ?? (size === 'large' ? 736 : 378), height: '100%' } : { left: 0, right: 0, [placement]: 0, width: '100%', height: height ?? (size === 'large' ? 736 : 378) }), ...style };
-  return <Modal {...props} open={open || present} onCancel={open ? onClose : undefined} title={title != null || extra != null ? <div className="pi-drawer-heading"><span>{title}</span>{extra != null && <div className="pi-drawer-extra">{extra}</div>}</div> : undefined} footer={null} width={horizontal ? panelStyle.width : '100%'} rootClassName={`pi-drawer-root pi-drawer-root--${placement} pi-drawer-root--${open ? 'enter' : 'leave'} ${rootClassName}`} className={`pi-drawer ${className}`} style={panelStyle}>
+  return <Modal {...props} centered={false} open={open || present} onCancel={open ? onClose : undefined} title={title != null || extra != null ? <div className="pi-drawer-heading"><span>{title}</span>{extra != null && <div className="pi-drawer-extra">{extra}</div>}</div> : undefined} footer={null} width={horizontal ? panelStyle.width : '100%'} rootClassName={`pi-drawer-root pi-drawer-root--${placement} pi-drawer-root--${open ? 'enter' : 'leave'} ${rootClassName}`} className={`pi-drawer ${className}`} style={panelStyle}>
     <div className="pi-drawer-content">{children}</div>{footer != null && <div className="pi-drawer-footer">{footer}</div>}
   </Modal>;
 }

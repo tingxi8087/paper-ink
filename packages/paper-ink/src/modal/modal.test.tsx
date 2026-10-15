@@ -6,6 +6,12 @@ import { Modal } from './modal.js';
 import { ConfigProvider } from '../config-provider/index.js';
 
 describe('Modal public behavior', () => {
+  it('centers by default and allows an explicit top layout', () => {
+    const { rerender } = render(<Modal open title="位置" />);
+    expect(screen.getByRole('dialog').parentElement).toHaveClass('pi-modal-wrap--centered');
+    rerender(<Modal open title="位置" centered={false} />);
+    expect(screen.getByRole('dialog').parentElement).not.toHaveClass('pi-modal-wrap--centered');
+  });
   it('portals a labelled dialog with theme and native attributes while callbacks stay controlled', () => {
     const onOk = vi.fn();
     const { container } = render(<ConfigProvider theme={{ token: { color: { primary: { solid: '#123456' } } } }}><Modal open title="编辑用户" onOk={onOk} className="custom" rootClassName="root-custom" style={{ width: 640 }} data-testid="editor">内容</Modal></ConfigProvider>);

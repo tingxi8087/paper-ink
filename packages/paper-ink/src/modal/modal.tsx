@@ -27,7 +27,7 @@ function focusFirst(dialog: HTMLElement) { (focusable(dialog)[0] ?? dialog).focu
 
 export function Modal({
   open = false, title, children, onOk, onCancel, confirmLoading = false,
-  footer, width = 520, centered = false, mask = true, maskClosable = true,
+  footer, width = 520, centered = true, mask = true, maskClosable = true,
   keyboard = true, closable = true, okText = '确定', cancelText = '取消',
   okButtonProps, cancelButtonProps, afterClose, destroyOnHidden = false,
   forceRender = false, getContainer, className = '', rootClassName = '', style,
