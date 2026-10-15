@@ -19,7 +19,7 @@ describe('documentation search', () => {
    ['弹窗', 'modal'], ['日期范围', 'date-picker'], ['useUpload', 'upload'],
    ['useRefState', 'hooks'], ['useLocalstorageState', 'hooks'], ['useTableHooks', 'table'],
    ['useBasePageTable', 'table'], ['useTableChecked', 'table'], ['useWatch', 'form'], ['useFieldState', 'form'], ['useFormState', 'form'],
-   ['SimpleGrid', 'arrangement'], ['主题变量', 'theme'],
+   ['Tabler', 'icons'], ['图标库', 'icons'], ['SimpleGrid', 'arrangement'], ['主题变量', 'theme'],
  ])('resolves %s to %s', (query, route) => expect(searchDocumentation(query)[0].route).toBe(route));
  it('ranks names before aliases and descriptions, and preserves stable ties', () => {
    const make = (route: string, label: string, aliases: string[], description: string) => ({ route, label, aliases, description, group:'test' });

@@ -22,3 +22,9 @@ if(Object.keys(uploadOnly.metafile.inputs).some(path=>path.includes('/hooks/useU
 const uploadHook = await build({entryPoints:['./packages/paper-ink/dist/use-upload/index.js'],bundle:true,write:false,minify:true,metafile:true,format:'esm',external:['react','react/jsx-runtime','react-dom']});
 if(Object.keys(uploadHook.metafile.inputs).some(path=>path.includes('/upload/upload') || path.includes('/modal/'))) throw new Error('useUpload unexpectedly imports UI');
 console.log('use-upload JS gzip: '+gzipSync(uploadHook.outputFiles[0].contents).length+' bytes (React external, no UI dependency)');
+
+const searchIcon = await build({ stdin: { contents: "export { IconSearch } from './packages/paper-ink/dist/icons/index.js'", resolveDir: process.cwd() }, bundle:true,write:false,minify:true,format:'esm',metafile:true,external:['react','react/jsx-runtime','react-dom'] });
+const iconBytes=gzipSync(searchIcon.outputFiles[0].contents).length;
+console.log('Tabler IconSearch JS gzip: '+iconBytes+' bytes (React external)');
+if(iconBytes>2000)throw new Error('Single icon exceeds 2 KB gzip budget');
+if(Object.keys(buttonOnly.metafile.inputs).some(path=>path.includes('@tabler/')))throw new Error('Tabler Icons leaked into Button entrypoint');

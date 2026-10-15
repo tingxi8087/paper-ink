@@ -22,13 +22,14 @@ try {
   await mkdir(join(consumer, 'src'), { recursive: true });
   await writeFile(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module', dependencies: { 'paper-ink': `file:${join(temp, libArchive)}`, '@tingxi8087/paper-ink-cli': `file:${join(temp, cliArchive)}`, react: consumerReactVersion, 'react-dom': consumerReactVersion, dayjs: '^1.11.23', '@ctrl/tinycolor': '^4.2.1' }, devDependencies: { vite: '7.3.7', typescript: '5.9.3', '@types/react': consumerReactTypes, '@types/react-dom': consumerReactTypes } }));
   await writeFile(join(consumer, 'tsconfig.json'), JSON.stringify({ compilerOptions: { target: 'ES2022', lib: ['ES2022', 'DOM'], module: 'ESNext', moduleResolution: 'Bundler', jsx: 'react-jsx', strict: true, skipLibCheck: true, noEmit: true }, include: ['src'] }));
-  run('pnpm', ['install', '--offline', '--ignore-scripts']);
+  await writeFile(join(consumer, '.npmrc'), 'registry=https://registry.npmjs.org\n');
+  run('pnpm', ['install', '--prefer-offline', '--ignore-scripts']);
   run('pnpm', ['exec', 'paper-ink', '--version']);
   run('pnpm', ['exec', 'paper-ink', 'init']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image', 'color-picker', 'upload', 'use-upload', '--dry-run']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image', 'color-picker', 'upload', 'use-upload', 'tabler-icons', '--dry-run']);
   assert.equal((await readdir(join(consumer, 'src'))).length, 0);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image', 'color-picker', 'upload', 'use-upload']);
-  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image', 'color-picker', 'upload', 'use-upload']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image', 'color-picker', 'upload', 'use-upload', 'tabler-icons']);
+  run('pnpm', ['exec', 'paper-ink', 'add', 'button', 'input', 'modal', 'stack', 'inline', 'simple-grid', 'checkbox', 'radio', 'switch', 'tabs', 'select', 'tooltip', 'message', 'tag', 'alert', 'spin', 'empty', 'typography', 'divider', 'avatar', 'badge', 'card', 'descriptions', 'dropdown', 'popover', 'popconfirm', 'drawer', 'breadcrumb', 'pagination', 'collapse', 'segmented', 'progress', 'skeleton', 'input-number', 'app', 'rate', 'timeline', 'result', 'form', 'table', 'table-hooks', 'use-ref-state', 'hooks', 'use-localstorage-state', 'date-picker', 'time-picker', 'menu', 'statistic', 'util', 'layout', 'splitter', 'steps', 'auto-complete', 'slider', 'notification', 'image', 'color-picker', 'upload', 'use-upload', 'tabler-icons']);
   await writeFile(join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8" /></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>');
   await writeFile(join(consumer, 'src/main.tsx'), `import { useState } from 'react';
 import dayjs, { type Dayjs } from 'dayjs';
@@ -39,11 +40,14 @@ type LocalOptions = LocalGetProp<{options?: string[]},'options'>;
 const typedOptions:LocalOptions=['ok'];
 const typedNumber:NpmGetProp<{value?:number},'value'>=1;
 void typedOptions;void typedNumber;
+void LocalIconSearch;void NpmIconSearch;
 import * as LocalComponents from './components/paper-ink/index';
 import * as NpmComponents from 'paper-ink';
 import * as Npm from 'paper-ink';
 import * as Local from './components/paper-ink';
 import { Button as NpmButton, Input as NpmInput, Modal as NpmModal, ConfigProvider as NpmProvider, Stack as NpmStack, Inline as NpmInline, SimpleGrid as NpmGrid } from 'paper-ink';
+import { IconSearch as LocalIconSearch } from './components/paper-ink/icons';
+import { IconSearch as NpmIconSearch } from 'paper-ink/icons';
 import { Button as LocalButton, Input as LocalInput, Modal as LocalModal, ConfigProvider as LocalProvider, Stack as LocalStack, Inline as LocalInline, SimpleGrid as LocalGrid } from './components/paper-ink';
 import 'paper-ink/style.css';
 import './components/paper-ink/style.css';
@@ -123,7 +127,7 @@ function Demo() {
  const [local, setLocal] = useState(0); const [npm, setNpm] = useState(0);
  const [localOpen, setLocalOpen] = useState(false); const [npmOpen, setNpmOpen] = useState(false);
  const theme = { token: { color: { primary: { solid: '#1677ff' } }, radius: { control: 12 } } };
- return <><h1>Paper Ink dual distribution</h1>
+ return <><h1>Paper Ink dual distribution</h1><LocalIconSearch role="img" aria-label="CLI Tabler icon" size={20} /><NpmIconSearch role="img" aria-label="npm Tabler icon" size={20} />
  <section aria-label="CLI source"><LocalProvider theme={theme}><FeatureSet source="Local" /><ModernFeatures source="Local" /><FormFeatures source="Local" /><TableFeatures source="Local" /><DateFeatures source="Local" /><MenuFeatures source="Local" /><NewFeatures source="Local" /><UploadFeatures source="Local" /><LocalStack aria-label="Local stack"><LocalInline><span>One</span><span>Two</span></LocalInline><LocalGrid columns={2}><span>First</span><LocalGrid.Item span="full">Full</LocalGrid.Item></LocalGrid></LocalStack><LocalButton type="primary" size="large" onClick={() => setLocal(local + 1)}>Local {local}</LocalButton><LocalButton disabled>Local disabled</LocalButton><LocalInput aria-label="Local input" defaultValue="Source" allowClear /><LocalInput.TextArea aria-label="Local textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><LocalButton onClick={() => setLocalOpen(true)}>Local modal</LocalButton><LocalModal title="Local dialog" open={localOpen} onOk={() => setLocalOpen(false)} onCancel={() => setLocalOpen(false)}><LocalInput placeholder="Portal input" /></LocalModal></LocalProvider></section>
  <section aria-label="npm package"><NpmProvider theme={theme}><FeatureSet source="Npm" /><ModernFeatures source="Npm" /><FormFeatures source="Npm" /><TableFeatures source="Npm" /><DateFeatures source="Npm" /><MenuFeatures source="Npm" /><NewFeatures source="Npm" /><UploadFeatures source="Npm" /><NpmStack aria-label="Npm stack"><NpmInline><span>One</span><span>Two</span></NpmInline><NpmGrid columns={2}><span>First</span><NpmGrid.Item span="full">Full</NpmGrid.Item></NpmGrid></NpmStack><NpmButton type="primary" size="large" onClick={() => setNpm(npm + 1)}>Npm {npm}</NpmButton><NpmButton disabled>Npm disabled</NpmButton><NpmInput aria-label="Npm input" defaultValue="Package" allowClear /><NpmInput.TextArea aria-label="Npm textarea" autoSize={{ minRows: 2, maxRows: 4 }} /><NpmButton onClick={() => setNpmOpen(true)}>Npm modal</NpmButton><NpmModal title="Npm dialog" open={npmOpen} onOk={() => setNpmOpen(false)} onCancel={() => setNpmOpen(false)}><NpmInput placeholder="Portal input" /></NpmModal></NpmProvider></section></>;
 }
@@ -138,6 +142,8 @@ createRoot(document.getElementById('root')!).render(<Demo />);`);
   const page = await browser.newPage(); const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(`http://127.0.0.1:${address.port}`);
+  assert.equal(await page.getByRole('img', {name:'CLI Tabler icon'}).getAttribute('viewBox'), '0 0 24 24');
+  assert.equal(await page.getByRole('img', {name:'npm Tabler icon'}).getAttribute('viewBox'), '0 0 24 24');
 
   for (const [region, label] of [['CLI source', 'Local'], ['npm package', 'Npm']]) {
     const group = page.getByRole('region', { name: region });

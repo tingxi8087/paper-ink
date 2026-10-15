@@ -22,6 +22,9 @@ import { Modal as SubpathModal } from 'paper-ink/modal';
 import { DatePicker } from 'paper-ink/date-picker';
 import { TimePicker } from 'paper-ink/time-picker';
 import { Menu } from 'paper-ink/menu';
+import { IconSearch } from 'paper-ink/icons';
+assert.match(renderToStaticMarkup(React.createElement(IconSearch, {size:20,stroke:1.5})), /viewBox="0 0 24 24"/);
+assert.match(renderToStaticMarkup(React.createElement(IconSearch)), /tabler-icon-search/);
 import { useUpload as IndependentUploadHook } from 'paper-ink/use-upload';
 import { useUpload as SharedUploadHook } from 'paper-ink/hooks';
 assert.equal(IndependentUploadHook, useUpload); assert.equal(SharedUploadHook, useUpload);
@@ -99,6 +102,8 @@ function ExpandedMergedTable() { return <Table rowKey="id" data={[{id:1,name:'A'
 function MenuConsumer() { const menuItems:MenuItem[]=[{key:'group',type:'group',children:[{key:'link',label:'Link',href:'#/link'}]},{key:'parent',label:'Parent',children:[{key:'leaf',label:'Leaf'}]}];return <Menu mode="horizontal" items={menuItems} onSelect={info=>{const selected:string[]=info.selectedKeys;void selected;}} onClick={info=>{const typed:MenuClickInfo=info;void typed;}} />; }
 function DateTimeConsumer() { const ref=createRef<PickerRef>();return <><DatePicker ref={ref} value={dayjs()} onChange={(date,text)=>{const typed:Dayjs|null=date;const s:string=text;void typed;void s;}} /><DatePicker.RangePicker value={null} onChange={(value,texts)=>{const typed:RangeValue=value;const strings:[string,string]=texts;void typed;void strings;}} /><TimePicker format="HH:mm" minuteStep={5} /></>; }
 function GenericHookConsumer() { const [count,setCount]=useLocalstorageState(0,'count');setCount(n=>n+1);const typed:number=count;void typed;return <span>{count}</span>; }
+import { IconSearch as TypedSearch } from 'paper-ink/icons';
+const typedIcon=<TypedSearch ref={createRef<SVGSVGElement>()} size={20} stroke={1.5} />;void typedIcon;
 import type { GetProp, GetRef } from 'paper-ink/util';
 const colorValue = new Color("hsba(240, 100%, 100%, 0.5)");
 const colorControl = <ColorPicker value={colorValue} onChange={(color,css)=>{const typed:Color=color;const text:string=css;void typed;void text;}} />;

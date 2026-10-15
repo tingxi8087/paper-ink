@@ -307,7 +307,11 @@
       "types": "./dist/use-upload/index.d.ts",
       "import": "./dist/use-upload/index.js"
     },
-    "./upload/style.css": "./dist/upload/style.css"
+    "./upload/style.css": "./dist/upload/style.css",
+    "./icons": {
+      "types": "./dist/icons/index.d.ts",
+      "import": "./dist/icons/index.js"
+    }
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../scripts/build-css.mjs",
@@ -324,6 +328,7 @@
   "dependencies": {
     "@ctrl/tinycolor": "^4.2.1",
     "@rc-component/mini-decimal": "^1.1.4",
+    "@tabler/icons-react": "3.49.0",
     "dayjs": "^1.11.23"
   },
   "repository": {

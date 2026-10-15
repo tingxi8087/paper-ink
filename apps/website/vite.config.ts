@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [{ enforce: "pre", ...mdx() }, react()],
   resolve: {
     alias: [
+      { find: /^paper-ink\/icons$/, replacement: fileURLToPath(new URL("../../packages/paper-ink/src/icons/index.ts", import.meta.url)) },
       {
         find: /^paper-ink$/,
         replacement: fileURLToPath(

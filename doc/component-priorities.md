@@ -1,6 +1,6 @@
 # antd 组件清单与 Paper Ink 开发优先级
 
-记录日期：2026-10-13。
+记录日期：2026-10-15。
 
 组件范围依据 [Ant Design 官方组件目录](https://ant.design/components/overview/)，本次查询页面版本为 6.6.5。核心目录共 73 个条目，包含组件、配置入口和工具项；Input.TextArea、Checkbox.Group 等子组件不单独计数。另列官网展示的 6 个 Pro Components 扩展组件，它们不属于核心 antd 包。
 
@@ -18,7 +18,7 @@
 
 成本按做好常用 API 和交互估计，不按完整复制 antd 计算。标注“已有”的组件以完善现有实现为主；本表不是全部实现的承诺。独立设计的组件单独列出，不计入 antd 核心目录。
 
-状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 84 项：已有基础实现 60 项、待实现 18 项、已有独立方案 5 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
+状态分为“已有基础实现”“待实现”“已有独立方案”“暂不实现”。标注“独立方案”的 antd 条目已有对应的 Paper Ink 方案，但不表示实现了 antd API；标注“暂不实现”的条目不计入待办。核心与独立组件共 85 项：已有基础实现 61 项、待实现 17 项、已有独立方案 6 项、暂不实现 1 项。4 分条目中的 DatePicker 已完成首期常用 API，当前没有待实现的 4 分条目。
 
 保持既定方向：通用 React + TypeScript 组件库，默认黑白主色、保留语义色，常规 API 接近 antd，主题结构独立设计，支持 npm 与 CLI 源码双分发，完全开源，从简单组件逐步推进。
 
@@ -28,7 +28,7 @@
 | --- | --- | --- | --- |
 | Button 按钮（已有） | 5/5 | 低 | 最基础的操作入口，继续完善一致性即可 |
 | FloatButton 悬浮按钮 | 2/5 | 中 | 使用场景相对少，普通 Button 加定位可先满足 |
-| Icon 图标 | 2/5 | 中 | 支持外部图标即可，独立维护图标库收益不高 |
+| Icon 图标（独立方案） | 2/5 | 低 | 采用 Tabler Icons，提供 paper-ink/icons 独立入口；不实现 antd Icon API |
 | Typography 排版（已有） | 4/5 | 中 | 统一标题、正文、链接；复制和省略能力可分期 |
 
 ## 布局（7）
@@ -169,12 +169,13 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 - 同步 npm 导出、独立 CSS、CLI registry 与依赖清单。
 - 提供紧凑的文档、真实交互演示和必要的行为验证。
 
-## Paper Ink 独立组件（11）
+## Paper Ink 独立组件（12）
 
 分类：布局、数据录入、数据展示与公共 Hook。API 独立设计，已有基础实现；不表示对应 antd API 已完成。
 
 | 组件 | 推荐指数 | 成本 | 理由 |
 | --- | --- | --- | --- |
+| TablerIcons 图标集（已有） | 3/5 | 低 | 随库安装 Tabler Icons、SVG 按需导入、完整图标目录与源码 CLI；保留官方名称和属性 |
 | Stack 竖向布局（已有） | 4/5 | 低 | 竖向排列、对齐与主题间距，适合表单和内容分组 |
 | Inline 横向布局（已有） | 4/5 | 低 | 横向排列、对齐与换行，适合工具栏和按钮组 |
 | SimpleGrid 网格布局（已有） | 4/5 | 低—中 | 等宽列、列比例、自动列数、跨列和独立行列间距 |
@@ -187,7 +188,7 @@ Form、Table、DatePicker 值得做，但建议分别立项设计，避免首期
 | useUpload 上传任务 Hook（已有） | 3/5 | 中—高 | 独立 Promise 请求、并发、真实进度、AbortSignal、取消重试与旧结果隔离 |
 | useLocalstorageState 本地状态 Hook（已有） | 4/5 | 低 | 普通 state 增加存储 key、JSON 自动保存与刷新恢复 |
 
-15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker、Menu，以及 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image、ColorPicker，连同 11 个独立组件与 Hook，已有基础实现共 60 项；完整 API 支持范围以组件文档为准。
+15 个 5/5 条目均已有常用 API 子集。已补齐 19 个 4/5 组件，以及 Rate、Timeline、Result、TimePicker、Menu，以及 Statistic、Util、Layout、Splitter、Steps、AutoComplete、Slider、Notification、Image、ColorPicker，连同 12 个独立组件与 Hook，已有基础实现共 61 项；完整 API 支持范围以组件文档为准。
 
 本阶段不实现 Space、antd Table 与 antd Form API；独立轻量 Form、Table 及公共表格 Hook 已实现。普通间距统一使用 Inline / Stack；DatePicker、RangePicker 与 TimePicker 首期已实现，API 与边界见[日期时间设计文档](./date-time-design.md)；Calendar 与时间范围尚未实现。InputNumber 使用 mini-decimal 处理精度运算；App 提供继承主题的 message / modal / notification。
 

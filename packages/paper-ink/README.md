@@ -121,6 +121,24 @@ pnpm --dir packages/paper-ink pack --pack-destination ../../.artifacts
 
 这是概览，不代表完整实现对应 Ant Design API。具体用法、示例与支持范围以 [在线文档](https://tingxi8087.github.io/paper-ink/) 为准。组件规划见 [状态清单](https://github.com/tingxi8087/paper-ink/blob/main/doc/component-priorities.md)。
 
+## 图标
+
+> 新增图标入口与 CLI 条目已在源码实现，待下一版 npm 发布；当前 0.1.0 尚不包含，可从仓库构建体验。
+
+公开图标库采用 [Tabler Icons](https://tabler.io/icons)，MIT 许可。安装 Paper Ink 时会自动安装依赖，不需要单独安装图标包：
+
+```tsx
+import { IconSearch, IconPlus } from 'paper-ink/icons';
+import { Button } from 'paper-ink';
+
+<IconSearch size={20} stroke={2} />;
+<Button icon={<IconPlus size={16} />}>新建</Button>;
+```
+
+保留 Tabler 官方组件名称和属性，支持按需打包，无图标 CSS 和额外包装节点。[图标目录](https://tingxi8087.github.io/paper-ink/#/icons)支持搜索、筛选、复制代码与居中辅助线。
+
+源码安装：`npx @tingxi8087/paper-ink-cli add tabler-icons`，CLI 自动处理依赖。
+
 ## 与 Ant Design 的关系
 
 Paper Ink 的常用组件 API 与交互习惯参考 [Ant Design](https://ant.design/)，采用独立实现，不依赖 `antd`；提供常用 API 子集，主题及部分复杂组件采用独立设计。它不是 Ant Design 的完整替代，也不保证直接迁移所有现有用法。

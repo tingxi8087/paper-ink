@@ -20,6 +20,9 @@
     "paths": {
       "paper-ink": [
         "./packages/paper-ink/src/index.ts"
+      ],
+      "paper-ink/icons": [
+        "./packages/paper-ink/src/icons/index.ts"
       ]
     }
   },

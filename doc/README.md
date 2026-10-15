@@ -39,3 +39,5 @@ ColorPicker 纯色首期已实现：支持透明度、HEX/RGB/HSB、预设、键
 Upload 纯文件控件与 useUpload 上传任务 Hook 首期已实现：12 组案例、批量操作类型、图片预览、Form 绑定和请求取消；规划页当前已有基础实现 60 项。
 
 - [npm 发布与镜像同步](npm-release.md)
+
+- [Tabler Icons 图标](icons.md)

@@ -1073,6 +1073,19 @@
       "exports": [
         "export * from './use-upload/index';"
       ]
+    },
+    {
+      "name": "tabler-icons",
+      "description": "Tabler Icons SVG components with original names and props",
+      "files": [
+        "icons/index.ts"
+      ],
+      "dependencies": {
+        "@tabler/icons-react": "3.49.0"
+      },
+      "exports": [
+        "export * from './icons/index';"
+      ]
     }
   ]
 }
