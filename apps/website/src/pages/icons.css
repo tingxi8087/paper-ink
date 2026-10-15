@@ -21,3 +21,13 @@
 .icons-page .table-scroll table { width:100%; min-width:600px; border-collapse:collapse; font-size:13px; }
 .icons-page .table-scroll th,.icons-page .table-scroll td { padding:10px 12px; border-bottom:1px solid var(--doc-line); text-align:left; }
 .icons-page .table-scroll th { background:var(--doc-wash); }
+.icons-categories { margin:12px 0 18px; min-width:0; }
+.icons-categories .pi-tabs__nav { min-width:0; }
+.icons-categories .pi-tabs__tab { flex:none; }
+.icons-categories .pi-tabs__panel { display:none; }
+.icons-copy-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.icons-copied { display:inline-flex; align-items:center; gap:4px; }
+.icons-name { height:16.5px; }
+.icons-selected > strong { overflow-wrap:anywhere; min-width:0; }
+.icons-page .pi-pagination { flex-wrap:wrap; }
+@media(max-width:600px) { .icons-selected { align-items:flex-start; flex-direction:column; } }
