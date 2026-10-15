@@ -19,7 +19,6 @@ export function IconsPage() {
   async function copy(){try{await navigator.clipboard.writeText(code);setCopyMessage(`已复制 ${selected} 的使用代码`);}catch{setCopyMessage('复制失败，请从下方选取代码');}}
   return <div className="icons-page">
     <h1>Icons 图标</h1>
-    <p>新增图标入口与 CLI 条目待下一版 npm 发布；当前 0.1.0 尚不包含，可从仓库构建体验。</p>
     <p>使用 <a href="https://tabler.io/icons" target="_blank" rel="noopener noreferrer">Tabler Icons</a>，MIT 许可。随 Paper Ink 自动安装，无需额外安装图标包。保留 Tabler 官方组件名称和属性。</p>
     <div className="icons-example"><IconSearch size={20} /><Button type="primary" icon={<IconPlus size={16} />}>新建</Button><Button icon={<IconSettings size={16} />}>设置</Button></div>
     <h2>使用方式</h2>

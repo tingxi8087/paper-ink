@@ -1,6 +1,6 @@
 {
   "name": "@tingxi8087/paper-ink-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Install Paper Ink component source into your React TypeScript project",
   "type": "module",
   "license": "MIT",

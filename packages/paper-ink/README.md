@@ -8,7 +8,7 @@ Paper Ink 追求清晰、克制的水墨风格：足够对比度的黑白、淡�
 
 [在线文档](https://tingxi8087.github.io/paper-ink/) · [组件画廊](https://tingxi8087.github.io/paper-ink/#/showcase) · [快速开始](https://tingxi8087.github.io/paper-ink/#/guide) · [主题实验室](https://tingxi8087.github.io/paper-ink/#/theme)
 
-> 首个公开版本为 **0.1.0**。面向 React 18+、ReactDOM 和 TypeScript 项目。
+> 当前版本为 **0.2.0**。面向 React 18+、ReactDOM 和 TypeScript 项目。
 
 ## 为什么选择 Paper Ink
 
@@ -105,7 +105,7 @@ pnpm --filter paper-ink build
 pnpm --dir packages/paper-ink pack --pack-destination ../../.artifacts
 ```
 
-将生成的 tgz 文件复制到消费项目后执行 `npm install ./paper-ink-0.1.0.tgz`。本仓库也可通过 `pnpm build:registry` 与 `pnpm cli` 使用未发布的本地 CLI 源码。
+将生成的 tgz 文件复制到消费项目后执行 `npm install ./paper-ink-0.2.0.tgz`。本仓库也可通过 `pnpm build:registry` 与 `pnpm cli` 使用未发布的本地 CLI 源码。
 
 </details>
 
@@ -122,8 +122,6 @@ pnpm --dir packages/paper-ink pack --pack-destination ../../.artifacts
 这是概览，不代表完整实现对应 Ant Design API。具体用法、示例与支持范围以 [在线文档](https://tingxi8087.github.io/paper-ink/) 为准。组件规划见 [状态清单](https://github.com/tingxi8087/paper-ink/blob/main/doc/component-priorities.md)。
 
 ## 图标
-
-> 新增图标入口与 CLI 条目已在源码实现，待下一版 npm 发布；当前 0.1.0 尚不包含，可从仓库构建体验。
 
 公开图标库采用 [Tabler Icons](https://tabler.io/icons)，MIT 许可。安装 Paper Ink 时会自动安装依赖，不需要单独安装图标包：
 

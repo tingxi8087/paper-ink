@@ -1,6 +1,6 @@
 # Tabler Icons 图标
 
-发布状态：源码已实现，当前 npm 0.1.0 尚未包含；下一版发布时同步删除文档和 README 的待发布提示。
+发布版本：组件包与 CLI 0.2.0，Tabler Icons 3.49.0。
 
 Paper Ink 使用 Tabler Icons 作为公开图标库，MIT 许可，来源：https://tabler.io/icons 。图标依赖放在组件包 dependencies 内，安装 paper-ink 时自动安装，用户不需要额外执行安装命令。
 

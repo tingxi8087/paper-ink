@@ -1,6 +1,6 @@
 {
   "name": "paper-ink",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A monochrome-first React UI library with familiar APIs.",
   "type": "module",
   "license": "MIT",
